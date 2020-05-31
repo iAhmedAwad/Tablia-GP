@@ -13,7 +13,6 @@ public class Review {
   }
 
 
-
   public Review(String reviewText, float rating,
                 String chefId, String customerId,
                 String itemId, String reviewId) {

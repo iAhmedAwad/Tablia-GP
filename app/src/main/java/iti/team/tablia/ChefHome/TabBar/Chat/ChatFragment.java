@@ -20,41 +20,42 @@ import iti.team.tablia.R;
 
 public class ChatFragment extends Fragment {
 
-    private ChatViewModel chatViewModel;
+  private ChatViewModel chatViewModel;
 
-    private RecyclerView recyclerView;
-    private UserAdapter userAdapter;
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+  private RecyclerView recyclerView;
+  private UserAdapter userAdapter;
 
-        chatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
+  @Nullable
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        /** Inflate the layout for this fragment
-         *
-         */
-        View view = inflater.inflate(R.layout.fragment_chat, container, false);
-        /**render recyclerview and set its attribute
-         *
-         */
-        recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        /**observe viewmodel to get chat list
-         *
-         */
-        chatViewModel.getChatList().observe(getActivity(),new Observer<List<ChatUser>>() {
-            @Override
-            public void onChanged(List<ChatUser> users) {
-                userAdapter = new UserAdapter(getContext(),users,true);
-                recyclerView.setAdapter(userAdapter);
-            }
-        });
+    chatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
-        /**
-         *update token for push notification
-         */
-        chatViewModel.updateToken(getActivity());
-        return view;
-    }
+    /** Inflate the layout for this fragment
+     *
+     */
+    View view = inflater.inflate(R.layout.fragment_chat, container, false);
+    /**render recyclerview and set its attribute
+     *
+     */
+    recyclerView = view.findViewById(R.id.recycler_view);
+    recyclerView.setHasFixedSize(true);
+    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    /**observe viewmodel to get chat list
+     *
+     */
+    chatViewModel.getChatList().observe(getActivity(), new Observer<List<ChatUser>>() {
+      @Override
+      public void onChanged(List<ChatUser> users) {
+        userAdapter = new UserAdapter(getContext(), users, true);
+        recyclerView.setAdapter(userAdapter);
+      }
+    });
+
+    /**
+     *update token for push notification
+     */
+    chatViewModel.updateToken(getActivity());
+    return view;
+  }
 }

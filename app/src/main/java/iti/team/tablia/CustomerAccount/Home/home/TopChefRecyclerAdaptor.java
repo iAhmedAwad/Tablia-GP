@@ -20,70 +20,69 @@ import iti.team.tablia.R;
 
 
 public class TopChefRecyclerAdaptor extends RecyclerView.Adapter<TopChefRecyclerAdaptor.ViewHolder> {
-    Context context;
-   // List<ChatUser> arrName;
-    Bitmap bitmap;
-    private List<ChatUser> users;
+  Context context;
+  // List<ChatUser> arrName;
+  Bitmap bitmap;
+  private List<ChatUser> users;
 
-    public TopChefRecyclerAdaptor(Context context, List<ChatUser> users) {
-        this.context = context;
-        this.users = users;
+  public TopChefRecyclerAdaptor(Context context, List<ChatUser> users) {
+    this.context = context;
+    this.users = users;
+  }
+
+  @Override
+  public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.home_chef_row, viewGroup, false));
+  }
+
+
+  @Override
+  public void onBindViewHolder(TopChefRecyclerAdaptor.ViewHolder viewHolder, int i) {
+    final ChatUser user = users.get(i);
+    String strToConvert = users.get(i).getImageURL();
+
+    viewHolder.image.setImageBitmap(StringToBitMap(strToConvert));
+    viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(context, ViewChiefProfileActivity.class);
+        intent.putExtra("userid", user.getId());
+        context.startActivity(intent);
+      }
+    });
+  }
+
+  public Bitmap StringToBitMap(String encodedString) {
+    try {
+      byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+      bitmap = BitmapFactory.decodeByteArray(encodeByte, 0,
+          encodeByte.length);
+      return bitmap;
+    } catch (Exception e) {
+      e.getMessage();
+      return null;
+    }
+  }
+
+  @Override
+  public int getItemCount() {
+    if (users.size() > 5) {
+      return 5;
+    } else {
+      return users.size();
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.home_chef_row, viewGroup, false));
-    }
+  }
+
+  public class ViewHolder extends RecyclerView.ViewHolder {
+
+    CircleImageView image;
 
 
-
-    @Override
-    public void onBindViewHolder(TopChefRecyclerAdaptor.ViewHolder viewHolder, int i) {
-        final ChatUser user = users.get(i);
-        String strToConvert = users.get(i).getImageURL();
-
-        viewHolder.image.setImageBitmap(StringToBitMap(strToConvert));
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ViewChiefProfileActivity.class);
-                intent.putExtra("userid", user.getId());
-                context.startActivity(intent);
-            }
-        });
-    }
-
-    public Bitmap StringToBitMap(String encodedString) {
-        try {
-            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            bitmap = BitmapFactory.decodeByteArray(encodeByte, 0,
-                    encodeByte.length);
-            return bitmap;
-        } catch (Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        if(users.size() > 5){
-            return 5 ;
-        }else{
-            return  users.size();
-        }
+    public ViewHolder(View itemView) {
+      super(itemView);
+      image = itemView.findViewById(R.id.id_profile_pic);
 
     }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        CircleImageView image;
-
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-            image = itemView.findViewById(R.id.id_profile_pic);
-
-        }
-    }
+  }
 }

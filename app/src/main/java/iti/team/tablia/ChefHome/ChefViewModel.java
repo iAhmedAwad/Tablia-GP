@@ -6,17 +6,17 @@ import androidx.lifecycle.ViewModel;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 
 public class ChefViewModel extends ViewModel {
-    private StatusRepository statusRepository;
+  private StatusRepository statusRepository;
 
-    public ChefViewModel() {
-        statusRepository = new StatusRepository();
-    }
+  public ChefViewModel() {
+    statusRepository = new StatusRepository();
+  }
 
-    public void status(String status) {
-        statusRepository.status(status);
-    }
+  public void status(String status) {
+    statusRepository.status(status);
+  }
 
-    public MutableLiveData<ChefAccountSettings> getCurrentUser() {
-       return statusRepository.getCurrentUser();
-    }
+  public MutableLiveData<ChefAccountSettings> getCurrentUser() {
+    return statusRepository.getCurrentUser();
+  }
 }

@@ -21,76 +21,74 @@ import java.util.List;
 
 public class PlaceApi {
 
-    public PlaceApi() {
+  public PlaceApi() {
+  }
+
+  private FusedLocationProviderClient fusedLocationProviderClient;
+
+  public ArrayList<String> autocomplete(String input) {
+
+    ArrayList<String> arrayList = new ArrayList();
+    HttpURLConnection connection = null;
+    StringBuilder jsonResult = new StringBuilder();
+
+    try {
+      StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/autocomplete/json?");
+      sb.append("input=" + input);
+      sb.append("&key=AIzaSyDFhO6SEcewKE7jQUjyE-XwqbhlODfObEA");
+      URL url = new URL(sb.toString());
+      connection = (HttpURLConnection) url.openConnection();
+      InputStreamReader inputStreamReader = new InputStreamReader(connection.getInputStream());
+      int read;
+      char[] buff = new char[1024];
+      while ((read = inputStreamReader.read(buff)) != -1) {
+        jsonResult.append(buff, 0, read);
+      }
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      if (connection != null) {
+        connection.disconnect();
+        ;
+      }
     }
 
-    private FusedLocationProviderClient fusedLocationProviderClient;
-
-    public ArrayList<String> autocomplete(String input){
-
-        ArrayList<String> arrayList = new ArrayList();
-        HttpURLConnection connection = null;
-        StringBuilder jsonResult = new StringBuilder();
-
-        try {
-        StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/autocomplete/json?");
-        sb.append("input="+input);
-        sb.append("&key=AIzaSyDFhO6SEcewKE7jQUjyE-XwqbhlODfObEA");
-            URL url = new URL(sb.toString());
-            connection = (HttpURLConnection) url.openConnection();
-            InputStreamReader inputStreamReader = new InputStreamReader(connection.getInputStream());
-            int read;
-            char[] buff = new char[1024];
-            while((read=inputStreamReader.read(buff))!=-1){
-                jsonResult.append(buff, 0, read);
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-      catch (IOException e) {
-            e.printStackTrace();
-        }
-finally {
-            if (connection!=null){
-                connection.disconnect();;
-            }
-        }
-
-        try{
-            JSONObject jsonObject = new JSONObject(jsonResult.toString());
-            JSONArray predicions = jsonObject.getJSONArray("predictions");
-            for (int i=0; i<predicions.length(); i++){
-                arrayList.add(predicions.getJSONObject(i).getString("description"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return arrayList;
+    try {
+      JSONObject jsonObject = new JSONObject(jsonResult.toString());
+      JSONArray predicions = jsonObject.getJSONArray("predictions");
+      for (int i = 0; i < predicions.length(); i++) {
+        arrayList.add(predicions.getJSONObject(i).getString("description"));
+      }
+    } catch (JSONException e) {
+      e.printStackTrace();
     }
 
-    private Address getAddressFromCoordinates(Context context, LatLng latLng){
+    return arrayList;
+  }
+
+  private Address getAddressFromCoordinates(Context context, LatLng latLng) {
 
 
+    Geocoder geocoder = new Geocoder(context);
 
-        Geocoder geocoder = new Geocoder(context);
+    List<Address> addresses;
 
-        List<Address> addresses;
-
-        try {
-            addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 5);
-            if (addresses!=null){
-                Address address = addresses.get(0);
-                return address;
-            }else {
-                return null;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
+    try {
+      addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 5);
+      if (addresses != null) {
+        Address address = addresses.get(0);
+        return address;
+      } else {
+        return null;
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
     }
+
+  }
 
     /*
     public ArrayList<Double> getCurrentLocation(Context context){

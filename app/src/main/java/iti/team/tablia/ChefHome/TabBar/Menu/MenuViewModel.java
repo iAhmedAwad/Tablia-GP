@@ -10,18 +10,17 @@ import iti.team.tablia.others.Database;
 
 public class MenuViewModel extends ViewModel {
 
-    public MutableLiveData<List<MenuPojo>> deatilsMutableLiveData  = new MutableLiveData<>();
+  public MutableLiveData<List<MenuPojo>> deatilsMutableLiveData = new MutableLiveData<>();
 //    DataOfMenu data = DataOfMenu.getInstance();
 
-   Database db = new Database();
+  Database db = new Database();
 
 
+  public void getList() {
 
-    public void getList() {
+    deatilsMutableLiveData = db.getMenuItems();
 
-       deatilsMutableLiveData =  db.getMenuItems();
-
-    }
+  }
 
 
 }

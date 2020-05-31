@@ -10,9 +10,9 @@ import java.util.List;
 
 public class MenuViewModel extends ViewModel {
 
-    public MutableLiveData<List<MenuPojo>> deatilsMutableLiveData  = new MutableLiveData<>();
-    DataOfMenu data = DataOfMenu.getInstance();
-    DatabaseReference ref ;
+  public MutableLiveData<List<MenuPojo>> deatilsMutableLiveData = new MutableLiveData<>();
+  DataOfMenu data = DataOfMenu.getInstance();
+  DatabaseReference ref;
 
 
 //    public void getList() {
@@ -41,13 +41,12 @@ public class MenuViewModel extends ViewModel {
 //    }
 
 
-
-    public void getList() {
+  public void getList() {
 
 
     deatilsMutableLiveData.setValue(data.getData());
 
-    }
+  }
 
 
 }

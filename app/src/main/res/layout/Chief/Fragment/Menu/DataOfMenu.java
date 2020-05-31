@@ -7,24 +7,27 @@ import java.util.List;
 
 public class DataOfMenu {
 
-    private static DataOfMenu INSTANCE = null;
-     List<MenuPojo> data = new ArrayList<>();
+  private static DataOfMenu INSTANCE = null;
+  List<MenuPojo> data = new ArrayList<>();
 
-    private DataOfMenu() {};
+  private DataOfMenu() {
+  }
 
-    public static DataOfMenu getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new DataOfMenu();
-        }
-        return(INSTANCE);
+  ;
+
+  public static DataOfMenu getInstance() {
+    if (INSTANCE == null) {
+      INSTANCE = new DataOfMenu();
     }
+    return (INSTANCE);
+  }
 
-    public  List<MenuPojo> getData() {
-        return data;
-    }
+  public List<MenuPojo> getData() {
+    return data;
+  }
 
-    public void setData(MenuPojo dataa) {
-        this.data.add(dataa);
-    }
+  public void setData(MenuPojo dataa) {
+    this.data.add(dataa);
+  }
 }
 

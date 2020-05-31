@@ -36,6 +36,7 @@
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <EditText
         android:id="@+id/search"
         android:layout_below="@id/bar_layout"

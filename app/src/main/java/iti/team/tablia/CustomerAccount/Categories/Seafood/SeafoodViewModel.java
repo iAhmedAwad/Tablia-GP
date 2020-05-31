@@ -10,18 +10,18 @@ import iti.team.tablia.others.Database;
 
 
 public class SeafoodViewModel extends ViewModel {
-private Database database;
-private MutableLiveData<ArrayList<MenuPojo>> mutableLiveData;
+  private Database database;
+  private MutableLiveData<ArrayList<MenuPojo>> mutableLiveData;
 
-    public SeafoodViewModel() {
-        this.database = new Database();
+  public SeafoodViewModel() {
+    this.database = new Database();
 
-    }
+  }
 
-    public MutableLiveData<ArrayList<MenuPojo>> getFishItems(String category){
+  public MutableLiveData<ArrayList<MenuPojo>> getFishItems(String category) {
 
-        mutableLiveData = database.getCategoryList(category);
+    mutableLiveData = database.getCategoryList(category);
 
-        return mutableLiveData;
-    }
+    return mutableLiveData;
+  }
 }

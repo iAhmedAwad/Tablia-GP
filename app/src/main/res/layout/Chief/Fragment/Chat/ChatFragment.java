@@ -17,24 +17,24 @@ import com.awad.tablia.R;
 
 public class ChatFragment extends Fragment {
 
-    private ChatViewModel chatViewModel;
+  private ChatViewModel chatViewModel;
 
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+  @Nullable
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        chatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
+    chatViewModel = ViewModelProviders.of(this).get(ChatViewModel.class);
 
-        View v = inflater.inflate(R.layout.fragment_chat, container, false);
-        final TextView test = v.findViewById(R.id.test);
+    View v = inflater.inflate(R.layout.fragment_chat, container, false);
+    final TextView test = v.findViewById(R.id.test);
 
-        chatViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                test.setText(s);
-            }
-        });
-        return v ;
-    }
+    chatViewModel.getText().observe(this, new Observer<String>() {
+      @Override
+      public void onChanged(@Nullable String s) {
+        test.setText(s);
+      }
+    });
+    return v;
+  }
 }

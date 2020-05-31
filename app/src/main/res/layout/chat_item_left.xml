@@ -9,6 +9,7 @@
         android:layout_height="40dp"
         android:id="@+id/profile_image"
         android:src="@mipmap/ic_launcher" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +19,7 @@
         android:id="@+id/show_message"
         android:textSize="18sp"
         android:padding="8dp"
-        android:background="@drawable/background_left"/>
+        android:background="@drawable/background_left" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,6 +27,6 @@
         android:text="seen"
         android:layout_below="@id/show_message"
         android:visibility="gone"
-        android:id="@+id/seen"/>
+        android:id="@+id/seen" />
 
 </RelativeLayout>

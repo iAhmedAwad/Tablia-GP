@@ -7,11 +7,11 @@ import Models.ChiefPojo;
 
 
 public class chiefViewModel extends ViewModel {
-    MutableLiveData<ChiefPojo> myData = new MutableLiveData<ChiefPojo>();
+  MutableLiveData<ChiefPojo> myData = new MutableLiveData<ChiefPojo>();
 
-    public void setDataFromDataBase(ChiefPojo objj) {
-        myData.setValue(objj);
-    }
+  public void setDataFromDataBase(ChiefPojo objj) {
+    myData.setValue(objj);
+  }
 
 }
 

@@ -8,14 +8,17 @@ import iti.team.tablia.ChefHome.TabBar.Oreder.OrderPojo;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 
 public class CompleteOrderViewModel extends ViewModel {
-    private ChatRepository chatRepository;
-    public CompleteOrderViewModel() {
-        chatRepository = new ChatRepository();
-    }
-    public MutableLiveData<CustomerAccountSettings> getCustInfo(){
-        return chatRepository.getCustInfo();
-    }
-    public void saveOrder(OrderPojo orderPojo){
-         chatRepository.saveOrder(orderPojo);
-    }
+  private ChatRepository chatRepository;
+
+  public CompleteOrderViewModel() {
+    chatRepository = new ChatRepository();
+  }
+
+  public MutableLiveData<CustomerAccountSettings> getCustInfo() {
+    return chatRepository.getCustInfo();
+  }
+
+  public void saveOrder(OrderPojo orderPojo) {
+    chatRepository.saveOrder(orderPojo);
+  }
 }

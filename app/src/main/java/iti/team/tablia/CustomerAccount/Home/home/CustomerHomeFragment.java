@@ -30,67 +30,67 @@ import iti.team.tablia.R;
  */
 public class CustomerHomeFragment extends Fragment {
 
-    public CustomerHomeFragment() {
-        // Required empty public constructor
-    }
+  public CustomerHomeFragment() {
+    // Required empty public constructor
+  }
 
-    TopChefRecyclerAdaptor adapter;
-    CategoryRecyclerAdaptor adapter2;
-    //FollowingRecyclerAdaptor adapter3;
-    TextView see1, see2, see3;
-    CustomerHomeViewModel viewModel;
-    // ChefYouFollowViewModel followViewModel;
-    List<Integer> list = new ArrayList<>();
+  TopChefRecyclerAdaptor adapter;
+  CategoryRecyclerAdaptor adapter2;
+  //FollowingRecyclerAdaptor adapter3;
+  TextView see1, see2, see3;
+  CustomerHomeViewModel viewModel;
+  // ChefYouFollowViewModel followViewModel;
+  List<Integer> list = new ArrayList<>();
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState);
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    setHasOptionsMenu(true);
+    super.onCreate(savedInstanceState);
 
-        viewModel = new ViewModelProvider(getActivity()).get(CustomerHomeViewModel.class);
-        //  followViewModel = new ViewModelProvider(getActivity()).get(ChefYouFollowViewModel.class);
+    viewModel = new ViewModelProvider(getActivity()).get(CustomerHomeViewModel.class);
+    //  followViewModel = new ViewModelProvider(getActivity()).get(ChefYouFollowViewModel.class);
 
-    }
+  }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_customer_home, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Home");
-       // viewModel.getitems();
-        list.add(R.drawable.pasta);
-        list.add(R.drawable.pasta);
-        list.add(R.drawable.pasta);
-        list.add(R.drawable.pasta);
-        list.add(R.drawable.pasta);
-        list.add(R.drawable.pasta);
-        list.add(R.drawable.pasta);
-        list.add(R.drawable.pasta);
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragment_customer_home, container, false);
+    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Home");
+    // viewModel.getitems();
+    list.add(R.drawable.pasta);
+    list.add(R.drawable.pasta);
+    list.add(R.drawable.pasta);
+    list.add(R.drawable.pasta);
+    list.add(R.drawable.pasta);
+    list.add(R.drawable.pasta);
+    list.add(R.drawable.pasta);
+    list.add(R.drawable.pasta);
 
 
-        final RecyclerView recycler = view.findViewById(R.id.id_recycle1);
-        final RecyclerView recycler2 = view.findViewById(R.id.id_recycle2);
+    final RecyclerView recycler = view.findViewById(R.id.id_recycle1);
+    final RecyclerView recycler2 = view.findViewById(R.id.id_recycle2);
 //        final RecyclerView recycler3 = view.findViewById(R.id.id_recycle3);
 
-        see1 = view.findViewById(R.id.seeAllchefs);
-        see2 = view.findViewById(R.id.seeAllCategories);
+    see1 = view.findViewById(R.id.seeAllchefs);
+    see2 = view.findViewById(R.id.seeAllCategories);
 //        see3 = view.findViewById(R.id.seeAllFollowings);
 
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+    LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+    LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+    GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
 
 
-        viewModel.getChefList().observe(requireActivity(), new Observer<List<ChatUser>>() {
-            @Override
-            public void onChanged(List<ChatUser> chefList) {
-                adapter = new TopChefRecyclerAdaptor(getContext(), chefList);
-                recycler.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+    viewModel.getChefList().observe(requireActivity(), new Observer<List<ChatUser>>() {
+      @Override
+      public void onChanged(List<ChatUser> chefList) {
+        adapter = new TopChefRecyclerAdaptor(getContext(), chefList);
+        recycler.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
-            }
-        });
+      }
+    });
 //        followViewModel.getFollwing().observe(getActivity(), new Observer<ArrayList<Following>>() {
 //            @Override
 //            public void onChanged(ArrayList<Following> followings) {
@@ -104,33 +104,32 @@ public class CustomerHomeFragment extends Fragment {
 
 // TODO ViewModel Category
 
-       viewModel.getitemsFollwedByCust().observe(getActivity(), new Observer<ArrayList<MenuPojo>>() {
-           @Override
-           public void onChanged(ArrayList<MenuPojo> menuPojos) {
-               adapter2 =  new  CategoryRecyclerAdaptor(getActivity(),menuPojos);
-               recycler2.setAdapter(adapter2);
-               adapter2.notifyDataSetChanged();
-           }
-       });
+    viewModel.getitemsFollwedByCust().observe(getActivity(), new Observer<ArrayList<MenuPojo>>() {
+      @Override
+      public void onChanged(ArrayList<MenuPojo> menuPojos) {
+        adapter2 = new CategoryRecyclerAdaptor(getActivity(), menuPojos);
+        recycler2.setAdapter(adapter2);
+        adapter2.notifyDataSetChanged();
+      }
+    });
 //        adapter2 = new CategoryRecyclerAdaptor(getContext(), list);
 
 
-
-        recycler.setLayoutManager(layoutManager);
-        recycler2.setLayoutManager(gridLayoutManager);
-        //seperator
-        //recycler2.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+    recycler.setLayoutManager(layoutManager);
+    recycler2.setLayoutManager(gridLayoutManager);
+    //seperator
+    //recycler2.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 //        recycler3.setLayoutManager(layoutManager3);
 
 
-        see1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    see1.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
 
-                Intent intent = new Intent(getActivity(), CustomerChefListActivity.class);
-                startActivity(intent);
-            }
-        });
+        Intent intent = new Intent(getActivity(), CustomerChefListActivity.class);
+        startActivity(intent);
+      }
+    });
 //        see2.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -149,8 +148,8 @@ public class CustomerHomeFragment extends Fragment {
 //        });
 
 
-        return view;
-    }
+    return view;
+  }
 
 
 }

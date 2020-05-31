@@ -9,26 +9,26 @@ import iti.team.tablia.Models.Customer.CustomerSettings;
 import iti.team.tablia.others.Database;
 
 public class CustomerEditProfileViewModel extends ViewModel {
-    private MutableLiveData<CustomerSettings> customerSettingsMutableLiveData;
-    private Database database;
+  private MutableLiveData<CustomerSettings> customerSettingsMutableLiveData;
+  private Database database;
 
-    public CustomerEditProfileViewModel() {
+  public CustomerEditProfileViewModel() {
 
-        database = new Database();
-    }
+    database = new Database();
+  }
 
-    public MutableLiveData<CustomerSettings> getCustomerSettings() {
+  public MutableLiveData<CustomerSettings> getCustomerSettings() {
 
-        customerSettingsMutableLiveData = database.getCustomerSettings();
-        // Log.d("HelloX", customerSettingsMutableLiveData.getValue().getUser().getFullName());
-        return customerSettingsMutableLiveData;
-    }
+    customerSettingsMutableLiveData = database.getCustomerSettings();
+    // Log.d("HelloX", customerSettingsMutableLiveData.getValue().getUser().getFullName());
+    return customerSettingsMutableLiveData;
+  }
 
-    public void editCustomer(CustomerSettings customerSettings){
-        database.addCustomerToDatabase(customerSettings);
-    }
+  public void editCustomer(CustomerSettings customerSettings) {
+    database.addCustomerToDatabase(customerSettings);
+  }
 
-    public void uploadProfilePhoto(Bitmap bitmap){
-        database.uploadProfilePhoto(bitmap);
-    }
+  public void uploadProfilePhoto(Bitmap bitmap) {
+    database.uploadProfilePhoto(bitmap);
+  }
 }

@@ -66,13 +66,13 @@ public class FollowingAdapter extends RecyclerView.Adapter<FollowingAdapter.View
       @Override
       public void onChanged(Boolean aBoolean) {
 
-    if (!aBoolean) {
-      holder.xFollowingRowButton.setChecked(false);
-      Log.d("Toggle", "I am true");
-    } else {
-      holder.xFollowingRowButton.setChecked(true);
-      Log.d("Toggle", "I am false");
-    }
+        if (!aBoolean) {
+          holder.xFollowingRowButton.setChecked(false);
+          Log.d("Toggle", "I am true");
+        } else {
+          holder.xFollowingRowButton.setChecked(true);
+          Log.d("Toggle", "I am false");
+        }
       }
     });
 

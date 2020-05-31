@@ -6,7 +6,6 @@
     android:layout_height="match_parent">
 
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/xPasswordLayout"
         android:layout_width="0dp"
@@ -15,8 +14,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline24"
         app:layout_constraintStart_toStartOf="@+id/guideline23"
         app:layout_constraintTop_toBottomOf="@+id/xEmailLayout"
-        app:passwordToggleEnabled="true"
-        >
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/xChefPassword"
@@ -59,8 +57,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline23"
         app:layout_constraintTop_toTopOf="@+id/guideline21"
         app:srcCompat="@drawable/tableyya"
-        android:transitionName="logo_image"
-        />
+        android:transitionName="logo_image" />
 
     <TextView
         android:id="@+id/textView25"
@@ -81,8 +78,7 @@
         android:textSize="48sp"
         app:layout_constraintStart_toStartOf="@+id/guideline23"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        android:transitionName="logo_text"
-        />
+        android:transitionName="logo_text" />
 
     <Button
         android:id="@+id/btn_login"
@@ -119,8 +115,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
     <androidx.constraintlayout.widget.Guideline

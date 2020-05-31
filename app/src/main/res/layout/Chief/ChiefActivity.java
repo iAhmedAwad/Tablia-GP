@@ -17,50 +17,50 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ChiefActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView ;
+  private BottomNavigationView bottomNavigationView;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chief);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
-        bottomNavigationView = findViewById(R.id.bottomNav);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_chief);
+    getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+    bottomNavigationView = findViewById(R.id.bottomNav);
+    bottomNavigationView.setSelectedItemId(R.id.home);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                Fragment fragment = null ;
+        Fragment fragment = null;
 
-                switch (menuItem.getItemId()){
-                    case R.id.chat:
-                        fragment = new ChatFragment();
-                        break;
+        switch (menuItem.getItemId()) {
+          case R.id.chat:
+            fragment = new ChatFragment();
+            break;
 
-                    case R.id.profile:
-                        fragment = new profileFragment();
-                        break;
+          case R.id.profile:
+            fragment = new profileFragment();
+            break;
 
-                    case R.id.home:
-                        fragment = new HomeFragment();
-                        break;
+          case R.id.home:
+            fragment = new HomeFragment();
+            break;
 
-                    case R.id.order:
-                        fragment = new OrderFragment();
-                        break;
+          case R.id.order:
+            fragment = new OrderFragment();
+            break;
 
-                    case R.id.menu:
-                        fragment = new MenuFragment();
-                        break;
-                }
+          case R.id.menu:
+            fragment = new MenuFragment();
+            break;
+        }
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
-                return true;
-            }
-        });
+        return true;
+      }
+    });
 
-    }
+  }
 }

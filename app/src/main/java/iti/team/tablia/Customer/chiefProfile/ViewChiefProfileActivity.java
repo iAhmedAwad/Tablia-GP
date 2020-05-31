@@ -40,7 +40,7 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
   FirebaseUser cust;
 
   protected void onCreate(Bundle savedInstanceState) {
-      db = new Database();
+    db = new Database();
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_view_chief_profile);
     reviewlist.add("  when an unknown printer took a galley of type and scrambled it to make a type specimen book. ");
@@ -79,7 +79,7 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     myViewModel.isFollowing(userId).observe(ViewChiefProfileActivity.this, new Observer<Boolean>() {
       @Override
       public void onChanged(Boolean aBoolean) {
-        if(aBoolean) {
+        if (aBoolean) {
           Log.d("xfollow", "I am in the isFollowing check - true");
           isfollow.setChecked(true);
         } else {
@@ -142,17 +142,16 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
 
 
         if (isfollow.isChecked()) {
-            db.followChef(userId);
-                } else {
-            db.unfollowChef(userId);
-                }
+          db.followChef(userId);
+        } else {
+          db.unfollowChef(userId);
+        }
 
-            }
-        });
+      }
+    });
 
 
-
-    }
+  }
 
 
 }

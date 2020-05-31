@@ -18,8 +18,7 @@ import iti.team.tablia.others.Database;
 
 /**
  * This activity has to be started by putting Item ID and Chef ID strings to the starting intent.
- *
- * */
+ */
 public class AddReviewsActivity extends AppCompatActivity {
 
   //constants
@@ -49,7 +48,7 @@ public class AddReviewsActivity extends AppCompatActivity {
     xSubmitReview = findViewById(R.id.xSubmitReview);
     //Database
     mDatabase = new Database(this);
-    mViewModel =  new ViewModelProvider(this).get(AddReviewsActivityViewModel.class);
+    mViewModel = new ViewModelProvider(this).get(AddReviewsActivityViewModel.class);
 
     getIncomingIntent();
     init();
@@ -57,38 +56,39 @@ public class AddReviewsActivity extends AppCompatActivity {
 
   }
 
-  private void getIncomingIntent(){
-    Intent intent =  getIntent();
+  private void getIncomingIntent() {
+    Intent intent = getIntent();
     mITEM_id = intent.getStringExtra(INCOMING_ITEM_ID);
     mCHEF_id = intent.getStringExtra(INCOMING_CHEF_ID);
   }
 
-  private void init(){
+  private void init() {
 
     mViewModel.getReview(mITEM_id)
         .observe(this, new Observer<Review>() {
-      @Override
-      public void onChanged(Review review) {
-        if(review != null && review.getCustomerId() != null){
-          mReview = new Review(review);
-        xRatingBar.setRating(review.getRating());
-        xReviewText.setText(review.getReviewText());
-        }
-      }
-    });
+          @Override
+          public void onChanged(Review review) {
+            if (review != null && review.getCustomerId() != null) {
+              mReview = new Review(review);
+              xRatingBar.setRating(review.getRating());
+              xReviewText.setText(review.getReviewText());
+            }
+          }
+        });
   }
-  private void initButton(){
+
+  private void initButton() {
     //TODO here, you gotta complete the review object!
 
     xSubmitReview.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-    final float rating = xRatingBar.getRating();
-    final String reviewText = xReviewText.getText().toString();
+        final float rating = xRatingBar.getRating();
+        final String reviewText = xReviewText.getText().toString();
 
-    if(mReview == null){
-      mReview = new Review();
-    }
+        if (mReview == null) {
+          mReview = new Review();
+        }
         mReview.setItemId(mITEM_id);
         mReview.setChefId(mCHEF_id);
         mReview.setReviewText(reviewText);
