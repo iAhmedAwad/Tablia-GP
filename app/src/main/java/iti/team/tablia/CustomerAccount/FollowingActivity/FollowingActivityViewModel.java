@@ -9,7 +9,7 @@ import iti.team.tablia.Models.Following;
 import iti.team.tablia.others.Database;
 
 public class FollowingActivityViewModel extends ViewModel {
- private Database mDatabase;
+  private Database mDatabase;
 
   public FollowingActivityViewModel() {
     mDatabase = new Database();

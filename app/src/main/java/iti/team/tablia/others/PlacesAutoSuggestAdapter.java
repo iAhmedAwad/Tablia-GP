@@ -11,59 +11,59 @@ import java.util.ArrayList;
 
 public class PlacesAutoSuggestAdapter extends ArrayAdapter implements Filterable {
 
-    ArrayList<String> results;
-    int resource;
-    Context context;
+  ArrayList<String> results;
+  int resource;
+  Context context;
 
-    PlaceApi placeApi = new PlaceApi();
+  PlaceApi placeApi = new PlaceApi();
 
-    public PlacesAutoSuggestAdapter(Context context, int resId){
-        super(context, resId);
-        this.context = context;
-        this.resource = resId;
-    }
+  public PlacesAutoSuggestAdapter(Context context, int resId) {
+    super(context, resId);
+    this.context = context;
+    this.resource = resId;
+  }
 
-    @Nullable
-    @Override
-    public Object getItem(int position) {
-        return results.get(position);
-    }
+  @Nullable
+  @Override
+  public Object getItem(int position) {
+    return results.get(position);
+  }
 
-    @Override
-    public int getCount() {
-        return results.size();
-    }
+  @Override
+  public int getCount() {
+    return results.size();
+  }
 
-    @Override
-    public Filter getFilter(){
-        Filter filter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults = new FilterResults();
+  @Override
+  public Filter getFilter() {
+    Filter filter = new Filter() {
+      @Override
+      protected FilterResults performFiltering(CharSequence constraint) {
+        FilterResults filterResults = new FilterResults();
 
-                if(constraint!= null){
-                    results = placeApi.autocomplete(constraint.toString());
-                    filterResults.values=results;
-                    filterResults.count = results.size();
-                }
+        if (constraint != null) {
+          results = placeApi.autocomplete(constraint.toString());
+          filterResults.values = results;
+          filterResults.count = results.size();
+        }
 
-                return filterResults;
-            }
+        return filterResults;
+      }
 
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
+      @Override
+      protected void publishResults(CharSequence constraint, FilterResults results) {
 
-                if(results != null && results.count>0){
-                    notifyDataSetChanged();
-                }else {
-                    notifyDataSetInvalidated();
-                }
+        if (results != null && results.count > 0) {
+          notifyDataSetChanged();
+        } else {
+          notifyDataSetInvalidated();
+        }
 
-            }
-        };
+      }
+    };
 
-        return filter;
-    }
+    return filter;
+  }
 
 
 }

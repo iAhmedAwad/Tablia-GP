@@ -33,132 +33,134 @@ import iti.team.tablia.Models.ChatUser;
 import iti.team.tablia.R;
 
 public class MessageActivity extends AppCompatActivity {
-    private CircleImageView profile_image;
-    private TextView username;
-    private FirebaseUser firebaseUser;
-    private DatabaseReference reference;
-    private Intent intent;
-    private ImageButton btn_send;
-    private EditText txt_send;
-    private MessageAdapter messageAdapter;
-    private RecyclerView recyclerView;
-    private String userId;
-    private String imageURL;
-    private boolean notify = false;
-    private MessageViewModel messageViewModel;
-    private boolean isPaused = false;
+  private CircleImageView profile_image;
+  private TextView username;
+  private FirebaseUser firebaseUser;
+  private DatabaseReference reference;
+  private Intent intent;
+  private ImageButton btn_send;
+  private EditText txt_send;
+  private MessageAdapter messageAdapter;
+  private RecyclerView recyclerView;
+  private String userId;
+  private String imageURL;
+  private boolean notify = false;
+  private MessageViewModel messageViewModel;
+  private boolean isPaused = false;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_message);
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setTitle("");
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
 
-                finish();
-            }
-        });
-        profile_image = findViewById(R.id.profile_image);
-        username = findViewById(R.id.username);
-        btn_send = findViewById(R.id.btn_send);
-        txt_send = findViewById(R.id.txt_send);
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        layoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(layoutManager);
-        intent = getIntent();
-        userId = intent.getStringExtra("userid");
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        //Done
-        btn_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                notify = true;
-                String msg = txt_send.getText().toString();
-                if (!msg.equals("")) {
-                    sendMessage(firebaseUser.getUid(), userId, msg);
-                } else {
-                    Toast.makeText(MessageActivity.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
-                }
-                txt_send.setText("");
-            }
-        });
-
-
-        messageViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
-        messageViewModel.openChatMessage(userId);
-        messageViewModel.getUserMutableLiveData().observe(this, new Observer<ChatUser>() {
-            @Override
-            public void onChanged(ChatUser user) {
-                username.setText(user.getUsername());
-                imageURL = user.getImageURL();
-                if (user.getImageURL().contains("https")) {
-                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
-                } else {
-                    Bitmap bitmap = StringToBitMap(user.getImageURL());
-                    profile_image.setImageBitmap(bitmap);
-                }
-                messageViewModel.readMessage(firebaseUser.getUid(), userId);
-                messageViewModel.getChatList().observe(MessageActivity.this, new Observer<List<Chat>>() {
-                    @Override
-                    public void onChanged(List<Chat> chats) {
-                        messageAdapter = new MessageAdapter(MessageActivity.this, chats, imageURL);
-                        recyclerView.setAdapter(messageAdapter);
-                    }
-                });
-            }
-        });
-
-        seenMessage(userId);
-
-    }
-
-    private void seenMessage(final String userId) {
-        messageViewModel.seenMessage(userId, isPaused);
-    }
-
-    private void sendMessage(final String sender, final String receiver, String message) {
-        messageViewModel.sendMessage(sender, receiver, message);
-        messageViewModel.notifyUser(receiver, message, MessageActivity.this, notify);
-
-    }
-    public Bitmap StringToBitMap(String encodedString) {
-        try {
-            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0,
-                    encodeByte.length);
-            return bitmap;
-        } catch (Exception e) {
-            e.getMessage();
-            return null;
+        finish();
+      }
+    });
+    profile_image = findViewById(R.id.profile_image);
+    username = findViewById(R.id.username);
+    btn_send = findViewById(R.id.btn_send);
+    txt_send = findViewById(R.id.txt_send);
+    recyclerView = findViewById(R.id.recycler_view);
+    recyclerView.setHasFixedSize(true);
+    LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+    layoutManager.setStackFromEnd(true);
+    recyclerView.setLayoutManager(layoutManager);
+    intent = getIntent();
+    userId = intent.getStringExtra("userid");
+    firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    //Done
+    btn_send.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        notify = true;
+        String msg = txt_send.getText().toString();
+        if (!msg.equals("")) {
+          sendMessage(firebaseUser.getUid(), userId, msg);
+        } else {
+          Toast.makeText(MessageActivity.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
         }
-    }
-    private void status(String status) {
-        reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("status", status);
-        reference.updateChildren(hashMap);
-    }
+        txt_send.setText("");
+      }
+    });
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        messageViewModel.seenMessage(userId, false);
-        status("online");
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        messageViewModel.seenMessage(userId, true);
-        status("offline");
+    messageViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
+    messageViewModel.openChatMessage(userId);
+    messageViewModel.getUserMutableLiveData().observe(this, new Observer<ChatUser>() {
+      @Override
+      public void onChanged(ChatUser user) {
+        username.setText(user.getUsername());
+        imageURL = user.getImageURL();
+        if (user.getImageURL().contains("https")) {
+          Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
+        } else {
+          Bitmap bitmap = StringToBitMap(user.getImageURL());
+          profile_image.setImageBitmap(bitmap);
+        }
+        messageViewModel.readMessage(firebaseUser.getUid(), userId);
+        messageViewModel.getChatList().observe(MessageActivity.this, new Observer<List<Chat>>() {
+          @Override
+          public void onChanged(List<Chat> chats) {
+            messageAdapter = new MessageAdapter(MessageActivity.this, chats, imageURL);
+            recyclerView.setAdapter(messageAdapter);
+          }
+        });
+      }
+    });
+
+    seenMessage(userId);
+
+  }
+
+  private void seenMessage(final String userId) {
+    messageViewModel.seenMessage(userId, isPaused);
+  }
+
+  private void sendMessage(final String sender, final String receiver, String message) {
+    messageViewModel.sendMessage(sender, receiver, message);
+    messageViewModel.notifyUser(receiver, message, MessageActivity.this, notify);
+
+  }
+
+  public Bitmap StringToBitMap(String encodedString) {
+    try {
+      byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+      Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0,
+          encodeByte.length);
+      return bitmap;
+    } catch (Exception e) {
+      e.getMessage();
+      return null;
     }
+  }
+
+  private void status(String status) {
+    reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
+    HashMap<String, Object> hashMap = new HashMap<>();
+    hashMap.put("status", status);
+    reference.updateChildren(hashMap);
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    messageViewModel.seenMessage(userId, false);
+    status("online");
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    messageViewModel.seenMessage(userId, true);
+    status("offline");
+  }
 
 }

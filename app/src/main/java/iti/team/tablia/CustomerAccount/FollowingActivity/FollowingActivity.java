@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 import iti.team.tablia.Models.Following;
@@ -19,6 +20,7 @@ public class FollowingActivity extends AppCompatActivity {
   private RecyclerView.LayoutManager mLayoutManager;
   private FollowingActivityViewModel mModel;
   private FollowingAdapter mAdapter;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

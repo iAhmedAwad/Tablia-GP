@@ -9,12 +9,12 @@ import Models.OrderPojo;
 
 public class OrderViewModel extends ViewModel {
 
-    public MutableLiveData<List<OrderPojo>> deatilsMutableLiveData  = new MutableLiveData<>();
+  public MutableLiveData<List<OrderPojo>> deatilsMutableLiveData = new MutableLiveData<>();
 
 
-    public void setList(List<OrderPojo> list) {
-        deatilsMutableLiveData.setValue(list);
-    }
+  public void setList(List<OrderPojo> list) {
+    deatilsMutableLiveData.setValue(list);
+  }
 
 
 }

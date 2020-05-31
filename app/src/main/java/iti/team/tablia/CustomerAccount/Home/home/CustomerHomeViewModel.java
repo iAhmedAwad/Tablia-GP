@@ -15,22 +15,23 @@ import iti.team.tablia.others.Database;
 
 public class CustomerHomeViewModel extends ViewModel {
 
-    ChatRepository chatRepository = new ChatRepository();
-    Database database = new Database();
-   public MutableLiveData<ChefAccountSettings> myData = new MutableLiveData<>();
-    public MutableLiveData<HashSet<MenuPojo>> myData2 = new MutableLiveData<>();
+  ChatRepository chatRepository = new ChatRepository();
+  Database database = new Database();
+  public MutableLiveData<ChefAccountSettings> myData = new MutableLiveData<>();
+  public MutableLiveData<HashSet<MenuPojo>> myData2 = new MutableLiveData<>();
 
-    public MutableLiveData<List<ChatUser>> getChefList() {
-        return chatRepository.getChefList();
-    }
+  public MutableLiveData<List<ChatUser>> getChefList() {
+    return chatRepository.getChefList();
+  }
 
-    public void getChefInfo(String userId) {
+  public void getChefInfo(String userId) {
 
-        myData = database.getChefInfoById(userId);
-    }
-    public MutableLiveData<ArrayList<MenuPojo>> getitemsFollwedByCust(){
-        return database.getFollowedChefsMenuItems();
-    }
+    myData = database.getChefInfoById(userId);
+  }
+
+  public MutableLiveData<ArrayList<MenuPojo>> getitemsFollwedByCust() {
+    return database.getFollowedChefsMenuItems();
+  }
 }
 
 

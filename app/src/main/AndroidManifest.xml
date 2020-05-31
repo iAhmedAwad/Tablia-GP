@@ -21,8 +21,6 @@
         android:theme="@style/AppTheme">
 
 
-
-
         <activity android:name=".CustomerAccount.CustomerOrder.CompleteOrder"></activity>
         <activity android:name=".CustomerAccount.CustomerOrder.Cart" />
         <activity android:name=".CustomerAccount.Items.ItemDetails" />
@@ -86,8 +84,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
-
 
 
 </manifest>

@@ -7,9 +7,6 @@
     tools:context=".CustomerAccount.Home.seeAll.seeAllCategories">
 
 
-
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_id"
         android:layout_width="match_parent"

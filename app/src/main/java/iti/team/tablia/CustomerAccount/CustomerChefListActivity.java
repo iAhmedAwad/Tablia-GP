@@ -34,124 +34,124 @@ import iti.team.tablia.R;
 
 
 public class CustomerChefListActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private TopChefAdapter userAdapter;
-    private List<ChatUser> users;
-    EditText search;
-    CustomerChefListViewModel viewModel;
+  private RecyclerView recyclerView;
+  private TopChefAdapter userAdapter;
+  private List<ChatUser> users;
+  EditText search;
+  CustomerChefListViewModel viewModel;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_chef_list);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_customer_chef_list);
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setTitle("");
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
 
-                finish();
-            }
-        });
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        users = new ArrayList<>();
-        viewModel = ViewModelProviders.of(this).get(CustomerChefListViewModel.class);
-        viewModel.getChefList().observe(this, new Observer<List<ChatUser>>() {
-            @Override
-            public void onChanged(List<ChatUser> chefList) {
-                userAdapter = new TopChefAdapter(CustomerChefListActivity.this, chefList);
-                recyclerView.setAdapter(userAdapter);
+        finish();
+      }
+    });
+    recyclerView = findViewById(R.id.recycler_view);
+    recyclerView.setHasFixedSize(true);
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+    users = new ArrayList<>();
+    viewModel = ViewModelProviders.of(this).get(CustomerChefListViewModel.class);
+    viewModel.getChefList().observe(this, new Observer<List<ChatUser>>() {
+      @Override
+      public void onChanged(List<ChatUser> chefList) {
+        userAdapter = new TopChefAdapter(CustomerChefListActivity.this, chefList);
+        recyclerView.setAdapter(userAdapter);
 
 
-            }
-        });
+      }
+    });
 //        readUsers();
-        search = findViewById(R.id.search);
+    search = findViewById(R.id.search);
 
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    search.addTextChangedListener(new TextWatcher() {
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+      }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                viewModel.searchChef(s.toString()).observe(CustomerChefListActivity.this, new Observer<List<ChatUser>>() {
-                    @Override
-                    public void onChanged(List<ChatUser> chefList) {
-                        userAdapter = new TopChefAdapter(CustomerChefListActivity.this, chefList);
-                        recyclerView.setAdapter(userAdapter);
-                    }
-                });
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {
+        viewModel.searchChef(s.toString()).observe(CustomerChefListActivity.this, new Observer<List<ChatUser>>() {
+          @Override
+          public void onChanged(List<ChatUser> chefList) {
+            userAdapter = new TopChefAdapter(CustomerChefListActivity.this, chefList);
+            recyclerView.setAdapter(userAdapter);
+          }
         });
-    }
+      }
 
-    private void searchUsers(String s) {
+      @Override
+      public void afterTextChanged(Editable s) {
 
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference("chef_account_settings").orderByChild("userName")
-                .startAt(s)
-                .endAt(s + "\uf8ff");
+      }
+    });
+  }
 
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!search.getText().toString().equals("")) {
-                    users.clear();
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
-                        String chefId = snapshot.getKey();
-                        ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto(), user.getStatus());
-                        users.add(chatUser);
+  private void searchUsers(String s) {
 
-                    }
-                    userAdapter = new TopChefAdapter(CustomerChefListActivity.this, users);
-                    recyclerView.setAdapter(userAdapter);
-                } else {
-                    readUsers();
-                }
-            }
+    final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    Query query = FirebaseDatabase.getInstance().getReference("chef_account_settings").orderByChild("userName")
+        .startAt(s)
+        .endAt(s + "\uf8ff");
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+    query.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        if (!search.getText().toString().equals("")) {
+          users.clear();
+          for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+            ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
+            String chefId = snapshot.getKey();
+            ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto(), user.getStatus());
+            users.add(chatUser);
 
-            }
-        });
-    }
+          }
+          userAdapter = new TopChefAdapter(CustomerChefListActivity.this, users);
+          recyclerView.setAdapter(userAdapter);
+        } else {
+          readUsers();
+        }
+      }
 
-    private void readUsers() {
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                users.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
-                    String chefId = snapshot.getKey();
-                    ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto(), user.getStatus());
-                    users.add(chatUser);
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-                userAdapter = new TopChefAdapter(CustomerChefListActivity.this, users);
-                recyclerView.setAdapter(userAdapter);
-            }
+      }
+    });
+  }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+  private void readUsers() {
+    final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+    reference.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        users.clear();
+        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+          ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
+          String chefId = snapshot.getKey();
+          ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto(), user.getStatus());
+          users.add(chatUser);
 
-            }
-        });
-    }
+        }
+        userAdapter = new TopChefAdapter(CustomerChefListActivity.this, users);
+        recyclerView.setAdapter(userAdapter);
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
+  }
 }

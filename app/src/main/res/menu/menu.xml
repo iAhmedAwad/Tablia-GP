@@ -4,27 +4,22 @@
     <item
         android:title="chat"
         android:id="@+id/chat"
-        android:icon="@drawable/ic_chat_black_24dp">
-    </item>
+        android:icon="@drawable/ic_chat_black_24dp"></item>
 
     <item
         android:title="oreder"
         android:id="@+id/order"
-        android:icon="@drawable/ic_border_color_black_24dp">
-    </item>
+        android:icon="@drawable/ic_border_color_black_24dp"></item>
 
     <item
         android:title="home"
         android:id="@+id/home"
-        android:icon="@drawable/ic_home_black_24dp"
-        >
-    </item>
+        android:icon="@drawable/ic_home_black_24dp"></item>
 
     <item
         android:title="menu"
         android:id="@+id/menu"
-        android:icon="@drawable/ic_assignment_black_24dp">
-    </item>
+        android:icon="@drawable/ic_assignment_black_24dp"></item>
 
     <item
         android:id="@+id/profile"

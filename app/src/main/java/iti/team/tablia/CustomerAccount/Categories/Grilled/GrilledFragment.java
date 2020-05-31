@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import java.util.ArrayList;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
@@ -23,42 +22,42 @@ import iti.team.tablia.util.Constants;
 
 public class GrilledFragment extends Fragment {
 
-    private GrilledViewModel mViewModel;
-    private RecyclerView xRecyclerView;
-    private GrilledAdapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+  private GrilledViewModel mViewModel;
+  private RecyclerView xRecyclerView;
+  private GrilledAdapter mAdapter;
+  private RecyclerView.LayoutManager layoutManager;
 
-    public static GrilledFragment newInstance() {
-        return new GrilledFragment();
-    }
+  public static GrilledFragment newInstance() {
+    return new GrilledFragment();
+  }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.grilled_fragment, container, false);
-        mViewModel = ViewModelProviders.of(this).get(GrilledViewModel.class);
-        xRecyclerView = view.findViewById(R.id.xgrilledRecycle);
-        layoutManager = new LinearLayoutManager(getContext());
-        xRecyclerView.setHasFixedSize(true);
-        xRecyclerView.setLayoutManager(layoutManager);
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                           @Nullable Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.grilled_fragment, container, false);
+    mViewModel = ViewModelProviders.of(this).get(GrilledViewModel.class);
+    xRecyclerView = view.findViewById(R.id.xgrilledRecycle);
+    layoutManager = new LinearLayoutManager(getContext());
+    xRecyclerView.setHasFixedSize(true);
+    xRecyclerView.setLayoutManager(layoutManager);
 
 
-        return view;
-    }
+    return view;
+  }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+  @Override
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
 
-        mViewModel.getGrilledItems(Constants.GRILLED)
-                .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
-                    @Override
-                    public void onChanged(ArrayList<MenuPojo> menuPojos) {
-                        mAdapter = new GrilledAdapter(getContext(), menuPojos);
-                        xRecyclerView.setAdapter(mAdapter);
-                        mAdapter.notifyDataSetChanged();
-                    }
-                });
-    }
+    mViewModel.getGrilledItems(Constants.GRILLED)
+        .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
+          @Override
+          public void onChanged(ArrayList<MenuPojo> menuPojos) {
+            mAdapter = new GrilledAdapter(getContext(), menuPojos);
+            xRecyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+          }
+        });
+  }
 
 }

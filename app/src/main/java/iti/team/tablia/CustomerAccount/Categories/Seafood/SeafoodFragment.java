@@ -22,41 +22,41 @@ import iti.team.tablia.util.Constants;
 
 public class SeafoodFragment extends Fragment {
 
-    private SeafoodViewModel mViewModel;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+  private SeafoodViewModel mViewModel;
+  private RecyclerView recyclerView;
+  private RecyclerView.Adapter mAdapter;
+  private RecyclerView.LayoutManager layoutManager;
 
-    public static SeafoodFragment newInstance() {
-        return new SeafoodFragment();
-    }
+  public static SeafoodFragment newInstance() {
+    return new SeafoodFragment();
+  }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fish_fragment, container, false);
-        recyclerView = view.findViewById(R.id.xFishRecycler);
-        recyclerView.setHasFixedSize(true);
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                           @Nullable Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fish_fragment, container, false);
+    recyclerView = view.findViewById(R.id.xFishRecycler);
+    recyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
+    layoutManager = new LinearLayoutManager(getContext());
+    recyclerView.setLayoutManager(layoutManager);
 
-        mViewModel = ViewModelProviders.of(this).get(SeafoodViewModel.class);
-        mViewModel.getFishItems(Constants.SEAFOOD).observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
-            @Override
-            public void onChanged(ArrayList<MenuPojo> menuPojos) {
-                mAdapter = new SeafoodAdapter(getContext(), menuPojos);
-                recyclerView.setAdapter(mAdapter);
-                mAdapter.notifyDataSetChanged();
-            }
-        });
-        return view;
-    }
+    mViewModel = ViewModelProviders.of(this).get(SeafoodViewModel.class);
+    mViewModel.getFishItems(Constants.SEAFOOD).observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
+      @Override
+      public void onChanged(ArrayList<MenuPojo> menuPojos) {
+        mAdapter = new SeafoodAdapter(getContext(), menuPojos);
+        recyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+      }
+    });
+    return view;
+  }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        // TODO: Use the ViewModel
-    }
+  @Override
+  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    // TODO: Use the ViewModel
+  }
 
 }

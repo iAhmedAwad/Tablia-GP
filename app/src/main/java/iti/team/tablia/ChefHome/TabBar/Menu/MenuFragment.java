@@ -24,55 +24,55 @@ import iti.team.tablia.R;
 
 public class MenuFragment extends Fragment {
 
-    private MenuViewModel menuViewModel;
+  private MenuViewModel menuViewModel;
 
-    MenuAdapter myAdapter;
-    RecyclerView recycleMenu ;
-//    ImageView img ;
-    FloatingActionButton fab ;
-    Bitmap bitmap = null ;
+  MenuAdapter myAdapter;
+  RecyclerView recycleMenu;
+  //    ImageView img ;
+  FloatingActionButton fab;
+  Bitmap bitmap = null;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
 
-        menuViewModel = ViewModelProviders.of(this).get(MenuViewModel.class);
+    menuViewModel = ViewModelProviders.of(this).get(MenuViewModel.class);
 
-        View root = inflater.inflate(R.layout.fragment_menu, container, false);
+    View root = inflater.inflate(R.layout.fragment_menu, container, false);
 
 //        DataOfMenu data = DataOfMenu.getInstance();
 
-         fab = root.findViewById(R.id.fab);
+    fab = root.findViewById(R.id.fab);
 
-        recycleMenu = root.findViewById(R.id.recycleMenu);
-        recycleMenu.setLayoutManager(new GridLayoutManager(getContext(),2));
+    recycleMenu = root.findViewById(R.id.recycleMenu);
+    recycleMenu.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
 
 //        data.setData(new MenuPojo("Cake", "200 EGP",null));
-        menuViewModel.getList();
+    menuViewModel.getList();
 
 
 //        menuViewModel.setList(testList);
 
-        menuViewModel.deatilsMutableLiveData.observe(getViewLifecycleOwner(), new Observer<List<MenuPojo>>() {
-            @Override
-            public void onChanged(List<MenuPojo> menuPojos) {
+    menuViewModel.deatilsMutableLiveData.observe(getViewLifecycleOwner(), new Observer<List<MenuPojo>>() {
+      @Override
+      public void onChanged(List<MenuPojo> menuPojos) {
 
-                myAdapter  = new MenuAdapter(menuPojos,getContext());
-                recycleMenu.setAdapter(myAdapter);
+        myAdapter = new MenuAdapter(menuPojos, getContext());
+        recycleMenu.setAdapter(myAdapter);
 
-            }
-        });
+      }
+    });
 
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goToAddMenue = new Intent(getContext() , AddMenu.class);
-                startActivity(goToAddMenue);
-            }
-        });
+    fab.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent goToAddMenue = new Intent(getContext(), AddMenu.class);
+        startActivity(goToAddMenue);
+      }
+    });
 
-        return root;
-    }
+    return root;
+  }
 }

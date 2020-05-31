@@ -22,8 +22,6 @@
             android:background="@drawable/circle_border">
 
 
-
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/id_profile_pic"
                 android:layout_width="90dp"
@@ -38,8 +36,7 @@
                 android:padding="3dp"
                 android:src="@drawable/ic_user"
                 app:civ_border_color="#FF000000"
-                app:civ_border_width="1dp"
-                />
+                app:civ_border_width="1dp" />
 
 
             <ImageView
@@ -52,8 +49,7 @@
                 android:layout_alignBottom="@id/id_profile_pic"
                 android:layout_marginRight="2dp"
                 android:layout_marginBottom="0dp"
-                android:background="@drawable/ic_camera_alt_black_24dp"
-                />
+                android:background="@drawable/ic_camera_alt_black_24dp" />
 
         </RelativeLayout>
 
@@ -131,6 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Order End Time:" />
+
             <Button
                 android:id="@+id/id_save_changes"
                 android:layout_width="wrap_content"
@@ -141,7 +138,6 @@
                 android:padding="10dp"
                 android:layout_marginBottom="2dp"
                 android:text="Save Changes " />
-
 
 
         </LinearLayout>

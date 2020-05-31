@@ -9,14 +9,15 @@ import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.others.Database;
 
 public class GrilledViewModel extends ViewModel {
-    private MutableLiveData<ArrayList<MenuPojo>> arrayListMutableLiveData;
-private Database database;
-    public GrilledViewModel() {
-        this.database = new Database();
-    }
+  private MutableLiveData<ArrayList<MenuPojo>> arrayListMutableLiveData;
+  private Database database;
 
-    public MutableLiveData<ArrayList<MenuPojo>> getGrilledItems(String category){
-        arrayListMutableLiveData = database.getCategoryList(category);
-        return arrayListMutableLiveData;
-    }
+  public GrilledViewModel() {
+    this.database = new Database();
+  }
+
+  public MutableLiveData<ArrayList<MenuPojo>> getGrilledItems(String category) {
+    arrayListMutableLiveData = database.getCategoryList(category);
+    return arrayListMutableLiveData;
+  }
 }

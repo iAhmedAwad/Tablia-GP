@@ -8,12 +8,12 @@ import iti.team.tablia.others.Database;
 
 public class ReviewViewModel extends ViewModel {
 
-    Database database = new Database();
-    public MutableLiveData<Review> myData = new MutableLiveData<>();
+  Database database = new Database();
+  public MutableLiveData<Review> myData = new MutableLiveData<>();
 
-    public void getReviews(String id) {
+  public void getReviews(String id) {
 
-        myData = database.getReview(id);
-    }
+    myData = database.getReview(id);
+  }
 
 }

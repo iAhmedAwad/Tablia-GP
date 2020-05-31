@@ -8,18 +8,18 @@ import iti.team.tablia.others.Database;
 
 public class CustomerProfileViewModel extends ViewModel {
 
-    private MutableLiveData<CustomerSettings> customerSettingsMutableLiveData;
-    private Database database;
+  private MutableLiveData<CustomerSettings> customerSettingsMutableLiveData;
+  private Database database;
 
-    public CustomerProfileViewModel() {
+  public CustomerProfileViewModel() {
 
-        database = new Database();
-    }
+    database = new Database();
+  }
 
-    public MutableLiveData<CustomerSettings> getCustomerSettings() {
+  public MutableLiveData<CustomerSettings> getCustomerSettings() {
 
-        customerSettingsMutableLiveData = database.getCustomerSettings();
-        // Log.d("HelloX", customerSettingsMutableLiveData.getValue().getUser().getFullName());
-        return customerSettingsMutableLiveData;
-    }
+    customerSettingsMutableLiveData = database.getCustomerSettings();
+    // Log.d("HelloX", customerSettingsMutableLiveData.getValue().getUser().getFullName());
+    return customerSettingsMutableLiveData;
+  }
 }
