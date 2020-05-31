@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import iti.team.tablia.Customer.chiefProfile.ViewChiefProfileActivity;
+import iti.team.tablia.Customer.ChefProfile.ViewChiefProfileActivity;
 import iti.team.tablia.Models.ChatUser;
 import iti.team.tablia.R;
 

@@ -63,8 +63,8 @@
         </activity>
         <activity android:name=".Authentication.CustomerRegistration.CustomerRegistrationActivity" />
         <activity android:name=".ChefHome.ChiefActivity" />
-        <activity android:name=".Customer.chiefProfile.ReviewsActivity" />
-        <activity android:name=".Customer.chiefProfile.ViewChiefProfileActivity" />
+        <activity android:name=".Customer.ChefProfile.ReviewsActivity" />
+        <activity android:name=".Customer.ChefProfile.ViewChiefProfileActivity" />
         <activity android:name=".ChefHome.TabBar.Chat.Messages.MessageActivity" />
 
         <service

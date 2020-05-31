@@ -1,4 +1,4 @@
-package iti.team.tablia.Customer.chiefProfile;
+package iti.team.tablia.Customer.ChefProfile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import iti.team.tablia.ChefHome.TabBar.Chat.Messages.MessageActivity;
-import iti.team.tablia.ChefHome.TabBar.Menu.MenuFragment;
 import iti.team.tablia.CustomerAccount.ChefMenus.ViewChefMenus;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.R;
