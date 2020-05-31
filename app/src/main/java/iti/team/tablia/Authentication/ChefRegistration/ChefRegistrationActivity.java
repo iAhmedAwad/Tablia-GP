@@ -67,7 +67,7 @@ public class ChefRegistrationActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_chef_registration);
     mRegister = findViewById(R.id.xChefBtnRegister);
-    xEmail = findViewById(R.id.xChefPassword);
+    xEmail = findViewById(R.id.xChefEmail);
     xPassword = findViewById(R.id.xChefPassword);
     xUsername = findViewById(R.id.xChefUsername);
     xConfirmPassword = findViewById(R.id.xChefConfirmPassword);
