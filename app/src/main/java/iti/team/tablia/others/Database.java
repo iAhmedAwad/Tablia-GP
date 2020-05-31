@@ -220,8 +220,8 @@ public class Database {
     String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-    //add data to the "customers" node
-    reference.child(String.valueOf(R.string.usersNode))
+    //add data to the "users" node
+    reference.child(Constants.usersNode)
         .child(userid)
         .setValue(chefSettings.getUser());
 
