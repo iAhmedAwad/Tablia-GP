@@ -2,9 +2,9 @@
 <resources>
     <color name="colorPrimary">#FFC107</color>
     <color name="colorPrimaryDark">#FFC107</color>
-    <color name="colorAccent">#71068F</color>
+    <color name="colorAccent">#81007F</color>
     <!--  Splash  -->
-    <color name="app_green">#cccc66</color>
+    <color name="app_green">#fff</color>
     <color name="app_light_orange">#ffcc66</color>
     <color name="app_orange">#ff9933</color>
     <color name="app_blue_dark">#669999</color>
