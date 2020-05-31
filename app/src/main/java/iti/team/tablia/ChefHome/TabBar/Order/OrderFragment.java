@@ -1,4 +1,4 @@
-package iti.team.tablia.ChefHome.TabBar.Oreder;
+package iti.team.tablia.ChefHome.TabBar.Order;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

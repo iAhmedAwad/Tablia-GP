@@ -19,7 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import iti.team.tablia.ChefHome.TabBar.Oreder.OrderPojo;
+import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.Customer.ChefProfile.ViewChiefProfileActivity;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.R;

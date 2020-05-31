@@ -39,7 +39,7 @@
         <activity android:name=".CustomerAccount.Filter.FilteredDataActivity" />
         <activity android:name=".CustomerAccount.Filter.FilterActivity" />
         <activity android:name=".Authentication.RegistrationOptionsActivity" />
-        <activity android:name=".ChefHome.TabBar.Oreder.OrderDeatils.OrderDeatils" />
+        <activity android:name=".ChefHome.TabBar.Order.OrderDeatils.OrderDeatils" />
         <activity android:name=".others.MainActivity" />
         <activity
             android:name=".CustomerAccount.CustomerActivity.CustomerActivity"

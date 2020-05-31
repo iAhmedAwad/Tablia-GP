@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
-import iti.team.tablia.ChefHome.TabBar.Oreder.OrderPojo;
+import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Chef.ChefSettings;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
