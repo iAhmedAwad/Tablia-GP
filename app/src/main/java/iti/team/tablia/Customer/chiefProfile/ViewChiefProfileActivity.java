@@ -30,7 +30,7 @@ import iti.team.tablia.util.GlobalImageLoader;
 
 public class ViewChiefProfileActivity extends AppCompatActivity {
 
-  TextView name, start_time, end_time, nb_followers, nb_orders, address, reviews, menus;
+  TextView name, start_time, end_time, nb_followers, nb_orders, address, reviews, menus ;
   String userId;
   RatingBar rating;
   ImageView chat;
@@ -104,6 +104,8 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
         nb_orders.setText(String.valueOf(chiefPojo.getOrders()));
         rating.setRating(chiefPojo.getRating());
         prfo_img.setImageBitmap(GlobalImageLoader.StringToBitMap(chiefPojo.getProfilePhoto()));
+        reviews.setText("View Reviews On " + chiefPojo.getDisplayName());
+        menus.setText("Vist " + chiefPojo.getDisplayName() +"'s "+ "Menus");
         if (chiefPojo.isAvailable() == true) {
           avaliablity.setImageResource(R.drawable.online);
         } else {
@@ -129,7 +131,7 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
         Intent intent1 = new Intent(ViewChiefProfileActivity.this, ViewChefMenus.class);
         intent1.putExtra("userid",userId);
        startActivity(intent1);
-        Toast.makeText(ViewChiefProfileActivity.this, "Menus", Toast.LENGTH_LONG).show();
+//        Toast.makeText(ViewChiefProfileActivity.this, "Menus", Toast.LENGTH_LONG).show();
       }
     });
 
