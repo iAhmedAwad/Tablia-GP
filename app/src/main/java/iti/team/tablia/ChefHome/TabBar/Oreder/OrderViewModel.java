@@ -15,7 +15,7 @@ public class OrderViewModel extends ViewModel {
 
   public void getList() {
 
-    deatilsMutableLiveData = db.getOrder();
+    deatilsMutableLiveData = db.getChefOrder();
 
   }
 

@@ -37,10 +37,6 @@ public class OrderFragment extends Fragment {
     recyclerView = root.findViewById(R.id.listOfOrder);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//        testList.add(new OrderPojo("Order ID : 353","Order Time : 04 : 20 AM 20/20/2020",
-//                "Customer ID : 324","Total : 200 EGP"));
-//        testList.add(new OrderPojo("Order ID : 353","Order Time : 04 : 20 AM 20/20/2020",
-//                "Customer ID : 324","Total : 200 EGP"));
     orderViewModel.getList();
 
     orderViewModel.deatilsMutableLiveData.observe(getViewLifecycleOwner(), new Observer<List<OrderPojo>>() {

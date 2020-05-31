@@ -431,6 +431,57 @@ public class Database {
     return order;
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public MutableLiveData<List<OrderPojo>> getChefOrder() {
+
+    final List<OrderPojo> list = new ArrayList<>();
+    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("orders").child(userId);
+
+    ref.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+        list.clear();
+        for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+          for (DataSnapshot dataSnapshot1 : data.getChildren()){
+
+            OrderPojo pojo = dataSnapshot1.getValue(OrderPojo.class);
+
+            list.add(pojo);
+          }
+
+        }
+
+        order.setValue(list);
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
+    return order;
+  }
+
+
+
+
+
+
   /**
    * This uploads a photo to database
    * And also adds the link to this photo to the node using the updateProfilePhotoInDatabase method
@@ -698,6 +749,8 @@ public class Database {
    *
    * @return
    */
+
+
 
   /**
    * A customer follows a certain chef
