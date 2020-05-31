@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,30 +36,22 @@ public class CategoryRecyclerAdaptor extends RecyclerView.Adapter<CategoryRecycl
 
   @Override
   public void onBindViewHolder(ViewHolder viewHolder, int position) {
-//        ArrayList<MenuPojo> namesList = new ArrayList<>(arrName);
-//
-////        viewHolder.image.setImageBitmap(GlobalImageLoader.StringToBitMap(namesList.get(i).getImgItem(0));
-////
-//        Iterator iterator = arrName.iterator();
-//
-//        while (iterator.hasNext()){
-//
-////            viewHolder.image.setImageBitmap(GlobalImageLoader.StringToBitMap(arrName.iterator().next().getImgItem());
-//        }
 
     Log.d("why", arrName.get(position).getImgItem().get(0).getImgaeItem());
     viewHolder.image.setImageBitmap(GlobalImageLoader.StringToBitMap(arrName.get(position).getImgItem().get(0).getImgaeItem()));
+    viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Toast.makeText(context, "Go to item", Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
 
   @Override
   public int getItemCount() {
     return arrName.size();
-//        if(arrName.size() > 5){
-//            return 5 ;
-//        }else{
-//            return  arrName.size();
-//        }
+
   }
 
   public class ViewHolder extends RecyclerView.ViewHolder {
