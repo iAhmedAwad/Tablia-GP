@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "631939356806",
+    "firebase_url": "https://tablia-fbadb.firebaseio.com",
+    "project_id": "tablia-fbadb",
+    "storage_bucket": "tablia-fbadb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631939356806:android:5e6e38e4185f49571b1907",
+        "android_client_info": {
+          "package_name": "iti.team.tablia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631939356806-q5pcm3tg1aniqkj56c1pposae57gaf13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVDS36dIjK7OPIENCU2HjNiIQAzlL4p-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631939356806-q5pcm3tg1aniqkj56c1pposae57gaf13.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

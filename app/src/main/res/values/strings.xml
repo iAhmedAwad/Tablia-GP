@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">Tablia</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Firebase -->
+    <!--  Nodes  -->
+    <string name="usersNode">users</string>
+    <string name="customerAccountSettingsNode">customer_account_settings</string>
+    <string name="chefAccountSettingsNode">chef_account_settings</string>
+    <string name="ProfilePhotosNode">profilePhotos</string>
+    <!-- Fields-->
+    <string name="profilePhotoField">profilePhoto</string>
+
+    <!--  user types: used to distinguish whether the user is a customer or a chef  -->
+
+    <string name="typeCustomer">customer</string>
+    <string name="typeChef">chef</string>
+
+
+    <!-- the returned from camera intent   -->
+    <string name="selectedBitmap">selectedBitmap</string>
+
+    <!--  intent source and directions  -->
+    <string name="editProfileActivity">editProfileActivity</string>
+    <string name="intentSource">intentSource</string>
+    <string name="customerProfileActivity">customerProfileActivity</string>
+
+    <!--  Navigation drawer  -->
+
+
+    <string name="NameItem">Name Item</string>
+    <string name="Price">Price</string>
+
+    <string name="menuNode">menu</string>
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <!--  Categories array  -->
+
+
+    <string-array name="Spinner_Item">
+        <item>Desert</item>
+        <item>Grilled</item>
+        <item>Juice</item>
+        <item>Macaroni</item>
+        <item>Mahashy</item>
+        <item>Salad</item>
+        <item>Seafood</item>
+    </string-array>
+    <!-- drop down list for stats-->
+    <string-array name="date_arrays">
+        <item>Year</item>
+        <item>Month</item>
+        <item>Week</item>
+        <item>Day</item>
+    </string-array>
+    <string name="Order">order</string>
+    <string name="most_sold_item_for_today">sold</string>
+    <string name="item">Item</string>
+    <string name="followers">Followers</string>
+    <string name="sold">Most sold item for today</string>
+    <string name="avg_sales">0</string>
+    <string name="customer_rating">Your Rate</string>
+    <string name="sales">Monthly Sales:</string>
+    <string name="search">Search...</string>
+    <string name="username">username</string>
+    <string name="sales_amount">350 EGP</string>
+    <string name="followers_num">12</string>
+    <string name="avg_order">Average orders you delivered</string>
+    <string name="rate">3.5</string>
+    <string name="submit">submit</string>
+
+
+
+</resources>

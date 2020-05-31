@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="iti.team.tablia">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+
+
+
+        <activity android:name=".CustomerAccount.CustomerOrder.CompleteOrder"></activity>
+        <activity android:name=".CustomerAccount.CustomerOrder.Cart" />
+        <activity android:name=".CustomerAccount.Items.ItemDetails" />
+        <activity android:name=".CustomerAccount.FollowingActivity.FollowingActivity"></activity>
+        <activity
+            android:name=".CustomerAccount.Reviews.AddReviewsActivity"
+            android:label="Write a review" />
+        <activity android:name=".Authentication.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Authentication.ChefRegistration.ChefRegistrationActivity" />
+        <activity android:name=".CustomerAccount.CustomerChefListActivity" />
+        <activity android:name=".CustomerAccount.Filter.FilteredDataActivity" />
+        <activity android:name=".CustomerAccount.Filter.FilterActivity" />
+        <activity android:name=".Authentication.RegistrationOptionsActivity" />
+        <activity android:name=".ChefHome.TabBar.Oreder.OrderDeatils.OrderDeatils" />
+        <activity android:name=".others.MainActivity" />
+        <activity
+            android:name=".CustomerAccount.CustomerActivity.CustomerActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".Authentication.LoginActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".Authentication.CustomerRegistration.CustomerRegistrationActivity" />
+        <activity android:name=".ChefHome.ChiefActivity" />
+        <activity android:name=".Customer.chiefProfile.ReviewsActivity" />
+        <activity android:name=".Customer.chiefProfile.ViewChiefProfileActivity" />
+        <activity android:name=".ChefHome.TabBar.Chat.Messages.MessageActivity" />
+
+        <service
+            android:name=".Services.MyFirebaseIdService"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".ChefHome.TabBar.Profile.EditChiefActivity" />
+        <activity android:name=".ChefHome.TabBar.Menu.AddMenu.AddMenu" />
+
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+
+
+
+</manifest>
