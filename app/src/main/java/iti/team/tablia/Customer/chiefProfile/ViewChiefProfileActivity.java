@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import iti.team.tablia.ChefHome.TabBar.Chat.Messages.MessageActivity;
+import iti.team.tablia.ChefHome.TabBar.Menu.MenuFragment;
+import iti.team.tablia.CustomerAccount.ChefMenus.ViewChefMenus;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.R;
 import iti.team.tablia.others.Database;
@@ -65,7 +67,7 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     reviews = findViewById(R.id.id_view_reviews);
     avaliablity = findViewById(R.id.online_status);
 
-    Intent intent = getIntent();
+    final Intent intent = getIntent();
     userId = intent.getStringExtra("userid");
 
 
@@ -124,6 +126,9 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     menus.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        Intent intent1 = new Intent(ViewChiefProfileActivity.this, ViewChefMenus.class);
+        intent1.putExtra("userid",userId);
+       startActivity(intent1);
         Toast.makeText(ViewChiefProfileActivity.this, "Menus", Toast.LENGTH_LONG).show();
       }
     });

@@ -389,6 +389,41 @@ public class Database {
     return menuList;
   }
 
+  /**
+   *
+   *  retrieve chef menu by chefId
+   */
+
+  public MutableLiveData<List<MenuPojo>> getMenuItems(String chefId) {
+
+    final List<MenuPojo> list = new ArrayList<>();
+    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("menu").child(chefId);
+
+    //ref.child(userId);
+    ref.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+        list.clear();
+        for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+          MenuPojo pojo = data.getValue(MenuPojo.class);
+
+          list.add(pojo);
+        }
+
+        menuList.setValue(list);
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
+    return menuList;
+  }
+
+
 
   public void addOrderToDatabase(OrderPojo orderPojo) {
 
