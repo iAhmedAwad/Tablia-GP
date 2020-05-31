@@ -21,4 +21,16 @@ public class CompleteOrderViewModel extends ViewModel {
   public void saveOrder(OrderPojo orderPojo) {
     chatRepository.saveOrder(orderPojo);
   }
+
+  public MutableLiveData<Boolean> checkOrderItemsInMenu(OrderPojo orderPojo) {
+    return chatRepository.checkOrderItemsInMenu(orderPojo);
+  }
+
+  public void updateMenuQty(OrderPojo orderPojo) {
+    chatRepository.updateMenuQty(orderPojo);
+  }
+
+  public void removeCartOrder(OrderPojo orderPojo) {
+    chatRepository.removeCartOrder(orderPojo);
+  }
 }

@@ -68,9 +68,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     holder.confirm.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
-        Date date = new Date();
-        String strDate = dateFormat.format(date);
         String str = holder.subTotal.getText().toString();
         String[] priceArr = str.split(" ");
         double total = Double.parseDouble(priceArr[0]);

@@ -13,6 +13,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -65,4 +66,8 @@ dependencies {
 
     //????
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    //multidex error
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
 }

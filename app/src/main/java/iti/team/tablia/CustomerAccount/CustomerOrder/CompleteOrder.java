@@ -41,6 +41,9 @@ public class CompleteOrder extends AppCompatActivity {
   private Button cancel;
   private CompleteOrderViewModel model;
   public static OrderPojo orderPojo;
+  private TextView deliveryTime;
+  private int numOfApprovedOrders = 0;
+  private int iterationNum = 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +72,11 @@ public class CompleteOrder extends AppCompatActivity {
     chefName = findViewById(R.id.chef_name);
     confirm = findViewById(R.id.confirm);
     cancel = findViewById(R.id.cancel);
+    deliveryTime = findViewById(R.id.delivery_time);
     changeAddress.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+//                startActivity(new Intent(CompleteOrder.this, EditProfile.class));
         Toast.makeText(CompleteOrder.this, "CHANGE YOUR ADDRESS", Toast.LENGTH_SHORT).show();
       }
     });
@@ -94,9 +99,14 @@ public class CompleteOrder extends AppCompatActivity {
         startActivity(intent1);
       }
     });
+    deliveryTime.setText(orderPojo.getDeliveryTime());
     subTotal.setText("EGP " + orderPojo.getSubTotal());
 
     shippingFee.setText(shipping + " EGP");
+    shippingFee2.setText("EGP " + shipping);
+    double totalD = orderPojo.getSubTotal() + shipping;
+    total.setText("EGP " + totalD);
+    orderPojo.setTotal(totalD);
     doorDelivery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -105,6 +115,7 @@ public class CompleteOrder extends AppCompatActivity {
           shippingFee2.setTextColor(Color.parseColor("#71068F"));
           double totalD = orderPojo.getSubTotal() + shipping;
           total.setText("EGP " + totalD);
+          orderPojo.setTotal(totalD);
           orderPojo.setDeliveryType(true);
         }
       }
@@ -117,6 +128,7 @@ public class CompleteOrder extends AppCompatActivity {
           shippingFee2.setText("EGP " + 0.0);
           shippingFee2.setTextColor(Color.GREEN);
           total.setText("EGP " + orderPojo.getSubTotal());
+          orderPojo.setTotal(orderPojo.getSubTotal());
           orderPojo.setDeliveryType(false);
         }
       }
@@ -127,16 +139,35 @@ public class CompleteOrder extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         orderPojo.setOrderTime(dateFormat.format(date));
-        model.saveOrder(orderPojo);
+        model.checkOrderItemsInMenu(orderPojo).observe(CompleteOrder.this, new Observer<Boolean>() {
+          @Override
+          public void onChanged(Boolean approved) {
+            iterationNum++;
+            if(approved){
+              numOfApprovedOrders++;
+              if(orderPojo.getItems().size()==numOfApprovedOrders){
+                model.removeCartOrder(orderPojo);
+                model.updateMenuQty(orderPojo);
+                model.saveOrder(orderPojo);
+                finish();
+              }
+            }
+
+            if(orderPojo.getItems().size() ==iterationNum&&orderPojo.getItems().size()>numOfApprovedOrders ){
+              Toast.makeText(CompleteOrder.this, "Some of your orders are sold out please check your cart again", Toast.LENGTH_SHORT).show();
+              finish();
+            }
+          }
+        });
       }
     });
     cancel.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        model.removeCartOrder(orderPojo);
         finish();
       }
     });
-
 
   }
 }

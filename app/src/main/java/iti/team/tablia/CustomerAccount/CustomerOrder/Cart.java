@@ -18,7 +18,6 @@ import iti.team.tablia.R;
 public class Cart extends AppCompatActivity {
   private RecyclerView recyclerView;
   private CartAdapter cartAdapter;
-  private List<CartGroupPojo> cartGroups;
   public CartViewModel cartViewModel;
 
   @Override

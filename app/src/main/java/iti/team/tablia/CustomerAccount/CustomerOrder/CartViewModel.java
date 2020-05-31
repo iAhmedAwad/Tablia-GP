@@ -10,21 +10,21 @@ import iti.team.tablia.Models.CartGroupPojo;
 import iti.team.tablia.Models.CartPojo;
 
 public class CartViewModel extends ViewModel {
-  private ChatRepository chatRepository;
+    private ChatRepository chatRepository;
 
-  public CartViewModel() {
-    this.chatRepository = new ChatRepository();
-  }
+    public CartViewModel() {
+        this.chatRepository = new ChatRepository();
+    }
 
-  public MutableLiveData<List<CartGroupPojo>> getCartListGroups() {
-    return chatRepository.getCartListGroups();
-  }
+    public MutableLiveData<List<CartGroupPojo>> getCartListGroups() {
+        return chatRepository.getCartListGroups();
+    }
 
-  public void removeCartItem(CartPojo cartPojo) {
-    chatRepository.removeCartItem(cartPojo);
-  }
+    public void removeCartItem(CartPojo cartPojo) {
+        chatRepository.removeCartItem(cartPojo);
+    }
 
-  public MutableLiveData<Boolean> updateCart(CartPojo cartPojo) {
-    return chatRepository.saveCartItem(cartPojo);
-  }
+    public MutableLiveData<Boolean> updateCart(CartPojo cartPojo) {
+        return chatRepository.updateCartItem(cartPojo);
+    }
 }

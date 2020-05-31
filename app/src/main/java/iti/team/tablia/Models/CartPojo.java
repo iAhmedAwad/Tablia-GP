@@ -8,7 +8,7 @@ public class CartPojo implements Serializable {
   private String itemID;
   private String chefName;
   private String itemName;
-  private int Quantity;
+  private int quantity;
   private double itemPrice;
   private String img;
 
@@ -20,7 +20,7 @@ public class CartPojo implements Serializable {
     this.itemID = itemID;
     this.chefName = chefName;
     this.itemName = itemName;
-    Quantity = quantity;
+    this.quantity = quantity;
     this.itemPrice = itemPrice;
     this.img = img;
   }
@@ -58,11 +58,11 @@ public class CartPojo implements Serializable {
   }
 
   public int getQuantity() {
-    return Quantity;
+    return quantity;
   }
 
   public void setQuantity(int quantity) {
-    Quantity = quantity;
+    this.quantity = quantity;
   }
 
   public double getItemPrice() {
