@@ -125,7 +125,7 @@ public class AddMenu extends AppCompatActivity {
           picture = BitMapToString(bmp);
 
           Item = new MenuPojo("itemID", FirebaseAuth.getInstance().getCurrentUser().getUid()
-              , editNameItem.getText().toString(), Integer.valueOf(editPriceItem.getText().toString()), list,
+              , editNameItem.getText().toString(), Double.parseDouble(editPriceItem.getText().toString()), list,
               category, editDescrption.getText().toString(), editIngredients.getText().toString(), 10);
 
           db.addMenuItemToDatabase(Item);
