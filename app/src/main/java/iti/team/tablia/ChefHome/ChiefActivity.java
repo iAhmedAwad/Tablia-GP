@@ -1,6 +1,7 @@
 package iti.team.tablia.ChefHome;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import iti.team.tablia.ChefHome.TabBar.Oreder.OrderFragment;
 import iti.team.tablia.ChefHome.TabBar.Profile.profileFragment;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.R;
+import iti.team.tablia.util.Constants;
 
 
 public class ChiefActivity extends AppCompatActivity {
@@ -126,6 +128,10 @@ public class ChiefActivity extends AppCompatActivity {
     switch (item.getItemId()) {
       case R.id.logout:
         FirebaseAuth.getInstance().signOut();
+        SharedPreferences sharedPref = getSharedPreferences(Constants.isLogged, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(Constants.isLogged, false);
+        editor.commit();
         startActivity(new Intent(ChiefActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
         return true;

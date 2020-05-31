@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import iti.team.tablia.ChefHome.TabBar.Chat.Messages.MessageActivity;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.R;
 import iti.team.tablia.others.Database;
@@ -114,6 +115,9 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     chat.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        Intent i = new Intent(ViewChiefProfileActivity.this, MessageActivity.class);
+        i.putExtra("userid",userId);
+        startActivity(i);
         Toast.makeText(ViewChiefProfileActivity.this, "Chat", Toast.LENGTH_LONG).show();
       }
     });
