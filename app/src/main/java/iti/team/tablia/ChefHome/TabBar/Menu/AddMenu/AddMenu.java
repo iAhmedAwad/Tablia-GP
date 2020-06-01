@@ -55,7 +55,6 @@ public class AddMenu extends AppCompatActivity {
   MenuItemPojo picItem;
   List<MenuItemPojo> list;
   String category;
-  MenuItemPojo item;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

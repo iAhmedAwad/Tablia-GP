@@ -1,11 +1,16 @@
 package iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.MenuItemPojo;
 
-public class MenuPojo {
+public class MenuPojo implements Parcelable {
+
   private String itemID;
   private String chefID;
   private String itemName;
@@ -33,6 +38,30 @@ public class MenuPojo {
     this.itemQuantity = itemQuantity;
     disabled = false;
   }
+
+  protected MenuPojo(Parcel in) {
+    itemID = in.readString();
+    chefID = in.readString();
+    itemName = in.readString();
+    priceItem = in.readDouble();
+    category = in.readString();
+    description = in.readString();
+    ingredients = in.readString();
+    itemQuantity = in.readInt();
+    disabled = in.readByte() != 0;
+  }
+
+  public static final Creator<MenuPojo> CREATOR = new Creator<MenuPojo>() {
+    @Override
+    public MenuPojo createFromParcel(Parcel in) {
+      return new MenuPojo(in);
+    }
+
+    @Override
+    public MenuPojo[] newArray(int size) {
+      return new MenuPojo[size];
+    }
+  };
 
   public String getItemName() {
     return itemName;
@@ -112,5 +141,23 @@ public class MenuPojo {
 
   public void setDisabled(boolean disabled) {
     this.disabled = disabled;
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(itemID);
+    dest.writeString(chefID);
+    dest.writeString(itemName);
+    dest.writeDouble(priceItem);
+    dest.writeString(category);
+    dest.writeString(description);
+    dest.writeString(ingredients);
+    dest.writeInt(itemQuantity);
+    dest.writeByte((byte) (disabled ? 1 : 0));
   }
 }
