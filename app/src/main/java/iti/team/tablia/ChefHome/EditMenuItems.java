@@ -59,7 +59,8 @@ public class EditMenuItems extends AppCompatActivity {
     MenuItemPojo picItem;
     List<MenuItemPojo> list;
     String category;
-    private MenuPojo menuPojo ;
+
+    public static MenuPojo menuPojo ;
 
 
     @Override
@@ -67,9 +68,9 @@ public class EditMenuItems extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_menu_items);
 
-        Intent intent = getIntent();
+//        Intent intent = getIntent();
 
-        menuPojo =  intent.getParcelableExtra("itemEdit");
+//        menuPojo =  intent.getParcelableExtra("itemEdit");
 
         editNameItem = findViewById(R.id.editNameItem);
         editPriceItem = findViewById(R.id.editPriceItem);
@@ -78,7 +79,6 @@ public class EditMenuItems extends AppCompatActivity {
 
 
         addItem = findViewById(R.id.btnAddItem);
-
 
 
         editNameItem.setText(menuPojo.getItemName());
@@ -92,8 +92,8 @@ public class EditMenuItems extends AppCompatActivity {
         myrecycle.setLayoutManager(layoutManager);
 
         list = new ArrayList<>();
-//        list.addAll(menuPojo.getImgItem());
 
+        list.addAll(menuPojo.getImgItem());
 
 
         myAdapter = new AddMenuAdapter(list, this);
@@ -145,11 +145,11 @@ public class EditMenuItems extends AppCompatActivity {
                         !editDescrption.getText().toString().isEmpty() && !editIngredients.getText().toString().isEmpty()) {
                     picture = BitMapToString(bmp);
 
-                    Item = new MenuPojo("itemID", FirebaseAuth.getInstance().getCurrentUser().getUid()
+                    Item = new MenuPojo(menuPojo.getItemID(), FirebaseAuth.getInstance().getCurrentUser().getUid()
                             , editNameItem.getText().toString(), Double.parseDouble(editPriceItem.getText().toString()), list,
                             category, editDescrption.getText().toString(), editIngredients.getText().toString(), 10);
 
-                    db.addMenuItemToDatabase(Item);
+                    db.updateMenuItemToDatabase(Item);
 
 
                     Log.i("MM", picture);

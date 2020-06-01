@@ -355,6 +355,21 @@ public class Database {
 
   }
 
+
+  public void updateMenuItemToDatabase(MenuPojo menuPojo) {
+    String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference(mContext.getString(R.string.menuNode));
+
+    //add data to the "customers" node
+//    String key = reference.push().getKey();
+//    menuPojo.setItemID(key);
+    reference.child(userid)
+            .child(menuPojo.getItemID())
+            .setValue(menuPojo);
+
+  }
+
+
   /**
    * retrieves chef's menu items
    *

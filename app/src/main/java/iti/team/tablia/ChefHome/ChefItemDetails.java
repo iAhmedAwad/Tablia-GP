@@ -44,7 +44,7 @@ public class ChefItemDetails extends AppCompatActivity {
         chefId = intent.getStringExtra("chefId");
         itemId = intent.getStringExtra("itemId");
         String item_name = intent.getStringExtra("itemName");
-        menuPojo =  intent.getParcelableExtra("pojoItem");
+//        menuPojo =  intent.getParcelableExtra("pojoItem");
         toolbarTitle.setText(item_name);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -119,7 +119,7 @@ public class ChefItemDetails extends AppCompatActivity {
                 Intent intent = new Intent(this,EditMenuItems.class);
                 intent.putExtra("chefId",chefId);
                 intent.putExtra("itemId",itemId);
-                intent.putExtra("itemEdit",menuPojo);
+//                intent.putExtra("itemEdit",menuPojo);
                 startActivity(intent);
                 Toast.makeText(this, "EDIT", Toast.LENGTH_SHORT).show();
                 return true;
