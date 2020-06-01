@@ -1,4 +1,4 @@
-package iti.team.tablia.ChefHome.TabBar.Oreder;
+package iti.team.tablia.ChefHome.TabBar.Order;
 
 import java.io.Serializable;
 import java.util.List;

@@ -21,6 +21,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ChefHome.EditMenuItems"></activity>
         <activity android:name=".ChefHome.ChefItemDetails" />
+        <activity android:name=".CustomerAccount.ChefMenus.ViewChefMenus"></activity>
         <activity android:name=".CustomerAccount.CustomerOrder.CompleteOrder" />
         <activity android:name=".CustomerAccount.CustomerOrder.Cart" />
         <activity android:name=".CustomerAccount.Items.ItemDetails" />
@@ -40,7 +41,7 @@
         <activity android:name=".CustomerAccount.Filter.FilteredDataActivity" />
         <activity android:name=".CustomerAccount.Filter.FilterActivity" />
         <activity android:name=".Authentication.RegistrationOptionsActivity" />
-        <activity android:name=".ChefHome.TabBar.Oreder.OrderDeatils.OrderDeatils" />
+        <activity android:name=".ChefHome.TabBar.Order.OrderDeatils.OrderDeatils" />
         <activity android:name=".others.MainActivity" />
         <activity
             android:name=".CustomerAccount.CustomerActivity.CustomerActivity"
@@ -64,8 +65,8 @@
         </activity>
         <activity android:name=".Authentication.CustomerRegistration.CustomerRegistrationActivity" />
         <activity android:name=".ChefHome.ChiefActivity" />
-        <activity android:name=".Customer.chiefProfile.ReviewsActivity" />
-        <activity android:name=".Customer.chiefProfile.ViewChiefProfileActivity" />
+        <activity android:name=".Customer.ChefProfile.ReviewsActivity" />
+        <activity android:name=".Customer.ChefProfile.ViewChiefProfileActivity" />
         <activity android:name=".ChefHome.TabBar.Chat.Messages.MessageActivity" />
 
         <service
@@ -78,6 +79,7 @@
 
         <activity android:name=".ChefHome.TabBar.Profile.EditChiefActivity" />
         <activity android:name=".ChefHome.TabBar.Menu.AddMenu.AddMenu" />
+        <activity android:name=".ChefHome.TabBar.Menu.MenuFragment" />
 
         <meta-data
             android:name="preloaded_fonts"

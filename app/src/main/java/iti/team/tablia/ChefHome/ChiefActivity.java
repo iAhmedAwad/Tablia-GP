@@ -26,7 +26,7 @@ import iti.team.tablia.Authentication.LoginActivity;
 import iti.team.tablia.ChefHome.TabBar.Chat.ChatFragment;
 import iti.team.tablia.ChefHome.TabBar.Home.HomeFragment;
 import iti.team.tablia.ChefHome.TabBar.Menu.MenuFragment;
-import iti.team.tablia.ChefHome.TabBar.Oreder.OrderFragment;
+import iti.team.tablia.ChefHome.TabBar.Order.OrderFragment;
 import iti.team.tablia.ChefHome.TabBar.Profile.profileFragment;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.R;

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
-import iti.team.tablia.ChefHome.TabBar.Oreder.OrderPojo;
+import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Chef.ChefSettings;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
@@ -389,6 +389,41 @@ public class Database {
     return menuList;
   }
 
+  /**
+   *
+   *  retrieve chef menu by chefId
+   */
+
+  public MutableLiveData<List<MenuPojo>> getMenuItems(String chefId) {
+
+    final List<MenuPojo> list = new ArrayList<>();
+    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("menu").child(chefId);
+
+    //ref.child(userId);
+    ref.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+        list.clear();
+        for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+          MenuPojo pojo = data.getValue(MenuPojo.class);
+
+          list.add(pojo);
+        }
+
+        menuList.setValue(list);
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
+    return menuList;
+  }
+
+
 
   public void addOrderToDatabase(OrderPojo orderPojo) {
 
@@ -430,6 +465,57 @@ public class Database {
     });
     return order;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public MutableLiveData<List<OrderPojo>> getChefOrder() {
+
+    final List<OrderPojo> list = new ArrayList<>();
+    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("orders").child(userId);
+
+    ref.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+        list.clear();
+        for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+          for (DataSnapshot dataSnapshot1 : data.getChildren()){
+
+            OrderPojo pojo = dataSnapshot1.getValue(OrderPojo.class);
+
+            list.add(pojo);
+          }
+
+        }
+
+        order.setValue(list);
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
+    return order;
+  }
+
+
+
+
+
 
   /**
    * This uploads a photo to database
@@ -698,6 +784,8 @@ public class Database {
    *
    * @return
    */
+
+
 
   /**
    * A customer follows a certain chef

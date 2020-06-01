@@ -1,4 +1,4 @@
-package iti.team.tablia.ChefHome.TabBar.Oreder.OrderDeatils;
+package iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils;
 
 public class ItemOrderPojo {
   private String orderId;

@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import iti.team.tablia.Customer.chiefProfile.ViewChiefProfileActivity;
+import iti.team.tablia.Customer.ChefProfile.ViewChiefProfileActivity;
 import iti.team.tablia.Models.Following;
 import iti.team.tablia.R;
 import iti.team.tablia.others.Database;

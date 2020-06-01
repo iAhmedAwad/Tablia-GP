@@ -1,4 +1,4 @@
-package iti.team.tablia.Customer.chiefProfile;
+package iti.team.tablia.Customer.ChefProfile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import iti.team.tablia.ChefHome.TabBar.Chat.Messages.MessageActivity;
+import iti.team.tablia.CustomerAccount.ChefMenus.ViewChefMenus;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.R;
 import iti.team.tablia.others.Database;
@@ -29,7 +30,7 @@ import iti.team.tablia.util.GlobalImageLoader;
 
 public class ViewChiefProfileActivity extends AppCompatActivity {
 
-  TextView name, start_time, end_time, nb_followers, nb_orders, address, reviews, menus;
+  TextView name, start_time, end_time, nb_followers, nb_orders, address, reviews, menus ;
   String userId;
   RatingBar rating;
   LinearLayout chat;
@@ -66,7 +67,7 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     reviews = findViewById(R.id.id_view_reviews);
     avaliablity = findViewById(R.id.online_status);
 
-    Intent intent = getIntent();
+    final Intent intent = getIntent();
     userId = intent.getStringExtra("userid");
 
 
@@ -103,6 +104,8 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
         nb_orders.setText(String.valueOf(chiefPojo.getOrders()));
         rating.setRating(chiefPojo.getRating());
         prfo_img.setImageBitmap(GlobalImageLoader.StringToBitMap(chiefPojo.getProfilePhoto()));
+        reviews.setText("View Reviews On " + chiefPojo.getDisplayName());
+        menus.setText("Vist " + chiefPojo.getDisplayName() +"'s "+ "Menus");
         if (chiefPojo.isAvailable() == true) {
           avaliablity.setImageResource(R.drawable.online);
         } else {
@@ -125,7 +128,10 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     menus.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Toast.makeText(ViewChiefProfileActivity.this, "Menus", Toast.LENGTH_LONG).show();
+        Intent intent1 = new Intent(ViewChiefProfileActivity.this, ViewChefMenus.class);
+        intent1.putExtra("userid",userId);
+       startActivity(intent1);
+//        Toast.makeText(ViewChiefProfileActivity.this, "Menus", Toast.LENGTH_LONG).show();
       }
     });
 

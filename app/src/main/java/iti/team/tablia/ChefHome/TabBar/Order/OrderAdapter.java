@@ -1,4 +1,4 @@
-package iti.team.tablia.ChefHome.TabBar.Oreder;
+package iti.team.tablia.ChefHome.TabBar.Order;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import iti.team.tablia.ChefHome.TabBar.Oreder.OrderDeatils.OrderDeatils;
+import iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils.OrderDeatils;
 import iti.team.tablia.R;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {

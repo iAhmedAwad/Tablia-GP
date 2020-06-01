@@ -36,11 +36,8 @@ public class CustomerHomeFragment extends Fragment {
 
   TopChefRecyclerAdaptor adapter;
   CategoryRecyclerAdaptor adapter2;
-  //FollowingRecyclerAdaptor adapter3;
-  TextView see1, see2, see3;
+  TextView see1, see2;
   CustomerHomeViewModel viewModel;
-  // ChefYouFollowViewModel followViewModel;
-  List<Integer> list = new ArrayList<>();
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +45,6 @@ public class CustomerHomeFragment extends Fragment {
     super.onCreate(savedInstanceState);
 
     viewModel = new ViewModelProvider(getActivity()).get(CustomerHomeViewModel.class);
-    //  followViewModel = new ViewModelProvider(getActivity()).get(ChefYouFollowViewModel.class);
 
   }
 
@@ -56,29 +52,14 @@ public class CustomerHomeFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_customer_home, container, false);
     ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Home");
-    // viewModel.getitems();
-    list.add(R.drawable.pasta);
-    list.add(R.drawable.pasta);
-    list.add(R.drawable.pasta);
-    list.add(R.drawable.pasta);
-    list.add(R.drawable.pasta);
-    list.add(R.drawable.pasta);
-    list.add(R.drawable.pasta);
-    list.add(R.drawable.pasta);
-
 
     final RecyclerView recycler = view.findViewById(R.id.id_recycle1);
     final RecyclerView recycler2 = view.findViewById(R.id.id_recycle2);
-//        final RecyclerView recycler3 = view.findViewById(R.id.id_recycle3);
 
     see1 = view.findViewById(R.id.seeAllchefs);
     see2 = view.findViewById(R.id.seeAllCategories);
-//        see3 = view.findViewById(R.id.seeAllFollowings);
-
 
     LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-    LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-    LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
     GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
 
 
@@ -91,18 +72,6 @@ public class CustomerHomeFragment extends Fragment {
 
       }
     });
-//        followViewModel.getFollwing().observe(getActivity(), new Observer<ArrayList<Following>>() {
-//            @Override
-//            public void onChanged(ArrayList<Following> followings) {
-//                adapter3 = new FollowingRecyclerAdaptor(getContext(), followings);
-////                recycler3.setAdapter(adapter3);
-//                adapter3.notifyDataSetChanged();
-//            }
-//
-//        });
-
-
-// TODO ViewModel Category
 
     viewModel.getitemsFollwedByCust().observe(getActivity(), new Observer<ArrayList<MenuPojo>>() {
       @Override
@@ -112,15 +81,9 @@ public class CustomerHomeFragment extends Fragment {
         adapter2.notifyDataSetChanged();
       }
     });
-//        adapter2 = new CategoryRecyclerAdaptor(getContext(), list);
-
 
     recycler.setLayoutManager(layoutManager);
     recycler2.setLayoutManager(gridLayoutManager);
-    //seperator
-    //recycler2.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-//        recycler3.setLayoutManager(layoutManager3);
-
 
     see1.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -130,23 +93,6 @@ public class CustomerHomeFragment extends Fragment {
         startActivity(intent);
       }
     });
-//        see2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(getActivity(), seeAllCategories.class);
-//                startActivity(intent);
-//            }
-//        });
-//        see3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(getActivity(), FollowingActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
 
     return view;
   }
