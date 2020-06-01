@@ -50,7 +50,7 @@ public class CategoryRecyclerAdaptor extends RecyclerView.Adapter<CategoryRecycl
                 intent.putExtra("itemId", menuPojo.getItemID());
                 intent.putExtra("itemName", menuPojo.getItemName());
                 context.startActivity(intent);
-                Toast.makeText(context, "Go to item", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Go to item", Toast.LENGTH_SHORT).show();
             }
         });
     }
