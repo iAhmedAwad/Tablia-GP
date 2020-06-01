@@ -16,10 +16,10 @@ public class FilteredDataActivityViewModel extends ViewModel {
     database = new Database();
   }
 
-  public MutableLiveData<ArrayList<MenuPojo>> getFilteredData(ArrayList<String> categoryList) {
+  public MutableLiveData<ArrayList<MenuPojo>> getFilteredData(ArrayList<String> categoryList, double min, double max) {
 
     if (categoryList != null) {
-      listMutableLiveData = database.getFilteredItems(categoryList);
+      listMutableLiveData = database.getFilteredItems(categoryList, min, max);
     } else {
       listMutableLiveData = database.getAllMenuItems();
     }
