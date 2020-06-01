@@ -32,15 +32,16 @@
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
                 android:layout_marginBottom="2dp"
-                android:background="@drawable/ic_user"
+                android:src="@mipmap/ic_img_person_round"
+                android:background="@drawable/circle"
                 android:padding="3dp"
-                android:src="@drawable/ic_user"
-                app:civ_border_color="#FF000000"
+                app:civ_border_color="#81007F"
                 app:civ_border_width="1dp" />
 
 
             <ImageView
                 android:id="@+id/id_edit_cam"
+                android:backgroundTint="@color/colorAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@id/id_profile_pic"
@@ -91,7 +92,7 @@
                 android:layout_marginBottom="5dp"
                 android:checked="true"
                 android:switchMinWidth="56dp"
-                android:thumbTint="@color/followersBg"
+                android:thumbTint="@color/colorAccent"
                 android:text="Availability:"
                 android:textOff="OFF"
                 android:textOn="ON" />
