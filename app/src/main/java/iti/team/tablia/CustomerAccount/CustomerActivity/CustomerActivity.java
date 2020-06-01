@@ -215,7 +215,7 @@ public class CustomerActivity extends AppCompatActivity implements FragmentManag
       case R.id.cart:
         Intent intent = new Intent(CustomerActivity.this, Cart.class);
         startActivity(intent);
-        Toast.makeText(this, "Go To Cart Activity ", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Go To Cart Activity ", Toast.LENGTH_SHORT).show();
         return true;
     }
     return false;
