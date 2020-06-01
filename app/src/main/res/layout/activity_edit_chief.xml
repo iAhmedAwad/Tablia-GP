@@ -110,6 +110,18 @@
                 android:layout_height="wrap_content"
                 android:hint="Address:" />
 
+            <EditText
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description:" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone:" />
+
 
             <EditText
                 android:id="@+id/num_orders"
@@ -117,17 +129,9 @@
                 android:layout_height="wrap_content"
                 android:hint=" Max Number of Orders :" />
 
-            <EditText
-                android:id="@+id/start_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Order Start Time:" />
 
-            <EditText
-                android:id="@+id/end_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Order End Time:" />
+
+
 
             <Button
                 android:id="@+id/id_save_changes"

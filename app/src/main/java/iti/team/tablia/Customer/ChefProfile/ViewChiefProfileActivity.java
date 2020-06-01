@@ -30,7 +30,7 @@ import iti.team.tablia.util.GlobalImageLoader;
 
 public class ViewChiefProfileActivity extends AppCompatActivity {
 
-  TextView name, start_time, end_time, nb_followers, nb_orders, address, reviews, menus ;
+  TextView name, bio, phone, nb_followers, nb_orders, address, reviews, menus ;
   String userId;
   RatingBar rating;
   LinearLayout chat;
@@ -55,9 +55,9 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
 
     name = findViewById(R.id.id_name);
     prfo_img = findViewById(R.id.id_profile_pic);
-    start_time = findViewById(R.id.id_start_time);
-    end_time = findViewById(R.id.id_end_time);
     nb_followers = findViewById(R.id.id_nb_followers);
+    phone = findViewById(R.id.id_phone);
+    bio = findViewById(R.id.id_descp);
     nb_orders = findViewById(R.id.id_nb_orders);
     rating = findViewById(R.id.id_rating);
     address = findViewById(R.id.id_address);
@@ -98,8 +98,8 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
       public void onChanged(ChefAccountSettings chiefPojo) {
         name.setText(chiefPojo.getDisplayName());
         address.setText(chiefPojo.getAddress());
-        start_time.setText(String.valueOf(chiefPojo.getStart_order_time()));
-        end_time.setText(String.valueOf(chiefPojo.getEnd_order_time()));
+        bio.setText(String.valueOf(chiefPojo.getBio()));
+        phone.setText(String.valueOf(chiefPojo.getPhoneNumber()));
         nb_followers.setText(String.valueOf(chiefPojo.getFollowers()));
         nb_orders.setText(String.valueOf(chiefPojo.getOrders()));
         rating.setRating(chiefPojo.getRating());
