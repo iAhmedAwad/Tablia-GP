@@ -180,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text=" Max orders"
+                    android:text=" Orders"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="15sp" />

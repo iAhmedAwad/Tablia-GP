@@ -187,17 +187,6 @@
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/xCustomerName" />
 
-    <Button
-        android:id="@+id/xTryFilters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Try Filters"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/xCustomerID" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

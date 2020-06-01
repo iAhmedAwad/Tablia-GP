@@ -99,7 +99,7 @@
                         android:padding="2dp"
                         android:id="@+id/sales_amount"
                         android:hint="@string/sales_amount"
-                        android:textColor="#6f6f6f"
+                        android:textColor="@color/colorAccent"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -137,7 +137,7 @@
                         android:id="@+id/followers_num"
                         android:text="@string/followers_num"
                         android:textAlignment="center"
-                        android:textColor="#AB6F6F6F"
+                        android:textColor="@color/colorAccent"
                         android:textSize="50sp"
                         android:textStyle="bold" />
 
@@ -212,10 +212,8 @@
                     android:text="@string/avg_order"
                     android:id="@+id/txt_order"
                     android:textColor="#6f6f6f"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:gravity="center_horizontal" />
-
-
 
 
                 <LinearLayout

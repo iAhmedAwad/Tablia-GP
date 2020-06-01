@@ -24,7 +24,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -540,35 +544,22 @@ public class ChatRepository {
         return chefSearchLiveData;
     }
 
-    public MutableLiveData<Float> getChefRate() {
-        final MutableLiveData<Float> rateLiveData = new MutableLiveData<>();
-        reference = FirebaseDatabase.getInstance().getReference("chef_account_settings")
-                .child(firebaseUser.getUid()).child("rating");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Float rate = dataSnapshot.getValue(Float.class);
-                rateLiveData.setValue(rate);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        return rateLiveData;
-    }
-
     public MutableLiveData<Double> getOrdersAmount() {
         final MutableLiveData<Double> salesAmountLiveData = new MutableLiveData<>();
-        reference = FirebaseDatabase.getInstance().getReference("orders").child(firebaseUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("orders")
+                .child(firebaseUser.getUid());
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 double salesAmount = 0;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    OrderPojo orderDeatils = snapshot.getValue(OrderPojo.class);
-                    salesAmount += orderDeatils.getSubTotal();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+                    for (DataSnapshot dataSnapshot1 : data.getChildren()) {
+
+                        OrderPojo pojo = dataSnapshot1.getValue(OrderPojo.class);
+                        salesAmount += pojo.getSubTotal();
+                    }
+
                 }
                 salesAmountLiveData.setValue(salesAmount);
             }
@@ -855,6 +846,7 @@ public class ChatRepository {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    chefOrdersNum(pojo.getChefID());
                     saveCustOrder(pojo, completeOrder1);
                 }
             }
@@ -925,9 +917,111 @@ public class ChatRepository {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    custOrdersNum();
                     removeCartOrder(orderPojo, completeOrder);
                 }
             }
         });
     }
+
+    private void chefOrdersNum(final String chefId) {
+        DatabaseReference ref= FirebaseDatabase.getInstance().getReference("chef_account_settings")
+                .child(chefId);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ChefAccountSettings settings = dataSnapshot.getValue(ChefAccountSettings.class);
+                settings.setOrders(settings.getOrders() + 1);
+                FirebaseDatabase.getInstance().getReference("chef_account_settings")
+                        .child(chefId).setValue(settings);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void custOrdersNum() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("customer_account_settings")
+                .child(firebaseUser.getUid());
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
+                settings.setOrders(settings.getOrders() + 1);
+                FirebaseDatabase.getInstance().getReference("customer_account_settings")
+                        .child(firebaseUser.getUid()).setValue(settings);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public MutableLiveData<ChefAccountSettings> getChefData() {
+        final MutableLiveData<ChefAccountSettings> liveData = new MutableLiveData<>();
+        reference = FirebaseDatabase.getInstance().getReference("chef_account_settings")
+                .child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ChefAccountSettings settings = dataSnapshot.getValue(ChefAccountSettings.class);
+                liveData.setValue(settings);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
+    }
+
+    public MutableLiveData<Integer> getTodysOrders() {
+        final MutableLiveData<Integer> liveData = new MutableLiveData<>();
+        reference = FirebaseDatabase.getInstance().getReference("orders")
+                .child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int counter=0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                        OrderPojo orderPojo = snapshot1.getValue(OrderPojo.class);
+                        try {
+                            Date date=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+                                    .parse(orderPojo.getOrderTime());
+                            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                            date = dateFormat.parse(dateFormat.format(date));
+
+                            Date date1 = new Date();
+                            DateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+                            date1 = dateFormat1.parse(dateFormat1.format(date1));
+
+
+                            if (date1.equals(date)) {
+                                counter++;
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+                liveData.setValue(counter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
+    }
+
 }

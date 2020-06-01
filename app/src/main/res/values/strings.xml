@@ -63,7 +63,7 @@
     <string name="username">username</string>
     <string name="sales_amount">350 EGP</string>
     <string name="followers_num">12</string>
-    <string name="avg_order">Average orders you delivered</string>
+    <string name="avg_order">Number Of Orders You Delivered</string>
     <string name="rate">3.5</string>
     <string name="submit">submit</string>
 

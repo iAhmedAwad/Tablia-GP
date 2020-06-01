@@ -42,7 +42,7 @@ public class CustomerProfileFragment extends Fragment {
   private TextView xOrders, xFollowing, xCustomerName,
       xCustomerPhone, xCustomerAddress, xCustomerDescription;
   private CircleImageView xProfileImage;
-  private Button xEditProfile, xTryFilters;
+  private Button xEditProfile;
 
   public CustomerProfileFragment() {
     // Required empty public constructor
@@ -64,7 +64,6 @@ public class CustomerProfileFragment extends Fragment {
     xCustomerDescription = view.findViewById(R.id.xCustomerDescription);
     xProfileImage = view.findViewById(R.id.xprofile_image);
     xEditProfile = view.findViewById(R.id.xEditProfile);
-    xTryFilters = view.findViewById(R.id.xTryFilters);
     //TM.log("Hello from" + TAG);
     initButton();
     //setupFirebaseAuth();
@@ -106,13 +105,6 @@ public class CustomerProfileFragment extends Fragment {
       }
     });
 
-    xTryFilters.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), FilterActivity.class);
-        startActivity(intent);
-      }
-    });
   }
 
   private void setProfileWidgets(CustomerSettings customerSettings) {
