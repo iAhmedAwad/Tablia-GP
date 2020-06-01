@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import iti.team.tablia.CustomerAccount.Filter.FilterActivity;
+import iti.team.tablia.CustomerAccount.FollowingActivity.FollowingActivity;
 import iti.team.tablia.CustomerAccount.Profile.EditProfile.CustomerEditProfileFragment;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerSettings;
@@ -90,6 +91,14 @@ public class CustomerProfileFragment extends Fragment {
   }
 
   private void initButton() {
+    xFollowing.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(getActivity(), FollowingActivity.class);
+        startActivity(intent);
+      }
+    });
+
     xEditProfile.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {

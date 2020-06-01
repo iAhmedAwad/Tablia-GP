@@ -1,4 +1,4 @@
-package iti.team.tablia.Customer.chiefProfile;
+package iti.team.tablia.Customer.ChefProfile;
 
 import android.content.Context;
 import android.view.LayoutInflater;

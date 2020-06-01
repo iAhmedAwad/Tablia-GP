@@ -23,7 +23,7 @@ import java.util.List;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.MenuItemPojo;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
-import iti.team.tablia.Customer.chiefProfile.ViewChiefProfileActivity;
+import iti.team.tablia.Customer.ChefProfile.ViewChiefProfileActivity;
 import iti.team.tablia.CustomerAccount.CustomerOrder.Cart;
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;

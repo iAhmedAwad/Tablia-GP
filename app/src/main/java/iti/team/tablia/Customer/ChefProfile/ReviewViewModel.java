@@ -1,4 +1,4 @@
-package iti.team.tablia.Customer.chiefProfile;
+package iti.team.tablia.Customer.ChefProfile;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
