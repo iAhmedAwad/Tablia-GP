@@ -5,6 +5,7 @@ public class MenuItemPojo {
   String imgaeItem;
 
   public MenuItemPojo() {
+
   }
 
   public MenuItemPojo(String imgaeItem) {

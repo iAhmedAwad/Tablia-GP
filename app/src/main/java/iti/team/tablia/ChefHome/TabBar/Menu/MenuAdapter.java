@@ -23,7 +23,7 @@ import iti.team.tablia.R;
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
 
   private List<MenuPojo> data;
-  Context context;
+   Context context;
 
   public MenuAdapter(List<MenuPojo> data, Context context) {
     this.data = data;
@@ -43,9 +43,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
   }
 
   @Override
-  public void onBindViewHolder(@NonNull MenuAdapter.ViewHolder holder, int position) {
+  public void onBindViewHolder(@NonNull MenuAdapter.ViewHolder holder, final int position) {
 
-    final MenuPojo menuPojo = data.get(position);
+      final MenuPojo menuPojo = data.get(position);
     Bitmap bitmap = StringToBitMap(data.get(position).getImgItem().get(0).getImgaeItem());
     holder.imgItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
     holder.imgItem.setImageBitmap(bitmap);
@@ -59,6 +59,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         intent.putExtra("chefId", menuPojo.getChefID());
         intent.putExtra("itemId", menuPojo.getItemID());
         intent.putExtra("itemName", menuPojo.getItemName());
+        intent.putExtra("pojoItem",menuPojo);
         context.startActivity(intent);
       }
     });
