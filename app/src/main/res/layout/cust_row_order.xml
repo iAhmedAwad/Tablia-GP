@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    app:cardCornerRadius="12dp"
     android:layout_margin="10dp"
+    app:cardCornerRadius="12dp"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/conID"
         android:layout_width="match_parent"
         android:padding="10dp"
-        android:layout_height="wrap_content">
-
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/txtorderTime"
             android:layout_width="wrap_content"
@@ -50,7 +49,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
             android:shadowColor="#FFFFFF"
-            android:text="Customer Name:"
+            android:text="Chef Name:"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/orderTime" />
@@ -62,14 +61,14 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
             android:shadowColor="#FFFFFF"
-            android:text="Mina Magdy"
+            android:text="Huda Anwar"
             android:textColor="@color/colorAccent"
             android:textSize="16sp"
             android:layout_marginRight="10dp"
-            android:layout_marginEnd="10dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/orderTime" />
+            app:layout_constraintTop_toBottomOf="@+id/orderTime"
+            android:layout_marginEnd="10dp" />
 
         <TextView
             android:id="@+id/txtPrice"
@@ -80,7 +79,6 @@
             android:layout_marginTop="12dp"
             android:shadowColor="#FFFFFF"
             android:text="Total: "
-            android:layout_marginBottom="10dp"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/customerID" />

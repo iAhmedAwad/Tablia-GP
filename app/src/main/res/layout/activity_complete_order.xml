@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".CustomerAccount.CustomerOrder.CompleteOrder">
 
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar_layout"
         android:layout_width="match_parent"
@@ -341,5 +343,13 @@
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
 </RelativeLayout>

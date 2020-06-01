@@ -215,21 +215,14 @@
                     android:textSize="18sp"
                     android:gravity="center_horizontal" />
 
-                <Spinner
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="12dp"
-                    android:id="@+id/date_list"
-                    android:entries="@array/date_arrays"
-                    android:layout_below="@+id/txt_order" />
+
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:weightSum="2"
-                    android:layout_below="@id/date_list"
+                    android:layout_below="@id/txt_order"
                     android:orientation="horizontal">
 
                     <ImageView

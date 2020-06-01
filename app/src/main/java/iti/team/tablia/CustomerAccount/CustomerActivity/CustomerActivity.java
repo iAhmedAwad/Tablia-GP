@@ -32,6 +32,7 @@ import iti.team.tablia.CustomerAccount.CustomerChefListActivity;
 import iti.team.tablia.CustomerAccount.CustomerOrder.Cart;
 import iti.team.tablia.CustomerAccount.Home.home.CustomerHomeFragment;
 import iti.team.tablia.CustomerAccount.Items.ItemDetails;
+import iti.team.tablia.CustomerAccount.MyOrders.MyOrdersFragment;
 import iti.team.tablia.CustomerAccount.Profile.CustomerProfileFragment;
 import iti.team.tablia.Models.Customer.CustomerSettings;
 import iti.team.tablia.R;
@@ -149,6 +150,11 @@ public class CustomerActivity extends AppCompatActivity implements FragmentManag
                     case R.id.chef_list:
                         Intent intent = new Intent(CustomerActivity.this, CustomerChefListActivity.class);
                         startActivity(intent);
+                        break;
+
+                    case R.id.nav_orders:
+                        mManager.beginTransaction().replace(R.id.fragment_container,
+                                new MyOrdersFragment()).commit();
                         break;
                 }
                 drawer.closeDrawer(GravityCompat.START);

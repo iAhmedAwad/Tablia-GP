@@ -3,13 +3,16 @@ package iti.team.tablia.ChefHome.TabBar.Chat;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,12 +32,14 @@ import java.util.Set;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
+import iti.team.tablia.CustomerAccount.CustomerOrder.CompleteOrder;
 import iti.team.tablia.Models.CartGroupPojo;
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.Models.Chat;
 import iti.team.tablia.Models.ChatUser;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Chef.ChefSettings;
+import iti.team.tablia.Models.CustOrderPojo;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerSettings;
 import iti.team.tablia.Models.User;
@@ -55,6 +60,7 @@ public class ChatRepository {
     private FirebaseUser firebaseUser;
     private Set<String> usersList;
     private List<ChatUser> chatUserList;
+    private List<OrderPojo> orderPojos;
     private List<Chat> chats;
     private String lastMsg;
     private DatabaseReference reference;
@@ -538,7 +544,7 @@ public class ChatRepository {
         final MutableLiveData<Float> rateLiveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("chef_account_settings")
                 .child(firebaseUser.getUid()).child("rating");
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Float rate = dataSnapshot.getValue(Float.class);
@@ -556,7 +562,7 @@ public class ChatRepository {
     public MutableLiveData<Double> getOrdersAmount() {
         final MutableLiveData<Double> salesAmountLiveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("orders").child(firebaseUser.getUid());
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 double salesAmount = 0;
@@ -578,7 +584,7 @@ public class ChatRepository {
     public MutableLiveData<MenuPojo> getMenuItemDetails(String chefId, String itemId) {
         final MutableLiveData<MenuPojo> liveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("menu").child(chefId).child(itemId);
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 MenuPojo menuPojo = dataSnapshot.getValue(MenuPojo.class);
@@ -596,7 +602,7 @@ public class ChatRepository {
     public MutableLiveData<ChefAccountSettings> getChefInfo(String chefId) {
         final MutableLiveData<ChefAccountSettings> liveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("chef_account_settings").child(chefId);
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ChefAccountSettings settings = dataSnapshot.getValue(ChefAccountSettings.class);
@@ -640,7 +646,7 @@ public class ChatRepository {
         reference = FirebaseDatabase.getInstance().getReference("menu")
                 .child(cartPojo.getChefID())
                 .child(cartPojo.getItemID());
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 MenuPojo menuPojo = dataSnapshot.getValue(MenuPojo.class);
@@ -736,7 +742,7 @@ public class ChatRepository {
         final MutableLiveData<CustomerAccountSettings> liveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("customer_account_settings")
                 .child(firebaseUser.getUid());
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
@@ -751,11 +757,31 @@ public class ChatRepository {
         return liveData;
     }
 
-    public MutableLiveData<Boolean> checkOrderItemsInMenu(final OrderPojo orderPojo) {
+    public MutableLiveData<CustomerAccountSettings> getCustInfo(String custId) {
+        final MutableLiveData<CustomerAccountSettings> liveData = new MutableLiveData<>();
+        reference = FirebaseDatabase.getInstance().getReference("customer_account_settings")
+                .child(custId);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
+                liveData.setValue(settings);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
+    }
+
+    public MutableLiveData<Boolean> checkOrderItemsInMenu(final OrderPojo orderPojo, final CompleteOrder completeOrder) {
         final MutableLiveData<Boolean> liveData = new MutableLiveData<>();
+        final List<Boolean> list = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("menu")
                 .child(orderPojo.getChefID());
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (CartPojo pojo : orderPojo.getItems()) {
@@ -763,12 +789,17 @@ public class ChatRepository {
                         MenuPojo menuPojo = snapshot.getValue(MenuPojo.class);
                         if (menuPojo.getItemID().equals(pojo.getItemID())) {
                             if (menuPojo.getItemQuantity() >= pojo.getQuantity()) {
-                                liveData.setValue(true);
+                                list.add(true);
                             } else {
-                                liveData.setValue(false);
+                                list.add(false);
                             }
                         }
                     }
+                }
+                if (!list.contains(false)) {
+                    updateMenuQty(orderPojo, completeOrder);
+                } else {
+                    liveData.setValue(false);
                 }
             }
 
@@ -780,10 +811,10 @@ public class ChatRepository {
         return liveData;
     }
 
-    public void updateMenuQty(final OrderPojo orderPojo) {
+    public void updateMenuQty(final OrderPojo orderPojo, final CompleteOrder completeOrder) {
         reference = FirebaseDatabase.getInstance().getReference("menu")
                 .child(orderPojo.getChefID());
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (CartPojo pojo : orderPojo.getItems()) {
@@ -800,6 +831,7 @@ public class ChatRepository {
                         }
                     }
                 }
+                saveOrder(orderPojo, completeOrder);
             }
 
             @Override
@@ -810,21 +842,36 @@ public class ChatRepository {
 
     }
 
-    public void saveOrder(OrderPojo orderPojo) {
+    public void saveOrder(OrderPojo orderPojo, CompleteOrder completeOrder) {
         reference = FirebaseDatabase.getInstance().getReference("orders")
                 .child(orderPojo.getChefID())
                 .child(firebaseUser.getUid());
         String key = reference.push().getKey();
         orderPojo.setOrderID(key);
         orderPojo.setCustomerID(firebaseUser.getUid());
-        reference.child(key).setValue(orderPojo);
+        final OrderPojo pojo = orderPojo;
+        final CompleteOrder completeOrder1 = completeOrder;
+        reference.child(key).setValue(orderPojo).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    saveCustOrder(pojo, completeOrder1);
+                }
+            }
+        });
 
     }
 
-    public void removeCartOrder(OrderPojo orderPojo) {
+    public void removeCartOrder(OrderPojo orderPojo, final CompleteOrder completeOrder) {
         FirebaseDatabase.getInstance().getReference("cart")
                 .child(firebaseUser.getUid())
-                .child(orderPojo.getChefID()).removeValue();
+                .child(orderPojo.getChefID()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                completeOrder.progressBar.setVisibility(View.GONE);
+                completeOrder.finish();
+            }
+        });
     }
 
     public void deleteMenuItem(String chefId, String itemId) {
@@ -834,10 +881,53 @@ public class ChatRepository {
     }
 
     public void disableMenuItem(String chefId, String itemId) {
-        HashMap<String,Object> hashMap = new HashMap<>();
-        hashMap.put("disabled",true);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("disabled", true);
         FirebaseDatabase.getInstance().getReference("menu")
                 .child(chefId)
                 .child(itemId).updateChildren(hashMap);
+    }
+
+    public MutableLiveData<List<OrderPojo>> getCustOrders() {
+        final MutableLiveData<List<OrderPojo>> liveData = new MutableLiveData<>();
+        orderPojos = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference();
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.child("cust_orders").child(firebaseUser.getUid()).getChildren()) {
+                    CustOrderPojo custOrderPojo = snapshot.getValue(CustOrderPojo.class);
+                    if (!custOrderPojo.isConfirmed()) {
+                        OrderPojo orderPojo = dataSnapshot.child("orders")
+                                .child(custOrderPojo.getChefId())
+                                .child(firebaseUser.getUid())
+                                .child(custOrderPojo.getOrderId()).getValue(OrderPojo.class);
+                        orderPojos.add(orderPojo);
+
+                    }
+                }
+                liveData.setValue(orderPojos);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
+    }
+
+    public void saveCustOrder(final OrderPojo orderPojo, final CompleteOrder completeOrder) {
+        CustOrderPojo custOrderPojo = new CustOrderPojo(orderPojo.getChefID(), orderPojo.getOrderID());
+        reference = FirebaseDatabase.getInstance().getReference("cust_orders")
+                .child(firebaseUser.getUid());
+        reference.push().setValue(custOrderPojo).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    removeCartOrder(orderPojo, completeOrder);
+                }
+            }
+        });
     }
 }

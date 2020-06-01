@@ -50,18 +50,12 @@
         <item>Salad</item>
         <item>Seafood</item>
     </string-array>
-    <!-- drop down list for stats-->
-    <string-array name="date_arrays">
-        <item>Year</item>
-        <item>Month</item>
-        <item>Week</item>
-        <item>Day</item>
-    </string-array>
+
     <string name="Order">order</string>
     <string name="most_sold_item_for_today">sold</string>
-    <string name="item">Item</string>
+    <string name="item">orders</string>
     <string name="followers">Followers</string>
-    <string name="sold">Most sold item for today</string>
+    <string name="sold">Today\'s Orders</string>
     <string name="avg_sales">0</string>
     <string name="customer_rating">Your Rate</string>
     <string name="sales">Monthly Sales:</string>

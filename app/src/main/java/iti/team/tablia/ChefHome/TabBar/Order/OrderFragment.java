@@ -43,7 +43,7 @@ public class OrderFragment extends Fragment {
       @Override
       public void onChanged(List<OrderPojo> orderPojos) {
         list = orderPojos;
-        myAdapter = new OrderAdapter(list, getContext());
+        myAdapter = new OrderAdapter(list, getContext(),orderViewModel);
         recyclerView.setAdapter(myAdapter);
       }
     });

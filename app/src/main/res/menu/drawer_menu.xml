@@ -35,6 +35,10 @@
             android:id="@+id/chef_list"
             android:icon="@drawable/ic_top_chefs_24dp"
             android:title="Top Chefs" />
+        <item
+            android:id="@+id/nav_orders"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="My Orders" />
 
     </group>
 
