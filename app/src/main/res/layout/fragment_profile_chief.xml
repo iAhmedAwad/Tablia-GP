@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="ChefHome.TabBar.Profile.profileFragment">
 
@@ -34,7 +35,7 @@
                 android:padding="3dp"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="1dp"
-                android:src="@drawable/ic_user" />
+                android:src="@mipmap/ic_img_person_round" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/online_status"
@@ -60,7 +61,8 @@
             android:layout_marginTop="5sp"
             android:fontFamily="sans-serif-light"
             android:text="Chief Name "
-            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
         <TextView
@@ -72,7 +74,7 @@
             android:fontFamily="sans-serif"
             android:text="Smouha , Alexandria"
             android:textAllCaps="false"
-            android:textColor="@color/address"
+            android:textColor="@color/colorAccent"
             android:textSize="13sp" />
 
         <RatingBar
@@ -114,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@color/followersBg"
+            android:background="@color/white"
             android:gravity="center"
             android:paddingTop="4dp"
             android:paddingBottom="4dp">
@@ -131,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="453K"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
                 <TextView
@@ -140,7 +142,7 @@
                     android:fontFamily="sans-serif-light"
                     android:text="followers"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorAccent"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -152,7 +154,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@color/followingBg"
+            android:background="@color/white"
             android:gravity="center"
             android:paddingTop="5dp"
             android:paddingBottom="5dp">
@@ -170,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="9"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
                 <TextView
@@ -179,7 +181,7 @@
                     android:fontFamily="sans-serif-light"
                     android:text=" Max orders"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorAccent"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -216,7 +218,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Order Time "
-                    android:textColor="@color/headings"
+                    android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
                 <LinearLayout
@@ -288,7 +290,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View Reviews "
-                    android:textColor="@color/headings"
+                    android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
                 <View
