@@ -3,6 +3,7 @@ package iti.team.tablia.others;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -390,8 +391,7 @@ public class Database {
   }
 
   /**
-   *
-   *  retrieve chef menu by chefId
+   * retrieve chef menu by chefId
    */
 
   public MutableLiveData<List<MenuPojo>> getMenuItems(String chefId) {
@@ -422,7 +422,6 @@ public class Database {
     });
     return menuList;
   }
-
 
 
   public void addOrderToDatabase(OrderPojo orderPojo) {
@@ -467,19 +466,6 @@ public class Database {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   public MutableLiveData<List<OrderPojo>> getChefOrder() {
 
     final List<OrderPojo> list = new ArrayList<>();
@@ -492,7 +478,7 @@ public class Database {
         list.clear();
         for (DataSnapshot data : dataSnapshot.getChildren()) {
 
-          for (DataSnapshot dataSnapshot1 : data.getChildren()){
+          for (DataSnapshot dataSnapshot1 : data.getChildren()) {
 
             OrderPojo pojo = dataSnapshot1.getValue(OrderPojo.class);
 
@@ -511,10 +497,6 @@ public class Database {
     });
     return order;
   }
-
-
-
-
 
 
   /**
@@ -627,25 +609,33 @@ public class Database {
    * Filtered data
    */
 
-  public MutableLiveData<ArrayList<MenuPojo>> getFilteredItems(final ArrayList<String> categoriesList) {
+  public MutableLiveData<ArrayList<MenuPojo>> getFilteredItems(final ArrayList<String> categoriesList,
+                                                               final double min, final double max) {
     final MutableLiveData<ArrayList<MenuPojo>> listMutableLiveData = new MutableLiveData<>();
-
-    //TODO change to category
 
     final ArrayList<MenuPojo> list = new ArrayList<>();
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
-        .child("menu");
+        .child(Constants.MenuNode);
 
-    ref.addValueEventListener(new ValueEventListener() {
+    ref.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
         list.clear();
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
+          Log.d("filterx", "first loop");
+
           for (DataSnapshot dsx : ds.getChildren()) {
+          Log.d("filterx", "second loop");
             MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
-            if (categoriesList.contains(menuPojo.getCategory())) {
+            if (categoriesList.contains(menuPojo.getCategory())
+                && menuPojo.getPriceItem() >= min
+                && menuPojo.getPriceItem() <= max
+            ) {
+              Log.d("filterx", "Item name is: "+ menuPojo.getItemName());
+              Log.d("filterx", "Item price is: "+ menuPojo.getPriceItem());
+              Log.d("filterx", "min and max are: "+ min +" & "+ max);
               list.add(menuPojo);
             }
           }
@@ -786,7 +776,6 @@ public class Database {
    */
 
 
-
   /**
    * A customer follows a certain chef
    *
@@ -794,6 +783,25 @@ public class Database {
    */
   public void followChef(String chefId) {
     //TODO increment the following number of the customer by 1
+
+    final DatabaseReference ref = FirebaseDatabase.getInstance()
+        .getReference(Constants.customerAccountSettingsNode)
+        .child(userId);
+
+    ref.addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
+        settings.setFollowing(settings.getFollowing()+1);
+        ref.setValue(settings);
+
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
 
     FirebaseDatabase.getInstance().getReference().child(Constants.FOLLOWING_NODE)
         .child(userId).child(chefId).setValue(chefId);
@@ -809,6 +817,25 @@ public class Database {
    */
 
   public void unfollowChef(String chefId) {
+
+
+    final DatabaseReference reference = FirebaseDatabase.getInstance()
+        .getReference(Constants.customerAccountSettingsNode)
+        .child(userId);
+
+    reference.addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
+        settings.setFollowing(settings.getFollowing()-1);
+        reference.setValue(settings);
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
         .child(Constants.FOLLOWING_NODE).child(userId).child(chefId);
@@ -950,7 +977,7 @@ public class Database {
    */
   private void addFollower(String chefID) {
     final DatabaseReference refrence = FirebaseDatabase.getInstance().getReference(Constants.chefAccountSettingsNode).child(chefID);
-    refrence.addValueEventListener(new ValueEventListener() {
+    refrence.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         ChefAccountSettings chef = dataSnapshot.getValue(ChefAccountSettings.class);
@@ -1072,8 +1099,7 @@ public class Database {
                       }
                     }
                     ArrayListMutableLiveData.setValue(menuPojoArrayList);
-                    //TODO check!
-                    // ref.child(Constants.MenuNode).removeEventListener(this);
+
                   }
 
                   @Override
