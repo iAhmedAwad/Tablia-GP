@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -42,7 +43,7 @@ public class CustomerProfileFragment extends Fragment {
   private TextView xOrders, xFollowing, xCustomerName,
       xCustomerPhone, xCustomerAddress, xCustomerDescription;
   private CircleImageView xProfileImage;
-  private Button xEditProfile;
+  private ImageView xEditProfile;
 
   public CustomerProfileFragment() {
     // Required empty public constructor

@@ -33,7 +33,7 @@ import iti.team.tablia.others.Database;
 
 
 public class profileFragment extends Fragment {
-  TextView name, start_time, end_time, nb_followers, nb_orders, address, reviews, menus;
+  TextView name, nb_followers, nb_orders, address, reviews, menus ,bio , phone;
   RatingBar rating;
   CircleImageView prfo_img;
   ImageView edit;
@@ -56,8 +56,8 @@ public class profileFragment extends Fragment {
     View view = inflater.inflate(R.layout.fragment_profile_chief, container, false);
     name = view.findViewById(R.id.id_name);
     prfo_img = view.findViewById(R.id.id_profile_pic);
-    start_time = view.findViewById(R.id.id_start_time);
-    end_time = view.findViewById(R.id.id_end_time);
+    bio = view.findViewById(R.id.id_description);
+    phone=view.findViewById(R.id.id_phone);
     nb_followers = view.findViewById(R.id.id_nb_followers);
     nb_orders = view.findViewById(R.id.id_nb_orders);
     rating = view.findViewById(R.id.id_rating);
@@ -141,9 +141,8 @@ public class profileFragment extends Fragment {
     address.setText(settings.getAddress());
     name.setText(settings.getDisplayName());
     nb_orders.setText(String.valueOf(settings.getOrders()));
-    //TODO review POJO
-    start_time.setText(String.valueOf(settings.getStart_order_time()));
-    end_time.setText(String.valueOf(settings.getEnd_order_time()));
+    bio.setText(String.valueOf(settings.getBio()));
+    phone.setText(String.valueOf(settings.getPhoneNumber()));
     nb_followers.setText(String.valueOf(settings.getFollowers()));
     bitmap = StringToBitMap(settings.getProfilePhoto());
     prfo_img.setImageBitmap(bitmap);

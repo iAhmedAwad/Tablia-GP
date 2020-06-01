@@ -32,15 +32,16 @@
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
                 android:layout_marginBottom="2dp"
-                android:background="@drawable/ic_user"
+                android:src="@mipmap/ic_img_person_round"
+                android:background="@drawable/circle"
                 android:padding="3dp"
-                android:src="@drawable/ic_user"
-                app:civ_border_color="#FF000000"
+                app:civ_border_color="#81007F"
                 app:civ_border_width="1dp" />
 
 
             <ImageView
                 android:id="@+id/id_edit_cam"
+                android:backgroundTint="@color/colorAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@id/id_profile_pic"
@@ -91,7 +92,7 @@
                 android:layout_marginBottom="5dp"
                 android:checked="true"
                 android:switchMinWidth="56dp"
-                android:thumbTint="@color/followersBg"
+                android:thumbTint="@color/colorAccent"
                 android:text="Availability:"
                 android:textOff="OFF"
                 android:textOn="ON" />
@@ -109,6 +110,18 @@
                 android:layout_height="wrap_content"
                 android:hint="Address:" />
 
+            <EditText
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description:" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone:" />
+
 
             <EditText
                 android:id="@+id/num_orders"
@@ -116,17 +129,9 @@
                 android:layout_height="wrap_content"
                 android:hint=" Max Number of Orders :" />
 
-            <EditText
-                android:id="@+id/start_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Order Start Time:" />
 
-            <EditText
-                android:id="@+id/end_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Order End Time:" />
+
+
 
             <Button
                 android:id="@+id/id_save_changes"
@@ -137,6 +142,7 @@
                 android:background="@drawable/grad"
                 android:padding="10dp"
                 android:layout_marginBottom="2dp"
+                android:textColor="@color/colorAccent"
                 android:text="Save Changes " />
 
 
