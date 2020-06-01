@@ -19,12 +19,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-        <activity android:name=".CustomerAccount.CustomerOrder.CompleteOrder"></activity>
+        <activity android:name=".ChefHome.EditMenuItems"></activity>
+        <activity android:name=".ChefHome.ChefItemDetails" />
+        <activity android:name=".CustomerAccount.CustomerOrder.CompleteOrder" />
         <activity android:name=".CustomerAccount.CustomerOrder.Cart" />
         <activity android:name=".CustomerAccount.Items.ItemDetails" />
-        <activity android:name=".CustomerAccount.FollowingActivity.FollowingActivity"></activity>
+        <activity android:name=".CustomerAccount.FollowingActivity.FollowingActivity" />
         <activity
             android:name=".CustomerAccount.Reviews.AddReviewsActivity"
             android:label="Write a review" />
@@ -79,11 +79,9 @@
         <activity android:name=".ChefHome.TabBar.Profile.EditChiefActivity" />
         <activity android:name=".ChefHome.TabBar.Menu.AddMenu.AddMenu" />
 
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 
 </manifest>

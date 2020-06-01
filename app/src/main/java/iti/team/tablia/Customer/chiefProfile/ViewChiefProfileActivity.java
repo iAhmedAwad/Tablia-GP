@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
   TextView name, start_time, end_time, nb_followers, nb_orders, address, reviews, menus;
   String userId;
   RatingBar rating;
-  ImageView chat;
+  LinearLayout chat;
   Database db;
   CircleImageView prfo_img, avaliablity;
   ChefAccountSettings cheif;

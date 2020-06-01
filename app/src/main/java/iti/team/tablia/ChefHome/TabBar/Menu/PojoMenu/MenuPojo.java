@@ -15,8 +15,10 @@ public class MenuPojo {
   private String description;
   private String ingredients;
   private int itemQuantity;
+  private boolean disabled;
 
   public MenuPojo() {
+    disabled = false;
   }
 
   public MenuPojo(String itemID, String chefID, String itemName, double priceItem, List<MenuItemPojo> imgItem, String category, String description, String ingredients, int itemQuantity) {
@@ -29,6 +31,7 @@ public class MenuPojo {
     this.description = description;
     this.ingredients = ingredients;
     this.itemQuantity = itemQuantity;
+    disabled = false;
   }
 
   public String getItemName() {
@@ -101,5 +104,13 @@ public class MenuPojo {
 
   public void setItemQuantity(int itemQuantity) {
     this.itemQuantity = itemQuantity;
+  }
+
+  public boolean isDisabled() {
+    return disabled;
+  }
+
+  public void setDisabled(boolean disabled) {
+    this.disabled = disabled;
   }
 }

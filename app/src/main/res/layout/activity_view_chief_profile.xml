@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Customer.chiefProfile.ViewChiefProfileActivity">
 
     <RelativeLayout
@@ -31,10 +32,10 @@
                 android:layout_marginRight="2dp"
                 android:layout_marginBottom="2dp"
                 android:background="@drawable/circle"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="1dp"
                 android:padding="3dp"
-                android:src="@drawable/ic_user" />
+                android:src="@mipmap/ic_img_person_round"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="1dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/online_status"
@@ -58,8 +59,9 @@
             android:layout_marginTop="5sp"
             android:fontFamily="sans-serif-light"
             android:text="Chief Name "
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         <TextView
@@ -71,7 +73,7 @@
             android:fontFamily="sans-serif"
             android:text="Smouha , Alexandria"
             android:textAllCaps="false"
-            android:textColor="@color/address"
+            android:textColor="@color/colorAccent"
             android:textSize="13sp" />
 
         <RatingBar
@@ -87,16 +89,16 @@
             android:stepSize="0.1" />
 
 
-        <ImageView
-            android:id="@+id/id_chat"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_message_black_24dp" />
+<!--        <ImageView-->
+<!--            android:id="@+id/id_chat"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginRight="15dp"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:scaleType="centerInside"-->
+<!--            app:srcCompat="@drawable/ic_message_black_24dp" />-->
 
     </RelativeLayout>
 
@@ -111,8 +113,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@color/followersBg"
+            android:layout_weight="2"
+            android:background="@color/white"
             android:gravity="center"
             android:paddingTop="4dp"
             android:paddingBottom="4dp">
@@ -129,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="453K"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
                 <TextView
@@ -138,7 +140,7 @@
                     android:fontFamily="sans-serif-light"
                     android:text="followers"
                     android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorAccent"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -150,7 +152,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@color/followingBg"
+            android:background="@color/white"
             android:gravity="center"
             android:paddingTop="5dp"
             android:paddingBottom="5dp">
@@ -159,23 +161,48 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
 
                 <ToggleButton
                     android:id="@+id/id_follow"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:backgroundTint="@color/followersBg"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rect_purple"
                     android:fontFamily="sans-serif-light"
-                    android:textAllCaps="true"
                     android:text="follow"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textOff="follow"
                     android:textOn="unfollow"
-                    android:textSize="13sp" />
+                    android:padding="5dp"
+                    android:textStyle="bold" />
 
+                <LinearLayout
+                    android:id="@+id/id_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/rect_purple"
+                    android:padding="5dp">
 
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="20dp"
+                        app:srcCompat="@drawable/ic_message_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Message"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
 
         </RelativeLayout>
@@ -187,11 +214,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/linlay1"
         android:layout_centerInParent="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/linlay1">
+        android:layout_marginRight="30dp">
 
         <LinearLayout
 
@@ -210,7 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Order Time "
-                    android:textColor="@color/headings"
+                    android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
                 <LinearLayout
@@ -281,7 +308,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Number of Orders"
-                    android:textColor="@color/headings"
+                    android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
                 <TextView
@@ -312,7 +339,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View Reviews "
-                    android:textColor="@color/headings"
+                    android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
                 <View
@@ -334,7 +361,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Visit Menu "
-                    android:textColor="@color/headings"
+                    android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
             </LinearLayout>

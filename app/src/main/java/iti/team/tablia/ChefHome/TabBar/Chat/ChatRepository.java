@@ -826,4 +826,18 @@ public class ChatRepository {
                 .child(firebaseUser.getUid())
                 .child(orderPojo.getChefID()).removeValue();
     }
+
+    public void deleteMenuItem(String chefId, String itemId) {
+        FirebaseDatabase.getInstance().getReference("menu")
+                .child(chefId)
+                .child(itemId).removeValue();
+    }
+
+    public void disableMenuItem(String chefId, String itemId) {
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("disabled",true);
+        FirebaseDatabase.getInstance().getReference("menu")
+                .child(chefId)
+                .child(itemId).updateChildren(hashMap);
+    }
 }

@@ -40,6 +40,7 @@ public class CategoryRecyclerAdaptor extends RecyclerView.Adapter<CategoryRecycl
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         final MenuPojo menuPojo = arrName.get(position);
         Log.d("why", arrName.get(position).getImgItem().get(0).getImgaeItem());
+        viewHolder.image.setScaleType(ImageView.ScaleType.CENTER_CROP);
         viewHolder.image.setImageBitmap(GlobalImageLoader.StringToBitMap(arrName.get(position).getImgItem().get(0).getImgaeItem()));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

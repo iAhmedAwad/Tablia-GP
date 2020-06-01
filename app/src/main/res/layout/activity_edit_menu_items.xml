@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ChefHome.TabBar.Menu.AddMenu.AddMenu">
+    tools:context=".ChefHome.EditMenuItems">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar_layout"
         android:layout_width="match_parent"
@@ -29,24 +30,23 @@
 
                 <TextView
                     android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_marginLeft="25dp"
                     android:layout_weight="3"
-                    android:text="Add Menu Item"
+                    android:text="Edit Menu Item"
                     android:textColor="#fff"
                     android:textStyle="bold" />
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
-
     <ScrollView
+        android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@id/bar_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -67,7 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp" />
 
             <TextView
                 android:id="@+id/txtAddItem"
@@ -78,7 +79,8 @@
                 android:text="@string/NameItem"
                 android:textColor="#000000"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="30dp" />
 
             <EditText
                 android:id="@+id/editNameItem"
@@ -88,7 +90,8 @@
                 android:layout_marginTop="20dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="Name"
+                android:layout_marginStart="30dp" />
 
             <TextView
                 android:id="@+id/txtPriceItem"
@@ -99,7 +102,8 @@
                 android:text="@string/Price"
                 android:textColor="#000000"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="30dp" />
 
             <EditText
                 android:id="@+id/editPriceItem"
@@ -109,7 +113,8 @@
                 android:layout_marginTop="20dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="Name"
+                android:layout_marginStart="30dp" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -120,7 +125,8 @@
                 android:text="Category"
                 android:textColor="#000000"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="30dp" />
 
             <Spinner
                 android:id="@+id/spinner"
@@ -128,7 +134,8 @@
                 android:layout_height="47dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
-                android:entries="@array/Spinner_Item" />
+                android:entries="@array/Spinner_Item"
+                android:layout_marginStart="30dp" />
 
             <TextView
                 android:id="@+id/textView27"
@@ -139,7 +146,8 @@
                 android:text="Description"
                 android:textColor="#000000"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="30dp" />
 
             <EditText
                 android:id="@+id/editDescrption"
@@ -149,7 +157,8 @@
                 android:layout_marginTop="20dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="Name"
+                android:layout_marginStart="30dp" />
 
             <TextView
                 android:id="@+id/textView28"
@@ -160,7 +169,8 @@
                 android:text="Ingredients"
                 android:textColor="#000000"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="30dp" />
 
             <EditText
                 android:id="@+id/editIngredients"
@@ -170,7 +180,8 @@
                 android:layout_marginTop="20dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="Name"
+                android:layout_marginStart="30dp" />
 
             <Button
                 android:id="@+id/btnAddItem"
