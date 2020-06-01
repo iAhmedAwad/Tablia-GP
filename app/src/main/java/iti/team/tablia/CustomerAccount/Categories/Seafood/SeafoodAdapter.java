@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.CustomerAccount.Items.ItemDetails;
 import iti.team.tablia.R;
+import iti.team.tablia.util.GlobalImageLoader;
 
 public class SeafoodAdapter extends RecyclerView.Adapter<SeafoodAdapter.ViewHolder> {
   private Context mContext;
@@ -34,7 +36,14 @@ public class SeafoodAdapter extends RecyclerView.Adapter<SeafoodAdapter.ViewHold
   @Override
   public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
     final MenuPojo menuPojo = menuPojos.get(position);
-    holder.xTextView.setText(menuPojo.getItemName());
+
+    holder.xCatItemName.setText(menuPojos.get(position).getItemName());
+    holder.xCatItemCategory.setText(menuPojos.get(position).getCategory());
+    holder.xCatItemPrice.setText(String.valueOf(menuPojos.get(position).getPriceItem())+"EGP");
+    holder.cat_imageView.setImageBitmap(
+        GlobalImageLoader.StringToBitMap(
+            menuPojos.get(position).getImgItem().get(0).getImgaeItem()));
+
     holder.itemView.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -54,12 +63,15 @@ public class SeafoodAdapter extends RecyclerView.Adapter<SeafoodAdapter.ViewHold
   }
 
   public class ViewHolder extends RecyclerView.ViewHolder {
-    TextView xTextView;
+    private TextView xCatItemName, xCatItemPrice, xCatItemCategory;
+    private ImageView cat_imageView;
 
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
-      xTextView = itemView.findViewById(R.id.xTextView);
-
+      xCatItemName = itemView.findViewById(R.id.xCatItemName);
+      xCatItemCategory = itemView.findViewById(R.id.xCatItemCategory);
+      xCatItemPrice = itemView.findViewById(R.id.xCatItemPrice);
+      cat_imageView = itemView.findViewById(R.id.cat_imageView);
     }
   }
 }

@@ -50,18 +50,12 @@
         <item>Salad</item>
         <item>Seafood</item>
     </string-array>
-    <!-- drop down list for stats-->
-    <string-array name="date_arrays">
-        <item>Year</item>
-        <item>Month</item>
-        <item>Week</item>
-        <item>Day</item>
-    </string-array>
+
     <string name="Order">order</string>
     <string name="most_sold_item_for_today">sold</string>
-    <string name="item">Item</string>
+    <string name="item">orders</string>
     <string name="followers">Followers</string>
-    <string name="sold">Most sold item for today</string>
+    <string name="sold">Today\'s Orders</string>
     <string name="avg_sales">0</string>
     <string name="customer_rating">Your Rate</string>
     <string name="sales">Monthly Sales:</string>
@@ -69,7 +63,7 @@
     <string name="username">username</string>
     <string name="sales_amount">350 EGP</string>
     <string name="followers_num">12</string>
-    <string name="avg_order">Average orders you delivered</string>
+    <string name="avg_order">Number Of Orders You Delivered</string>
     <string name="rate">3.5</string>
     <string name="submit">submit</string>
 

@@ -14,6 +14,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -70,4 +71,7 @@ dependencies {
     //multidex error
     def multidex_version = "2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
+
+    //Range bar
+    implementation 'io.apptik.widget:multislider:1.3'
 }

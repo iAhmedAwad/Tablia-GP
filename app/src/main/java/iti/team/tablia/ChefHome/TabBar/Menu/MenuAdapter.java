@@ -1,6 +1,7 @@
 package iti.team.tablia.ChefHome.TabBar.Menu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import iti.team.tablia.ChefHome.ChefItemDetails;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.R;
 
@@ -43,12 +45,23 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
   @Override
   public void onBindViewHolder(@NonNull MenuAdapter.ViewHolder holder, int position) {
 
+    final MenuPojo menuPojo = data.get(position);
     Bitmap bitmap = StringToBitMap(data.get(position).getImgItem().get(0).getImgaeItem());
-
+    holder.imgItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
     holder.imgItem.setImageBitmap(bitmap);
     holder.txtNameItem.setText(data.get(position).getItemName());
     holder.txtPriceItem.setText(String.valueOf(data.get(position).getPriceItem()));
     holder.txtCategory.setText(data.get(position).getCategory());
+    holder.itemView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(context, ChefItemDetails.class);
+        intent.putExtra("chefId", menuPojo.getChefID());
+        intent.putExtra("itemId", menuPojo.getItemID());
+        intent.putExtra("itemName", menuPojo.getItemName());
+        context.startActivity(intent);
+      }
+    });
 
   }
 
