@@ -1,9 +1,14 @@
 package iti.team.tablia.CustomerAccount.Profile.EditProfile;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +16,11 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -23,7 +31,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import iti.team.tablia.ChefHome.TabBar.Profile.EditChiefActivity;
 import iti.team.tablia.CustomerAccount.Profile.CustomerProfileFragment;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerSettings;
@@ -41,6 +53,11 @@ import iti.team.tablia.util.Permissions;
 public class CustomerEditProfileFragment extends Fragment {
   public static final String TAG = "EditProfileFragment";
   private static final int CAMERA_REQUEST_CODE = 3;
+  Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
+
+  Uri img;
+  String mypic;
+  Bitmap bitmap;
   //PlacesAPI
   private final String mAPIKey = "AIzaSyDFhO6SEcewKE7jQUjyE-XwqbhlODfObEA";
   //Firebase
@@ -51,13 +68,13 @@ public class CustomerEditProfileFragment extends Fragment {
   private Database database;
   //Widgets
   private CircleImageView xProfileImage;
+  ImageView cam;
   private AutoCompleteTextView xCusomerAddress;
   private CustomerSettings mCustomerSettings;
   private EditText xCustomerName, xCustomerPhone, xCustomerDescription;
   private Button xSaveChanges;
   private CustomerEditProfileViewModel model;
   //vars
-  Bitmap bitmap;
 
 
   public CustomerEditProfileFragment() {
@@ -86,10 +103,11 @@ public class CustomerEditProfileFragment extends Fragment {
     xCustomerPhone = view.findViewById(R.id.xCustomerPhone);
     xCustomerDescription = view.findViewById(R.id.xCustomerDescription);
     xSaveChanges = view.findViewById(R.id.xEditData);
+    cam = view.findViewById(R.id.id_edit_cam);
     database = new Database(getActivity());
     //setupFirebaseAuth();
     initComponents();
-    initProfileImage(xProfileImage);
+//    initProfileImage(xProfileImage);
     return view;
   }
 
@@ -111,6 +129,7 @@ public class CustomerEditProfileFragment extends Fragment {
     xCustomerPhone.setText(settings.getPhoneNumber());
     xCusomerAddress.setText(settings.getAddress());
     xCustomerDescription.setText(settings.getBio());
+//    xProfileImage.setImageBitmap(GlobalImageLoader.StringToBitMap(settings.getProfilePhoto()));
 
   }
 
@@ -130,6 +149,15 @@ public class CustomerEditProfileFragment extends Fragment {
     PlacesClient mPlacesClient = Places.createClient(getActivity());
     xCusomerAddress.setAdapter(new PlacesAutoSuggestAdapter(getActivity(), android.R.layout.simple_list_item_1));
 
+    cam.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        SelectImage();
+        Toast.makeText(getActivity(), "open cam", Toast.LENGTH_SHORT).show();
+
+      }
+    });
+
     xSaveChanges.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -143,6 +171,34 @@ public class CustomerEditProfileFragment extends Fragment {
     });
 
   }
+  public void SelectImage() {
+
+    final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
+    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    builder.setTitle("Add Image");
+    builder.setItems(items, new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+
+        if (items[which].equals("Camera")) {
+
+          Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+          startActivityForResult(intentCamera, REQUEST_CAMERA);
+
+        } else if (items[which].equals("Gallery")) {
+
+          Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+          intentGallery.setType("image/*");
+          startActivityForResult(intentGallery.createChooser(intentGallery, "SelectFile"), SELECT_FILE);
+
+        } else {
+          dialog.dismiss();
+        }
+      }
+    });
+    builder.show();
+  }
+
 
   private void initProfileImage(CircleImageView circleImageView) {
     circleImageView.setOnClickListener(new View.OnClickListener() {
@@ -165,11 +221,13 @@ public class CustomerEditProfileFragment extends Fragment {
     String address = xCusomerAddress.getText().toString();
     String description = xCustomerDescription.getText().toString();
 
+
     customerSettings.getUser().setFullName(name);
     customerSettings.getCustomerAccountSettings().setDisplayName(name);
     customerSettings.getCustomerAccountSettings().setPhoneNumber(phone);
     customerSettings.getCustomerAccountSettings().setAddress(address);
     customerSettings.getCustomerAccountSettings().setBio(description);
+    customerSettings.getCustomerAccountSettings().setProfilePhoto(mypic);
 
     model.editCustomer(customerSettings);
   }
@@ -177,35 +235,61 @@ public class CustomerEditProfileFragment extends Fragment {
   @Override
   public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == CAMERA_REQUEST_CODE) {
-      if (data != null) {
+    if (resultCode ==Activity.RESULT_OK && data != null) {
+      if (requestCode == REQUEST_CAMERA) {
         bitmap = (Bitmap) data.getExtras().get("data");
+        Log.i("nopic",GlobalImageLoader.BitMapToString(bitmap));
+
         xProfileImage.setImageBitmap(bitmap);
+        mypic = GlobalImageLoader.BitMapToString(bitmap);
 
+      } else if (requestCode == SELECT_FILE) {
+
+        img = data.getData();
+        try {
+          bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), img);
+          mypic = GlobalImageLoader.BitMapToString(bitmap);
+
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+
+        xProfileImage.setImageBitmap(bitmap);
+        Log.i("nopic", bitmap.toString());
       }
-//            database.uploadProfilePhoto(bitmap);
-
-            /*
-            if (isRootTask()) {
-
-            } else {
-                try{
-//                    TM.log("Received a new bitmap from camera "+ bitmap);
-//                    Intent intent = new Intent(getActivity(),
-//                            CustomerProfileActivityOld.class);
-//                    intent.putExtra(getString(R.string.selectedBitmap), bitmap);
-//                    intent.putExtra(getString(R.string.intentSource), getString(R.string.customerProfileActivity));
-//                    startActivity(intent);
-//                    finish();
-                    database.uploadProfilePhoto(bitmap);
-                }catch (NullPointerException e){
-                    TM.log("NullPointerException" + e.getMessage());
-                }
-
-            }
-*/
-    } else {
     }
+
+
+
+//    if (requestCode == CAMERA_REQUEST_CODE) {
+//      if (data != null) {
+//        bitmap = (Bitmap) data.getExtras().get("data");
+//        xProfileImage.setImageBitmap(bitmap);
+//
+//      }
+////            database.uploadProfilePhoto(bitmap);
+//
+//            /*
+//            if (isRootTask()) {
+//
+//            } else {
+//                try{
+////                    TM.log("Received a new bitmap from camera "+ bitmap);
+////                    Intent intent = new Intent(getActivity(),
+////                            CustomerProfileActivityOld.class);
+////                    intent.putExtra(getString(R.string.selectedBitmap), bitmap);
+////                    intent.putExtra(getString(R.string.intentSource), getString(R.string.customerProfileActivity));
+////                    startActivity(intent);
+////                    finish();
+//                    database.uploadProfilePhoto(bitmap);
+//                }catch (NullPointerException e){
+//                    TM.log("NullPointerException" + e.getMessage());
+//                }
+//
+//            }
+//*/
+//    } else {
+//    }
   }
 
   private boolean isRootTask() {

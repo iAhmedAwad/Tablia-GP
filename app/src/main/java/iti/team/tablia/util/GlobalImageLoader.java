@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
+
 import iti.team.tablia.R;
 
 public class GlobalImageLoader {
@@ -52,5 +54,13 @@ public class GlobalImageLoader {
       e.getMessage();
       return null;
     }
+  }
+
+  public static String BitMapToString(Bitmap bitmap) {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+    byte[] b = baos.toByteArray();
+    String temp = Base64.encodeToString(b, Base64.DEFAULT);
+    return temp;
   }
 }
