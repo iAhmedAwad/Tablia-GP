@@ -43,7 +43,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     holder.txtOrderID.setText(data.get(position).getOrderID());
     holder.txtOrderTime.setText(data.get(position).getOrderTime());
     holder.txtCustomerID.setText(data.get(position).getCustomerID());
-    holder.txtPrice.setText(String.valueOf(data.get(position).getSubTotal()));
+    holder.txtPrice.setText(String.valueOf(data.get(position).getTotal()));
     holder.con.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
