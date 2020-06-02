@@ -575,7 +575,7 @@ public class ChatRepository {
     public MutableLiveData<MenuPojo> getMenuItemDetails(String chefId, String itemId) {
         final MutableLiveData<MenuPojo> liveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("menu").child(chefId).child(itemId);
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 MenuPojo menuPojo = dataSnapshot.getValue(MenuPojo.class);
@@ -593,7 +593,7 @@ public class ChatRepository {
     public MutableLiveData<ChefAccountSettings> getChefInfo(String chefId) {
         final MutableLiveData<ChefAccountSettings> liveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("chef_account_settings").child(chefId);
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ChefAccountSettings settings = dataSnapshot.getValue(ChefAccountSettings.class);
