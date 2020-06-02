@@ -25,6 +25,7 @@ import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.MenuItemPojo;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Customer.ChefProfile.ViewChiefProfileActivity;
 import iti.team.tablia.CustomerAccount.CustomerOrder.Cart;
+import iti.team.tablia.CustomerAccount.Reviews.AddReviewsActivity;
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.R;
@@ -44,8 +45,9 @@ public class ItemDetails extends AppCompatActivity {
     private ItemDetailsViewModel detailsViewModel;
     private List<MenuItemPojo> imgList;
     private double price;
-    private MenuPojo menuPojo;
     private TextView toolbarTitle;
+    private String chefId;
+    private String itemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +55,8 @@ public class ItemDetails extends AppCompatActivity {
         setContentView(R.layout.activity_item_details);
         toolbarTitle = findViewById(R.id.toolbar_title);
         Intent intent = getIntent();
-        final String chefId = intent.getStringExtra("chefId");
-        final String itemId = intent.getStringExtra("itemId");
+        chefId = intent.getStringExtra("chefId");
+        itemId = intent.getStringExtra("itemId");
         String item_name = intent.getStringExtra("itemName");
         toolbarTitle.setText(item_name);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -156,7 +158,6 @@ public class ItemDetails extends AppCompatActivity {
         detailsViewModel.getMenuItemDetails(chefId, itemId).observe(this, new Observer<MenuPojo>() {
             @Override
             public void onChanged(MenuPojo menuPojo) {
-                ItemDetails.this.menuPojo = menuPojo;
                 getSupportActionBar().setTitle(menuPojo.getItemName());
                 itemName.setText(menuPojo.getItemName());
                 price = menuPojo.getPriceItem();
@@ -178,6 +179,10 @@ public class ItemDetails extends AppCompatActivity {
         writeReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Intent intent1 = new Intent(ItemDetails.this, AddReviewsActivity.class);
+//                intent1.putExtra(AddReviewsActivity.INCOMING_ITEM_ID, itemId);
+//                intent1.putExtra(AddReviewsActivity.INCOMING_CHEF_ID, chefId);
+//                startActivity(intent1);
                 Toast.makeText(ItemDetails.this, "writeReview", Toast.LENGTH_SHORT).show();
             }
         });
