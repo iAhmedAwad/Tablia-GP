@@ -1,138 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/xChefBtnRegister"
-        android:layout_width="0dp"
+    <RelativeLayout
+        android:id="@+id/rellay1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/white_onclick_grey"
-        android:padding="12dp"
-        android:text="Register"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toBottomOf="@+id/xCustomerConfirmPassword" />
+        android:background="@drawable/grad"
+        android:paddingBottom="20dp">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="0dp"
+        <RelativeLayout
+            android:id="@+id/imgUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create a New Customer Account"
+                android:layout_marginTop="40dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="21sp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linlay1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="center_horizontal"
-        android:text="Create a New Account"
-        android:textColor="@color/Black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+        android:layout_below="@id/rellay1"
+        android:orientation="horizontal">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="23dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="16dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
-
-    <EditText
-        android:id="@+id/xCustomrRegName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Full name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <EditText
-        android:id="@+id/xCustomerUsername"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/username"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toBottomOf="@+id/xCustomrRegName" />
-
-    <EditText
-        android:id="@+id/xCustomerPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toBottomOf="@+id/xCustomerEmail" />
-
-    <EditText
-        android:id="@+id/xCustomerConfirmPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toBottomOf="@+id/xCustomerPassword" />
-
-    <EditText
-        android:id="@+id/xCustomerEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9"
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toBottomOf="@+id/xCustomerUsername" />
+        android:layout_below="@+id/linlay1"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/xCustomrRegName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:hint=" Full Name"
+                android:textColor="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/xCustomerUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:hint="Username"
+                android:textColor="@color/colorAccent" />
+
+
+            <EditText
+                android:id="@+id/xCustomerEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:hint="Email"
+                android:textColor="@color/colorAccent" />
+
+
+            <EditText
+                android:id="@+id/xCustomerPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:hint=" Password"
+                android:textColor="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/xCustomerConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:hint="Confirm Password"
+                android:textColor="@color/colorAccent" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_margin="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/xChefBtnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/grad"
+                android:padding="10dp"
+                android:text="Sign Up"
+                android:textColor="@color/colorAccent" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--    <Button-->
+    <!--        android:id="@+id/xChefBtnRegister"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginLeft="16dp"-->
+    <!--        android:layout_marginTop="48dp"-->
+    <!--        android:layout_marginEnd="16dp"-->
+    <!--        android:layout_marginRight="16dp"-->
+    <!--        android:background="@drawable/white_onclick_grey"-->
+    <!--        android:padding="12dp"-->
+    <!--        android:text="Register"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
+    <!--        app:layout_constraintHorizontal_bias="1.0"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/xCustomerConfirmPassword" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView4"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="24dp"-->
+    <!--        android:gravity="center_horizontal"-->
+    <!--        android:text="Create a New Customer Account"-->
+    <!--        android:textColor="@color/colorAccent"-->
+    <!--        android:textSize="20sp"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/guideline6" />-->
+
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progressBar"-->
+    <!--        android:layout_width="50dp"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <androidx.constraintlayout.widget.Guideline-->
+    <!--        android:id="@+id/guideline6"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintGuide_begin="23dp" />-->
+
+    <!--    <androidx.constraintlayout.widget.Guideline-->
+    <!--        android:id="@+id/guideline7"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintGuide_end="16dp" />-->
+
+    <!--    <androidx.constraintlayout.widget.Guideline-->
+    <!--        android:id="@+id/guideline8"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        app:layout_constraintGuide_begin="16dp" />-->
+
+    <!--    <androidx.constraintlayout.widget.Guideline-->
+    <!--        android:id="@+id/guideline9"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        app:layout_constraintGuide_end="16dp" />-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/xCustomrRegName"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="24dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="Full name"-->
+    <!--        android:inputType="textPersonName"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/textView4" />-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/xCustomerUsername"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="@string/username"-->
+    <!--        android:inputType="textPersonName"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/xCustomrRegName" />-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/xCustomerPassword"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="Password"-->
+    <!--        android:inputType="textPassword"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/xCustomerEmail" />-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/xCustomerConfirmPassword"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="Confirm Password"-->
+    <!--        android:inputType="textPassword"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/xCustomerPassword" />-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/xCustomerEmail"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="Email"-->
+    <!--        android:inputType="textEmailAddress"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/xCustomerUsername" />-->
+
+
+</RelativeLayout>
 
 
 
