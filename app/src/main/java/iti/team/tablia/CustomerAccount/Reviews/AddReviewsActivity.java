@@ -3,6 +3,7 @@ package iti.team.tablia.CustomerAccount.Reviews;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -68,11 +69,10 @@ public class AddReviewsActivity extends AppCompatActivity {
         .observe(this, new Observer<Review>() {
           @Override
           public void onChanged(Review review) {
-            if (review != null && review.getCustomerId() != null) {
-              mReview = new Review(review);
-              xRatingBar.setRating(review.getRating());
-              xReviewText.setText(review.getReviewText());
-            }
+            mReview = new Review(review);
+            xRatingBar.setRating(review.getRating());
+            xReviewText.setText(review.getReviewText());
+
           }
         });
   }
@@ -88,14 +88,20 @@ public class AddReviewsActivity extends AppCompatActivity {
 
         if (mReview == null) {
           mReview = new Review();
+          mReview.setItemId(mITEM_id);
+          mReview.setChefId(mCHEF_id);
         }
-        mReview.setItemId(mITEM_id);
-        mReview.setChefId(mCHEF_id);
         mReview.setReviewText(reviewText);
         mReview.setRating(rating);
         mDatabase.addReview(mReview);
+        finish();
       }
     });
 
+  }
+
+  private void hideSoftKeyboard() {
+    this.getWindow().
+        setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
   }
 }

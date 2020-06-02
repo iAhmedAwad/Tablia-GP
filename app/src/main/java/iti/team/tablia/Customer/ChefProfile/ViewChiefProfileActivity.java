@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -30,7 +29,7 @@ import iti.team.tablia.util.GlobalImageLoader;
 
 public class ViewChiefProfileActivity extends AppCompatActivity {
 
-  TextView name, bio, phone, nb_followers, nb_orders, address, reviews, menus ;
+  TextView name, bio, phone, nb_followers, nb_orders, address, reviews, menus;
   String userId;
   RatingBar rating;
   LinearLayout chat;
@@ -105,7 +104,7 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
         rating.setRating(chiefPojo.getRating());
         prfo_img.setImageBitmap(GlobalImageLoader.StringToBitMap(chiefPojo.getProfilePhoto()));
         reviews.setText("View Reviews On " + chiefPojo.getDisplayName());
-        menus.setText("Vist " + chiefPojo.getDisplayName() +"'s "+ "Menus");
+        menus.setText("Vist " + chiefPojo.getDisplayName() + "'s " + "Menus");
         if (chiefPojo.isAvailable() == true) {
           avaliablity.setImageResource(R.drawable.online);
         } else {
@@ -120,7 +119,7 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         Intent i = new Intent(ViewChiefProfileActivity.this, MessageActivity.class);
-        i.putExtra("userid",userId);
+        i.putExtra("userid", userId);
         startActivity(i);
         Toast.makeText(ViewChiefProfileActivity.this, "Chat", Toast.LENGTH_LONG).show();
       }
@@ -129,8 +128,8 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         Intent intent1 = new Intent(ViewChiefProfileActivity.this, ViewChefMenus.class);
-        intent1.putExtra("userid",userId);
-       startActivity(intent1);
+        intent1.putExtra("userid", userId);
+        startActivity(intent1);
 //        Toast.makeText(ViewChiefProfileActivity.this, "Menus", Toast.LENGTH_LONG).show();
       }
     });

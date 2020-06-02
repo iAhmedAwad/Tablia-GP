@@ -734,10 +734,15 @@ public class Database {
    * @return
    */
   public MutableLiveData<Review> getReview(String itemID) {
-    final MutableLiveData<Review> reviewMutableLiveData = null;
+    Log.d("Reviewx", "From DB getReview method ");
+
+
+    final MutableLiveData<Review> reviewMutableLiveData =new MutableLiveData<>();
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
         .child(Constants.reviewsNode).child(itemID);
+    Log.d("Reviewx", "From DB itemId:"+itemID);
+
 
     ref.addValueEventListener(new ValueEventListener() {
       @Override
@@ -745,6 +750,8 @@ public class Database {
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
           Review review = ds.getValue(Review.class);
 
+          Log.d("Reviewx", "From DB userID: "+userId);
+          Log.d("Reviewx", "From DB customerId: "+review.getCustomerId());
           if (review.getCustomerId().equals(userId)) {
             reviewMutableLiveData.setValue(review);
           }
@@ -768,12 +775,20 @@ public class Database {
    */
 
   public void addReview(Review review) {
-    String itemId = FirebaseDatabase.getInstance().getReference().push().getKey();
-    review.setItemId(itemId);
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
-        .child(Constants.reviewsNode);
+    String reviewId;
+    if ( review.getReviewId()==null) {
 
-    ref.child(itemId)
+    reviewId = FirebaseDatabase.getInstance().getReference().push().getKey();
+    review.setReviewId(reviewId);
+    } else {
+      reviewId = review.getReviewId();
+    }
+
+    review.setCustomerId(userId);
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
+        .child(Constants.reviewsNode).child(review.getItemId());
+
+    ref.child(reviewId)
         .setValue(review).addOnCompleteListener(new OnCompleteListener<Void>() {
       @Override
       public void onComplete(@NonNull Task<Void> task) {
@@ -990,6 +1005,7 @@ public class Database {
    *
    * @param chefID
    */
+
   private void addFollower(String chefID) {
     final DatabaseReference refrence = FirebaseDatabase.getInstance().getReference(Constants.chefAccountSettingsNode).child(chefID);
     refrence.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -1038,6 +1054,7 @@ public class Database {
   /**
    * a method to return true if a customer follows a certain chef
    */
+
   public MutableLiveData<Boolean> isFollowing(final String chefId) {
 
     final MutableLiveData<Boolean> isFollowing = new MutableLiveData<>();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -179,10 +180,11 @@ public class ItemDetails extends AppCompatActivity {
         writeReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent1 = new Intent(ItemDetails.this, AddReviewsActivity.class);
-//                intent1.putExtra(AddReviewsActivity.INCOMING_ITEM_ID, itemId);
-//                intent1.putExtra(AddReviewsActivity.INCOMING_CHEF_ID, chefId);
-//                startActivity(intent1);
+                Log.d("Review", "itemId is: "+itemId+"ChefId is: "+ chefId);
+                Intent intent1 = new Intent(ItemDetails.this, AddReviewsActivity.class);
+                intent1.putExtra(AddReviewsActivity.INCOMING_ITEM_ID, itemId);
+                intent1.putExtra(AddReviewsActivity.INCOMING_CHEF_ID, chefId);
+                startActivity(intent1);
                 Toast.makeText(ItemDetails.this, "writeReview", Toast.LENGTH_SHORT).show();
             }
         });
