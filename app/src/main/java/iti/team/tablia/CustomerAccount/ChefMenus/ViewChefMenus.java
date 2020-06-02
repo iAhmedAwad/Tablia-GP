@@ -22,7 +22,7 @@ import iti.team.tablia.R;
 
 public class ViewChefMenus extends AppCompatActivity {
 
-    MenuAdapter myAdapter;
+    ViewChefMenuAdaptor myAdapter;
     RecyclerView recycleMenu;
     ViewChefMenuViewModel myViewModel;
     String chefId ;
@@ -42,7 +42,7 @@ public class ViewChefMenus extends AppCompatActivity {
 myViewModel.getList(chefId).observe(this, new Observer<List<MenuPojo>>() {
     @Override
     public void onChanged(List<MenuPojo> menuPojos) {
-        myAdapter = new MenuAdapter( menuPojos, ViewChefMenus.this);
+        myAdapter = new ViewChefMenuAdaptor( menuPojos, ViewChefMenus.this);
         recycleMenu.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
 

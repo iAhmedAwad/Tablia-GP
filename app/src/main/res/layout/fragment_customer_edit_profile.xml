@@ -85,12 +85,14 @@
                 android:id="@+id/xCustomerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint=" Name" />
 
             <EditText
                 android:id="@+id/xCustomerDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint="Description:" />
 
 
@@ -98,6 +100,7 @@
                 android:id="@+id/xCustomerAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint="Address:" />
 
 
@@ -105,12 +108,14 @@
                 android:id="@+id/xCustomerPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint=" Phone :" />
 
             <EditText
                 android:id="@+id/xCustomerID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint="ID Number:" />
 
 

@@ -86,21 +86,23 @@
                 android:layout_width="188dp"
                 android:layout_height="16dp"
                 android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginBottom="5dp"
                 android:checked="true"
                 android:switchMinWidth="56dp"
-                android:thumbTint="@color/colorAccent"
                 android:text="Availability:"
                 android:textOff="OFF"
-                android:textOn="ON" />
+                android:textOn="ON"
+                android:thumbTint="@color/colorAccent" />
 
             <EditText
                 android:id="@+id/id_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint=" Name" />
 
 
@@ -108,18 +110,21 @@
                 android:id="@+id/id_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint="Address:" />
 
             <EditText
-            android:id="@+id/desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Description:" />
+                android:id="@+id/desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="Description:" />
 
             <EditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint="Phone:" />
 
 
@@ -127,6 +132,7 @@
                 android:id="@+id/num_orders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint=" Max Number of Orders :" />
 
 
@@ -139,10 +145,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/grad"
+                android:background="@drawable/rect_purple"
                 android:padding="10dp"
                 android:layout_marginBottom="2dp"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:text="Save Changes " />
 
 
