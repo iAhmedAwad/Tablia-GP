@@ -125,10 +125,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/grad"
+                android:background="@drawable/rect_purple"
                 android:padding="10dp"
                 android:layout_marginBottom="2dp"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:text="Save Changes " />
 
 
