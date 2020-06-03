@@ -227,7 +227,7 @@ public class CustomerEditProfileFragment extends Fragment {
     customerSettings.getCustomerAccountSettings().setAddress(address);
     customerSettings.getCustomerAccountSettings().setBio(description);
     customerSettings.getCustomerAccountSettings().setProfilePhoto(mypic);
-//customerSettings.getCustomerAccountSettings().setProfilePhotoByYasmine(mypic);
+//customerSettings.getCustomerAccountSettings().setProfilePhoto(mypic);
     model.editCustomer(customerSettings);
   }
 

@@ -178,7 +178,7 @@ public class Database {
     final MutableLiveData<CustomerSettings> customerSettingsMutableLiveData = new MutableLiveData<>();
 
     final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-
+//Edited from addValue to addSingle
     reference.addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
