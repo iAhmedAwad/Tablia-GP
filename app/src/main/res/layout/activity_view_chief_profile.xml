@@ -78,7 +78,6 @@
 
         <RatingBar
             android:id="@+id/id_rating"
-            android:progressTint="@color/colorAccent"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,19 +86,20 @@
             android:layout_marginTop="5dp"
             android:isIndicator="true"
             android:numStars="5"
+            android:progressTint="@color/colorAccent"
             android:stepSize="0.1" />
 
 
-<!--        <ImageView-->
-<!--            android:id="@+id/id_chat"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginRight="15dp"-->
-<!--            android:adjustViewBounds="true"-->
-<!--            android:scaleType="centerInside"-->
-<!--            app:srcCompat="@drawable/ic_message_black_24dp" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/id_chat"-->
+        <!--            android:layout_width="40dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_alignParentRight="true"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:layout_marginRight="15dp"-->
+        <!--            android:adjustViewBounds="true"-->
+        <!--            android:scaleType="centerInside"-->
+        <!--            app:srcCompat="@drawable/ic_message_black_24dp" />-->
 
     </RelativeLayout>
 
@@ -108,7 +108,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/rellay1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="3">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -170,30 +171,32 @@
                     android:id="@+id/id_follow"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginRight="30dp"
                     android:layout_weight="1"
                     android:background="@drawable/rect_purple"
                     android:fontFamily="sans-serif-light"
+                    android:padding="5dp"
                     android:text="follow"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textOff="follow"
                     android:textOn="unfollow"
-                    android:padding="5dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/id_chat"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginRight="70dp"
                     android:background="@drawable/rect_purple"
                     android:padding="5dp">
 
                     <ImageView
                         android:layout_width="20dp"
-                        android:layout_gravity="center_vertical"
                         android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
                         app:srcCompat="@drawable/ic_message_black_24dp" />
 
                     <TextView
@@ -256,6 +259,7 @@
                     android:background="@color/grey" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

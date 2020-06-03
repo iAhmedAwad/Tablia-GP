@@ -57,7 +57,7 @@ public class EditMenuItems extends AppCompatActivity {
     RecyclerView myrecycle;
     AddMenuAdapter myAdapter;
     MenuItemPojo picItem;
-    List<MenuItemPojo> list;
+    List<MenuItemPojo> list =  new ArrayList<>();
     String category;
 
     public static MenuPojo menuPojo ;
@@ -91,7 +91,7 @@ public class EditMenuItems extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         myrecycle.setLayoutManager(layoutManager);
 
-        list = new ArrayList<>();
+
 
         list.addAll(menuPojo.getImgItem());
 
@@ -112,6 +112,10 @@ public class EditMenuItems extends AppCompatActivity {
 
 
         spinner = findViewById(R.id.spinner);
+
+        int x = CheckCategory(menuPojo.getCategory());
+
+        spinner.setSelection(x);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -141,10 +145,11 @@ public class EditMenuItems extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if ((bmp != null) && !editNameItem.getText().toString().isEmpty() && !editPriceItem.getText().toString().isEmpty() &&
+                if ((bmp != null || !list.isEmpty()) && !editNameItem.getText().toString().isEmpty() && !editPriceItem.getText().toString().isEmpty() &&
                         !editDescrption.getText().toString().isEmpty() && !editIngredients.getText().toString().isEmpty()) {
-                    picture = BitMapToString(bmp);
-
+                    if(bmp != null) {
+                        picture = BitMapToString(bmp);
+                    }
                     Item = new MenuPojo(menuPojo.getItemID(), FirebaseAuth.getInstance().getCurrentUser().getUid()
                             , editNameItem.getText().toString(), Double.parseDouble(editPriceItem.getText().toString()), list,
                             category, editDescrption.getText().toString(), editIngredients.getText().toString(), 10);
@@ -152,7 +157,7 @@ public class EditMenuItems extends AppCompatActivity {
                     db.updateMenuItemToDatabase(Item);
 
 
-                    Log.i("MM", picture);
+//                    Log.i("MM", picture);
 
                     finish();
                 } else {
@@ -241,4 +246,47 @@ public class EditMenuItems extends AppCompatActivity {
 
 
     }
+
+    public int CheckCategory(String category){
+        int i  ;
+
+        switch (category){
+            case "Desert" :
+                i=0;
+                break;
+            case "Grilled" :
+                i=1;
+                break;
+            case "Juice":
+                i=2;
+                break;
+            case "Macaroni":
+                i=3;
+                break;
+            case "Mahashy":
+                i=4;
+                break;
+            case "Salad":
+                i=5;
+                break;
+            case "Seafood":
+                i=6;
+                break;
+            default:
+                i=0;
+                break;
+        }
+
+        return i;
+
+    }
 }
+
+
+//<item></item>
+//<item></item>
+//<item></item>
+//<item></item>
+//<item></item>
+//<item></item>
+//<item></item>

@@ -85,12 +85,14 @@
                 android:id="@+id/xCustomerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint=" Name" />
 
             <EditText
                 android:id="@+id/xCustomerDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint="Description:" />
 
 
@@ -98,6 +100,7 @@
                 android:id="@+id/xCustomerAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint="Address:" />
 
 
@@ -105,12 +108,14 @@
                 android:id="@+id/xCustomerPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint=" Phone :" />
 
             <EditText
                 android:id="@+id/xCustomerID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:hint="ID Number:" />
 
 
@@ -120,10 +125,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/grad"
+                android:background="@drawable/rect_purple"
                 android:padding="10dp"
                 android:layout_marginBottom="2dp"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:text="Save Changes " />
 
 

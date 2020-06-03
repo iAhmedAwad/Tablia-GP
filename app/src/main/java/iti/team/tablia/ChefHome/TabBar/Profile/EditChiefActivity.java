@@ -227,6 +227,7 @@ public class EditChiefActivity extends AppCompatActivity {
         phone.setText(String.valueOf(chefSettings.getChefAccountSettings().getPhoneNumber()));
         orders.setText(String.valueOf(chefSettings.getChefAccountSettings().getOrders()));
         swicth.setChecked(chefSettings.getChefAccountSettings().isAvailable());
+        mypic = chefSettings.getChefAccountSettings().getProfilePhoto();
         Bitmap bitmapload = StringToBitMap(chefSettings.getChefAccountSettings().getProfilePhoto());
         prof.setImageBitmap(bitmapload);
         //   prof.setImageBitmap(bitmap);
