@@ -250,12 +250,12 @@ public class CustomerEditProfileFragment extends Fragment {
           bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), img);
           mypic = GlobalImageLoader.BitMapToString(bitmap);
 
+        xProfileImage.setImageBitmap(bitmap);
+        Log.i("nopic", bitmap.toString());
         } catch (IOException e) {
           e.printStackTrace();
         }
 
-        xProfileImage.setImageBitmap(bitmap);
-        Log.i("nopic", bitmap.toString());
       }
     }
 
