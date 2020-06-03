@@ -84,8 +84,9 @@ public class CustomerProfileFragment extends Fragment {
       public void onChanged(CustomerSettings customerSettings) {
         setProfileWidgets(customerSettings);
         if (customerSettings != null) {
-          // Log.d("HelloV", customerSettings.toString());
+//           Log.d("HelloV", customerSettings.toString());
         }
+        Log.d("pic", customerSettings.getCustomerAccountSettings().getProfilePhoto().toString());
       }
     });
   }
@@ -112,7 +113,8 @@ public class CustomerProfileFragment extends Fragment {
     Log.d(TAG, "Setting widgets with data retrieved from Firebase");
     User user = customerSettings.getUser();
     CustomerAccountSettings settings = customerSettings.getCustomerAccountSettings();
-    GlobalImageLoader.setImage(getContext(), xProfileImage, settings.getProfilePhoto());
+//    GlobalImageLoader.setImage(getContext(), xProfileImage, settings.getProfilePhoto());
+    xProfileImage.setImageBitmap(GlobalImageLoader.StringToBitMap(settings.getProfilePhoto()));
     xCustomerName.setText(user.getFullName());
     xOrders.setText(String.valueOf(settings.getOrders()));
     xFollowing.setText(String.valueOf(settings.getFollowing()));
