@@ -35,7 +35,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
                     android:text="CustName"
-                    android:textStyle="bold"
+                    android:textStyle="italic"
                     android:textSize="17sp"
                     android:textColor="@color/colorAccent" />
 
