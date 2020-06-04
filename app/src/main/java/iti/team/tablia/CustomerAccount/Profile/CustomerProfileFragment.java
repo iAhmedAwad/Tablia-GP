@@ -130,6 +130,7 @@ public class CustomerProfileFragment extends Fragment {
     //
   }
 
+
     /*
    ----------------------------- Firebase setup ---------------------------------
 */

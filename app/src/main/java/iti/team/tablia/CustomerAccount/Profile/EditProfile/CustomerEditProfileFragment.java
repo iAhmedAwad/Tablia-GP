@@ -161,9 +161,10 @@ public class CustomerEditProfileFragment extends Fragment {
       @Override
       public void onClick(View v) {
         editCustomer(mCustomerSettings);
-        if (bitmap != null) {
-          model.uploadProfilePhoto(bitmap);
-        }
+
+//        if (bitmap != null) {
+//          model.uploadProfilePhoto(bitmap);
+//        }
         navigateToProfileFragment();
 
       }
@@ -302,7 +303,7 @@ public class CustomerEditProfileFragment extends Fragment {
     }
   }
 
-  public void navigateToProfileFragment() {
+  private void navigateToProfileFragment() {
 
     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
         new CustomerProfileFragment()).commit();

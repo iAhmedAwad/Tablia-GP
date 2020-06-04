@@ -82,6 +82,12 @@ public class CustomerActivity extends AppCompatActivity implements FragmentManag
     View header = navigationView.getHeaderView(0);
     xNavHeaderImageView = header.findViewById(R.id.xNavHeaderImageView);
     xNavBarName = header.findViewById(R.id.xNavHeaderName);
+    xNavHeaderImageView.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        navigateToProfileFragment();
+      }
+    });
     //open home as default
     init();
     if (savedInstanceState == null) {
@@ -162,10 +168,20 @@ public class CustomerActivity extends AppCompatActivity implements FragmentManag
   }
 
   private void setWidgets(CustomerSettings customerSettings) {
-    GlobalImageLoader.setImage(this, xNavHeaderImageView, customerSettings.getCustomerAccountSettings().getProfilePhoto());
+//    GlobalImageLoader.setImage(this, xNavHeaderImageView, customerSettings.getCustomerAccountSettings().getProfilePhoto());
+    xNavHeaderImageView.setImageBitmap(GlobalImageLoader.StringToBitMap(customerSettings.getCustomerAccountSettings().getProfilePhoto()));
     xNavBarName.setText(customerSettings.getUser().getFullName());
+
   }
 
+
+
+  private void navigateToProfileFragment() {
+
+   this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+            new CustomerProfileFragment()).commit();
+    drawer.closeDrawer(GravityCompat.START);
+  }
   @Override
   public void onBackStackChanged() {
         /*
