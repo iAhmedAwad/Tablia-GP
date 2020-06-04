@@ -54,6 +54,7 @@ public class AddReviewsActivity extends AppCompatActivity {
     getIncomingIntent();
     init();
     initButton();
+    hideSoftKeyboard();
 
   }
 

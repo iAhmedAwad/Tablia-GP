@@ -36,6 +36,7 @@ import iti.team.tablia.Models.Chef.ChefSettings;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerSettings;
 import iti.team.tablia.Models.Following;
+import iti.team.tablia.Models.Others.ChefReviews;
 import iti.team.tablia.Models.Others.Review;
 import iti.team.tablia.Models.User;
 import iti.team.tablia.R;
@@ -364,8 +365,8 @@ public class Database {
 //    String key = reference.push().getKey();
 //    menuPojo.setItemID(key);
     reference.child(userid)
-            .child(menuPojo.getItemID())
-            .setValue(menuPojo);
+        .child(menuPojo.getItemID())
+        .setValue(menuPojo);
 
   }
 
@@ -642,15 +643,15 @@ public class Database {
           Log.d("filterx", "first loop");
 
           for (DataSnapshot dsx : ds.getChildren()) {
-          Log.d("filterx", "second loop");
+            Log.d("filterx", "second loop");
             MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
             if (categoriesList.contains(menuPojo.getCategory())
                 && menuPojo.getPriceItem() >= min
                 && menuPojo.getPriceItem() <= max
             ) {
-              Log.d("filterx", "Item name is: "+ menuPojo.getItemName());
-              Log.d("filterx", "Item price is: "+ menuPojo.getPriceItem());
-              Log.d("filterx", "min and max are: "+ min +" & "+ max);
+              Log.d("filterx", "Item name is: " + menuPojo.getItemName());
+              Log.d("filterx", "Item price is: " + menuPojo.getPriceItem());
+              Log.d("filterx", "min and max are: " + min + " & " + max);
               list.add(menuPojo);
             }
           }
@@ -737,11 +738,11 @@ public class Database {
     Log.d("Reviewx", "From DB getReview method ");
 
 
-    final MutableLiveData<Review> reviewMutableLiveData =new MutableLiveData<>();
+    final MutableLiveData<Review> reviewMutableLiveData = new MutableLiveData<>();
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
         .child(Constants.reviewsNode).child(itemID);
-    Log.d("Reviewx", "From DB itemId:"+itemID);
+    Log.d("Reviewx", "From DB itemId:" + itemID);
 
 
     ref.addValueEventListener(new ValueEventListener() {
@@ -750,8 +751,8 @@ public class Database {
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
           Review review = ds.getValue(Review.class);
 
-          Log.d("Reviewx", "From DB userID: "+userId);
-          Log.d("Reviewx", "From DB customerId: "+review.getCustomerId());
+          Log.d("Reviewx", "From DB userID: " + userId);
+          Log.d("Reviewx", "From DB customerId: " + review.getCustomerId());
           if (review.getCustomerId().equals(userId)) {
             reviewMutableLiveData.setValue(review);
           }
@@ -776,10 +777,10 @@ public class Database {
 
   public void addReview(Review review) {
     String reviewId;
-    if ( review.getReviewId()==null) {
+    if (review.getReviewId() == null) {
 
-    reviewId = FirebaseDatabase.getInstance().getReference().push().getKey();
-    review.setReviewId(reviewId);
+      reviewId = FirebaseDatabase.getInstance().getReference().push().getKey();
+      review.setReviewId(reviewId);
     } else {
       reviewId = review.getReviewId();
     }
@@ -822,7 +823,7 @@ public class Database {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
-        settings.setFollowing(settings.getFollowing()+1);
+        settings.setFollowing(settings.getFollowing() + 1);
         ref.setValue(settings);
 
       }
@@ -857,7 +858,7 @@ public class Database {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
-        settings.setFollowing(settings.getFollowing()-1);
+        settings.setFollowing(settings.getFollowing() - 1);
         reference.setValue(settings);
       }
 
@@ -1149,6 +1150,64 @@ public class Database {
 
 
     return ArrayListMutableLiveData;
+  }
+
+  public MutableLiveData<ArrayList<ChefReviews>> retrieveChefReviews(final String chefId) {
+
+    final ArrayList<ChefReviews> chefReviewsArrayList = new ArrayList<>();
+    final MutableLiveData<ArrayList<ChefReviews>> mutableLiveData = new MutableLiveData<>();
+
+    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+    ref.child(Constants.reviewsNode).addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        //Getting the chef's items
+        //These are the reviews *grouped* by ItemId
+        for (DataSnapshot dsGroupedByItem : dataSnapshot.getChildren()) {
+          for (DataSnapshot dsReview : dsGroupedByItem.getChildren()) {
+            Review review = dsReview.getValue(Review.class);
+            if (review.getChefId() == chefId) {
+              ChefReviews chefReviews = new ChefReviews();
+              chefReviews.setReview(review);
+              chefReviewsArrayList.add(chefReviews);
+            }
+          }
+
+        }
+
+        ref.child(Constants.usersNode).addListenerForSingleValueEvent(new ValueEventListener() {
+          @Override
+          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            for (DataSnapshot usersSnapShot : dataSnapshot.getChildren()) {
+              for (ChefReviews cr : chefReviewsArrayList) {
+                if (cr.getReview().getChefId().equals(usersSnapShot.getKey())) {
+                  cr.setChefName(usersSnapShot.getValue(User.class).getFullName());
+                } else {
+                  if (cr.getReview().getCustomerId().equals(usersSnapShot.getKey())) {
+                    cr.setCustomerName(usersSnapShot.getValue(User.class).getFullName());
+                  }
+                }
+              }
+            }
+          }
+
+          @Override
+          public void onCancelled(@NonNull DatabaseError databaseError) {
+
+          }
+        });
+
+        mutableLiveData.setValue(chefReviewsArrayList);
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
+
+    return mutableLiveData;
   }
 
 }

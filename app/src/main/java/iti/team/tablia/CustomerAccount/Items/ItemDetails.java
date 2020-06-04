@@ -180,7 +180,7 @@ public class ItemDetails extends AppCompatActivity {
         writeReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Review", "itemId is: "+itemId+"ChefId is: "+ chefId);
+                //Log.d("Review", "itemId is: "+itemId+"ChefId is: "+ chefId);
                 Intent intent1 = new Intent(ItemDetails.this, AddReviewsActivity.class);
                 intent1.putExtra(AddReviewsActivity.INCOMING_ITEM_ID, itemId);
                 intent1.putExtra(AddReviewsActivity.INCOMING_CHEF_ID, chefId);
