@@ -91,6 +91,7 @@ public class AddReviewsActivity extends AppCompatActivity {
           mReview = new Review();
           mReview.setItemId(mITEM_id);
           mReview.setChefId(mCHEF_id);
+          mReview.setRating(0);
         }
         mReview.setReviewText(reviewText);
         mReview.setRating(rating);
