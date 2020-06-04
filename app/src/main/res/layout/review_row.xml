@@ -36,8 +36,8 @@
                     android:layout_weight="1"
                     android:text="CustName"
                     android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textSize="17sp"
+                    android:textColor="@color/colorAccent" />
 
 
                 <TextView
@@ -60,7 +60,7 @@
                     android:layout_marginTop="5dp"
                     android:isIndicator="true"
                     android:numStars="5"
-                    android:progressTint="@color/colorAccent"
+                    android:progressTint="@color/colorPrimaryDark"
                      />
             </LinearLayout>
 
