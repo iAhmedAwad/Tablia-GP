@@ -1,6 +1,7 @@
 package iti.team.tablia.CustomerAccount.MyOrders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import iti.team.tablia.ChefHome.TabBar.Order.OrderAdapter;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
+import iti.team.tablia.CustomerAccount.MyOrders.CustOrderDetails.CustOrderDetails;
 import iti.team.tablia.R;
 
 public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHolder> {
@@ -35,14 +37,18 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtOrderTime.setText(orderPojos.get(position).getOrderTime());
-        holder.txtChefName.setText(orderPojos.get(position).getChefName());
-        holder.txtPrice.setText(String.valueOf(orderPojos.get(position).getTotal()));
+        final OrderPojo orderPojo = orderPojos.get(position);
+        holder.txtOrderTime.setText(orderPojo.getOrderTime());
+        holder.txtChefName.setText(orderPojo.getChefName());
+        holder.txtPrice.setText(String.valueOf(orderPojo.getTotal()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent goToOrderDeatils = new Intent(context, OrderDeatils.class);
-//                context.startActivity(goToOrderDeatils);
+                Intent goToOrderDeatils = new Intent(context, CustOrderDetails.class);
+                goToOrderDeatils.putExtra("orderID",orderPojo.getOrderID());
+                goToOrderDeatils.putExtra("chefID",orderPojo.getChefID());
+                goToOrderDeatils.putExtra("custID",orderPojo.getCustomerID());
+                context.startActivity(goToOrderDeatils);
 
             }
         });

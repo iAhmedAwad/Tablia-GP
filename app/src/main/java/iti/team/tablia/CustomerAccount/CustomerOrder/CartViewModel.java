@@ -5,26 +5,26 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.ChatRepository;
+import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
 import iti.team.tablia.Models.CartGroupPojo;
 import iti.team.tablia.Models.CartPojo;
 
 public class CartViewModel extends ViewModel {
-    private ChatRepository chatRepository;
+    private Repository repository;
 
     public CartViewModel() {
-        this.chatRepository = new ChatRepository();
+        this.repository = new Repository();
     }
 
     public MutableLiveData<List<CartGroupPojo>> getCartListGroups() {
-        return chatRepository.getCartListGroups();
+        return repository.getCartListGroups();
     }
 
     public void removeCartItem(CartPojo cartPojo) {
-        chatRepository.removeCartItem(cartPojo);
+        repository.removeCartItem(cartPojo);
     }
 
     public MutableLiveData<Boolean> updateCart(CartPojo cartPojo) {
-        return chatRepository.updateCartItem(cartPojo);
+        return repository.updateCartItem(cartPojo);
     }
 }
