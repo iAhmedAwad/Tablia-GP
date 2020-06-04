@@ -1173,13 +1173,11 @@ public class Database {
               reviewArrayList.add(review);
             }
           }
-
         }
         Log.wtf("bored", "Size: " + reviewArrayList.size());
         ref.child(Constants.usersNode).addListenerForSingleValueEvent(new ValueEventListener() {
           @Override
           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
             for (Review rv : reviewArrayList) {
               ChefReviews chefReviews = new ChefReviews();
               chefReviews.setReview(rv);
@@ -1193,7 +1191,6 @@ public class Database {
                   if (usersSnapshot.getKey().equals(rv.getCustomerId())) {
                     chefReviews.setCustomerName(user.getFullName());
                     //Log.wtf("blabla", "customer is true, name is: " + user.getFullName());
-
                 }
               }
               chefReviewsArrayList.add(chefReviews);

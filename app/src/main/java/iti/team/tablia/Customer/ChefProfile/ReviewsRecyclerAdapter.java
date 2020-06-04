@@ -1,8 +1,7 @@
 package iti.team.tablia.Customer.ChefProfile;
 
 import android.content.Context;
-import android.media.Rating;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Models.Others.ChefReviews;
 import iti.team.tablia.R;
 
@@ -22,9 +21,11 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
   Context context;
   ArrayList<ChefReviews> arrName;
 
-  public ReviewsRecyclerAdapter(Context context,ArrayList<ChefReviews> arrName) {
+
+  public ReviewsRecyclerAdapter(Context context, ArrayList<ChefReviews> arrName) {
     this.context = context;
     this.arrName = arrName;
+
   }
 
   @Override
@@ -35,7 +36,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
   @Override
   public void onBindViewHolder(ViewHolder viewHolder, int i) {
     viewHolder.review.setText(arrName.get(i).getReview().getReviewText());
-    viewHolder.itemName.setText(arrName.get(i).getItemName());
+    viewHolder.itemName.setText(arrName.get(i).getReview().getItemName());
     viewHolder.custName.setText(arrName.get(i).getCustomerName());
     viewHolder.rating.setRating(arrName.get(i).getReview().getRating());
     Toast.makeText(context, arrName.get(i).getItemName(), Toast.LENGTH_SHORT).show();

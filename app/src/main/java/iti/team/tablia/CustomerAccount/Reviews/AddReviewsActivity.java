@@ -25,6 +25,7 @@ public class AddReviewsActivity extends AppCompatActivity {
   //constants
   public static final String INCOMING_ITEM_ID = "item_id";
   public static final String INCOMING_CHEF_ID = "chef_id";
+    public static final String INCOMING_ITEM_NAME = "item_name";
   //Views
   private RatingBar xRatingBar;
   private EditText xReviewText;
@@ -37,6 +38,7 @@ public class AddReviewsActivity extends AppCompatActivity {
   private Database mDatabase;
   private String mITEM_id;
   private String mCHEF_id;
+  private String mITEM_name;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class AddReviewsActivity extends AppCompatActivity {
     Intent intent = getIntent();
     mITEM_id = intent.getStringExtra(INCOMING_ITEM_ID);
     mCHEF_id = intent.getStringExtra(INCOMING_CHEF_ID);
+    mITEM_name = intent.getStringExtra(INCOMING_ITEM_NAME);
   }
 
   private void init() {
@@ -91,6 +94,7 @@ public class AddReviewsActivity extends AppCompatActivity {
           mReview = new Review();
           mReview.setItemId(mITEM_id);
           mReview.setChefId(mCHEF_id);
+          mReview.setItemName(mITEM_name);
           mReview.setRating(0);
         }
         mReview.setReviewText(reviewText);

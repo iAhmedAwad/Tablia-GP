@@ -58,7 +58,7 @@ public class ItemDetails extends AppCompatActivity {
         Intent intent = getIntent();
         chefId = intent.getStringExtra("chefId");
         itemId = intent.getStringExtra("itemId");
-        String item_name = intent.getStringExtra("itemName");
+        final String item_name = intent.getStringExtra("itemName");
         toolbarTitle.setText(item_name);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -184,6 +184,7 @@ public class ItemDetails extends AppCompatActivity {
                 Intent intent1 = new Intent(ItemDetails.this, AddReviewsActivity.class);
                 intent1.putExtra(AddReviewsActivity.INCOMING_ITEM_ID, itemId);
                 intent1.putExtra(AddReviewsActivity.INCOMING_CHEF_ID, chefId);
+                intent1.putExtra(AddReviewsActivity.INCOMING_ITEM_NAME,item_name);
                 startActivity(intent1);
                 Toast.makeText(ItemDetails.this, "writeReview", Toast.LENGTH_SHORT).show();
             }

@@ -2,6 +2,7 @@ package iti.team.tablia.Customer.ChefProfile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -13,17 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Models.Others.ChefReviews;
 import iti.team.tablia.R;
 
 public class ReviewsActivity extends AppCompatActivity {
 
     private ReviewsRecyclerAdapter adapter;
-    private List<String> list;
     private ReviewViewModel rViewModel;
     public static final String ChefId = "ChefId";
     RecyclerView myrecyler;
     String string;
+    String itemID;
+    ArrayList<ChefReviews> chefArray ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +35,24 @@ public class ReviewsActivity extends AppCompatActivity {
         rViewModel = new ViewModelProvider(this).get(ReviewViewModel.class);
         Intent intent = getIntent();
         string = intent.getStringExtra(ChefId);
-//        list = (List<String>) getIntent().getSerializableExtra("List");
+//        itemID = ReviewsRecyclerAdapter.itemIDD;
         myrecyler = findViewById(R.id.myRecycle);
         myrecyler.setLayoutManager(new LinearLayoutManager(this));
 
         rViewModel.retrieveChefReviews(string).observe(this, new Observer<ArrayList<ChefReviews>>() {
             @Override
             public void onChanged(ArrayList<ChefReviews> chefReviews) {
-                adapter = new ReviewsRecyclerAdapter(ReviewsActivity.this, chefReviews);
+
+//                chefArray = chefReviews;
+                adapter = new ReviewsRecyclerAdapter(ReviewsActivity.this,chefReviews);
                 myrecyler.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
+
+
             }
         });
+
 
 
     }
