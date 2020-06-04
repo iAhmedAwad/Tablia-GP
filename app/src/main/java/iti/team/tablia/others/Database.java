@@ -1156,7 +1156,6 @@ public class Database {
 
     final ArrayList<ChefReviews> chefReviewsArrayList = new ArrayList<>();
     final MutableLiveData<ArrayList<ChefReviews>> mutableLiveData = new MutableLiveData<>();
-
     final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
     ref.child(Constants.reviewsNode).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -1167,7 +1166,8 @@ public class Database {
         for (DataSnapshot dsGroupedByItem : dataSnapshot.getChildren()) {
           for (DataSnapshot dsReview : dsGroupedByItem.getChildren()) {
             Review review = dsReview.getValue(Review.class);
-            if (review.getChefId() == chefId) {
+
+            if (review.getChefId().equals(chefId)) {
               ChefReviews chefReviews = new ChefReviews();
               chefReviews.setReview(review);
               chefReviewsArrayList.add(chefReviews);
