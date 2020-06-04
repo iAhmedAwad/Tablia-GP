@@ -24,20 +24,22 @@
         android:id="@+id/xAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/berkshire_swash"
         android:gravity="center"
         android:text="Tablia"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="72sp"
+        android:transitionName="logo_text"
         app:layout_constraintEnd_toStartOf="@+id/guideline20"
         app:layout_constraintStart_toStartOf="@+id/guideline19"
-        app:layout_constraintTop_toBottomOf="@+id/xSplashImage"
-        android:transitionName="logo_text" />
+        app:layout_constraintTop_toBottomOf="@+id/xSplashImage" />
 
     <TextView
         android:id="@+id/xSlogan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Your kitchen At My Home"
         android:textColor="@color/colorAccent"
         android:textSize="16sp"

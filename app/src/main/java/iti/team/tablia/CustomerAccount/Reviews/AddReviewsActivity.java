@@ -25,6 +25,7 @@ public class AddReviewsActivity extends AppCompatActivity {
   //constants
   public static final String INCOMING_ITEM_ID = "item_id";
   public static final String INCOMING_CHEF_ID = "chef_id";
+    public static final String INCOMING_ITEM_NAME = "item_name";
   //Views
   private RatingBar xRatingBar;
   private EditText xReviewText;
@@ -37,6 +38,7 @@ public class AddReviewsActivity extends AppCompatActivity {
   private Database mDatabase;
   private String mITEM_id;
   private String mCHEF_id;
+  private String mITEM_name;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class AddReviewsActivity extends AppCompatActivity {
     getIncomingIntent();
     init();
     initButton();
+    hideSoftKeyboard();
 
   }
 
@@ -61,6 +64,7 @@ public class AddReviewsActivity extends AppCompatActivity {
     Intent intent = getIntent();
     mITEM_id = intent.getStringExtra(INCOMING_ITEM_ID);
     mCHEF_id = intent.getStringExtra(INCOMING_CHEF_ID);
+    mITEM_name = intent.getStringExtra(INCOMING_ITEM_NAME);
   }
 
   private void init() {
@@ -83,15 +87,20 @@ public class AddReviewsActivity extends AppCompatActivity {
     xSubmitReview.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        final float rating = xRatingBar.getRating();
+        float rating = xRatingBar.getRating();
         final String reviewText = xReviewText.getText().toString();
 
         if (mReview == null) {
           mReview = new Review();
           mReview.setItemId(mITEM_id);
           mReview.setChefId(mCHEF_id);
+          mReview.setItemName(mITEM_name);
+          mReview.setRating(0);
         }
         mReview.setReviewText(reviewText);
+//        if(rating == Float.parseFloat(null)){
+//          rating =0.0f;
+//        }
         mReview.setRating(rating);
         mDatabase.addReview(mReview);
         finish();

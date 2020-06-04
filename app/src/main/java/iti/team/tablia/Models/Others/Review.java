@@ -7,6 +7,7 @@ public class Review {
   private String chefId;
   private String customerId;
   private String itemId;
+  private String itemName;
   private String reviewId;
 
   public Review() {
@@ -15,13 +16,14 @@ public class Review {
 
   public Review(String reviewText, float rating,
                 String chefId, String customerId,
-                String itemId, String reviewId) {
+                String itemId, String reviewId,String itemName) {
     this.reviewText = reviewText;
     this.rating = rating;
     this.chefId = chefId;
     this.customerId = customerId;
     this.itemId = itemId;
     this.reviewId = reviewId;
+    this.itemName = itemName;
   }
 
   public Review(Review review) {
@@ -79,6 +81,14 @@ public class Review {
 
   public void setReviewId(String reviewId) {
     this.reviewId = reviewId;
+  }
+
+  public String getItemName() {
+    return itemName;
+  }
+
+  public void setItemName(String itemName) {
+    this.itemName = itemName;
   }
 
   @Override

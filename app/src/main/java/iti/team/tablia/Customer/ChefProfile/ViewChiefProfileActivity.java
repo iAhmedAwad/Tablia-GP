@@ -37,7 +37,6 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
   CircleImageView prfo_img, avaliablity;
   ChefAccountSettings cheif;
   ToggleButton isfollow;
-  ArrayList<String> reviewlist = new ArrayList<>();
   ChefViewModel myViewModel;
   FirebaseUser cust;
 
@@ -45,13 +44,6 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     db = new Database();
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_view_chief_profile);
-    reviewlist.add("  when an unknown printer took a galley of type and scrambled it to make a type specimen book. ");
-    reviewlist.add("Lorem Ipsum is simply dummy text of the prins been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ");
-    reviewlist.add("Lorem since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ");
-    reviewlist.add("Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ");
-    reviewlist.add("Lo since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ");
-    reviewlist.add("Lorem Ipustry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ");
-
     name = findViewById(R.id.id_name);
     prfo_img = findViewById(R.id.id_profile_pic);
     nb_followers = findViewById(R.id.id_nb_followers);
@@ -137,9 +129,9 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     reviews.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Toast.makeText(ViewChiefProfileActivity.this, "Go to Reviews", Toast.LENGTH_LONG).show();
+//        Toast.makeText(ViewChiefProfileActivity.this, "Go to Reviews", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(ViewChiefProfileActivity.this, ReviewsActivity.class);
-        intent.putExtra("List", reviewlist);
+        intent.putExtra(ReviewsActivity.ChefId,userId);
         startActivity(intent);
       }
     });
