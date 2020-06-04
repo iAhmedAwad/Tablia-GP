@@ -8,15 +8,17 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import iti.team.tablia.Models.Others.ChefReviews;
 import iti.team.tablia.R;
 
 public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecyclerAdapter.ViewHolder> {
   Context context;
-  List<String> arrName;
+  ArrayList<ChefReviews> arrName;
 
-  public ReviewsRecyclerAdapter(Context context, List<String> arrName) {
+  public ReviewsRecyclerAdapter(Context context,ArrayList<ChefReviews> arrName) {
     this.context = context;
     this.arrName = arrName;
   }
@@ -28,7 +30,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
 
   @Override
   public void onBindViewHolder(ViewHolder viewHolder, int i) {
-    viewHolder.review.setText(arrName.get(i));
+    viewHolder.review.setText(arrName.get(i).getReview().getReviewText());
   }
 
   @Override
