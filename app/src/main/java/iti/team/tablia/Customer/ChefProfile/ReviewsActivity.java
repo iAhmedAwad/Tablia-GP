@@ -32,7 +32,7 @@ public class ReviewsActivity extends AppCompatActivity {
         rViewModel = new ViewModelProvider(this).get(ReviewViewModel.class);
         Intent intent = getIntent();
         string = intent.getStringExtra(ChefId);
-        list = (List<String>) getIntent().getSerializableExtra("List");
+//        list = (List<String>) getIntent().getSerializableExtra("List");
         myrecyler = findViewById(R.id.myRecycle);
         myrecyler.setLayoutManager(new LinearLayoutManager(this));
 
@@ -40,7 +40,6 @@ public class ReviewsActivity extends AppCompatActivity {
             @Override
             public void onChanged(ArrayList<ChefReviews> chefReviews) {
                 adapter = new ReviewsRecyclerAdapter(ReviewsActivity.this, chefReviews);
-
                 myrecyler.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 

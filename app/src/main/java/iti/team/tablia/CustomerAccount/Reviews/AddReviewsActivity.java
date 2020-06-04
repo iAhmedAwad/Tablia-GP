@@ -84,7 +84,7 @@ public class AddReviewsActivity extends AppCompatActivity {
     xSubmitReview.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        final float rating = xRatingBar.getRating();
+        float rating = xRatingBar.getRating();
         final String reviewText = xReviewText.getText().toString();
 
         if (mReview == null) {
@@ -93,6 +93,9 @@ public class AddReviewsActivity extends AppCompatActivity {
           mReview.setChefId(mCHEF_id);
         }
         mReview.setReviewText(reviewText);
+        if(rating == Float.parseFloat(null)){
+          rating =0.0f;
+        }
         mReview.setRating(rating);
         mDatabase.addReview(mReview);
         finish();

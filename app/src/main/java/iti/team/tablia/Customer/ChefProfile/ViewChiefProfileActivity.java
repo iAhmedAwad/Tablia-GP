@@ -140,8 +140,8 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
         Toast.makeText(ViewChiefProfileActivity.this, "Go to Reviews", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(ViewChiefProfileActivity.this, ReviewsActivity.class);
         intent.putExtra(ReviewsActivity.ChefId,userId);
-        intent.putExtra("List", reviewlist);
-
+//        intent.putExtra("List", reviewlist);
+//
         startActivity(intent);
       }
     });
