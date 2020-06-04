@@ -1,9 +1,11 @@
 package iti.team.tablia.Customer.ChefProfile;
 
 import android.content.Context;
+import android.media.Rating;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +33,9 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
   @Override
   public void onBindViewHolder(ViewHolder viewHolder, int i) {
     viewHolder.review.setText(arrName.get(i).getReview().getReviewText());
+    viewHolder.itemName.setText(arrName.get(i).getItemName());
+    viewHolder.custName.setText(arrName.get(i).getCustomerName());
+//    viewHolder.rating.setRating(arrName.get(i).getReview().getRating());
   }
 
   @Override
@@ -39,11 +44,15 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
   }
 
   public class ViewHolder extends RecyclerView.ViewHolder {
-    TextView review;
+    TextView review,custName,itemName;
+    RatingBar rating;
 
     public ViewHolder(View itemView) {
       super(itemView);
+      custName = itemView.findViewById(R.id.id_txtCustomr_name);
+      itemName = itemView.findViewById(R.id.id_txtItem_name);
       review = itemView.findViewById(R.id.id_txtReview);
+      rating = itemView.findViewWithTag(R.id.id_ratingBar);
     }
   }
 }
