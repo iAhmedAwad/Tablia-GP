@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +38,8 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
     viewHolder.itemName.setText(arrName.get(i).getItemName());
     viewHolder.custName.setText(arrName.get(i).getCustomerName());
     viewHolder.rating.setRating(arrName.get(i).getReview().getRating());
+    Toast.makeText(context, arrName.get(i).getItemName(), Toast.LENGTH_SHORT).show();
+
   }
 
   @Override
@@ -46,7 +49,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
 
   public class ViewHolder extends RecyclerView.ViewHolder {
     TextView review,custName,itemName;
-    RatingBar rating;
+    RatingBar rating ;
 
     public ViewHolder(View itemView) {
       super(itemView);

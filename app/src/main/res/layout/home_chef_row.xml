@@ -12,6 +12,7 @@
         android:layout_margin="2dp"
         android:padding="3dp"
         android:src="@drawable/ic_user"
+        android:background="@drawable/circle"
         app:civ_border_color="#81007F"
         app:civ_border_width="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
