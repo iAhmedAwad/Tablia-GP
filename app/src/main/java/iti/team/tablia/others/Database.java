@@ -1153,7 +1153,9 @@ public class Database {
   }
 
   public MutableLiveData<ArrayList<ChefReviews>> retrieveChefReviews(final String chefId) {
+    Log.w("bored", "Hi from retrieveChefReviews");
 
+    final ArrayList<Review> reviewArrayList = new ArrayList<>();
     final ArrayList<ChefReviews> chefReviewsArrayList = new ArrayList<>();
     final MutableLiveData<ArrayList<ChefReviews>> mutableLiveData = new MutableLiveData<>();
     final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -1168,28 +1170,42 @@ public class Database {
             Review review = dsReview.getValue(Review.class);
 
             if (review.getChefId().equals(chefId)) {
-              ChefReviews chefReviews = new ChefReviews();
-              chefReviews.setReview(review);
-              chefReviewsArrayList.add(chefReviews);
+              reviewArrayList.add(review);
             }
           }
 
         }
-
+        Log.wtf("bored", "Size: " + reviewArrayList.size());
         ref.child(Constants.usersNode).addListenerForSingleValueEvent(new ValueEventListener() {
           @Override
           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            for (DataSnapshot usersSnapShot : dataSnapshot.getChildren()) {
-              for (ChefReviews cr : chefReviewsArrayList) {
-                if (cr.getReview().getChefId().equals(usersSnapShot.getKey())) {
-                  cr.setChefName(usersSnapShot.getValue(User.class).getFullName());
-                } else {
-                  if (cr.getReview().getCustomerId().equals(usersSnapShot.getKey())) {
-                    cr.setCustomerName(usersSnapShot.getValue(User.class).getFullName());
-                  }
+
+            for (Review rv : reviewArrayList) {
+              ChefReviews chefReviews = new ChefReviews();
+              chefReviews.setReview(rv);
+              for (DataSnapshot usersSnapshot : dataSnapshot.getChildren()) {
+                User user = usersSnapshot.getValue(User.class);
+
+                if (usersSnapshot.getKey().equals(rv.getChefId())) {
+                  chefReviews.setChefName(user.getFullName());
+                  //Log.wtf("blabla", "chef is true, name is: " + chefReviews.getChefName());
+                }
+                  if (usersSnapshot.getKey().equals(rv.getCustomerId())) {
+                    chefReviews.setCustomerName(user.getFullName());
+                    //Log.wtf("blabla", "customer is true, name is: " + user.getFullName());
+
                 }
               }
+              chefReviewsArrayList.add(chefReviews);
             }
+
+            for (ChefReviews cr : chefReviewsArrayList) {
+
+              Log.wtf("blabla", "Customer: " + cr.getCustomerName());
+              Log.wtf("blabla", "Chef: " + cr.getChefName());
+            }
+
+            mutableLiveData.setValue(chefReviewsArrayList);
           }
 
           @Override
@@ -1198,7 +1214,8 @@ public class Database {
           }
         });
 
-        mutableLiveData.setValue(chefReviewsArrayList);
+
+
       }
 
       @Override

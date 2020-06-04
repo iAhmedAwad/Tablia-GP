@@ -30,11 +30,11 @@
             android:name=".CustomerAccount.Reviews.AddReviewsActivity"
             android:label="Write a review" />
         <activity android:name=".Authentication.SplashScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".Authentication.ChefRegistration.ChefRegistrationActivity" />
         <activity android:name=".CustomerAccount.CustomerChefListActivity" />
@@ -56,12 +56,12 @@
         </activity>
         <activity android:name=".Authentication.LoginActivity">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <activity android:name=".Authentication.CustomerRegistration.CustomerRegistrationActivity" />
         <activity android:name=".ChefHome.ChiefActivity" />

@@ -94,9 +94,9 @@ public class AddReviewsActivity extends AppCompatActivity {
           mReview.setRating(0);
         }
         mReview.setReviewText(reviewText);
-        if(rating == Float.parseFloat(null)){
-          rating =0.0f;
-        }
+//        if(rating == Float.parseFloat(null)){
+//          rating =0.0f;
+//        }
         mReview.setRating(rating);
         mDatabase.addReview(mReview);
         finish();

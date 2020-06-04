@@ -2,6 +2,7 @@ package iti.team.tablia.Customer.ChefProfile;
 
 import android.content.Context;
 import android.media.Rating;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
     viewHolder.review.setText(arrName.get(i).getReview().getReviewText());
     viewHolder.itemName.setText(arrName.get(i).getItemName());
     viewHolder.custName.setText(arrName.get(i).getCustomerName());
-//    viewHolder.rating.setRating(arrName.get(i).getReview().getRating());
+    viewHolder.rating.setRating(arrName.get(i).getReview().getRating());
   }
 
   @Override
@@ -52,7 +53,7 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
       custName = itemView.findViewById(R.id.id_txtCustomr_name);
       itemName = itemView.findViewById(R.id.id_txtItem_name);
       review = itemView.findViewById(R.id.id_txtReview);
-      rating = itemView.findViewWithTag(R.id.id_ratingBar);
+      rating = itemView.findViewById(R.id.id_ratingBar);
     }
   }
 }
