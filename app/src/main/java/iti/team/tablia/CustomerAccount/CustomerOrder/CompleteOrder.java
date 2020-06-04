@@ -79,7 +79,7 @@ public class CompleteOrder extends AppCompatActivity {
         changeAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(CompleteOrder.this, EditProfile.class));
+                startActivity(new Intent(CompleteOrder.this, EditCustProfile.class));
                 Toast.makeText(CompleteOrder.this, "CHANGE YOUR ADDRESS", Toast.LENGTH_SHORT).show();
             }
         });

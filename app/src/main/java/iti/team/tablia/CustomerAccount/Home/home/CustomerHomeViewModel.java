@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.ChatRepository;
+import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Models.ChatUser;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
@@ -15,13 +15,13 @@ import iti.team.tablia.others.Database;
 
 public class CustomerHomeViewModel extends ViewModel {
 
-  ChatRepository chatRepository = new ChatRepository();
+  Repository repository = new Repository();
   Database database = new Database();
   public MutableLiveData<ChefAccountSettings> myData = new MutableLiveData<>();
   public MutableLiveData<HashSet<MenuPojo>> myData2 = new MutableLiveData<>();
 
   public MutableLiveData<List<ChatUser>> getChefList() {
-    return chatRepository.getChefList();
+    return repository.getChefList();
   }
 
   public void getChefInfo(String userId) {

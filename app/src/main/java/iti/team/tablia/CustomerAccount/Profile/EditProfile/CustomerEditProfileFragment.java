@@ -36,6 +36,7 @@ import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import iti.team.tablia.ChefHome.TabBar.Profile.EditChiefActivity;
+import iti.team.tablia.CustomerAccount.CustomerOrder.EditCustProfile;
 import iti.team.tablia.CustomerAccount.Profile.CustomerProfileFragment;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerSettings;
@@ -301,10 +302,12 @@ public class CustomerEditProfileFragment extends Fragment {
   }
 
   public void navigateToProfileFragment() {
-
-    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-        new CustomerProfileFragment()).commit();
-
+    if(getActivity().getClass().equals(EditCustProfile.class)){
+      getActivity().finish();
+    }else {
+      getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+              new CustomerProfileFragment()).commit();
+    }
   }
 
 

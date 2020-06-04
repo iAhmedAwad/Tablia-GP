@@ -5,22 +5,22 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.ChatRepository;
+import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
 import iti.team.tablia.Models.ChatUser;
 
 public class CustomerChefListViewModel extends ViewModel {
-  private ChatRepository chatRepository;
+  private Repository repository;
 
   public CustomerChefListViewModel() {
-    chatRepository = new ChatRepository();
+    repository = new Repository();
   }
 
   public MutableLiveData<List<ChatUser>> getChefList() {
-    return chatRepository.getChefList();
+    return repository.getChefList();
   }
 
 
   public MutableLiveData<List<ChatUser>> searchChef(String s) {
-    return chatRepository.getChefSearchList(s);
+    return repository.getChefSearchList(s);
   }
 }

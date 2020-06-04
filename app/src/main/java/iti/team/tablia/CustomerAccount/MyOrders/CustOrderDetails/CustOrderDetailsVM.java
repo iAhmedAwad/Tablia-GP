@@ -1,6 +1,5 @@
-package iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils;
+package iti.team.tablia.CustomerAccount.MyOrders.CustOrderDetails;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -9,12 +8,11 @@ import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 
-public class OrderDeatilsViewModel extends ViewModel {
+public class CustOrderDetailsVM extends ViewModel {
     private Repository repository;
-    public OrderDeatilsViewModel() {
+    public CustOrderDetailsVM() {
         repository = new Repository();
     }
-
     public MutableLiveData<OrderPojo> getOrder(String orderID, String chefID, String custID) {
         return repository.getOrder(orderID,chefID,custID);
     }
@@ -27,20 +25,11 @@ public class OrderDeatilsViewModel extends ViewModel {
         return repository.getChefInfo(chefID);
     }
 
-    public void updateOrder(String orderID, String chefID, String custID,double newShippingFee) {
-        repository.updateOrder(orderID,chefID,custID,newShippingFee);
-    }
-
-    public void updateOrderDelTime(String orderID, String chefID, String custID, String deliveryTime) {
-        repository.updateOrderDelTime(orderID,chefID,custID,deliveryTime);
-    }
-
-    public void updateOrderChefConfirm(String orderID, String chefID, String custID) {
-        repository.updateOrderChefConfirm(orderID, chefID, custID);
-    }
-
     public MutableLiveData<Boolean> checkItemExist(String itemID, String chefID) {
         return repository.checkItemExist(itemID,chefID);
     }
 
+    public void updateOrderCustConfirm(String orderID, String chefID, String custID) {
+        repository.updateOrderCustConfirm(orderID, chefID, custID);
+    }
 }
