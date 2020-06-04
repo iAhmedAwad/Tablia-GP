@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.ChatRepository;
+import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Models.Others.ChefReviews;
 import iti.team.tablia.Models.Others.Review;
@@ -13,12 +13,12 @@ import iti.team.tablia.others.Database;
 
 public class ReviewViewModel extends ViewModel {
     private Database database;
-    private ChatRepository chatRepository;
+    private iti.team.tablia.ChefHome.TabBar.Chat.Repository Repository;
     private MutableLiveData<Review> myData;
 
     public ReviewViewModel() {
         database = new Database();
-        chatRepository = new ChatRepository();
+        Repository = new Repository();
         myData = new MutableLiveData<>();
     }
 
@@ -35,7 +35,7 @@ public class ReviewViewModel extends ViewModel {
     }
     public MutableLiveData<MenuPojo> getMenuItemDetails(String chefId, String itemId) {
 
-        return chatRepository.getMenuItemDetails(chefId, itemId);
+        return Repository.getMenuItemDetails(chefId, itemId);
     }
 
 
