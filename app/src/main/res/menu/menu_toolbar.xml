@@ -5,14 +5,14 @@
 
     <item
         android:id="@+id/filter"
-        android:icon="@drawable/filter"
+        android:icon="@drawable/ic_search_black_24dp"
         android:title="menu"
         app:showAsAction="always"
         android:visible="true"></item>
 
     <item
         android:id="@+id/cart"
-        android:icon="@drawable/cart"
+        android:icon="@drawable/ic_shopping_cart"
         android:title="profile"
         app:showAsAction="always"></item>
 
