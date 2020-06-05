@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="0"
+                    android:text=""
                     android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
@@ -172,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="0"
+                    android:text=""
                     android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
@@ -294,6 +294,12 @@
         </LinearLayout>
 
     </RelativeLayout>
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/progressBar"/>
 </RelativeLayout>
 
 

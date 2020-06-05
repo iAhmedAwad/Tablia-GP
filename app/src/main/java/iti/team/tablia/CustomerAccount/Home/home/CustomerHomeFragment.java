@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -38,6 +39,7 @@ public class CustomerHomeFragment extends Fragment {
   CategoryRecyclerAdaptor adapter2;
   TextView see1, see2;
   CustomerHomeViewModel viewModel;
+  ProgressBar progressBar;
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,7 +54,8 @@ public class CustomerHomeFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_customer_home, container, false);
     ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Home");
-
+    progressBar = view.findViewById(R.id.progressBar);
+    progressBar.setVisibility(View.VISIBLE);
     final RecyclerView recycler = view.findViewById(R.id.id_recycle1);
     final RecyclerView recycler2 = view.findViewById(R.id.id_recycle2);
 
@@ -66,6 +69,7 @@ public class CustomerHomeFragment extends Fragment {
     viewModel.getChefList().observe(requireActivity(), new Observer<List<ChatUser>>() {
       @Override
       public void onChanged(List<ChatUser> chefList) {
+        progressBar.setVisibility(View.GONE);
         adapter = new TopChefRecyclerAdaptor(getContext(), chefList);
         recycler.setAdapter(adapter);
         adapter.notifyDataSetChanged();

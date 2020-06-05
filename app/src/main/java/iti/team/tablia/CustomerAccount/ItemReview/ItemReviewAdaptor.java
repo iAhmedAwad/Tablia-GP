@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -48,9 +49,14 @@ public class ItemReviewAdaptor extends RecyclerView.Adapter<ItemReviewAdaptor.Vi
         viewHolder.review.setText(arrName.get(i).getReviewText());
         viewHolder.itemName.setText(arrName.get(i).getItemName());
         viewHolder.rating.setRating(arrName.get(i).getRating());
-//        String arr = db.getCustName(arrName.get(i).getCustomerId());
-//        Toast.makeText(context, arr, Toast.LENGTH_SHORT).show();
-//        viewHolder.custName.setText(arr);
+//        MutableLiveData<String> arr = db.getCustName(arrName.get(i).getCustomerId());
+//       arr.observe((LifecycleOwner) context, new Observer<String>() {
+//           @Override
+//           public void onChanged(String s) {
+//               viewHolder.custName.setText(s);
+//           }
+//       });
+
         ((ItemReview)context).reviewViewModel.getCustInfo(arrName.get(i).getCustomerId()).observe((LifecycleOwner) context, new Observer<CustomerAccountSettings>() {
             @Override
             public void onChanged(CustomerAccountSettings customerAccountSettings) {

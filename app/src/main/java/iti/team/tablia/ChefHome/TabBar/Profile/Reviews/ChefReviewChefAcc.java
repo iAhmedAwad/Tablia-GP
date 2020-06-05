@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import java.util.ArrayList;
 import iti.team.tablia.Customer.ChefProfile.ReviewsRecyclerAdapter;
 import iti.team.tablia.Models.Others.ChefReviews;
@@ -18,11 +21,14 @@ public class ChefReviewChefAcc extends AppCompatActivity {
     ChefReviewViewModel chefReviewViewModel;
     ReviewsRecyclerAdapter adaptor;
     String chefId;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chef_reviews);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         chefId = intent.getStringExtra("chefId");
         myrecyler = findViewById(R.id.myRecycle);
@@ -31,6 +37,7 @@ public class ChefReviewChefAcc extends AppCompatActivity {
         chefReviewViewModel.retrieveChefReviews(chefId).observe(this, new Observer<ArrayList<ChefReviews>>() {
             @Override
             public void onChanged(ArrayList<ChefReviews> chefReviews) {
+                progressBar.setVisibility(View.GONE);
                 adaptor = new ReviewsRecyclerAdapter(ChefReviewChefAcc.this, chefReviews);
                 myrecyler.setAdapter(adaptor);
                 adaptor.notifyDataSetChanged();

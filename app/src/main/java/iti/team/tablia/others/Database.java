@@ -553,7 +553,7 @@ public class Database {
 
 
                         OrderPojo pojo = dataSnapshot1.getValue(OrderPojo.class);
-                        if (!pojo.isChefConfirm()|| !pojo.isCustConfirm()) {
+                        if (!pojo.isChefConfirm() || !pojo.isCustConfirm()) {
                             list.add(pojo);
                         }
                     }
@@ -1316,23 +1316,20 @@ public class Database {
     /**
      * retrieve CustName from custId
      */
-    public String getCustName(String custId) {
-       final DatabaseReference reference;
-       final String[] name = new String[] {"A","B","C"};
-
+    public MutableLiveData<String> getCustName(String custId) {
+        final DatabaseReference reference;
+        final MutableLiveData<String> list = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("customer_account_settings").child(custId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
-               name[0] = settings.getDisplayName();
-                Log.i("try", name[0]);
+               list.setValue(settings.getDisplayName());
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-        Log.i("try", "reached" + name[0]);
-        return name[0];
+        return list;
     }
 }
