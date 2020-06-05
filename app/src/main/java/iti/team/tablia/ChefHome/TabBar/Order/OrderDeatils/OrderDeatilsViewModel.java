@@ -39,8 +39,4 @@ public class OrderDeatilsViewModel extends ViewModel {
         repository.updateOrderChefConfirm(orderID, chefID, custID);
     }
 
-    public MutableLiveData<Boolean> checkItemExist(String itemID, String chefID) {
-        return repository.checkItemExist(itemID,chefID);
-    }
-
 }

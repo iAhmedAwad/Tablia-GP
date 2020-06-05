@@ -23,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import iti.team.tablia.ChefHome.ChefItemDetails;
 import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.MenuItemPojo;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Customer.ChefProfile.ViewChiefProfileActivity;
@@ -163,23 +164,29 @@ public class ItemDetails extends AppCompatActivity {
         detailsViewModel.getMenuItemDetails(chefId, itemId).observe(this, new Observer<MenuPojo>() {
             @Override
             public void onChanged(MenuPojo menuPojo) {
-                progressBar.setVisibility(View.GONE);
-                getSupportActionBar().setTitle(menuPojo.getItemName());
-                itemName.setText(menuPojo.getItemName());
-                price = menuPojo.getPriceItem();
-                itemPrice.setText(menuPojo.getPriceItem() + " EGP");
-                category.setText(menuPojo.getCategory());
-                category.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(ItemDetails.this, "nav to category activity", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                ingredients.setText(menuPojo.getIngredients());
-                description.setText(menuPojo.getDescription());
-                imgList = menuPojo.getImgItem();
-                ImageSliderAdapter adapter = new ImageSliderAdapter(ItemDetails.this, menuPojo.getImgItem());
-                viewPager.setAdapter(adapter);
+                if(menuPojo!=null) {
+                    progressBar.setVisibility(View.GONE);
+                    getSupportActionBar().setTitle(menuPojo.getItemName());
+                    itemName.setText(menuPojo.getItemName());
+                    price = menuPojo.getPriceItem();
+                    itemPrice.setText(menuPojo.getPriceItem() + " EGP");
+                    category.setText(menuPojo.getCategory());
+                    category.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(ItemDetails.this, "nav to category activity", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    ingredients.setText(menuPojo.getIngredients());
+                    description.setText(menuPojo.getDescription());
+                    imgList = menuPojo.getImgItem();
+                    ImageSliderAdapter adapter = new ImageSliderAdapter(ItemDetails.this, menuPojo.getImgItem());
+                    viewPager.setAdapter(adapter);
+                }else {
+                    Toast.makeText(ItemDetails.this, "item is no longer exist", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
             }
         });
         writeReview.setOnClickListener(new View.OnClickListener() {

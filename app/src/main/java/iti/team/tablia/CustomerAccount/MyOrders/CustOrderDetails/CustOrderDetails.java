@@ -34,7 +34,7 @@ import iti.team.tablia.R;
 public class CustOrderDetails extends AppCompatActivity {
 
 
-    private OrderDetailsAdapter myAdapter;
+    private CustOrderItemAdapter myAdapter;
     private RecyclerView recyclerView;
     public CustOrderDetailsVM model;
     private TextView orderID;
@@ -153,7 +153,7 @@ public class CustOrderDetails extends AppCompatActivity {
 
                 }
                 delTime.setText(orderPojo.getDeliveryTime());
-                myAdapter = new OrderDetailsAdapter(orderPojo.getItems(), CustOrderDetails.this);
+                myAdapter = new CustOrderItemAdapter(orderPojo.getItems(), CustOrderDetails.this);
                 recyclerView.setAdapter(myAdapter);
             }
         });

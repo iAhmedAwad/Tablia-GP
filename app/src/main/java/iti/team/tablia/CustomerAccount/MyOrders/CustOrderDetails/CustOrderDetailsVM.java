@@ -25,10 +25,6 @@ public class CustOrderDetailsVM extends ViewModel {
         return repository.getChefInfo(chefID);
     }
 
-    public MutableLiveData<Boolean> checkItemExist(String itemID, String chefID) {
-        return repository.checkItemExist(itemID,chefID);
-    }
-
     public void updateOrderCustConfirm(String orderID, String chefID, String custID) {
         repository.updateOrderCustConfirm(orderID, chefID, custID);
     }

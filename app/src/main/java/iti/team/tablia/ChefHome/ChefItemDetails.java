@@ -90,22 +90,27 @@ public class ChefItemDetails extends AppCompatActivity {
         detailsViewModel.getMenuItemDetails(chefId, itemId).observe(this, new Observer<MenuPojo>() {
             @Override
             public void onChanged(MenuPojo menuPojo) {
-                progressBar.setVisibility(View.GONE);
-                getSupportActionBar().setTitle(menuPojo.getItemName());
-                itemName.setText(menuPojo.getItemName());
-                itemPrice.setText(menuPojo.getPriceItem() + " EGP");
-                qty.setText(menuPojo.getItemQuantity() + " Items");
-                category.setText(menuPojo.getCategory());
-                category.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(ChefItemDetails.this, "nav to category activity", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                ingredients.setText(menuPojo.getIngredients());
-                description.setText(menuPojo.getDescription());
-                ImageSliderAdapter adapter = new ImageSliderAdapter(ChefItemDetails.this, menuPojo.getImgItem());
-                viewPager.setAdapter(adapter);
+                if(menuPojo!=null) {
+                    progressBar.setVisibility(View.GONE);
+                    getSupportActionBar().setTitle(menuPojo.getItemName());
+                    itemName.setText(menuPojo.getItemName());
+                    itemPrice.setText(menuPojo.getPriceItem() + " EGP");
+                    qty.setText(menuPojo.getItemQuantity() + " Items");
+                    category.setText(menuPojo.getCategory());
+                    category.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(ChefItemDetails.this, "nav to category activity", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    ingredients.setText(menuPojo.getIngredients());
+                    description.setText(menuPojo.getDescription());
+                    ImageSliderAdapter adapter = new ImageSliderAdapter(ChefItemDetails.this, menuPojo.getImgItem());
+                    viewPager.setAdapter(adapter);
+                }else {
+                    Toast.makeText(ChefItemDetails.this, "item is no longer exist", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
 

@@ -34,6 +34,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import iti.team.tablia.ChefHome.ChefItemDetails;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.CustomerAccount.CustomerOrder.CompleteOrder;
@@ -776,14 +777,12 @@ public class Repository {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (CartPojo pojo : orderPojo.getItems()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        MenuPojo menuPojo = snapshot.getValue(MenuPojo.class);
-                        if (menuPojo.getItemID().equals(pojo.getItemID())) {
-                            if (menuPojo.getItemQuantity() >= pojo.getQuantity()) {
-                                list.add(true);
-                            } else {
-                                list.add(false);
-                            }
+                    if(dataSnapshot.hasChild(pojo.getItemID())){
+                        MenuPojo menuPojo = dataSnapshot.child(pojo.getItemID()).getValue(MenuPojo.class);
+                        if (menuPojo.getItemQuantity() >= pojo.getQuantity()) {
+                            list.add(true);
+                        }else {
+                            list.add(false);
                         }
                     }
                 }
@@ -809,16 +808,14 @@ public class Repository {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (CartPojo pojo : orderPojo.getItems()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        MenuPojo menuPojo = snapshot.getValue(MenuPojo.class);
-                        if (menuPojo.getItemID().equals(pojo.getItemID())) {
-                            if (menuPojo.getItemQuantity() >= pojo.getQuantity()) {
-                                int newQty = menuPojo.getItemQuantity() - pojo.getQuantity();
-                                menuPojo.setItemQuantity(newQty);
-                                FirebaseDatabase.getInstance().getReference("menu")
-                                        .child(orderPojo.getChefID())
-                                        .child(menuPojo.getItemID()).setValue(menuPojo);
-                            }
+                    if(dataSnapshot.hasChild(pojo.getItemID())){
+                        MenuPojo menuPojo = dataSnapshot.child(pojo.getItemID()).getValue(MenuPojo.class);
+                        if (menuPojo.getItemQuantity() >= pojo.getQuantity()) {
+                            int newQty = menuPojo.getItemQuantity() - pojo.getQuantity();
+                            menuPojo.setItemQuantity(newQty);
+                            FirebaseDatabase.getInstance().getReference("menu")
+                                    .child(orderPojo.getChefID())
+                                    .child(menuPojo.getItemID()).setValue(menuPojo);
                         }
                     }
                 }
@@ -1101,27 +1098,6 @@ public class Repository {
                 .child(orderID).updateChildren(hashMap);
     }
 
-    public MutableLiveData<Boolean> checkItemExist(final String itemID, String chefID) {
-        final MutableLiveData<Boolean> liveData = new MutableLiveData<>();
-        reference = FirebaseDatabase.getInstance().getReference("menu")
-                .child(chefID);
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild(itemID)) {
-                    liveData.setValue(true);
-                } else {
-                    liveData.setValue(false);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        return liveData;
-    }
 
     public void updateOrderCustConfirm(String orderID, String chefID, String custID) {
 
