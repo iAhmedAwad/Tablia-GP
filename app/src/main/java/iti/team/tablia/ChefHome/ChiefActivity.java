@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -134,6 +135,13 @@ public class ChiefActivity extends AppCompatActivity {
         editor.commit();
         startActivity(new Intent(ChiefActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
+        return true;
+
+      case R.id.ItemHistory:
+//                detailsViewModel.disableMenuItem(chefId,itemId);
+        Toast.makeText(this, "ITEM History", Toast.LENGTH_SHORT).show();
+        Intent goToDisable = new Intent(this,DisableMenuItems.class);
+        startActivity(goToDisable);
         return true;
     }
     return false;

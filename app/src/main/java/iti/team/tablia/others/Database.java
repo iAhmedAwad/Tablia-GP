@@ -360,14 +360,28 @@ public class Database {
     String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference(mContext.getString(R.string.menuNode));
 
-    //add data to the "customers" node
-//    String key = reference.push().getKey();
-//    menuPojo.setItemID(key);
     reference.child(userid)
             .child(menuPojo.getItemID())
             .setValue(menuPojo);
 
   }
+
+
+
+
+  public void addMenuDisableItemToDatabase(MenuPojo menuPojo) {
+    String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Disable");
+
+    //add data to the "customers" node
+    String key = reference.push().getKey();
+    menuPojo.setItemID(key);
+    reference.child(userid)
+            .child(key)
+            .setValue(menuPojo);
+
+  }
+
 
 
   /**
@@ -380,6 +394,39 @@ public class Database {
 
     final List<MenuPojo> list = new ArrayList<>();
     final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("menu").child(userId);
+
+    //ref.child(userId);
+    ref.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+        list.clear();
+        for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+          MenuPojo pojo = data.getValue(MenuPojo.class);
+
+          list.add(pojo);
+        }
+
+        menuList.setValue(list);
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
+    return menuList;
+  }
+
+
+
+
+
+  public MutableLiveData<List<MenuPojo>> getMenuItemsDisable() {
+
+    final List<MenuPojo> list = new ArrayList<>();
+    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Disable").child(userId);
 
     //ref.child(userId);
     ref.addValueEventListener(new ValueEventListener() {
