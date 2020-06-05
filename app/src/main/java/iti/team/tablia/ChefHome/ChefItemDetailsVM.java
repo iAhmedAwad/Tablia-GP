@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Models.Others.Review;
+import iti.team.tablia.others.Repository;
 
 
 public class ChefItemDetailsVM extends ViewModel {

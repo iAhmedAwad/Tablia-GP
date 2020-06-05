@@ -3,7 +3,7 @@ package iti.team.tablia.CustomerAccount.CustomerOrder;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
+import iti.team.tablia.others.Repository;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 

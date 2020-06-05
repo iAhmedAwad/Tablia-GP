@@ -1,4 +1,4 @@
-package iti.team.tablia.ChefHome.TabBar.Chat;
+package iti.team.tablia.others;
 
 import android.app.Activity;
 import android.content.Context;
@@ -483,7 +483,7 @@ public class Repository {
     //done
     public MutableLiveData<List<ChatUser>> getChefList() {
         chefList = new ArrayList<>();
-        Query query = FirebaseDatabase.getInstance().getReference("chef_account_settings").orderByChild("rating").limitToFirst(20);
+        Query query = FirebaseDatabase.getInstance().getReference("chef_account_settings").orderByChild("rating").limitToLast(20);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

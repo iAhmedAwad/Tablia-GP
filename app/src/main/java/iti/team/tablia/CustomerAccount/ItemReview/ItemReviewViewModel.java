@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
+import iti.team.tablia.others.Repository;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.Models.Others.Review;
 import iti.team.tablia.others.Database;
