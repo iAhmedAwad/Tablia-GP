@@ -40,7 +40,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Top Chefs"
+                    android:text="@string/top_chefs"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="see All Chefs"
+                    android:text="@string/see_all_chefs"
 
                     android:textColor="@color/colorPrimary" />
             </LinearLayout>
@@ -98,7 +98,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Recent Dishes"
+                    android:text="@string/recent_dishes"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 

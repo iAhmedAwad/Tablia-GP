@@ -60,7 +60,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5sp"
             android:fontFamily="sans-serif-light"
-            android:text="Chief Name "
+            android:text="@string/chef_name"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
             android:textSize="20sp" />
@@ -72,7 +72,7 @@
             android:layout_below="@+id/id_name"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
-            android:text="Smouha , Alexandria"
+            android:text="@string/address"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent"
             android:textSize="13sp" />
@@ -133,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="453K"
+                    android:text="0"
                     android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="followers"
+                    android:text="@string/followers"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="15sp" />
@@ -172,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="9"
+                    android:text="0"
                     android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
@@ -180,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text=" Orders"
+                    android:text="@string/orders"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="15sp" />
@@ -218,7 +218,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Desciption "
+                    android:text="@string/description"
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
@@ -226,7 +226,7 @@
                     android:id="@+id/id_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Desciption "
+                    android:hint="@string/description"
                     android:textColor="#000000"
                     android:textSize="13sp" />
 
@@ -247,7 +247,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Phone "
+                    android:text="@string/phone"
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
@@ -255,7 +255,7 @@
                     android:id="@+id/id_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Phone "
+                    android:hint="@string/phone"
                     android:textColor="#000000"
                     android:textSize="13sp" />
 
@@ -279,7 +279,7 @@
                     android:id="@+id/id_view_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="View Reviews "
+                    android:text="@string/view_reviews"
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 

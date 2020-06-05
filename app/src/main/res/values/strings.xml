@@ -67,5 +67,29 @@
     <string name="rate">3.5</string>
     <string name="submit">submit</string>
 
+    <!--  Chef Profiles by Yasmine -->
+    <string name="availability">Availability</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="phone">Phone</string>
+    <string name="max_number_of_orders">Max Number of Orders :</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="chef_name">Chef Name</string>
+    <string name="address">Address</string>
+    <string name="orders">Orders</string>
+    <string name="view_reviews">View Reviews</string>
+    <string name="number_of_orders">Number of Orders</string>
+    <string name="visit_menu">Visit Menu</string>
+    <string name="follow">follow</string>
+    <string name="unfollow">unfollow</string>
+    <string name="message">Message</string>
+
+    <!-- Customer Home Fragment Yasmine -->
+    <string name="top_chefs">Top Chefs</string>
+    <string name="see_all_chefs">see All Chefs</string>
+    <string name="recent_dishes">Recent Dishes</string>
+    <string name="custname">CustName</string>
+    <string name="itemname">ItemName</string>
+
 
 </resources>
