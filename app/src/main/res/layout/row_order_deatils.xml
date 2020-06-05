@@ -1,45 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/txtQuantity"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="TextView"
-        android:textColor="#050505"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/txtSubTotal"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toEndOf="@+id/txtNameItem"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/txtNameItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="36dp"
-        android:text="TextView"
-        android:textColor="#050505"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/itemImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/placeholder" />
 
-    <TextView
-        android:id="@+id/txtSubTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:text="TextView"
-        android:textColor="#050505"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txtNameItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ItemName"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            android:layout_margin="10dp"
+            android:layout_toEndOf="@+id/itemImg"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/itemImg" />
+
+        <TextView
+            android:id="@+id/txtQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/txtNameItem"
+            android:layout_toEndOf="@+id/itemImg"
+            android:layout_toRightOf="@+id/itemImg"
+            android:text="Quantity: "
+            android:layout_marginStart="10dp" />
+        <TextView
+            android:id="@+id/qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Black"
+            android:layout_below="@id/txtNameItem"
+            android:layout_toEndOf="@+id/txtQuantity"
+            android:layout_toRightOf="@+id/txtQuantity"
+            android:text="2" />
+
+        <TextView
+            android:id="@+id/txtSubTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtQuantity"
+            android:layout_toEndOf="@+id/itemImg"
+            android:layout_toRightOf="@+id/itemImg"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="Total: " />
+        <TextView
+            android:id="@+id/Subtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtQuantity"
+            android:layout_toEndOf="@+id/txtSubTotal"
+            android:layout_toRightOf="@+id/txtSubTotal"
+            android:layout_marginTop="10dp"
+            android:text="300 EGP" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

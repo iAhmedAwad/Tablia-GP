@@ -3,7 +3,7 @@ package iti.team.tablia.CustomerAccount.CustomerActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.ChatRepository;
+import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
 import iti.team.tablia.Models.Customer.CustomerSettings;
 import iti.team.tablia.others.Database;
 
@@ -13,11 +13,11 @@ public class CustomerActivityViewModel extends ViewModel {
 
   private MutableLiveData<CustomerSettings> customerSettingsMutableLiveData;
   private Database database;
-  private ChatRepository chatRepository;
+  private Repository repository;
 
   public CustomerActivityViewModel() {
     database = new Database();
-    chatRepository = new ChatRepository();
+    repository = new Repository();
   }
 
   public MutableLiveData<CustomerSettings> getCustomerSettings() {
@@ -27,6 +27,6 @@ public class CustomerActivityViewModel extends ViewModel {
   }
 
   public void status(String status) {
-    chatRepository.custStatus(status);
+    repository.custStatus(status);
   }
 }

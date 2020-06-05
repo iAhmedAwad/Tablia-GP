@@ -59,7 +59,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ChatRepository {
+public class Repository {
 
     private FirebaseUser firebaseUser;
     private Set<String> usersList;
@@ -75,7 +75,7 @@ public class ChatRepository {
     private List<ChatUser> chefList;
     private MutableLiveData<List<ChatUser>> chefListLiveData = new MutableLiveData<>();
 
-    public ChatRepository() {
+    public Repository() {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
@@ -280,10 +280,10 @@ public class ChatRepository {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                if (ChatRepository.this.notify) {
+                if (Repository.this.notify) {
                     sendNotification(receiver, user.getUsername(), message, context);
                 }
-                ChatRepository.this.notify = false;
+                Repository.this.notify = false;
             }
 
             @Override
@@ -733,7 +733,7 @@ public class ChatRepository {
         final MutableLiveData<CustomerAccountSettings> liveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("customer_account_settings")
                 .child(firebaseUser.getUid());
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
@@ -913,7 +913,7 @@ public class ChatRepository {
         CustOrderPojo custOrderPojo = new CustOrderPojo(orderPojo.getChefID(), orderPojo.getOrderID());
         reference = FirebaseDatabase.getInstance().getReference("cust_orders")
                 .child(firebaseUser.getUid());
-        reference.push().setValue(custOrderPojo).addOnCompleteListener(new OnCompleteListener<Void>() {
+        reference.child(orderPojo.getOrderID()).setValue(custOrderPojo).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -925,7 +925,7 @@ public class ChatRepository {
     }
 
     private void chefOrdersNum(final String chefId) {
-        DatabaseReference ref= FirebaseDatabase.getInstance().getReference("chef_account_settings")
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("chef_account_settings")
                 .child(chefId);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -989,12 +989,12 @@ public class ChatRepository {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int counter=0;
+                int counter = 0;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         OrderPojo orderPojo = snapshot1.getValue(OrderPojo.class);
                         try {
-                            Date date=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+                            Date date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
                                     .parse(orderPojo.getOrderTime());
                             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             date = dateFormat.parse(dateFormat.format(date));
@@ -1024,4 +1024,97 @@ public class ChatRepository {
         return liveData;
     }
 
+    public MutableLiveData<OrderPojo> getOrder(String orderID, String chefID, String custID) {
+        final MutableLiveData<OrderPojo> liveData = new MutableLiveData<>();
+        reference = FirebaseDatabase.getInstance().getReference("orders")
+                .child(chefID)
+                .child(custID)
+                .child(orderID);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                OrderPojo orderPojo = dataSnapshot.getValue(OrderPojo.class);
+                liveData.setValue(orderPojo);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
+    }
+
+    public void updateOrder(String orderID, String chefID, String custID, double newShippingFee) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("deliveryFee", newShippingFee);
+        FirebaseDatabase.getInstance().getReference("orders")
+                .child(chefID)
+                .child(custID)
+                .child(orderID).updateChildren(hashMap);
+    }
+
+    public void updateOrderDelTime(String orderID, String chefID, String custID, String deliveryTime) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("deliveryTime", deliveryTime);
+        FirebaseDatabase.getInstance().getReference("orders")
+                .child(chefID)
+                .child(custID)
+                .child(orderID).updateChildren(hashMap);
+    }
+
+    public void updateOrderChefConfirm(String orderID, String chefID, String custID) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("chefConfirm", true);
+        FirebaseDatabase.getInstance().getReference("orders")
+                .child(chefID)
+                .child(custID)
+                .child(orderID).updateChildren(hashMap);
+    }
+
+    public MutableLiveData<Boolean> checkItemExist(final String itemID, String chefID) {
+        final MutableLiveData<Boolean> liveData = new MutableLiveData<>();
+        reference = FirebaseDatabase.getInstance().getReference("menu")
+                .child(chefID);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(itemID)){
+                    liveData.setValue(true);
+                }else {
+                    liveData.setValue(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
+    }
+
+    public void updateOrderCustConfirm(String orderID, String chefID, String custID) {
+
+        HashMap<String, Object> hashMap0 = new HashMap<>();
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        hashMap0.put("deliveryTime", dateFormat.format(date));
+        FirebaseDatabase.getInstance().getReference("orders")
+                .child(chefID)
+                .child(custID)
+                .child(orderID).updateChildren(hashMap0);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("custConfirm", true);
+        FirebaseDatabase.getInstance().getReference("orders")
+                .child(chefID)
+                .child(custID)
+                .child(orderID).updateChildren(hashMap);
+        HashMap<String, Object>  hashMap2 = new HashMap<>();
+        hashMap2.put("confirmed", true);
+        FirebaseDatabase.getInstance().getReference("cust_orders")
+                .child(custID)
+                .child(orderID).updateChildren(hashMap2);
+    }
 }

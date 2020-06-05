@@ -58,7 +58,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     if (user.getImageURL().contains("https")) {
       Glide.with(context).load(user.getImageURL()).into(holder.profile_image);
     } else {
-      Bitmap bitmap = StringToBitMap(user.getImageURL());
+      Bitmap bitmap = stringToBitMap(user.getImageURL());
       holder.profile_image.setImageBitmap(bitmap);
 
     }
@@ -118,7 +118,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
   }
 
-  public Bitmap StringToBitMap(String encodedString) {
+  public Bitmap stringToBitMap(String encodedString) {
     try {
       byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
       Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0,

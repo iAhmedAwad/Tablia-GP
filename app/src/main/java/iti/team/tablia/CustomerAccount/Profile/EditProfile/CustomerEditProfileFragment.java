@@ -36,6 +36,7 @@ import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import iti.team.tablia.ChefHome.TabBar.Profile.EditChiefActivity;
+import iti.team.tablia.CustomerAccount.CustomerOrder.EditCustProfile;
 import iti.team.tablia.CustomerAccount.Profile.CustomerProfileFragment;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerSettings;
@@ -122,14 +123,14 @@ public class CustomerEditProfileFragment extends Fragment {
     Log.d(TAG, "Setting widgets with data retrieved from Firebase");
     User user = customerSettings.getUser();
     CustomerAccountSettings settings = customerSettings.getCustomerAccountSettings();
-    GlobalImageLoader.setImage(getActivity(), xProfileImage, settings.getProfilePhoto());
+//    GlobalImageLoader.setImage(getActivity(), xProfileImage, settings.getProfilePhoto());
 
 
     xCustomerName.setText(user.getFullName());
     xCustomerPhone.setText(settings.getPhoneNumber());
     xCusomerAddress.setText(settings.getAddress());
     xCustomerDescription.setText(settings.getBio());
-//    xProfileImage.setImageBitmap(GlobalImageLoader.StringToBitMap(settings.getProfilePhoto()));
+    xProfileImage.setImageBitmap(GlobalImageLoader.StringToBitMap(settings.getProfilePhoto()));
 
   }
 
@@ -153,7 +154,6 @@ public class CustomerEditProfileFragment extends Fragment {
       @Override
       public void onClick(View v) {
         SelectImage();
-        Toast.makeText(getActivity(), "open cam", Toast.LENGTH_SHORT).show();
 
       }
     });
@@ -162,9 +162,10 @@ public class CustomerEditProfileFragment extends Fragment {
       @Override
       public void onClick(View v) {
         editCustomer(mCustomerSettings);
-        if (bitmap != null) {
-          model.uploadProfilePhoto(bitmap);
-        }
+
+//        if (bitmap != null) {
+//          model.uploadProfilePhoto(bitmap);
+//        }
         navigateToProfileFragment();
 
       }
@@ -228,7 +229,7 @@ public class CustomerEditProfileFragment extends Fragment {
     customerSettings.getCustomerAccountSettings().setAddress(address);
     customerSettings.getCustomerAccountSettings().setBio(description);
     customerSettings.getCustomerAccountSettings().setProfilePhoto(mypic);
-
+//customerSettings.getCustomerAccountSettings().setProfilePhoto(mypic);
     model.editCustomer(customerSettings);
   }
 
@@ -250,12 +251,15 @@ public class CustomerEditProfileFragment extends Fragment {
           bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), img);
           mypic = GlobalImageLoader.BitMapToString(bitmap);
 
+        xProfileImage.setImageBitmap(bitmap);
+        Log.i("nopic", bitmap.toString());
         } catch (IOException e) {
           e.printStackTrace();
         }
 
         xProfileImage.setImageBitmap(bitmap);
         Log.i("nopic", bitmap.toString());
+        Log.i("nopic",GlobalImageLoader.BitMapToString(bitmap));
       }
     }
 
@@ -301,10 +305,12 @@ public class CustomerEditProfileFragment extends Fragment {
   }
 
   public void navigateToProfileFragment() {
-
-    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-        new CustomerProfileFragment()).commit();
-
+    if(getActivity().getClass().equals(EditCustProfile.class)){
+      getActivity().finish();
+    }else {
+      getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+              new CustomerProfileFragment()).commit();
+    }
   }
 
 

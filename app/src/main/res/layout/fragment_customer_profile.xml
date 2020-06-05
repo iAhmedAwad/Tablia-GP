@@ -229,33 +229,7 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ID Number "
-                    android:textColor="@color/colorAccent"
-                    android:textSize="13sp" />
-                <TextView
-                    android:id="@+id/xCustomerID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Your ID Number "
-                    android:textColor="@color/colorAccent"
-                    android:textSize="13sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@color/grey" />
-
-            </LinearLayout>
 
         </LinearLayout>
 

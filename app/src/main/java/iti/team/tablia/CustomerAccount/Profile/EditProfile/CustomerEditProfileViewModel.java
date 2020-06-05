@@ -31,4 +31,6 @@ public class CustomerEditProfileViewModel extends ViewModel {
   public void uploadProfilePhoto(Bitmap bitmap) {
     database.uploadProfilePhoto(bitmap);
   }
+
+
 }
