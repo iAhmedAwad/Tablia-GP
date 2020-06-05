@@ -1,20 +1,20 @@
 package iti.team.tablia.Models;
 
 public class Rating {
-    private double rating;
+    private float rating;
 
     public Rating() {
     }
 
-    public Rating(double rating) {
+    public Rating(float rating) {
         this.rating = rating;
     }
 
-    public double getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 }

@@ -58,7 +58,7 @@
     <string name="sold">Today\'s Orders</string>
     <string name="avg_sales">0</string>
     <string name="customer_rating">Your Rate</string>
-    <string name="sales">Monthly Sales:</string>
+    <string name="sales">Your Sales:</string>
     <string name="search">Search...</string>
     <string name="username">username</string>
     <string name="sales_amount">350 EGP</string>
