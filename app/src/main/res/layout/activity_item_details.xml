@@ -177,7 +177,6 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:hint="Macrooni"
-                        android:textColor="@android:color/holo_blue_light"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/cat"

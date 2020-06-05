@@ -18,8 +18,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.CustomerAccount.Items.ImageSliderAdapter;
+import iti.team.tablia.Models.Others.Review;
 import iti.team.tablia.R;
 import iti.team.tablia.others.Database;
 
@@ -76,17 +79,27 @@ public class ChefItemDetails extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
         //review node
-        itemRating.setRating(3.5f);
+
+        //end
+
+        detailsViewModel = ViewModelProviders.of(this).get(ChefItemDetailsVM.class);
+        detailsViewModel.getItemReviewsCountAndRating(itemId).observe(this, new Observer<List<Review>>() {
+            @Override
+            public void onChanged(List<Review> reviewsList) {
+                double totalRating = 0;
+                for (Review review : reviewsList) {
+                    totalRating+=review.getRating();
+                }
+                itemRating.setRating((float) (totalRating/(float)reviewsList.size()));
+                reviews.setText(reviewsList.size() + " reviews");
+            }
+        });
         reviews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ChefItemDetails.this, "to reviews activity", Toast.LENGTH_SHORT).show();
             }
         });
-        //end
-
-        detailsViewModel = ViewModelProviders.of(this).get(ChefItemDetailsVM.class);
-
         detailsViewModel.getMenuItemDetails(chefId, itemId).observe(this, new Observer<MenuPojo>() {
             @Override
             public void onChanged(MenuPojo menuPojo) {
