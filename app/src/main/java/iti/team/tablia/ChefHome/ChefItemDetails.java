@@ -64,6 +64,7 @@ public class ChefItemDetails extends AppCompatActivity {
                 finish();
             }
         });
+        progressBar=findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         itemName = findViewById(R.id.item_title);
         itemPrice = findViewById(R.id.price);
