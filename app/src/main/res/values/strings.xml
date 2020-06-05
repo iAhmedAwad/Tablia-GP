@@ -90,6 +90,18 @@
     <string name="recent_dishes">Recent Dishes</string>
     <string name="custname">CustName</string>
     <string name="itemname">ItemName</string>
+    <string name="Category">Category</string>
+    <string name="Description">Description</string>
+    <string name="Ingredients">Ingredients</string>
+    <string name="AddItem">Add Item</string>
+    <string name="item_quantaty">Item Quantaty:</string>
+    <string name="_3_reviews">3 reviews</string>
+    <string name="category">Category:</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="edit_menu_item">Edit Menu Item</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="sold_by">Sold by:</string>
+    <string name="write_review">Write Review</string>
 
 
 </resources>

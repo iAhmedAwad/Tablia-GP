@@ -137,12 +137,7 @@ public class ChiefActivity extends AppCompatActivity {
         finish();
         return true;
 
-      case R.id.ItemHistory:
-//                detailsViewModel.disableMenuItem(chefId,itemId);
-        Toast.makeText(this, "ITEM History", Toast.LENGTH_SHORT).show();
-        Intent goToDisable = new Intent(this,DisableMenuItems.class);
-        startActivity(goToDisable);
-        return true;
+
     }
     return false;
   }

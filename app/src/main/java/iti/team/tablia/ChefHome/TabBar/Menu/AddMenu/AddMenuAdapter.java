@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,11 +40,20 @@ public class AddMenuAdapter extends RecyclerView.Adapter<AddMenuAdapter.ViewHold
   }
 
   @Override
-  public void onBindViewHolder(@NonNull AddMenuAdapter.ViewHolder holder, int position) {
+  public void onBindViewHolder(@NonNull AddMenuAdapter.ViewHolder holder, final int position) {
 
     Bitmap bitmap = StringToBitMap(data.get(position).getImgaeItem());
 
     holder.imgItem.setImageBitmap(bitmap);
+    holder.btnClose.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Toast.makeText(context,"Remove",Toast.LENGTH_LONG).show();
+        data.remove(data.get(position));
+        notifyDataSetChanged();
+
+      }
+    });
 
   }
 
@@ -54,12 +64,13 @@ public class AddMenuAdapter extends RecyclerView.Adapter<AddMenuAdapter.ViewHold
 
   public class ViewHolder extends RecyclerView.ViewHolder {
 
-    CircleImageView imgItem;
+    CircleImageView imgItem , btnClose;
 
 
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
       imgItem = itemView.findViewById(R.id.imgItem);
+      btnClose = itemView.findViewById(R.id.btnClose);
 
 
     }
