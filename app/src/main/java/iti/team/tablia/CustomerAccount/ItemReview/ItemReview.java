@@ -17,7 +17,7 @@ import iti.team.tablia.R;
 
 public class ItemReview extends AppCompatActivity {
     RecyclerView myrecyler;
-    ItemReviewViewModel reviewViewModel;
+   public ItemReviewViewModel reviewViewModel;
     ItemReviewAdaptor adaptor;
     String itemId;
 
