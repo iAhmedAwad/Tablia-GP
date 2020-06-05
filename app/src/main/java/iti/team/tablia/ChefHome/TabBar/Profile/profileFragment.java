@@ -64,6 +64,15 @@ public class profileFragment extends Fragment {
         menus = view.findViewById(R.id.id_visit_menu);
         reviews = view.findViewById(R.id.id_view_reviews);
 
+//        nb_followers.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), ChefFollowersList.class);
+//                intent.putExtra("chefId",muser.getUid());
+//                startActivity(intent);
+//            }
+//        });
+
         reviews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

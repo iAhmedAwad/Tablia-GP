@@ -115,10 +115,10 @@ public class FollowingAdapter extends RecyclerView.Adapter<FollowingAdapter.View
 
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
-      xFollowingRowImageView = itemView.findViewById(R.id.xFollowingRowImageView);
-      xFollowingRowFullName = itemView.findViewById(R.id.xFollowingRowFullName);
-      xFollowingRowUsername = itemView.findViewById(R.id.xFollowingRowUsername);
-      xFollowingRowBio = itemView.findViewById(R.id.xFollowingRowBio);
+      xFollowingRowImageView = itemView.findViewById(R.id.xFollowerRowImageView);
+      xFollowingRowFullName = itemView.findViewById(R.id.xFollowerRowFullName);
+      xFollowingRowUsername = itemView.findViewById(R.id.xFollowerRowUsername);
+      xFollowingRowBio = itemView.findViewById(R.id.xFollowerRowBio);
       xFollowingRowButton = itemView.findViewById(R.id.xFollowingRowButton);
     }
   }
