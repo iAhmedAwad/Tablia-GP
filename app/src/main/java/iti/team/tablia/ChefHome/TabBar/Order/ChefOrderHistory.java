@@ -1,4 +1,4 @@
-package iti.team.tablia.CustomerAccount.MyOrders;
+package iti.team.tablia.ChefHome.TabBar.Order;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -11,21 +11,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.R;
 
-public class OrderHistory extends AppCompatActivity {
-    private MyOrdersViewModel orderViewModel;
-    private MyOrdersAdapter myAdapter;
+public class ChefOrderHistory extends AppCompatActivity {
+
+    private OrderViewModel orderViewModel;
+    private OrderAdapter myAdapter;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_history);
+        setContentView(R.layout.activity_chef_order_history);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,17 +39,18 @@ public class OrderHistory extends AppCompatActivity {
                 finish();
             }
         });
-        orderViewModel = ViewModelProviders.of(this).get(MyOrdersViewModel.class);
-        progressBar=findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
+
+
+        orderViewModel = ViewModelProviders.of(this).get(OrderViewModel.class);
+
         recyclerView = findViewById(R.id.listOfOrder);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        orderViewModel.getCustOrdersHistory().observe(this, new Observer<List<OrderPojo>>() {
+        orderViewModel.getChefOrdersHistory().observe(this, new Observer<List<OrderPojo>>() {
             @Override
             public void onChanged(List<OrderPojo> orderPojos) {
                 progressBar.setVisibility(View.GONE);
-                myAdapter = new MyOrdersAdapter(orderPojos, OrderHistory.this);
+                myAdapter = new OrderAdapter(orderPojos,ChefOrderHistory.this,orderViewModel);
                 recyclerView.setAdapter(myAdapter);
             }
         });

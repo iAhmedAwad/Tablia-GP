@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,12 +50,15 @@ public class ItemDetails extends AppCompatActivity {
     private TextView toolbarTitle;
     private String chefId;
     private String itemId;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
         toolbarTitle = findViewById(R.id.toolbar_title);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         chefId = intent.getStringExtra("chefId");
         itemId = intent.getStringExtra("itemId");
@@ -159,6 +163,7 @@ public class ItemDetails extends AppCompatActivity {
         detailsViewModel.getMenuItemDetails(chefId, itemId).observe(this, new Observer<MenuPojo>() {
             @Override
             public void onChanged(MenuPojo menuPojo) {
+                progressBar.setVisibility(View.GONE);
                 getSupportActionBar().setTitle(menuPojo.getItemName());
                 itemName.setText(menuPojo.getItemName());
                 price = menuPojo.getPriceItem();

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -24,45 +25,48 @@ import iti.team.tablia.R;
  */
 public class CustomerChatFragment extends Fragment {
 
-  private CustomerChatViewModel customerChatViewModel;
+    private CustomerChatViewModel customerChatViewModel;
 
-  private RecyclerView recyclerView;
-  private UserAdapter userAdapter;
+    private RecyclerView recyclerView;
+    private UserAdapter userAdapter;
+    private ProgressBar progressBar;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
+        /** Inflate the layout for this fragment
+         *
+         */
+        View view = inflater.inflate(R.layout.fragment_customer_chat, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Chat");
+        customerChatViewModel = ViewModelProviders.of(this).get(CustomerChatViewModel.class);
 
+        /**render recyclerview and set its attribute
+         *
+         */
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        /**observe viewmodel to get chat list
+         *
+         */
+        customerChatViewModel.getChatList().observe(getActivity(), new Observer<List<ChatUser>>() {
+            @Override
+            public void onChanged(List<ChatUser> users) {
+              progressBar.setVisibility(View.GONE);
+                userAdapter = new UserAdapter(getContext(), users, true);
+                recyclerView.setAdapter(userAdapter);
+            }
+        });
 
-    /** Inflate the layout for this fragment
-     *
-     */
-    View view = inflater.inflate(R.layout.fragment_customer_chat, container, false);
-    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Chat");
-    customerChatViewModel = ViewModelProviders.of(this).get(CustomerChatViewModel.class);
-
-    /**render recyclerview and set its attribute
-     *
-     */
-    recyclerView = view.findViewById(R.id.recycler_view);
-    recyclerView.setHasFixedSize(true);
-    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    /**observe viewmodel to get chat list
-     *
-     */
-    customerChatViewModel.getChatList().observe(getActivity(), new Observer<List<ChatUser>>() {
-      @Override
-      public void onChanged(List<ChatUser> users) {
-        userAdapter = new UserAdapter(getContext(), users, true);
-        recyclerView.setAdapter(userAdapter);
-      }
-    });
-
-    /**
-     *update token for push notification
-     */
-    customerChatViewModel.updateToken(getActivity());
-    return view;
-  }
+        /**
+         *update token for push notification
+         */
+        customerChatViewModel.updateToken(getActivity());
+        return view;
+    }
 }

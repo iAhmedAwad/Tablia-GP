@@ -8,9 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -55,6 +57,7 @@ public class OrderDeatils extends AppCompatActivity {
     private String orderIDStr;
     private String chefID;
     private String custID;
+    private ProgressBar progressBar;
     private CustomerAccountSettings cust;
     private ChefAccountSettings chef;
 
@@ -62,7 +65,20 @@ public class OrderDeatils extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_deatils);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
+
         recyclerView = findViewById(R.id.listItemOrderDeatils);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         orderID = findViewById(R.id.orderID);
         orderTime = findViewById(R.id.orderTime);
         itemNum = findViewById(R.id.item_num);
@@ -107,7 +123,7 @@ public class OrderDeatils extends AppCompatActivity {
         model.getOrder(orderIDStr, chefID, custID).observe(this, new Observer<OrderPojo>() {
             @Override
             public void onChanged(OrderPojo orderPojo) {
-
+                progressBar.setVisibility(View.GONE);
 
                 orderTime.setText(orderPojo.getOrderTime());
                 itemNum.setText(orderPojo.getItems().size() + " items");
@@ -124,21 +140,21 @@ public class OrderDeatils extends AppCompatActivity {
                     deliveryType.setText("Pickup");
                 }
                 shippingFee.setText(orderPojo.getDeliveryFee() + " EGP");
-                if(!orderPojo.isCustConfirm()&&!orderPojo.isChefConfirm()) {
-                  delStatus.setText("Order not delivered yet");
-                }else if(orderPojo.isChefConfirm()&&!orderPojo.isCustConfirm()){
-                  delStatus.setText("Order on the way to be delivered");
-                }else if(orderPojo.isCustConfirm()&&orderPojo.isChefConfirm()){
-                  delStatus.setText("Order was deliverd on" + orderPojo.getDeliveryTime());
+                if (!orderPojo.isCustConfirm() && !orderPojo.isChefConfirm()) {
+                    delStatus.setText("Order not delivered yet");
+                } else if (orderPojo.isChefConfirm() && !orderPojo.isCustConfirm()) {
+                    delStatus.setText("Order on the way to be delivered");
+                } else if (orderPojo.isCustConfirm() && orderPojo.isChefConfirm()) {
+                    delStatus.setText("Order was deliverd on" + orderPojo.getDeliveryTime());
                 }
-                if(orderPojo.isChefConfirm()){
-                  confirm.setEnabled(false);
-                  confirm.setBackgroundColor(Color.parseColor("#00FFFFFF"));
-                  confirm.setBackground(null);
-                  confirm.setText("Delivery Confirmed");
-                  confirm.setTextColor(Color.GREEN);
-                  editDelivery.setVisibility(View.INVISIBLE);
-                  editShipping.setVisibility(View.INVISIBLE);
+                if (orderPojo.isChefConfirm()) {
+                    confirm.setEnabled(false);
+                    confirm.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                    confirm.setBackground(null);
+                    confirm.setText("Delivery Confirmed");
+                    confirm.setTextColor(Color.GREEN);
+                    editDelivery.setVisibility(View.INVISIBLE);
+                    editShipping.setVisibility(View.INVISIBLE);
                 }
                 delTime.setText(orderPojo.getDeliveryTime());
                 myAdapter = new OrderDetailsAdapter(orderPojo.getItems(), OrderDeatils.this);
@@ -153,7 +169,7 @@ public class OrderDeatils extends AppCompatActivity {
                 doneShipping.setVisibility(View.VISIBLE);
                 editShipping.setVisibility(View.INVISIBLE);
                 double shipping = Double.parseDouble(shippingFee.getText().toString().split(" ")[0]);
-                shippingFeeEditor.setText(shipping+"");
+                shippingFeeEditor.setText(shipping + "");
             }
         });
         doneShipping.setOnClickListener(new View.OnClickListener() {
@@ -172,51 +188,51 @@ public class OrderDeatils extends AppCompatActivity {
             }
         });
         message.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            Intent goToMsg = new Intent(OrderDeatils.this, MessageActivity.class);
-            goToMsg.putExtra("userid",custID);
-            startActivity(goToMsg);
-          }
+            @Override
+            public void onClick(View v) {
+                Intent goToMsg = new Intent(OrderDeatils.this, MessageActivity.class);
+                goToMsg.putExtra("userid", custID);
+                startActivity(goToMsg);
+            }
         });
-      editDelivery.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          delTimeEditor.setVisibility(View.VISIBLE);
-          delTime.setVisibility(View.INVISIBLE);
-          doneDelivery.setVisibility(View.VISIBLE);
-          editDelivery.setVisibility(View.INVISIBLE);
-          delTimeEditor.setText(delTime.getText().toString());
-        }
-      });
-      doneDelivery.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          if (!delTimeEditor.getText().toString().equals("")) {
-            String deliveryTime = delTimeEditor.getText().toString();
-            delTime.setText(deliveryTime);
-            delTimeEditor.setVisibility(View.INVISIBLE);
-            delTime.setVisibility(View.VISIBLE);
-            doneDelivery.setVisibility(View.INVISIBLE);
-            editDelivery.setVisibility(View.VISIBLE);
-            model.updateOrderDelTime(orderIDStr, chefID, custID, deliveryTime);
+        editDelivery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delTimeEditor.setVisibility(View.VISIBLE);
+                delTime.setVisibility(View.INVISIBLE);
+                doneDelivery.setVisibility(View.VISIBLE);
+                editDelivery.setVisibility(View.INVISIBLE);
+                delTimeEditor.setText(delTime.getText().toString());
+            }
+        });
+        doneDelivery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!delTimeEditor.getText().toString().equals("")) {
+                    String deliveryTime = delTimeEditor.getText().toString();
+                    delTime.setText(deliveryTime);
+                    delTimeEditor.setVisibility(View.INVISIBLE);
+                    delTime.setVisibility(View.VISIBLE);
+                    doneDelivery.setVisibility(View.INVISIBLE);
+                    editDelivery.setVisibility(View.VISIBLE);
+                    model.updateOrderDelTime(orderIDStr, chefID, custID, deliveryTime);
 
-          }
-        }
-      });
-      confirm.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-          confirm.setEnabled(false);
-          confirm.setBackgroundColor(Color.parseColor("#00FFFFFF"));
-          confirm.setBackground(null);
-          confirm.setText("Delivery Confirmed");
-          confirm.setTextColor(Color.GREEN);
-          editDelivery.setVisibility(View.INVISIBLE);
-          editShipping.setVisibility(View.INVISIBLE);
-          model.updateOrderChefConfirm(orderIDStr, chefID, custID);
-        }
-      });
+                }
+            }
+        });
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirm.setEnabled(false);
+                confirm.setBackgroundColor(Color.parseColor("#00FFFFFF"));
+                confirm.setBackground(null);
+                confirm.setText("Delivery Confirmed");
+                confirm.setTextColor(Color.GREEN);
+                editDelivery.setVisibility(View.INVISIBLE);
+                editShipping.setVisibility(View.INVISIBLE);
+                model.updateOrderChefConfirm(orderIDStr, chefID, custID);
+            }
+        });
 
     }
 }

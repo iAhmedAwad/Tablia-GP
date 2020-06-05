@@ -1,5 +1,6 @@
 package iti.team.tablia.CustomerAccount.MyOrders;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -15,6 +16,10 @@ public class MyOrdersViewModel extends ViewModel {
     }
     public MutableLiveData<List<OrderPojo>> getCustOrders(){
         return repository.getCustOrders();
+    }
+
+    public MutableLiveData<List<OrderPojo>> getCustOrdersHistory() {
+        return repository.getCustOrdersHistory();
     }
 
 }

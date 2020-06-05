@@ -909,6 +909,35 @@ public class Repository {
         return liveData;
     }
 
+    public MutableLiveData<List<OrderPojo>> getCustOrdersHistory() {
+        final MutableLiveData<List<OrderPojo>> liveData = new MutableLiveData<>();
+        orderPojos = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference();
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.child("cust_orders").child(firebaseUser.getUid()).getChildren()) {
+                    CustOrderPojo custOrderPojo = snapshot.getValue(CustOrderPojo.class);
+                    if (custOrderPojo.isConfirmed()) {
+                        OrderPojo orderPojo = dataSnapshot.child("orders")
+                                .child(custOrderPojo.getChefId())
+                                .child(firebaseUser.getUid())
+                                .child(custOrderPojo.getOrderId()).getValue(OrderPojo.class);
+                        orderPojos.add(orderPojo);
+
+                    }
+                }
+                liveData.setValue(orderPojos);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
+    }
+
     public void saveCustOrder(final OrderPojo orderPojo, final CompleteOrder completeOrder) {
         CustOrderPojo custOrderPojo = new CustOrderPojo(orderPojo.getChefID(), orderPojo.getOrderID());
         reference = FirebaseDatabase.getInstance().getReference("cust_orders")
@@ -1079,9 +1108,9 @@ public class Repository {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(itemID)){
+                if (dataSnapshot.hasChild(itemID)) {
                     liveData.setValue(true);
-                }else {
+                } else {
                     liveData.setValue(false);
                 }
             }
@@ -1111,10 +1140,44 @@ public class Repository {
                 .child(chefID)
                 .child(custID)
                 .child(orderID).updateChildren(hashMap);
-        HashMap<String, Object>  hashMap2 = new HashMap<>();
+        HashMap<String, Object> hashMap2 = new HashMap<>();
         hashMap2.put("confirmed", true);
         FirebaseDatabase.getInstance().getReference("cust_orders")
                 .child(custID)
                 .child(orderID).updateChildren(hashMap2);
+    }
+
+    public MutableLiveData<List<OrderPojo>> getChefOrdersHistory() {
+        final MutableLiveData<List<OrderPojo>> order = new MutableLiveData<>();
+        final List<OrderPojo> list = new ArrayList<>();
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("orders")
+                .child(firebaseUser.getUid());
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                list.clear();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+                    for (DataSnapshot dataSnapshot1 : data.getChildren()) {
+
+
+                        OrderPojo pojo = dataSnapshot1.getValue(OrderPojo.class);
+                        if (pojo.isChefConfirm() && pojo.isCustConfirm()) {
+                            list.add(pojo);
+                        }
+                    }
+
+                }
+
+                order.setValue(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        return order;
     }
 }

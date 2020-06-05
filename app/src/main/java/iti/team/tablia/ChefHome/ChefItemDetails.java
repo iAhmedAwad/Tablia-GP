@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,9 @@ public class ChefItemDetails extends AppCompatActivity {
     private TextView qty;
     private String chefId;
     private String itemId;
-    private MenuPojo menuPojo ;
+    private MenuPojo menuPojo;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +59,7 @@ public class ChefItemDetails extends AppCompatActivity {
                 finish();
             }
         });
-
+        progressBar.setVisibility(View.VISIBLE);
         itemName = findViewById(R.id.item_title);
         itemPrice = findViewById(R.id.price);
         itemRating = findViewById(R.id.item_rating);
@@ -82,10 +85,11 @@ public class ChefItemDetails extends AppCompatActivity {
         detailsViewModel.getMenuItemDetails(chefId, itemId).observe(this, new Observer<MenuPojo>() {
             @Override
             public void onChanged(MenuPojo menuPojo) {
+                progressBar.setVisibility(View.GONE);
                 getSupportActionBar().setTitle(menuPojo.getItemName());
                 itemName.setText(menuPojo.getItemName());
                 itemPrice.setText(menuPojo.getPriceItem() + " EGP");
-                qty.setText(menuPojo.getItemQuantity()+" Items");
+                qty.setText(menuPojo.getItemQuantity() + " Items");
                 category.setText(menuPojo.getCategory());
                 category.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -104,7 +108,7 @@ public class ChefItemDetails extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_items,menu);
+        getMenuInflater().inflate(R.menu.menu_items, menu);
         return true;
     }
 
@@ -112,19 +116,19 @@ public class ChefItemDetails extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete:
-                detailsViewModel.deleteMenuItem(chefId,itemId);
+                detailsViewModel.deleteMenuItem(chefId, itemId);
                 Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.edit:
-                Intent intent = new Intent(this,EditMenuItems.class);
-                intent.putExtra("chefId",chefId);
-                intent.putExtra("itemId",itemId);
+                Intent intent = new Intent(this, EditMenuItems.class);
+                intent.putExtra("chefId", chefId);
+                intent.putExtra("itemId", itemId);
 //                intent.putExtra("itemEdit",menuPojo);
                 startActivity(intent);
                 Toast.makeText(this, "EDIT", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.disable:
-                detailsViewModel.disableMenuItem(chefId,itemId);
+                detailsViewModel.disableMenuItem(chefId, itemId);
                 Toast.makeText(this, "disable", Toast.LENGTH_SHORT).show();
                 return true;
         }

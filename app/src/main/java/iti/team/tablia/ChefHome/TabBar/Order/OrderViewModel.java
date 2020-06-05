@@ -1,5 +1,6 @@
 package iti.team.tablia.ChefHome.TabBar.Order;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -25,4 +26,7 @@ public class OrderViewModel extends ViewModel {
   }
 
 
+  public MutableLiveData<List<OrderPojo>> getChefOrdersHistory() {
+    return repository.getChefOrdersHistory();
+  }
 }
