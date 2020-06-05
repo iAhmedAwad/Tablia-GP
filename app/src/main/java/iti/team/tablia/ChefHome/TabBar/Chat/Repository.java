@@ -48,6 +48,7 @@ import iti.team.tablia.Models.CustOrderPojo;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerSettings;
 import iti.team.tablia.Models.Others.Review;
+import iti.team.tablia.Models.Rating;
 import iti.team.tablia.Models.User;
 import iti.team.tablia.R;
 import iti.team.tablia.Services.APIService;
@@ -778,11 +779,11 @@ public class Repository {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (CartPojo pojo : orderPojo.getItems()) {
-                    if(dataSnapshot.hasChild(pojo.getItemID())){
+                    if (dataSnapshot.hasChild(pojo.getItemID())) {
                         MenuPojo menuPojo = dataSnapshot.child(pojo.getItemID()).getValue(MenuPojo.class);
                         if (menuPojo.getItemQuantity() >= pojo.getQuantity()) {
                             list.add(true);
-                        }else {
+                        } else {
                             list.add(false);
                         }
                     }
@@ -809,7 +810,7 @@ public class Repository {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (CartPojo pojo : orderPojo.getItems()) {
-                    if(dataSnapshot.hasChild(pojo.getItemID())){
+                    if (dataSnapshot.hasChild(pojo.getItemID())) {
                         MenuPojo menuPojo = dataSnapshot.child(pojo.getItemID()).getValue(MenuPojo.class);
                         if (menuPojo.getItemQuantity() >= pojo.getQuantity()) {
                             int newQty = menuPojo.getItemQuantity() - pojo.getQuantity();
@@ -1099,7 +1100,6 @@ public class Repository {
                 .child(orderID).updateChildren(hashMap);
     }
 
-
     public void updateOrderCustConfirm(String orderID, String chefID, String custID) {
 
         HashMap<String, Object> hashMap0 = new HashMap<>();
@@ -1166,7 +1166,7 @@ public class Repository {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot:dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Review review = snapshot.getValue(Review.class);
                     reviews.add(review);
                 }
@@ -1179,5 +1179,47 @@ public class Repository {
             }
         });
         return liveData;
+    }
+
+    public void saveCustRating(final String chefId, String custId, float rating) {
+        Rating ratingPojo = new Rating(rating);
+        reference = FirebaseDatabase.getInstance().getReference("chef_rating")
+                .child(chefId)
+                .child(custId);
+        reference.setValue(ratingPojo).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    updateChefRating(chefId);
+                }
+            }
+        });
+    }
+
+    private void updateChefRating(final String chefId) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("chef_rating")
+                .child(chefId);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                float totalRating = 0;
+                int count = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    count++;
+                    Rating rating = snapshot.getValue(Rating.class);
+                    totalRating += rating.getRating();
+                }
+                HashMap<String,Object> hashMap = new HashMap<>();
+                double rate = (totalRating/(float)count);
+                hashMap.put("rating",rate);
+                FirebaseDatabase.getInstance().getReference("chef_account_settings")
+                        .child(chefId).updateChildren(hashMap);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

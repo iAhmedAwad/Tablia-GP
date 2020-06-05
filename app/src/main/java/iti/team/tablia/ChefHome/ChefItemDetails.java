@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
+import iti.team.tablia.CustomerAccount.ItemReview.ItemReview;
 import iti.team.tablia.CustomerAccount.Items.ImageSliderAdapter;
 import iti.team.tablia.Models.Others.Review;
 import iti.team.tablia.R;
@@ -97,7 +98,9 @@ public class ChefItemDetails extends AppCompatActivity {
         reviews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChefItemDetails.this, "to reviews activity", Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(ChefItemDetails.this, ItemReview.class);
+                i.putExtra("itemID",itemId);
+                startActivity(i);
             }
         });
         detailsViewModel.getMenuItemDetails(chefId, itemId).observe(this, new Observer<MenuPojo>() {

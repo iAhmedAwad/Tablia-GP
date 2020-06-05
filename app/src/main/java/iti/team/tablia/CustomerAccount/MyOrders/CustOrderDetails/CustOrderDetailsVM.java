@@ -28,4 +28,8 @@ public class CustOrderDetailsVM extends ViewModel {
     public void updateOrderCustConfirm(String orderID, String chefID, String custID) {
         repository.updateOrderCustConfirm(orderID, chefID, custID);
     }
+
+    public void saveCustRating(String chefId, String custId, float rating) {
+        repository.saveCustRating(chefId,custId,rating);
+    }
 }

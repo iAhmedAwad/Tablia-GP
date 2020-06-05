@@ -26,6 +26,7 @@ import iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils.OrderDeatils;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils.OrderDeatilsViewModel;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils.OrderDetailsAdapter;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
+import iti.team.tablia.CustomerAccount.MyOrders.CustOrderDetails.Rating.RatingDialog;
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
@@ -176,6 +177,8 @@ public class CustOrderDetails extends AppCompatActivity {
                 confirm.setText("Delivery Confirmed");
                 confirm.setTextColor(Color.GREEN);
                 model.updateOrderCustConfirm(orderIDStr, chefID, custID);
+                RatingDialog ratingDialog = new RatingDialog(chefID,custID);
+                ratingDialog.show(getSupportFragmentManager(),"Rating Dialog");
             }
         });
 

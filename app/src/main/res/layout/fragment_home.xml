@@ -34,14 +34,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
-                    android:rating="3.5" />
+                    android:focusable="false"
+                    android:isIndicator="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:id="@+id/rate"
-                    android:hint="@string/rate"
                     android:textColor="#605F5F"
                     android:textSize="24sp" />
 
@@ -98,7 +98,6 @@
                         android:layout_marginTop="12dp"
                         android:padding="2dp"
                         android:id="@+id/sales_amount"
-                        android:hint="@string/sales_amount"
                         android:textColor="@color/colorAccent"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -135,7 +134,6 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:id="@+id/followers_num"
-                        android:text="@string/followers_num"
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent"
                         android:textSize="50sp"
@@ -180,7 +178,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:id="@+id/top_item"
-                        android:text="@string/item"
                         android:textColor="#6f6f6f"
                         android:textSize="18sp" />
                 </LinearLayout>
@@ -240,7 +237,6 @@
                         android:layout_weight="1"
                         android:textAlignment="center"
                         android:id="@+id/avg_orders"
-                        android:text="@string/avg_sales"
                         android:textColor="@color/colorAccent"
                         android:gravity="center" />
                 </LinearLayout>
