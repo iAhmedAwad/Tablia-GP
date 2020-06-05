@@ -17,7 +17,7 @@
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/xFollowingRowImageView"
+                android:id="@+id/xFollowerRowImageView"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_marginStart="16dp"
@@ -30,29 +30,29 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/xFollowingRowFullName"
+                android:id="@+id/xFollowerRowFullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="2dp"
                 android:text="Name.."
-                app:layout_constraintStart_toEndOf="@+id/xFollowingRowImageView"
-                app:layout_constraintTop_toTopOf="@+id/xFollowingRowImageView" />
+                app:layout_constraintStart_toEndOf="@+id/xFollowerRowImageView"
+                app:layout_constraintTop_toTopOf="@+id/xFollowerRowImageView" />
 
             <TextView
-                android:id="@+id/xFollowingRowUsername"
+                android:id="@+id/xFollowerRowUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="2dp"
                 android:text="Username"
-                app:layout_constraintStart_toEndOf="@+id/xFollowingRowImageView"
-                app:layout_constraintTop_toBottomOf="@+id/xFollowingRowFullName" />
+                app:layout_constraintStart_toEndOf="@+id/xFollowerRowImageView"
+                app:layout_constraintTop_toBottomOf="@+id/xFollowerRowFullName" />
 
             <TextView
-                android:id="@+id/xFollowingRowBio"
+                android:id="@+id/xFollowerRowBio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -63,8 +63,8 @@
                 android:text="TextView"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toStartOf="@+id/xFollowingRowButton"
-                app:layout_constraintStart_toEndOf="@+id/xFollowingRowImageView"
-                app:layout_constraintTop_toBottomOf="@+id/xFollowingRowUsername" />
+                app:layout_constraintStart_toEndOf="@+id/xFollowerRowImageView"
+                app:layout_constraintTop_toBottomOf="@+id/xFollowerRowUsername" />
 
             <ToggleButton
                 android:id="@+id/xFollowingRowButton"
@@ -76,9 +76,9 @@
                 android:textAllCaps="false"
                 android:textOff="Follow"
                 android:textOn="Following"
-                app:layout_constraintBottom_toBottomOf="@+id/xFollowingRowImageView"
+                app:layout_constraintBottom_toBottomOf="@+id/xFollowerRowImageView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/xFollowingRowImageView" />
+                app:layout_constraintTop_toTopOf="@+id/xFollowerRowImageView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

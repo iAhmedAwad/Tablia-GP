@@ -27,6 +27,18 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_disabled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            app:srcCompat="@drawable/ic_history_black_24dp"
+            app:backgroundTint="@color/colorPrimaryDark"
+            android:layout_above="@id/fab"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_alignParentRight="true" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +48,6 @@
             android:contentDescription="@string/submit"
             app:srcCompat="@drawable/ic_add_black_24dp"
             app:backgroundTint="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"

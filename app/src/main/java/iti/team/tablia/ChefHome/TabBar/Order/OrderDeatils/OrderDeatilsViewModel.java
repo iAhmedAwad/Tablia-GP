@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
+import iti.team.tablia.others.Repository;
 
 public class OrderDeatilsViewModel extends ViewModel {
     private Repository repository;
@@ -37,10 +37,6 @@ public class OrderDeatilsViewModel extends ViewModel {
 
     public void updateOrderChefConfirm(String orderID, String chefID, String custID) {
         repository.updateOrderChefConfirm(orderID, chefID, custID);
-    }
-
-    public MutableLiveData<Boolean> checkItemExist(String itemID, String chefID) {
-        return repository.checkItemExist(itemID,chefID);
     }
 
 }

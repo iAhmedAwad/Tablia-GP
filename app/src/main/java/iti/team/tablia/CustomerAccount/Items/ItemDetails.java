@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +26,11 @@ import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.MenuItemPojo;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Customer.ChefProfile.ViewChiefProfileActivity;
 import iti.team.tablia.CustomerAccount.CustomerOrder.Cart;
+import iti.team.tablia.CustomerAccount.ItemReview.ItemReview;
 import iti.team.tablia.CustomerAccount.Reviews.AddReviewsActivity;
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
+import iti.team.tablia.Models.Others.Review;
 import iti.team.tablia.R;
 
 public class ItemDetails extends AppCompatActivity {
@@ -49,12 +51,15 @@ public class ItemDetails extends AppCompatActivity {
     private TextView toolbarTitle;
     private String chefId;
     private String itemId;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
         toolbarTitle = findViewById(R.id.toolbar_title);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         chefId = intent.getStringExtra("chefId");
         itemId = intent.getStringExtra("itemId");
@@ -84,16 +89,32 @@ public class ItemDetails extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
         //review node
-        itemRating.setRating(3.5f);
+
+
+        detailsViewModel = ViewModelProviders.of(this).get(ItemDetailsViewModel.class);
+        detailsViewModel.getItemReviewsCountAndRating(itemId).observe(this, new Observer<List<Review>>() {
+            @Override
+            public void onChanged(List<Review> reviewsList) {
+                double totalRating = 0;
+                for (Review review : reviewsList) {
+                    totalRating+=review.getRating();
+                }
+                itemRating.setRating((float) (totalRating/(float)reviewsList.size()));
+                reviews.setText(reviewsList.size() + " reviews");
+            }
+        });
+
+
         reviews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ItemDetails.this, "to reviews activity", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(ItemDetails.this, ItemReview.class);
+                i.putExtra("itemID",itemId);
+                startActivity(i);
+
             }
         });
         //end
-
-        detailsViewModel = ViewModelProviders.of(this).get(ItemDetailsViewModel.class);
         detailsViewModel.checkItemExistInCart(chefId, itemId).observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(final Boolean aBoolean) {
@@ -159,22 +180,23 @@ public class ItemDetails extends AppCompatActivity {
         detailsViewModel.getMenuItemDetails(chefId, itemId).observe(this, new Observer<MenuPojo>() {
             @Override
             public void onChanged(MenuPojo menuPojo) {
-                getSupportActionBar().setTitle(menuPojo.getItemName());
-                itemName.setText(menuPojo.getItemName());
-                price = menuPojo.getPriceItem();
-                itemPrice.setText(menuPojo.getPriceItem() + " EGP");
-                category.setText(menuPojo.getCategory());
-                category.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(ItemDetails.this, "nav to category activity", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                ingredients.setText(menuPojo.getIngredients());
-                description.setText(menuPojo.getDescription());
-                imgList = menuPojo.getImgItem();
-                ImageSliderAdapter adapter = new ImageSliderAdapter(ItemDetails.this, menuPojo.getImgItem());
-                viewPager.setAdapter(adapter);
+                if (menuPojo != null) {
+                    progressBar.setVisibility(View.GONE);
+                    getSupportActionBar().setTitle(menuPojo.getItemName());
+                    itemName.setText(menuPojo.getItemName());
+                    price = menuPojo.getPriceItem();
+                    itemPrice.setText(menuPojo.getPriceItem() + " EGP");
+                    category.setText(menuPojo.getCategory());
+                    ingredients.setText(menuPojo.getIngredients());
+                    description.setText(menuPojo.getDescription());
+                    imgList = menuPojo.getImgItem();
+                    ImageSliderAdapter adapter = new ImageSliderAdapter(ItemDetails.this, menuPojo.getImgItem());
+                    viewPager.setAdapter(adapter);
+                } else {
+                    Toast.makeText(ItemDetails.this, "item is no longer exist", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
             }
         });
         writeReview.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +206,7 @@ public class ItemDetails extends AppCompatActivity {
                 Intent intent1 = new Intent(ItemDetails.this, AddReviewsActivity.class);
                 intent1.putExtra(AddReviewsActivity.INCOMING_ITEM_ID, itemId);
                 intent1.putExtra(AddReviewsActivity.INCOMING_CHEF_ID, chefId);
-                intent1.putExtra(AddReviewsActivity.INCOMING_ITEM_NAME,item_name);
+                intent1.putExtra(AddReviewsActivity.INCOMING_ITEM_NAME, item_name);
                 startActivity(intent1);
                 Toast.makeText(ItemDetails.this, "writeReview", Toast.LENGTH_SHORT).show();
             }

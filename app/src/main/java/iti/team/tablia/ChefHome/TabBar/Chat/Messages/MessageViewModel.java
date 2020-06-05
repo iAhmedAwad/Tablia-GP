@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
+import iti.team.tablia.others.Repository;
 import iti.team.tablia.Models.Chat;
 import iti.team.tablia.Models.ChatUser;
 

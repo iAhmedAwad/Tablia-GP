@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import iti.team.tablia.ChefHome.ChefItemDetails;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.CustomerAccount.Items.ItemDetails;
 import iti.team.tablia.Models.CartPojo;
@@ -55,21 +56,11 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((OrderDeatils) context).model.checkItemExist(cartPojo.getItemID(), cartPojo.getChefID()).observe((LifecycleOwner) context, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(Boolean aBoolean) {
-                        if (aBoolean) {
-                            Intent intent = new Intent(context, ItemDetails.class);
-                            intent.putExtra("chefId", cartPojo.getChefID());
-                            intent.putExtra("itemId", cartPojo.getItemID());
-                            intent.putExtra("itemName", cartPojo.getItemName());
-                            context.startActivity(intent);
-                        } else {
-                          Toast.makeText(context, "Item is no longer exist", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
+                Intent intent = new Intent(context, ChefItemDetails.class);
+                intent.putExtra("chefId", cartPojo.getChefID());
+                intent.putExtra("itemId", cartPojo.getItemID());
+                intent.putExtra("itemName", cartPojo.getItemName());
+                context.startActivity(intent);
             }
         });
     }

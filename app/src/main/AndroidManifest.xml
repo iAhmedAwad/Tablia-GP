@@ -19,8 +19,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChefHome.DisableMenuItems"></activity>
-        <activity android:name=".CustomerAccount.MyOrders.OrderHistory"></activity>
+        <activity android:name=".ChefHome.TabBar.Profile.ChefFollowers.ChefFollowersList"></activity>
+        <activity android:name=".ChefHome.TabBar.Profile.Reviews.ChefReviewChefAcc" />
+        <activity android:name=".CustomerAccount.ItemReview.ItemReview" />
+        <activity android:name=".ChefHome.TabBar.Order.ChefOrderHistory" />
+        <activity android:name=".CustomerAccount.MyOrders.OrderHistory" />
+        <activity android:name=".ChefHome.DisableMenuItems" />
         <activity android:name=".CustomerAccount.MyOrders.CustOrderDetails.CustOrderDetails" />
         <activity android:name=".CustomerAccount.CustomerOrder.EditCustProfile" />
         <activity android:name=".ChefHome.EditMenuItems" />
@@ -34,11 +38,11 @@
             android:name=".CustomerAccount.Reviews.AddReviewsActivity"
             android:label="Write a review" />
         <activity android:name=".Authentication.SplashScreen">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Authentication.ChefRegistration.ChefRegistrationActivity" />
         <activity android:name=".CustomerAccount.CustomerChefListActivity" />
@@ -60,12 +64,12 @@
         </activity>
         <activity android:name=".Authentication.LoginActivity">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".Authentication.CustomerRegistration.CustomerRegistrationActivity" />
         <activity android:name=".ChefHome.ChiefActivity" />

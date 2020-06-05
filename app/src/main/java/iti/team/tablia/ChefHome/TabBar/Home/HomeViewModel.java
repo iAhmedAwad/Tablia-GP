@@ -3,7 +3,7 @@ package iti.team.tablia.ChefHome.TabBar.Home;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
+import iti.team.tablia.others.Repository;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 
 

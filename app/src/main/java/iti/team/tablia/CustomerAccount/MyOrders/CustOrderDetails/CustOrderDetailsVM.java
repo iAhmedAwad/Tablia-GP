@@ -3,7 +3,7 @@ package iti.team.tablia.CustomerAccount.MyOrders.CustOrderDetails;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
+import iti.team.tablia.others.Repository;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
@@ -25,11 +25,11 @@ public class CustOrderDetailsVM extends ViewModel {
         return repository.getChefInfo(chefID);
     }
 
-    public MutableLiveData<Boolean> checkItemExist(String itemID, String chefID) {
-        return repository.checkItemExist(itemID,chefID);
-    }
-
     public void updateOrderCustConfirm(String orderID, String chefID, String custID) {
         repository.updateOrderCustConfirm(orderID, chefID, custID);
+    }
+
+    public void saveCustRating(String chefId, String custId, float rating) {
+        repository.saveCustRating(chefId,custId,rating);
     }
 }

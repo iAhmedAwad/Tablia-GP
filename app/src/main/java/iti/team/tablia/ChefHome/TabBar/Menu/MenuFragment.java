@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -29,7 +30,9 @@ public class MenuFragment extends Fragment {
   MenuAdapter myAdapter;
   RecyclerView recycleMenu;
   FloatingActionButton fab;
+  FloatingActionButton fabDis;
   Bitmap bitmap = null;
+
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,7 +44,7 @@ public class MenuFragment extends Fragment {
 
 
     fab = root.findViewById(R.id.fab);
-
+    fabDis = root.findViewById(R.id.fab_disabled);
     recycleMenu = root.findViewById(R.id.recycleMenu);
     recycleMenu.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
@@ -66,6 +69,12 @@ public class MenuFragment extends Fragment {
       public void onClick(View view) {
         Intent goToAddMenue = new Intent(getContext(), AddMenu.class);
         startActivity(goToAddMenue);
+      }
+    });
+    fabDis.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Toast.makeText(getContext(), "Disabled items", Toast.LENGTH_SHORT).show();
       }
     });
 

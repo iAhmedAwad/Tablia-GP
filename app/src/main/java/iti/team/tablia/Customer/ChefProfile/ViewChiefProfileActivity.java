@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,11 +40,14 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
   ToggleButton isfollow;
   ChefViewModel myViewModel;
   FirebaseUser cust;
+  ProgressBar progressBar;
 
   protected void onCreate(Bundle savedInstanceState) {
     db = new Database();
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_view_chief_profile);
+    progressBar = findViewById(R.id.progressBar);
+    progressBar.setVisibility(View.VISIBLE);
     name = findViewById(R.id.id_name);
     prfo_img = findViewById(R.id.id_profile_pic);
     nb_followers = findViewById(R.id.id_nb_followers);
@@ -87,6 +91,7 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     myViewModel.myData.observe(this, new Observer<ChefAccountSettings>() {
       @Override
       public void onChanged(ChefAccountSettings chiefPojo) {
+        progressBar.setVisibility(View.GONE);
         name.setText(chiefPojo.getDisplayName());
         address.setText(chiefPojo.getAddress());
         bio.setText(String.valueOf(chiefPojo.getBio()));

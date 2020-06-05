@@ -39,7 +39,6 @@ public class ReviewsRecyclerAdapter extends RecyclerView.Adapter<ReviewsRecycler
     viewHolder.itemName.setText(arrName.get(i).getReview().getItemName());
     viewHolder.custName.setText(arrName.get(i).getCustomerName());
     viewHolder.rating.setRating(arrName.get(i).getReview().getRating());
-    Toast.makeText(context, arrName.get(i).getItemName(), Toast.LENGTH_SHORT).show();
 
   }
 

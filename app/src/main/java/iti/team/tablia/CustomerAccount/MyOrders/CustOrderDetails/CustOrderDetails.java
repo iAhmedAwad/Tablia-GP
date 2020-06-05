@@ -1,6 +1,7 @@
 package iti.team.tablia.CustomerAccount.MyOrders.CustOrderDetails;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils.OrderDeatils;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils.OrderDeatilsViewModel;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils.OrderDetailsAdapter;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
+import iti.team.tablia.CustomerAccount.MyOrders.CustOrderDetails.Rating.RatingDialog;
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
@@ -32,7 +35,7 @@ import iti.team.tablia.R;
 public class CustOrderDetails extends AppCompatActivity {
 
 
-    private OrderDetailsAdapter myAdapter;
+    private CustOrderItemAdapter myAdapter;
     private RecyclerView recyclerView;
     public CustOrderDetailsVM model;
     private TextView orderID;
@@ -53,11 +56,26 @@ public class CustOrderDetails extends AppCompatActivity {
     private String custID;
     private CustomerAccountSettings cust;
     private ChefAccountSettings chef;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cust_order_details);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         recyclerView = findViewById(R.id.listItemOrderDeatils);
         orderID = findViewById(R.id.orderID);
         orderTime = findViewById(R.id.orderTime);
@@ -91,14 +109,13 @@ public class CustOrderDetails extends AppCompatActivity {
             @Override
             public void onChanged(ChefAccountSettings settings) {
                 chef = settings;
-
             }
         });
         model.getOrder(orderIDStr, chefID, custID).observe(this, new Observer<OrderPojo>() {
             @Override
             public void onChanged(OrderPojo orderPojo) {
 
-
+                progressBar.setVisibility(View.GONE);
                 orderTime.setText(orderPojo.getOrderTime());
                 itemNum.setText(orderPojo.getItems().size() + " items");
                 total.setText("EGP " + orderPojo.getTotal());
@@ -113,22 +130,22 @@ public class CustOrderDetails extends AppCompatActivity {
                     }
                     deliveryType.setText("Pickup");
                 }
-                if(!orderPojo.isChefConfirm()){
+                if (!orderPojo.isChefConfirm()) {
                     confirm.setEnabled(false);
                     confirm.setBackgroundResource(R.drawable.rect_gray);
-                }else {
+                } else {
                     confirm.setEnabled(true);
                     confirm.setBackgroundResource(R.drawable.rect);
                 }
                 shippingFee.setText(orderPojo.getDeliveryFee() + " EGP");
-                if(!orderPojo.isCustConfirm()&&!orderPojo.isChefConfirm()) {
+                if (!orderPojo.isCustConfirm() && !orderPojo.isChefConfirm()) {
                     delStatus.setText("Order not delivered yet");
-                }else if(orderPojo.isChefConfirm()&&!orderPojo.isCustConfirm()){
+                } else if (orderPojo.isChefConfirm() && !orderPojo.isCustConfirm()) {
                     delStatus.setText("Order on the way to be delivered");
-                }else if(orderPojo.isCustConfirm()&&orderPojo.isChefConfirm()){
+                } else if (orderPojo.isCustConfirm() && orderPojo.isChefConfirm()) {
                     delStatus.setText("Order was deliverd on " + orderPojo.getDeliveryTime());
                 }
-                if(orderPojo.isCustConfirm()){
+                if (orderPojo.isCustConfirm()) {
                     confirm.setEnabled(false);
                     confirm.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                     confirm.setBackground(null);
@@ -137,7 +154,7 @@ public class CustOrderDetails extends AppCompatActivity {
 
                 }
                 delTime.setText(orderPojo.getDeliveryTime());
-                myAdapter = new OrderDetailsAdapter(orderPojo.getItems(), CustOrderDetails.this);
+                myAdapter = new CustOrderItemAdapter(orderPojo.getItems(), CustOrderDetails.this);
                 recyclerView.setAdapter(myAdapter);
             }
         });
@@ -146,7 +163,7 @@ public class CustOrderDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent goToMsg = new Intent(CustOrderDetails.this, MessageActivity.class);
-                goToMsg.putExtra("userid",chefID);
+                goToMsg.putExtra("userid", chefID);
                 startActivity(goToMsg);
             }
         });
@@ -160,6 +177,8 @@ public class CustOrderDetails extends AppCompatActivity {
                 confirm.setText("Delivery Confirmed");
                 confirm.setTextColor(Color.GREEN);
                 model.updateOrderCustConfirm(orderIDStr, chefID, custID);
+                RatingDialog ratingDialog = new RatingDialog(chefID,custID);
+                ratingDialog.show(getSupportFragmentManager(),"Rating Dialog");
             }
         });
 

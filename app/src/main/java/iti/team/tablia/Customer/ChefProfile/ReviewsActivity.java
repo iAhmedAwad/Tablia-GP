@@ -2,6 +2,8 @@ package iti.team.tablia.Customer.ChefProfile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,13 +27,14 @@ public class ReviewsActivity extends AppCompatActivity {
     public static final String ChefId = "ChefId";
     RecyclerView myrecyler;
     String string;
-    String itemID;
-    ArrayList<ChefReviews> chefArray ;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         rViewModel = new ViewModelProvider(this).get(ReviewViewModel.class);
         Intent intent = getIntent();
         string = intent.getStringExtra(ChefId);
@@ -44,6 +47,7 @@ public class ReviewsActivity extends AppCompatActivity {
             public void onChanged(ArrayList<ChefReviews> chefReviews) {
 
 //                chefArray = chefReviews;
+                progressBar.setVisibility(View.GONE);
                 adapter = new ReviewsRecyclerAdapter(ReviewsActivity.this,chefReviews);
                 myrecyler.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

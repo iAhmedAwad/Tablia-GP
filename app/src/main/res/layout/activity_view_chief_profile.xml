@@ -58,7 +58,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5sp"
             android:fontFamily="sans-serif-light"
-            android:text="Chief Name "
+            android:text="@string/chef_name"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -71,7 +71,7 @@
             android:layout_below="@+id/id_name"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
-            android:text="Smouha , Alexandria"
+            android:text="@string/address"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent"
             android:textSize="13sp" />
@@ -132,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="453K"
+                    android:text="0"
                     android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="followers"
+                    android:text="@string/followers"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="15sp" />
@@ -160,36 +160,33 @@
             android:paddingBottom="5dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                >
 
 
                 <ToggleButton
                     android:id="@+id/id_follow"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginVertical="5dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_weight="1"
                     android:background="@drawable/rect_purple"
                     android:fontFamily="sans-serif-light"
                     android:padding="5dp"
-                    android:text="follow"
+                    android:text="@string/follow"
+                    android:layout_margin="2dp"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textOff="follow"
-                    android:textOn="unfollow"
+                    android:textOff="@string/follow"
+                    android:textOn="@string/unfollow"
                     android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/id_chat"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginVertical="5dp"
-                    android:layout_marginRight="70dp"
+                    android:layout_margin="2dp"
                     android:background="@drawable/rect_purple"
                     android:padding="5dp">
 
@@ -203,7 +200,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="Message"
+                        android:text="@string/message"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -240,7 +237,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Description "
+                    android:text="@string/description"
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
@@ -248,7 +245,7 @@
                     android:id="@+id/id_descp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Description "
+                    android:hint="@string/description"
                     android:textColor="#000000"
                     android:textSize="13sp" />
 
@@ -268,7 +265,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Phone "
+                    android:text="@string/phone"
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
@@ -276,7 +273,7 @@
                     android:id="@+id/id_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Phone "
+                    android:hint="@string/phone"
                     android:textColor="#000000"
                     android:textSize="13sp" />
 
@@ -297,16 +294,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Number of Orders"
+                    android:text="@string/number_of_orders"
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/id_nb_orders"
                     android:layout_width="wrap_content"
-
                     android:layout_height="wrap_content"
-                    android:text="10"
+                    android:text="0"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -328,7 +324,7 @@
                     android:id="@+id/id_view_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="View Reviews "
+                    android:text="@string/view_reviews"
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
@@ -350,7 +346,7 @@
                     android:id="@+id/id_visit_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Visit Menu "
+                    android:text="@string/visit_menu"
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
@@ -358,7 +354,12 @@
 
         </LinearLayout>
 
-
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/progressBar"/>
     </RelativeLayout>
 
 </RelativeLayout>

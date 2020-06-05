@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,14 +40,17 @@ public class CustomerChefListActivity extends AppCompatActivity {
   private List<ChatUser> users;
   EditText search;
   CustomerChefListViewModel viewModel;
+  private ProgressBar progressBar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_customer_chef_list);
     Toolbar toolbar = findViewById(R.id.toolbar);
+    progressBar = findViewById(R.id.progressBar);
+    progressBar.setVisibility(View.VISIBLE);
     setSupportActionBar(toolbar);
-    getSupportActionBar().setTitle("");
+
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     toolbar.setNavigationOnClickListener(new View.OnClickListener() {
       @Override
@@ -64,6 +68,7 @@ public class CustomerChefListActivity extends AppCompatActivity {
     viewModel.getChefList().observe(this, new Observer<List<ChatUser>>() {
       @Override
       public void onChanged(List<ChatUser> chefList) {
+        progressBar.setVisibility(View.GONE);
         userAdapter = new TopChefAdapter(CustomerChefListActivity.this, chefList);
         recyclerView.setAdapter(userAdapter);
 

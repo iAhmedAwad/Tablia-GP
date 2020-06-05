@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
+import iti.team.tablia.others.Repository;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Models.Others.ChefReviews;
 import iti.team.tablia.Models.Others.Review;
@@ -13,7 +13,7 @@ import iti.team.tablia.others.Database;
 
 public class ReviewViewModel extends ViewModel {
     private Database database;
-    private iti.team.tablia.ChefHome.TabBar.Chat.Repository Repository;
+    private Repository Repository;
     private MutableLiveData<Review> myData;
 
     public ReviewViewModel() {
