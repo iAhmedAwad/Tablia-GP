@@ -575,7 +575,7 @@ public class Repository {
     public MutableLiveData<MenuPojo> getMenuItemDetails(String chefId, String itemId) {
         final MutableLiveData<MenuPojo> liveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("menu").child(chefId).child(itemId);
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 MenuPojo menuPojo = dataSnapshot.getValue(MenuPojo.class);

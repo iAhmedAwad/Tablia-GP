@@ -37,7 +37,6 @@ public class ChefItemDetails extends AppCompatActivity {
     private String chefId;
     private String itemId;
     private ProgressBar progressBar;
-
     public static MenuPojo menuPojo ;
     Database db ;
     @Override
@@ -124,6 +123,7 @@ public class ChefItemDetails extends AppCompatActivity {
             case R.id.delete:
                 detailsViewModel.deleteMenuItem(chefId, itemId);
                 Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+                finish();
                 return true;
             case R.id.edit:
                 Intent intent = new Intent(this, EditMenuItems.class);
