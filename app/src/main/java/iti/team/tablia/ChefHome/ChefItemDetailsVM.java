@@ -1,10 +1,14 @@
 package iti.team.tablia.ChefHome;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.List;
+
 import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
+import iti.team.tablia.Models.Others.Review;
 
 
 public class ChefItemDetailsVM extends ViewModel {
@@ -25,4 +29,8 @@ public class ChefItemDetailsVM extends ViewModel {
         repository.disableMenuItem(chefId,itemId);
     }
 
+    public MutableLiveData<List<Review>> getItemReviewsCountAndRating(String itemId) {
+        return repository.getReviewsCountAndRating(itemId);
+
+    }
 }

@@ -3,10 +3,13 @@ package iti.team.tablia.CustomerAccount.Items;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.List;
+
 import iti.team.tablia.ChefHome.TabBar.Chat.Repository;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
+import iti.team.tablia.Models.Others.Review;
 
 public class ItemDetailsViewModel extends ViewModel {
   private Repository repository;
@@ -36,4 +39,8 @@ public class ItemDetailsViewModel extends ViewModel {
   public void removeCartItem(CartPojo cartPojo) {
     repository.removeCartItem(cartPojo);
   }
+
+    public MutableLiveData<List<Review>> getItemReviewsCountAndRating(String itemId) {
+        return repository.getReviewsCountAndRating(itemId);
+    }
 }

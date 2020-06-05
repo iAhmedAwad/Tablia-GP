@@ -553,7 +553,7 @@ public class Database {
 
 
                         OrderPojo pojo = dataSnapshot1.getValue(OrderPojo.class);
-                        if (!pojo.isChefConfirm() && !pojo.isCustConfirm()) {
+                        if (!pojo.isChefConfirm()|| !pojo.isCustConfirm()) {
                             list.add(pojo);
                         }
                     }

@@ -47,6 +47,7 @@ import iti.team.tablia.Models.Chef.ChefSettings;
 import iti.team.tablia.Models.CustOrderPojo;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.Models.Customer.CustomerSettings;
+import iti.team.tablia.Models.Others.Review;
 import iti.team.tablia.Models.User;
 import iti.team.tablia.R;
 import iti.team.tablia.Services.APIService;
@@ -1155,5 +1156,28 @@ public class Repository {
             }
         });
         return order;
+    }
+
+    public MutableLiveData<List<Review>> getReviewsCountAndRating(String itemId) {
+        final List<Review> reviews = new ArrayList<>();
+        final MutableLiveData<List<Review>> liveData = new MutableLiveData<>();
+        reference = FirebaseDatabase.getInstance().getReference("reviews")
+                .child(itemId);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Review review = snapshot.getValue(Review.class);
+                    reviews.add(review);
+                }
+                liveData.setValue(reviews);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
     }
 }
