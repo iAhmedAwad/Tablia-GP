@@ -28,7 +28,6 @@ public class MenuFragment extends Fragment {
 
   MenuAdapter myAdapter;
   RecyclerView recycleMenu;
-  //    ImageView img ;
   FloatingActionButton fab;
   Bitmap bitmap = null;
 
@@ -40,7 +39,6 @@ public class MenuFragment extends Fragment {
 
     View root = inflater.inflate(R.layout.fragment_menu, container, false);
 
-//        DataOfMenu data = DataOfMenu.getInstance();
 
     fab = root.findViewById(R.id.fab);
 
@@ -48,11 +46,9 @@ public class MenuFragment extends Fragment {
     recycleMenu.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
 
-//        data.setData(new MenuPojo("Cake", "200 EGP",null));
     menuViewModel.getList();
 
 
-//        menuViewModel.setList(testList);
 
     menuViewModel.deatilsMutableLiveData.observe(getViewLifecycleOwner(), new Observer<List<MenuPojo>>() {
       @Override

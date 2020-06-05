@@ -405,6 +405,53 @@ public class Database {
         });
         return menuList;
     }
+    
+
+  public void addMenuDisableItemToDatabase(MenuPojo menuPojo) {
+    String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Disable");
+
+    //add data to the "customers" node
+    String key = reference.push().getKey();
+    menuPojo.setItemID(key);
+    reference.child(userid)
+            .child(key)
+            .setValue(menuPojo);
+
+  }
+
+
+
+
+  public MutableLiveData<List<MenuPojo>> getMenuItemsDisable() {
+
+    final List<MenuPojo> list = new ArrayList<>();
+    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Disable").child(userId);
+
+    //ref.child(userId);
+    ref.addValueEventListener(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+        list.clear();
+        for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+          MenuPojo pojo = data.getValue(MenuPojo.class);
+
+          list.add(pojo);
+        }
+
+        menuList.setValue(list);
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
+    return menuList;
+  }
+
 
     /**
      * retrieve chef menu by chefId
@@ -414,6 +461,12 @@ public class Database {
 
         final List<MenuPojo> list = new ArrayList<>();
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("menu").child(chefId);
+
+  /**
+   * retrieves chef's menu items
+   *
+   * @return
+   */
 
         //ref.child(userId);
         ref.addValueEventListener(new ValueEventListener() {
@@ -444,6 +497,10 @@ public class Database {
 
         String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+  /**
+   * retrieve chef menu by chefId
+   */
 
         //add data to the "customers" node
         reference.child(mContext.getString(R.string.Order))

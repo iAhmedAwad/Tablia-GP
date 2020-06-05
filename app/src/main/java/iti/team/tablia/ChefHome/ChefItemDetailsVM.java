@@ -24,4 +24,5 @@ public class ChefItemDetailsVM extends ViewModel {
     public void disableMenuItem(String chefId, String itemId) {
         repository.disableMenuItem(chefId,itemId);
     }
+
 }

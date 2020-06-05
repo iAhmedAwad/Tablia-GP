@@ -21,6 +21,7 @@ import android.widget.Toast;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.CustomerAccount.Items.ImageSliderAdapter;
 import iti.team.tablia.R;
+import iti.team.tablia.others.Database;
 
 public class ChefItemDetails extends AppCompatActivity {
     private TextView toolbarTitle;
@@ -35,13 +36,17 @@ public class ChefItemDetails extends AppCompatActivity {
     private TextView qty;
     private String chefId;
     private String itemId;
-    private MenuPojo menuPojo;
     private ProgressBar progressBar;
 
+    public static MenuPojo menuPojo ;
+    Database db ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chef_item_details);
+
+        db = new Database(this);
+
         toolbarTitle = findViewById(R.id.toolbar_title);
         Intent intent = getIntent();
         chefId = intent.getStringExtra("chefId");
@@ -130,7 +135,12 @@ public class ChefItemDetails extends AppCompatActivity {
             case R.id.disable:
                 detailsViewModel.disableMenuItem(chefId, itemId);
                 Toast.makeText(this, "disable", Toast.LENGTH_SHORT).show();
+                db.addMenuDisableItemToDatabase(menuPojo);
+                
+
                 return true;
+
+
         }
         return false;
     }

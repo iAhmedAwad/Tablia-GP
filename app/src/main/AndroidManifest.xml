@@ -21,6 +21,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ChefHome.TabBar.Order.ChefOrderHistory"></activity>
         <activity android:name=".CustomerAccount.MyOrders.OrderHistory" />
+        <activity android:name=".ChefHome.DisableMenuItems"></activity>
         <activity android:name=".CustomerAccount.MyOrders.CustOrderDetails.CustOrderDetails" />
         <activity android:name=".CustomerAccount.CustomerOrder.EditCustProfile" />
         <activity android:name=".ChefHome.EditMenuItems" />

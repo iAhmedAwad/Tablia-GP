@@ -58,6 +58,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
             public void onClick(View v) {
 
                 EditMenuItems.menuPojo = menuPojo;
+                ChefItemDetails.menuPojo=menuPojo;
                 Intent intent = new Intent(context, ChefItemDetails.class);
         intent.putExtra("chefId", menuPojo.getChefID());
         intent.putExtra("itemId", menuPojo.getItemID());
