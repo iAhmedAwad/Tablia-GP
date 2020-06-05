@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import iti.team.tablia.ChefHome.TabBar.Profile.ChefFollowers.ChefFollowersList;
 import iti.team.tablia.ChefHome.TabBar.Profile.Reviews.ChefReviewChefAcc;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Chef.ChefSettings;
@@ -63,6 +64,15 @@ public class profileFragment extends Fragment {
         edit = view.findViewById(R.id.id_edit);
         menus = view.findViewById(R.id.id_visit_menu);
         reviews = view.findViewById(R.id.id_view_reviews);
+
+//        nb_followers.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), ChefFollowersList.class);
+//                intent.putExtra("chefId",muser.getUid());
+//                startActivity(intent);
+//            }
+//        });
 
         reviews.setOnClickListener(new View.OnClickListener() {
             @Override
