@@ -8,25 +8,33 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import iti.team.tablia.Models.Customer.CustomerAccountSettings;
 import iti.team.tablia.Models.Others.ChefReviews;
 import iti.team.tablia.Models.Others.Review;
 import iti.team.tablia.R;
-
-
+import iti.team.tablia.others.Database;
 
 
 public class ItemReviewAdaptor extends RecyclerView.Adapter<ItemReviewAdaptor.ViewHolder> {
     Context context;
     ArrayList<Review> arrName;
+    Database db;
 
 
     public ItemReviewAdaptor(Context context, ArrayList<Review> arrName) {
         this.context = context;
         this.arrName = arrName;
+        db= new Database();
 
     }
 
@@ -36,10 +44,22 @@ public class ItemReviewAdaptor extends RecyclerView.Adapter<ItemReviewAdaptor.Vi
     }
 
     @Override
-    public void onBindViewHolder(ItemReviewAdaptor.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ItemReviewAdaptor.ViewHolder viewHolder, int i) {
         viewHolder.review.setText(arrName.get(i).getReviewText());
         viewHolder.itemName.setText(arrName.get(i).getItemName());
         viewHolder.rating.setRating(arrName.get(i).getRating());
+//        String arr = db.getCustName(arrName.get(i).getCustomerId());
+//        Toast.makeText(context, arr, Toast.LENGTH_SHORT).show();
+//        viewHolder.custName.setText(arr);
+        ((ItemReview)context).reviewViewModel.getCustInfo(arrName.get(i).getCustomerId()).observe((LifecycleOwner) context, new Observer<CustomerAccountSettings>() {
+            @Override
+            public void onChanged(CustomerAccountSettings customerAccountSettings) {
+                viewHolder.custName.setText(customerAccountSettings.getDisplayName());
+            }
+        });
+
+
+
 
 
     }
@@ -61,4 +81,7 @@ public class ItemReviewAdaptor extends RecyclerView.Adapter<ItemReviewAdaptor.Vi
             rating = itemView.findViewById(R.id.id_ratingBar);
         }
     }
+
+
+
 }

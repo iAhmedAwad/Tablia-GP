@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CustomerAccount.ItemReview.ItemReview"></activity>
+        <activity android:name=".ChefHome.TabBar.Profile.Reviews.ChefReviewChefAcc"></activity>
+        <activity android:name=".CustomerAccount.ItemReview.ItemReview" />
         <activity android:name=".ChefHome.TabBar.Order.ChefOrderHistory" />
         <activity android:name=".CustomerAccount.MyOrders.OrderHistory" />
         <activity android:name=".ChefHome.DisableMenuItems" />
