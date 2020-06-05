@@ -24,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import iti.team.tablia.ChefHome.TabBar.Profile.ChefFollowers.ChefFollowersList;
 import iti.team.tablia.ChefHome.TabBar.Profile.Reviews.ChefReviewChefAcc;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Chef.ChefSettings;
