@@ -13,7 +13,7 @@ import iti.team.tablia.others.Database;
 
 public class ReviewViewModel extends ViewModel {
     private Database database;
-    private iti.team.tablia.ChefHome.TabBar.Chat.Repository Repository;
+    private Repository Repository;
     private MutableLiveData<Review> myData;
 
     public ReviewViewModel() {

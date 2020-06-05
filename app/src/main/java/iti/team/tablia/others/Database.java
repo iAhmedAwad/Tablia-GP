@@ -405,52 +405,50 @@ public class Database {
         });
         return menuList;
     }
-    
-
-  public void addMenuDisableItemToDatabase(MenuPojo menuPojo) {
-    String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Disable");
-
-    //add data to the "customers" node
-    String key = reference.push().getKey();
-    menuPojo.setItemID(key);
-    reference.child(userid)
-            .child(key)
-            .setValue(menuPojo);
-
-  }
 
 
+    public void addMenuDisableItemToDatabase(MenuPojo menuPojo) {
+        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Disable");
+
+        //add data to the "customers" node
+        String key = reference.push().getKey();
+        menuPojo.setItemID(key);
+        reference.child(userid)
+                .child(key)
+                .setValue(menuPojo);
+
+    }
 
 
-  public MutableLiveData<List<MenuPojo>> getMenuItemsDisable() {
+    public MutableLiveData<List<MenuPojo>> getMenuItemsDisable() {
 
-    final List<MenuPojo> list = new ArrayList<>();
-    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Disable").child(userId);
+        final List<MenuPojo> list = new ArrayList<>();
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Disable").child(userId);
 
-    //ref.child(userId);
-    ref.addValueEventListener(new ValueEventListener() {
-      @Override
-      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        //ref.child(userId);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-        list.clear();
-        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                list.clear();
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
 
-          MenuPojo pojo = data.getValue(MenuPojo.class);
+                    MenuPojo pojo = data.getValue(MenuPojo.class);
 
-          list.add(pojo);
-        }
+                    list.add(pojo);
+                }
 
-        menuList.setValue(list);
-      }
+                menuList.setValue(list);
+            }
 
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-      }
-    });
-    return menuList;
-  }
+            }
+        });
+        return menuList;
+    }
 
 
     /**
@@ -462,11 +460,11 @@ public class Database {
         final List<MenuPojo> list = new ArrayList<>();
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("menu").child(chefId);
 
-  /**
-   * retrieves chef's menu items
-   *
-   * @return
-   */
+        /**
+         * retrieves chef's menu items
+         *
+         * @return
+         */
 
         //ref.child(userId);
         ref.addValueEventListener(new ValueEventListener() {
@@ -498,9 +496,9 @@ public class Database {
         String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-  /**
-   * retrieve chef menu by chefId
-   */
+        /**
+         * retrieve chef menu by chefId
+         */
 
         //add data to the "customers" node
         reference.child(mContext.getString(R.string.Order))
@@ -1282,4 +1280,36 @@ public class Database {
         return mutableLiveData;
     }
 
+    /**
+     * retreives Reviews By itemID
+     *
+     * @param itemID
+     * @return
+     */
+    public MutableLiveData<ArrayList<Review>> retriveReviewByItemId(final String itemID) {
+        Log.i("test", "inside method");
+        final MutableLiveData<ArrayList<Review>> ArrayListMutableLiveData = new MutableLiveData<>();
+        final ArrayList<Review> list = new ArrayList<>();
+        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child(Constants.reviewsNode).child(itemID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Log.i("test", String.valueOf(ds.getChildrenCount()));
+                    Review review = ds.getValue(Review.class);
+                    if (review != null && review.getItemId().equals(itemID)) {
+                        list.add(review);
+                    }
+                }
+                Log.i("test", "list size " + list.size());
+                ArrayListMutableLiveData.setValue(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        return ArrayListMutableLiveData;
+    }
 }

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -23,11 +22,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-import iti.team.tablia.ChefHome.ChefItemDetails;
 import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.MenuItemPojo;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.Customer.ChefProfile.ViewChiefProfileActivity;
 import iti.team.tablia.CustomerAccount.CustomerOrder.Cart;
+import iti.team.tablia.CustomerAccount.ItemReview.ItemReview;
 import iti.team.tablia.CustomerAccount.Reviews.AddReviewsActivity;
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
@@ -93,7 +92,10 @@ public class ItemDetails extends AppCompatActivity {
         reviews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ItemDetails.this, "to reviews activity", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(ItemDetails.this, ItemReview.class);
+                i.putExtra("itemID",itemId);
+                startActivity(i);
+
             }
         });
         //end

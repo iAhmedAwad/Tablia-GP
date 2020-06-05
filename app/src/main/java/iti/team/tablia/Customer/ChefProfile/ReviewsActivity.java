@@ -25,8 +25,6 @@ public class ReviewsActivity extends AppCompatActivity {
     public static final String ChefId = "ChefId";
     RecyclerView myrecyler;
     String string;
-    String itemID;
-    ArrayList<ChefReviews> chefArray ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
