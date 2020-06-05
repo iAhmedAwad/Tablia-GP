@@ -132,7 +132,7 @@ public class ChefItemDetails extends AppCompatActivity {
                 detailsViewModel.disableMenuItem(chefId,itemId);
                 Toast.makeText(this, "disable", Toast.LENGTH_SHORT).show();
                 db.addMenuDisableItemToDatabase(menuPojo);
-                
+
 
                 return true;
 
