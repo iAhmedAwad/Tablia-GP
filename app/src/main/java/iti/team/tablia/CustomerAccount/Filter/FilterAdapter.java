@@ -41,7 +41,8 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
 
     holder.xCatItemName.setText(menuPojo.getItemName());
     holder.xCatItemCategory.setText(menuPojo.getCategory());
-    holder.xCatItemPrice.setText(String.valueOf(menuPojo.getPriceItem())+"EGP");
+    holder.xCatItemPrice.setText(String.valueOf(menuPojo.getPriceItem())+" EGP");
+    holder.cat_imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
     holder.cat_imageView.setImageBitmap(
         GlobalImageLoader.StringToBitMap(
             menuPojo.getImgItem().get(0).getImgaeItem()));

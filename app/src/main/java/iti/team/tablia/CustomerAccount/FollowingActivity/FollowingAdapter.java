@@ -57,7 +57,7 @@ public class FollowingAdapter extends RecyclerView.Adapter<FollowingAdapter.View
     final String id = mList.get(position).getChefId();
     //TODO make sure button responds right
     holder.xFollowingRowFullName.setText(mList.get(position).getFullName());
-    holder.xFollowingRowUsername.setText(mList.get(position).getUserName());
+//    holder.xFollowingRowUsername.setText(mList.get(position).getUserName());
     holder.xFollowingRowBio.setText(mList.get(position).getBio());
     Bitmap b = GlobalImageLoader.StringToBitMap(mList.get(position).getProfilePhoto());
     holder.xFollowingRowImageView.setImageBitmap(b);
@@ -110,14 +110,14 @@ public class FollowingAdapter extends RecyclerView.Adapter<FollowingAdapter.View
 
   public class ViewHolder extends RecyclerView.ViewHolder {
     private CircleImageView xFollowingRowImageView;
-    private TextView xFollowingRowFullName, xFollowingRowUsername, xFollowingRowBio;
+    private TextView xFollowingRowFullName, xFollowingRowBio;
     private ToggleButton xFollowingRowButton;
 
     public ViewHolder(@NonNull View itemView) {
       super(itemView);
       xFollowingRowImageView = itemView.findViewById(R.id.xFollowerRowImageView);
       xFollowingRowFullName = itemView.findViewById(R.id.xFollowerRowFullName);
-      xFollowingRowUsername = itemView.findViewById(R.id.xFollowerRowUsername);
+//      xFollowingRowUsername = itemView.findViewById(R.id.xFollowerRowUsername);
       xFollowingRowBio = itemView.findViewById(R.id.xFollowerRowBio);
       xFollowingRowButton = itemView.findViewById(R.id.xFollowingRowButton);
     }

@@ -3,6 +3,7 @@ package iti.team.tablia.ChefHome;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,7 +49,7 @@ public class EditMenuItems extends AppCompatActivity {
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
     Bitmap bmp;
     Uri selectedImageUri;
-    EditText editNameItem, editPriceItem, editDescrption, editIngredients;
+    EditText editNameItem, editPriceItem, editDescrption, editIngredients,qty;
     MenuPojo Item;
     String picture;
     ImageView imgAdd;
@@ -67,7 +68,16 @@ public class EditMenuItems extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_menu_items);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                finish();
+            }
+        });
 //        Intent intent = getIntent();
 
 //        menuPojo =  intent.getParcelableExtra("itemEdit");
@@ -76,6 +86,7 @@ public class EditMenuItems extends AppCompatActivity {
         editPriceItem = findViewById(R.id.editPriceItem);
         editDescrption = findViewById(R.id.editDescrption);
         editIngredients = findViewById(R.id.editIngredients);
+        qty = findViewById(R.id.editItemqty);
 
 
         addItem = findViewById(R.id.btnAddItem);
@@ -85,6 +96,7 @@ public class EditMenuItems extends AppCompatActivity {
         editPriceItem.setText(String.valueOf(menuPojo.getPriceItem()));
         editDescrption.setText(menuPojo.getDescription());
         editIngredients.setText(menuPojo.getIngredients());
+        qty.setText(String.valueOf(menuPojo.getItemQuantity()));
 
 
         myrecycle = findViewById(R.id.recycle);
@@ -146,13 +158,13 @@ public class EditMenuItems extends AppCompatActivity {
             public void onClick(View v) {
 
                 if ((bmp != null || !list.isEmpty()) && !editNameItem.getText().toString().isEmpty() && !editPriceItem.getText().toString().isEmpty() &&
-                        !editDescrption.getText().toString().isEmpty() && !editIngredients.getText().toString().isEmpty()) {
+                        !editDescrption.getText().toString().isEmpty() && !editIngredients.getText().toString().isEmpty()&&!qty.getText().toString().isEmpty()) {
                     if(bmp != null) {
                         picture = BitMapToString(bmp);
                     }
                     Item = new MenuPojo(menuPojo.getItemID(), FirebaseAuth.getInstance().getCurrentUser().getUid()
                             , editNameItem.getText().toString(), Double.parseDouble(editPriceItem.getText().toString()), list,
-                            category, editDescrption.getText().toString(), editIngredients.getText().toString(), 10);
+                            category, editDescrption.getText().toString(), editIngredients.getText().toString(),  Integer.parseInt(qty.getText().toString()));
 
                     db.updateMenuItemToDatabase(Item);
 

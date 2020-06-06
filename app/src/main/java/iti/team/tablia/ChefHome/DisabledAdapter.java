@@ -1,4 +1,4 @@
-package iti.team.tablia.CustomerAccount.ChefMenus;
+package iti.team.tablia.ChefHome;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,37 +16,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import iti.team.tablia.ChefHome.ChefItemDetails;
-import iti.team.tablia.ChefHome.EditMenuItems;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
-import iti.team.tablia.CustomerAccount.Items.ItemDetails;
 import iti.team.tablia.R;
 
-
-public class ViewChefMenuAdaptor extends RecyclerView.Adapter<ViewChefMenuAdaptor.ViewHolder> {
-
+public class DisabledAdapter extends RecyclerView.Adapter<DisabledAdapter.ViewHolder>{
     private List<MenuPojo> data;
     Context context;
 
-    public ViewChefMenuAdaptor(List<MenuPojo> data, Context context) {
+    public DisabledAdapter(List<MenuPojo> data, Context context) {
         this.data = data;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ViewChefMenuAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         View v = inflater.inflate(R.layout.row_menu, parent, false);
 
-        return new ViewHolder(v);
+        return new DisabledAdapter.ViewHolder(v);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewChefMenuAdaptor.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 
         final MenuPojo menuPojo = data.get(position);
         Bitmap bitmap = StringToBitMap(data.get(position).getImgItem().get(0).getImgaeItem());
@@ -60,7 +55,8 @@ public class ViewChefMenuAdaptor extends RecyclerView.Adapter<ViewChefMenuAdapto
             public void onClick(View v) {
 
                 EditMenuItems.menuPojo = menuPojo;
-                Intent intent = new Intent(context, ItemDetails.class);
+                ChefItemDetails.menuPojo=menuPojo;
+                Intent intent = new Intent(context, DisabledItemDetails.class);
                 intent.putExtra("chefId", menuPojo.getChefID());
                 intent.putExtra("itemId", menuPojo.getItemID());
                 intent.putExtra("itemName", menuPojo.getItemName());

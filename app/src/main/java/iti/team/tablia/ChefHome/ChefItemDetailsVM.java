@@ -20,7 +20,9 @@ public class ChefItemDetailsVM extends ViewModel {
     public MutableLiveData<MenuPojo> getMenuItemDetails(String chefId, String itemId) {
         return repository.getMenuItemDetails(chefId,itemId);
     }
-
+    public MutableLiveData<MenuPojo> getDisItemDetails(String chefId, String itemId) {
+        return repository.getDisItemDetails(chefId,itemId);
+    }
     public void deleteMenuItem(String chefId, String itemId) {
         repository.deleteMenuItem( chefId,  itemId);
     }

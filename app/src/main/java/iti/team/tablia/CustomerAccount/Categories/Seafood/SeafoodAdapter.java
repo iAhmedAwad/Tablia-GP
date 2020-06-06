@@ -39,7 +39,8 @@ public class SeafoodAdapter extends RecyclerView.Adapter<SeafoodAdapter.ViewHold
 
     holder.xCatItemName.setText(menuPojos.get(position).getItemName());
     holder.xCatItemCategory.setText(menuPojos.get(position).getCategory());
-    holder.xCatItemPrice.setText(String.valueOf(menuPojos.get(position).getPriceItem())+"EGP");
+    holder.xCatItemPrice.setText(String.valueOf(menuPojos.get(position).getPriceItem())+" EGP");
+    holder.cat_imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
     holder.cat_imageView.setImageBitmap(
         GlobalImageLoader.StringToBitMap(
             menuPojos.get(position).getImgItem().get(0).getImgaeItem()));

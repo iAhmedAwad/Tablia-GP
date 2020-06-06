@@ -1,6 +1,7 @@
 package iti.team.tablia.ChefHome;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -21,16 +24,28 @@ public class DisableMenuItems extends AppCompatActivity {
 
 
     private DisableMenuItemVM disableMenuItemVM;
-    MenuAdapter myAdapter;
+    DisabledAdapter myAdapter;
     RecyclerView recycleMenu;
     FloatingActionButton fab;
     Bitmap bitmap = null;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disable_menu_items);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                finish();
+            }
+        });
 
         disableMenuItemVM = ViewModelProviders.of(this).get(DisableMenuItemVM.class);
 
@@ -44,8 +59,8 @@ public class DisableMenuItems extends AppCompatActivity {
         disableMenuItemVM.deatilsMutableLiveData.observe(this, new Observer<List<MenuPojo>>() {
             @Override
             public void onChanged(List<MenuPojo> menuPojos) {
-
-                myAdapter = new MenuAdapter( menuPojos , DisableMenuItems.this );
+                progressBar.setVisibility(View.GONE);
+                myAdapter = new DisabledAdapter(menuPojos, DisableMenuItems.this);
                 recycleMenu.setAdapter(myAdapter);
 
             }

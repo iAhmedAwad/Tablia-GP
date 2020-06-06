@@ -4,40 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/rellay1"
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/grad"
-        android:paddingBottom="20dp">
+        android:layout_alignParentTop="true">
 
-        <RelativeLayout
-            android:id="@+id/imgUser"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="60dp"
-            android:layout_marginTop="10dp">
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/menuStyle"
+            app:title="Create Customer Account">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create a New Customer Account"
-                android:layout_marginTop="40dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="21sp" />
+        </androidx.appcompat.widget.Toolbar>
 
-
-        </RelativeLayout>
-
-
-    </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/linlay1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rellay1"
+        android:layout_below="@id/bar_layout"
         android:orientation="horizontal">
 
     </LinearLayout>
@@ -53,6 +44,7 @@
 
 
         <LinearLayout
+            android:id="@+id/lin1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -100,26 +92,23 @@
                 android:hint="Confirm Password"
                 android:textColor="@color/colorAccent" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_margin="7dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/xChefBtnRegister"
-                android:background="@drawable/rect_purple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="2dp"
-                android:padding="5dp"
-                android:text="Sign Up"
-                android:textColor="@color/white" />
 
 
         </LinearLayout>
+        <Button
+            android:id="@+id/xChefBtnRegister"
+            android:background="@drawable/rect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@id/lin1"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="Sign Up"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 
@@ -250,7 +239,12 @@
     <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
     <!--        app:layout_constraintTop_toBottomOf="@+id/xCustomerUsername" />-->
 
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
 
 

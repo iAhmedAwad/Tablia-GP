@@ -5,7 +5,7 @@
     android:id="@+id/xlinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".Authentication.RegistrationOptionsActivity">
 
@@ -13,18 +13,22 @@
         android:id="@+id/xChefPhoto"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
         android:layout_weight="1"
         android:contentDescription="a chief image"
-        app:srcCompat="@drawable/chef" />
+        app:srcCompat="@drawable/chef_logo" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey" />
 
     <ImageView
+
         android:id="@+id/xCustomerPhoto"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
         android:layout_weight="1"
         android:contentDescription="a customer image"
-        app:srcCompat="@drawable/customer" />
+        app:srcCompat="@drawable/cust_logo" />
 
 </LinearLayout>

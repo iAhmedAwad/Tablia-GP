@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -22,42 +24,46 @@ import iti.team.tablia.util.Constants;
 
 public class GrilledFragment extends Fragment {
 
-  private GrilledViewModel mViewModel;
-  private RecyclerView xRecyclerView;
-  private GrilledAdapter mAdapter;
-  private RecyclerView.LayoutManager layoutManager;
+    private GrilledViewModel mViewModel;
+    private RecyclerView xRecyclerView;
+    private GrilledAdapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ProgressBar progressBar;
 
-  public static GrilledFragment newInstance() {
-    return new GrilledFragment();
-  }
+    public static GrilledFragment newInstance() {
+        return new GrilledFragment();
+    }
 
-  @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                           @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.grilled_fragment, container, false);
-    mViewModel = ViewModelProviders.of(this).get(GrilledViewModel.class);
-    xRecyclerView = view.findViewById(R.id.xgrilledRecycle);
-    layoutManager = new LinearLayoutManager(getContext());
-    xRecyclerView.setHasFixedSize(true);
-    xRecyclerView.setLayoutManager(layoutManager);
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.grilled_fragment, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Grilled");
+        mViewModel = ViewModelProviders.of(this).get(GrilledViewModel.class);
+        xRecyclerView = view.findViewById(R.id.xgrilledRecycle);
+        progressBar = view.findViewById(R.id.progressBar);
+        layoutManager = new LinearLayoutManager(getContext());
+        xRecyclerView.setHasFixedSize(true);
+        xRecyclerView.setLayoutManager(layoutManager);
 
 
-    return view;
-  }
+        return view;
+    }
 
-  @Override
-  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-    mViewModel.getGrilledItems(Constants.GRILLED)
-        .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
-          @Override
-          public void onChanged(ArrayList<MenuPojo> menuPojos) {
-            mAdapter = new GrilledAdapter(getContext(), menuPojos);
-            xRecyclerView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
-          }
-        });
-  }
+        mViewModel.getGrilledItems(Constants.GRILLED)
+                .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
+                    @Override
+                    public void onChanged(ArrayList<MenuPojo> menuPojos) {
+                      progressBar.setVisibility(View.GONE);
+                        mAdapter = new GrilledAdapter(getContext(), menuPojos);
+                        xRecyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+    }
 
 }

@@ -51,7 +51,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         holder.imgItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
         holder.imgItem.setImageBitmap(bitmap);
         holder.txtNameItem.setText(data.get(position).getItemName());
-        holder.txtPriceItem.setText(String.valueOf(data.get(position).getPriceItem()));
+        holder.txtPriceItem.setText(String.valueOf(data.get(position).getPriceItem()+" EGP"));
         holder.txtCategory.setText(data.get(position).getCategory());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -44,7 +44,7 @@ public class AddMenu extends AppCompatActivity {
   Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
   Bitmap bmp;
   Uri selectedImageUri;
-  EditText editNameItem, editPriceItem, editDescrption, editIngredients;
+  EditText editNameItem, editPriceItem, editDescrption, editIngredients,qty;
   MenuPojo Item;
   String picture;
   ImageView imgAdd;
@@ -65,7 +65,7 @@ public class AddMenu extends AppCompatActivity {
     editPriceItem = findViewById(R.id.editPriceItem);
     editDescrption = findViewById(R.id.editDescrption);
     editIngredients = findViewById(R.id.editIngredients);
-
+    qty = findViewById(R.id.editItemqty);
     addItem = findViewById(R.id.btnAddItem);
 
 
@@ -120,12 +120,12 @@ public class AddMenu extends AppCompatActivity {
       public void onClick(View v) {
 
         if ((bmp != null) && !editNameItem.getText().toString().isEmpty() && !editPriceItem.getText().toString().isEmpty() &&
-            !editDescrption.getText().toString().isEmpty() && !editIngredients.getText().toString().isEmpty()) {
+            !editDescrption.getText().toString().isEmpty() && !editIngredients.getText().toString().isEmpty()&&!qty.getText().toString().isEmpty()) {
           picture = BitMapToString(bmp);
 
           Item = new MenuPojo("itemID", FirebaseAuth.getInstance().getCurrentUser().getUid()
               , editNameItem.getText().toString(), Double.parseDouble(editPriceItem.getText().toString()), list,
-              category, editDescrption.getText().toString(), editIngredients.getText().toString(), 10);
+              category, editDescrption.getText().toString(), editIngredients.getText().toString(), Integer.parseInt(qty.getText().toString()));
 
           db.addMenuItemToDatabase(Item);
 

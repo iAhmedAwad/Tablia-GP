@@ -30,7 +30,7 @@
     <!--  Navigation drawer  -->
 
 
-    <string name="NameItem">Name Item</string>
+    <string name="NameItem">Item Name</string>
     <string name="Price">Price</string>
 
     <string name="menuNode">menu</string>
@@ -42,13 +42,17 @@
 
 
     <string-array name="Spinner_Item">
-        <item>Desert</item>
+        <item>Dessert</item>
         <item>Grilled</item>
         <item>Juice</item>
         <item>Macaroni</item>
         <item>Mahashy</item>
         <item>Salad</item>
         <item>Seafood</item>
+        <item>Main Dishes</item>
+        <item>Baking</item>
+        <item>Soups</item>
+        <item>Side Dishes</item>
     </string-array>
 
     <string name="Order">order</string>
@@ -80,13 +84,13 @@
     <string name="view_reviews">View Reviews</string>
     <string name="number_of_orders">Number of Orders</string>
     <string name="visit_menu">Visit Menu</string>
-    <string name="follow">follow</string>
-    <string name="unfollow">unfollow</string>
+    <string name="follow">Follow</string>
+    <string name="unfollow">Following</string>
     <string name="message">Message</string>
 
     <!-- Customer Home Fragment Yasmine -->
     <string name="top_chefs">Top Chefs</string>
-    <string name="see_all_chefs">see All Chefs</string>
+    <string name="see_all_chefs">See All</string>
     <string name="recent_dishes">Recent Dishes</string>
     <string name="custname">CustName</string>
     <string name="itemname">ItemName</string>
@@ -102,6 +106,9 @@
     <string name="edit_item">Edit Item</string>
     <string name="sold_by">Sold by:</string>
     <string name="write_review">Write Review</string>
+    <string name="order_time">Order Time:</string>
+    <string name="chef_name_cust_order">Chef Name:</string>
+    <string name="total">Total:</string>
 
 
 </resources>

@@ -30,7 +30,7 @@ import iti.team.tablia.util.GlobalImageLoader;
 
 public class ViewChiefProfileActivity extends AppCompatActivity {
 
-  TextView name, bio, phone, nb_followers, nb_orders, address, reviews, menus;
+  TextView name, bio, phone, nb_followers, address, reviews, menus;
   String userId;
   RatingBar rating;
   LinearLayout chat;
@@ -53,7 +53,6 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     nb_followers = findViewById(R.id.id_nb_followers);
     phone = findViewById(R.id.id_phone);
     bio = findViewById(R.id.id_descp);
-    nb_orders = findViewById(R.id.id_nb_orders);
     rating = findViewById(R.id.id_rating);
     address = findViewById(R.id.id_address);
     isfollow = findViewById(R.id.id_follow);
@@ -97,7 +96,6 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
         bio.setText(String.valueOf(chiefPojo.getBio()));
         phone.setText(String.valueOf(chiefPojo.getPhoneNumber()));
         nb_followers.setText(String.valueOf(chiefPojo.getFollowers()));
-        nb_orders.setText(String.valueOf(chiefPojo.getOrders()));
         rating.setRating(chiefPojo.getRating());
         prfo_img.setImageBitmap(GlobalImageLoader.StringToBitMap(chiefPojo.getProfilePhoto()));
         reviews.setText("View Reviews On " + chiefPojo.getDisplayName());

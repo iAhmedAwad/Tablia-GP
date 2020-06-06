@@ -20,7 +20,7 @@
             android:layout_marginBottom="2dp"
             android:background="@drawable/circle"
             android:padding="3dp"
-            android:src="@drawable/ic_user" />
+            android:src="@drawable/placeholder" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/btnClose"
@@ -32,6 +32,7 @@
             android:layout_marginRight="2dp"
             android:layout_marginBottom="2dp"
             android:padding="3dp"
+            android:background="@drawable/rect_purple"
             android:src="@drawable/ic_close_black_24dp" />
 
 

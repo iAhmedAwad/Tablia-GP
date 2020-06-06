@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Spinner_Item">
+        <item>حلويات</item>
+        <item>مشويات</item>
+        <item>عصائر</item>
+        <item>مكرونات</item>
+        <item>محاشي</item>
+        <item>سلطات</item>
+        <item>مأكولات بحرية</item>
+        <item>أطباق رئيسية</item>
+        <item>مخبوزات</item>
+        <item>شوربات</item>
+        <item>أطباق جانبية</item>
+    </string-array>
+</resources>

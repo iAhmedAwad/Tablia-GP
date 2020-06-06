@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 
@@ -32,6 +33,16 @@ public class FilterActivity extends AppCompatActivity implements MultipleChoices
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_filter);
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+
+        finish();
+      }
+    });
     xSelectCategories = findViewById(R.id.xSelectCategories);
     xApply = findViewById(R.id.xApply);
 
@@ -86,7 +97,7 @@ public class FilterActivity extends AppCompatActivity implements MultipleChoices
           maxValue = value;
         }
 
-        xPriceTextView.setTextSize(24);
+        xPriceTextView.setTextSize(14);
         xPriceTextView.setText(minValue+ " - " + maxValue);
       }
     });

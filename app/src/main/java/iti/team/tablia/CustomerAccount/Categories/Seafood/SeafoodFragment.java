@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -26,6 +28,7 @@ public class SeafoodFragment extends Fragment {
   private RecyclerView recyclerView;
   private RecyclerView.Adapter mAdapter;
   private RecyclerView.LayoutManager layoutManager;
+  private ProgressBar progressBar;
 
   public static SeafoodFragment newInstance() {
     return new SeafoodFragment();
@@ -35,7 +38,10 @@ public class SeafoodFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                            @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fish_fragment, container, false);
+    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Seafood");
     recyclerView = view.findViewById(R.id.xFishRecycler);
+    progressBar=view.findViewById(R.id.progressBar);
+    progressBar.setVisibility(View.VISIBLE);
     recyclerView.setHasFixedSize(true);
 
     layoutManager = new LinearLayoutManager(getContext());
@@ -45,6 +51,7 @@ public class SeafoodFragment extends Fragment {
     mViewModel.getFishItems(Constants.SEAFOOD).observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
       @Override
       public void onChanged(ArrayList<MenuPojo> menuPojos) {
+        progressBar.setVisibility(View.GONE);
         mAdapter = new SeafoodAdapter(getContext(), menuPojos);
         recyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();

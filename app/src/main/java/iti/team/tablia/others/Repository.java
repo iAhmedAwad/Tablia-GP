@@ -643,7 +643,23 @@ public class Repository {
         });
         return liveData;
     }
+    public MutableLiveData<MenuPojo> getDisItemDetails(String chefId, String itemId) {
+        final MutableLiveData<MenuPojo> liveData = new MutableLiveData<>();
+        reference = FirebaseDatabase.getInstance().getReference("Disable").child(chefId).child(itemId);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                MenuPojo menuPojo = dataSnapshot.getValue(MenuPojo.class);
+                liveData.setValue(menuPojo);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
+    }
     public MutableLiveData<ChefAccountSettings> getChefInfo(String chefId) {
         final MutableLiveData<ChefAccountSettings> liveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("chef_account_settings").child(chefId);

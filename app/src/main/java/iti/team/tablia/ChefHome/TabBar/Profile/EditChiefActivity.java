@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -46,7 +47,7 @@ import iti.team.tablia.others.Database;
 
 public class EditChiefActivity extends AppCompatActivity {
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
-    EditText name, address, orders, phone, desc;
+    EditText name, address, phone, desc;
     Button save;
     ImageView cam;
     CircleImageView prof;
@@ -71,13 +72,23 @@ public class EditChiefActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_chief);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         name = findViewById(R.id.id_name);
         address = findViewById(R.id.id_address);
         phone = findViewById(R.id.phone);
         desc = findViewById(R.id.desc);
-        orders = findViewById(R.id.num_orders);
+//        orders = findViewById(R.id.num_orders);
         save = findViewById(R.id.id_save_changes);
         cam = findViewById(R.id.id_edit_cam);
         prof = findViewById(R.id.id_profile_pic);
@@ -112,7 +123,7 @@ public class EditChiefActivity extends AppCompatActivity {
                 settings.setDisplayName(name.getText().toString());
                 settings.setBio(desc.getText().toString());
                 settings.setPhoneNumber(phone.getText().toString());
-                settings.setOrders(Integer.parseInt(orders.getText().toString()));
+//                settings.setOrders(Integer.parseInt(orders.getText().toString()));
                 settings.setAvailable(swicth.isChecked());
                 settings.setProfilePhoto(mypic);
 
@@ -230,7 +241,7 @@ public class EditChiefActivity extends AppCompatActivity {
         address.setText(chefSettings.getChefAccountSettings().getAddress());
         desc.setText(String.valueOf(chefSettings.getChefAccountSettings().getBio()));
         phone.setText(String.valueOf(chefSettings.getChefAccountSettings().getPhoneNumber()));
-        orders.setText(String.valueOf(chefSettings.getChefAccountSettings().getOrders()));
+//        orders.setText(String.valueOf(chefSettings.getChefAccountSettings().getOrders()));
         swicth.setChecked(chefSettings.getChefAccountSettings().isAvailable());
         mypic = chefSettings.getChefAccountSettings().getProfilePhoto();
         Bitmap bitmapload = StringToBitMap(chefSettings.getChefAccountSettings().getProfilePhoto());

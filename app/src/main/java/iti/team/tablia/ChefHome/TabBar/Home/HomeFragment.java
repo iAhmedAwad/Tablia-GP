@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class HomeFragment extends Fragment {
   private TextView top_item;
   private TextView avg_orders;
   private HomeViewModel homeViewModel;
+  private ProgressBar progressBar;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +38,8 @@ public class HomeFragment extends Fragment {
     followers_num = view.findViewById(R.id.followers_num);
     top_item = view.findViewById(R.id.top_item);
     avg_orders = view.findViewById(R.id.avg_orders);
+    progressBar = view.findViewById(R.id.progressBar);
+    progressBar.setVisibility(View.VISIBLE);
     homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
     homeViewModel.getChefData().observe(getViewLifecycleOwner(), new Observer<ChefAccountSettings>() {
       @Override
@@ -50,6 +54,7 @@ public class HomeFragment extends Fragment {
     homeViewModel.getOrdersAmount().observe(getViewLifecycleOwner(), new Observer<Double>() {
       @Override
       public void onChanged(Double amount) {
+        progressBar.setVisibility(View.GONE);
         sales.setText(amount + " EGP");
       }
     });
