@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import iti.team.tablia.Models.ChatList;
 import iti.team.tablia.Models.ChatUser;
 import iti.team.tablia.R;
 
@@ -47,14 +48,15 @@ public class ChatFragment extends Fragment {
         /**observe viewmodel to get chat list
          *
          */
-        chatViewModel.getChatList().observe(getActivity(), new Observer<List<ChatUser>>() {
+        chatViewModel.getChefChatList().observe(getViewLifecycleOwner(), new Observer<List<ChatUser>>() {
             @Override
-            public void onChanged(List<ChatUser> users) {
-              progressBar.setVisibility(View.GONE);
-                userAdapter = new UserAdapter(getContext(), users, true);
+            public void onChanged(List<ChatUser> chatUsers) {
+                progressBar.setVisibility(View.GONE);
+                userAdapter = new UserAdapter(getContext(), chatUsers, true);
                 recyclerView.setAdapter(userAdapter);
             }
         });
+
 
         /**
          *update token for push notification

@@ -127,7 +127,6 @@ public class MessageActivity extends AppCompatActivity {
   private void sendMessage(final String sender, final String receiver, String message) {
     messageViewModel.sendMessage(sender, receiver, message);
     messageViewModel.notifyUser(receiver, message, MessageActivity.this, notify);
-
   }
 
   public Bitmap StringToBitMap(String encodedString) {

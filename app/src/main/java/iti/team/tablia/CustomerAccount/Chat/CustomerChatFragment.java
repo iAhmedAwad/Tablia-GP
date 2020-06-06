@@ -54,14 +54,15 @@ public class CustomerChatFragment extends Fragment {
         /**observe viewmodel to get chat list
          *
          */
-        customerChatViewModel.getChatList().observe(getActivity(), new Observer<List<ChatUser>>() {
+        customerChatViewModel.getCustChatList().observe(getViewLifecycleOwner(), new Observer<List<ChatUser>>() {
             @Override
-            public void onChanged(List<ChatUser> users) {
-              progressBar.setVisibility(View.GONE);
-                userAdapter = new UserAdapter(getContext(), users, true);
+            public void onChanged(List<ChatUser> chatUsers) {
+                progressBar.setVisibility(View.GONE);
+                userAdapter = new UserAdapter(getContext(), chatUsers, true);
                 recyclerView.setAdapter(userAdapter);
             }
         });
+
 
         /**
          *update token for push notification

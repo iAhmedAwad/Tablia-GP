@@ -41,6 +41,7 @@ import iti.team.tablia.CustomerAccount.CustomerOrder.CompleteOrder;
 import iti.team.tablia.Models.CartGroupPojo;
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.Models.Chat;
+import iti.team.tablia.Models.ChatList;
 import iti.team.tablia.Models.ChatUser;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Chef.ChefSettings;
@@ -66,7 +67,7 @@ public class Repository {
 
     private FirebaseUser firebaseUser;
     private Set<String> usersList;
-    private List<ChatUser> chatUserList;
+//    private List<ChatUser> chatUserList;
     private List<OrderPojo> orderPojos;
     private List<Chat> chats;
     private String lastMsg;
@@ -89,29 +90,20 @@ public class Repository {
      *
      * @return
      */
-    public MutableLiveData<List<ChatUser>> getChatList() {
-        final MutableLiveData<List<ChatUser>> userChatList = new MutableLiveData<>();
-        usersList = new HashSet<>();
-        reference = FirebaseDatabase.getInstance().getReference("Chats");
+    public MutableLiveData<List<ChatUser>> getCustChatList() {
+        final List<ChatList> list = new ArrayList<>();
+        final MutableLiveData<List<ChatUser>> liveData = new MutableLiveData<>();
+        reference = FirebaseDatabase.getInstance().getReference("cust_chat_list")
+                .child(firebaseUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                usersList.clear();
+                list.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Chat chat = snapshot.getValue(Chat.class);
-                    if (chat.getSender().equals(firebaseUser.getUid())) {
-                        if (!usersList.contains(chat.getReceiver())) {
-                            usersList.add(chat.getReceiver());
-                        }
-                    }
-                    if (chat.getReceiver().equals(firebaseUser.getUid())) {
-                        if (!usersList.contains(chat.getSender())) {
-                            usersList.add(chat.getSender());
-                        }
-                    }
+                    ChatList chatList = snapshot.getValue(ChatList.class);
+                    list.add(chatList);
                 }
-                readChat(userChatList);
-
+                readChat(list,liveData, "cust");
             }
 
             @Override
@@ -119,7 +111,31 @@ public class Repository {
 
             }
         });
-        return userChatList;
+        return liveData;
+    }
+
+    public MutableLiveData<List<ChatUser>> getChefChatList() {
+        final List<ChatList> list = new ArrayList<>();
+        final MutableLiveData<List<ChatUser>> liveData = new MutableLiveData<>();
+        reference = FirebaseDatabase.getInstance().getReference("chef_chat_list")
+                .child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    ChatList chatList = snapshot.getValue(ChatList.class);
+                    list.add(chatList);
+                }
+                readChat(list,liveData ,"chef");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
     }
 
     /**
@@ -127,57 +143,51 @@ public class Repository {
      *
      * @param userChatList
      */
-    private void readChat(final MutableLiveData<List<ChatUser>> userChatList) {
+    private void readChat(final List<ChatList> userChatList, final MutableLiveData<List<ChatUser>>liveData, String type) {
 
-        chatUserList = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference();
-        valueEventListener = reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+       final List<ChatUser> chatUserList = new ArrayList<>();
+        if(type.equals("chef")){
+             reference=FirebaseDatabase.getInstance().getReference("customer_account_settings");
+             reference.addValueEventListener(new ValueEventListener() {
+                 @Override
+                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                     chatUserList.clear();
+                     for (ChatList chatList:userChatList){
+                         CustomerAccountSettings settings = dataSnapshot.child(chatList.getCustId())
+                                 .getValue(CustomerAccountSettings.class);
+                         ChatUser user = new ChatUser(chatList.getCustId(),settings.getDisplayName()
+                                 ,settings.getProfilePhoto(),settings.getStatus(),chatList.getLastMsgTime(),chatList.getLastMsg());
+                         chatUserList.add(user);
+                     }
+                     liveData.setValue(chatUserList);
+                 }
 
-                chatUserList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.child("users").getChildren()) {
-                    User user = snapshot.getValue(User.class);
-                    if (usersList.contains(user.getUser_id())) {
-                        Log.i("TAG", String.valueOf(R.string.typeChef));
-                        if (user.getType().equals("chef")) {
-                            ChefAccountSettings chef = dataSnapshot.child("chef_account_settings")
-                                    .child(user.getUser_id())
-                                    .getValue(ChefAccountSettings.class);
-                            ChefSettings chefSettings = new ChefSettings(user, chef);
-                            ChatUser chatUser = new ChatUser(chefSettings.getUser().getUser_id(),
-                                    chefSettings.getUser().getUsername(),
-                                    chefSettings.getChefAccountSettings().getProfilePhoto(),
-                                    chefSettings.getChefAccountSettings().getStatus());
-                            if (!chatUserList.contains(chatUser)) {
-                                chatUserList.add(chatUser);
-                            }
-                        } else {
-                            CustomerAccountSettings customer = dataSnapshot.child("customer_account_settings")
-                                    .child(user.getUser_id())
-                                    .getValue(CustomerAccountSettings.class);
-                            CustomerSettings customerSettings = new CustomerSettings(user, customer);
+                 @Override
+                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            ChatUser chatUser = new ChatUser(customerSettings.getUser().getUser_id(),
-                                    customerSettings.getUser().getUsername(),
-                                    customerSettings.getCustomerAccountSettings().getProfilePhoto(),
-                                    customerSettings.getCustomerAccountSettings().getStatus());
-                            if (!chatUserList.contains(chatUser)) {
-                                chatUserList.add(chatUser);
-                            }
-                        }
+                 }
+             });
+        }else{
+            reference=FirebaseDatabase.getInstance().getReference("chef_account_settings");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (ChatList chatList:userChatList){
+                        ChefAccountSettings settings = dataSnapshot.child(chatList.getChefId())
+                                .getValue(ChefAccountSettings.class);
+                        ChatUser user = new ChatUser(chatList.getChefId(),settings.getDisplayName()
+                                ,settings.getProfilePhoto(),settings.getStatus(),chatList.getLastMsgTime(),chatList.getLastMsg());
+                        chatUserList.add(user);
                     }
+                    liveData.setValue(chatUserList);
                 }
 
-                userChatList.setValue(chatUserList);
-                reference.removeEventListener(valueEventListener);
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+                }
+            });
+        }
     }
 
     /**
@@ -266,6 +276,45 @@ public class Repository {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         Chat chat = new Chat(sender, receiver, message, false);
         reference.child("Chats").push().setValue(chat);
+        setChatList(sender, receiver, message);
+    }
+
+    private void setChatList(final String sender, final String receiver, final String message) {
+        reference = FirebaseDatabase.getInstance().getReference("users");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.child(sender).getValue(User.class);
+                ChatList chatList = new ChatList();
+                chatList.setLastMsg(message);
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date date = new Date();
+                chatList.setLastMsgTime(dateFormat.format(date));
+
+                if (user.getType().equals("chef")) {
+                    chatList.setChefId(sender);
+                    chatList.setCustId(receiver);
+                } else {
+                    chatList.setChefId(receiver);
+                    chatList.setCustId(sender);
+                }
+
+                FirebaseDatabase.getInstance().getReference("chef_chat_list")
+                        .child(chatList.getChefId())
+                        .child(chatList.getCustId())
+                        .setValue(chatList);
+                FirebaseDatabase.getInstance().getReference("cust_chat_list")
+                        .child(chatList.getCustId())
+                        .child(chatList.getChefId())
+                        .setValue(chatList);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /**
@@ -377,7 +426,7 @@ public class Repository {
                 ChefAccountSettings chefAccountSettings = dataSnapshot.getValue(ChefAccountSettings.class);
                 ChatUser chatUser = new ChatUser(userId, chefAccountSettings.getUserName(),
                         chefAccountSettings.getProfilePhoto(),
-                        chefAccountSettings.getStatus());
+                        chefAccountSettings.getStatus(),"none","none");
                 user.setValue(chatUser);
             }
 
@@ -397,7 +446,7 @@ public class Repository {
                 CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
                 ChatUser chatUser = new ChatUser(userId, settings.getUserName(),
                         settings.getProfilePhoto(),
-                        settings.getStatus());
+                        settings.getStatus(),"none","none");
                 user.setValue(chatUser);
             }
 
@@ -491,7 +540,8 @@ public class Repository {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
                     String chefId = snapshot.getKey();
-                    ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto(), user.getStatus());
+                    ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto()
+                            , user.getStatus(),"none","none");
                     chefList.add(chatUser);
 
                 }
@@ -528,7 +578,8 @@ public class Repository {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
                         String chefId = snapshot.getKey();
-                        ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto(), user.getStatus());
+                        ChatUser chatUser = new ChatUser(chefId, user.getUserName()
+                                , user.getProfilePhoto(), user.getStatus(),"none","none");
                         chefList.add(chatUser);
 
                     }
@@ -1209,9 +1260,9 @@ public class Repository {
                     Rating rating = snapshot.getValue(Rating.class);
                     totalRating += rating.getRating();
                 }
-                HashMap<String,Object> hashMap = new HashMap<>();
-                double rate = (totalRating/(float)count);
-                hashMap.put("rating",rate);
+                HashMap<String, Object> hashMap = new HashMap<>();
+                double rate = (totalRating / (float) count);
+                hashMap.put("rating", rate);
                 FirebaseDatabase.getInstance().getReference("chef_account_settings")
                         .child(chefId).updateChildren(hashMap);
             }

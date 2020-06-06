@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import iti.team.tablia.Models.ChatList;
 import iti.team.tablia.Models.ChatUser;
 import iti.team.tablia.others.Repository;
 
@@ -20,11 +21,14 @@ public class ChatViewModel extends ViewModel {
     chatList = new MutableLiveData<>();
     repository = new Repository();
   }
-
-  public MutableLiveData<List<ChatUser>> getChatList() {
-    chatList = repository.getChatList();
-    return chatList;
+  public MutableLiveData<List<ChatUser>> getChefChatList(){
+    return repository.getChefChatList();
   }
+
+//  public MutableLiveData<List<ChatUser>> getChatList() {
+//    chatList = repository.getChatList();
+//    return chatList;
+//  }
 
   public void updateToken(Activity activity) {
     repository.updateToken(activity);
