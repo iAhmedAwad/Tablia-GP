@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import iti.team.tablia.ChefHome.DisableMenuItems;
 import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.AddMenu;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.R;
@@ -75,6 +76,9 @@ public class MenuFragment extends Fragment {
       @Override
       public void onClick(View view) {
         Toast.makeText(getContext(), "Disabled items", Toast.LENGTH_SHORT).show();
+
+        Intent goToDisable = new Intent(getActivity(), DisableMenuItems.class);
+        startActivity(goToDisable);
       }
     });
 

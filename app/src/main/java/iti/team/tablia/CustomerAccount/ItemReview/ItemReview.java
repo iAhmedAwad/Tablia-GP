@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,12 +22,15 @@ public class ItemReview extends AppCompatActivity {
    public ItemReviewViewModel reviewViewModel;
     ItemReviewAdaptor adaptor;
     String itemId;
+    ProgressBar progressBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_review);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         itemId = intent.getStringExtra("itemID");
         reviewViewModel = new ViewModelProvider(this).get(ItemReviewViewModel.class);
@@ -35,6 +40,7 @@ public class ItemReview extends AppCompatActivity {
         reviewViewModel.getReviews(itemId).observe(this, new Observer<ArrayList<Review>>() {
             @Override
             public void onChanged(ArrayList<Review> reviews) {
+                progressBar.setVisibility(View.GONE);
                 adaptor = new ItemReviewAdaptor(ItemReview.this,reviews);
                 myrecyler.setAdapter(adaptor);
                 adaptor.notifyDataSetChanged();

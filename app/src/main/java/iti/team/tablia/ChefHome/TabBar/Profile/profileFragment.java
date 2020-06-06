@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class profileFragment extends Fragment {
     ImageView edit;
     CircleImageView isAavaliable;
     Bitmap bitmap;
+    ProgressBar progressBar;
     private static final String TAG = "profileFragment";
     //Firebase
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -51,6 +53,8 @@ public class profileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_chief, container, false);
+        progressBar =view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         name = view.findViewById(R.id.id_name);
         prfo_img = view.findViewById(R.id.id_profile_pic);
         bio = view.findViewById(R.id.id_description);
@@ -133,6 +137,7 @@ public class profileFragment extends Fragment {
     }
 
     private void setProfileWidgets(ChefSettings chefSettings) {
+        progressBar.setVisibility(View.GONE);
 
         ChefAccountSettings settings = chefSettings.getChefAccountSettings();
         address.setText(settings.getAddress());

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 
 import androidx.annotation.NonNull;
@@ -49,6 +50,7 @@ public class EditChiefActivity extends AppCompatActivity {
     Button save;
     ImageView cam;
     CircleImageView prof;
+    ProgressBar progressBar;
     Uri img;
     String mypic;
     Bitmap bitmap;
@@ -69,6 +71,8 @@ public class EditChiefActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_chief);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         name = findViewById(R.id.id_name);
         address = findViewById(R.id.id_address);
         phone = findViewById(R.id.phone);
@@ -221,6 +225,7 @@ public class EditChiefActivity extends AppCompatActivity {
     }
 
     private void setProfileWidgets(ChefSettings chefSettings) {
+        progressBar.setVisibility(View.GONE);
         name.setText(chefSettings.getUser().getFullName());
         address.setText(chefSettings.getChefAccountSettings().getAddress());
         desc.setText(String.valueOf(chefSettings.getChefAccountSettings().getBio()));

@@ -34,7 +34,7 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="CustName"
+                    android:text="@string/custname"
                     android:textStyle="bold"
                     android:textSize="17sp"
                     android:textColor="@color/colorAccent" />
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textStyle="bold"
-                    android:text="ItemName" />
+                    android:text="@string/itemname" />
 
                 <RatingBar
                     android:id="@+id/id_ratingBar"
