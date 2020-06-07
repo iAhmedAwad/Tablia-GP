@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.libraries.places.api.Places;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -43,14 +45,17 @@ import iti.team.tablia.Models.Chef.ChefSettings;
 import iti.team.tablia.Models.User;
 import iti.team.tablia.R;
 import iti.team.tablia.others.Database;
+import iti.team.tablia.others.PlacesAutoSuggestAdapter;
 
 
 public class EditChiefActivity extends AppCompatActivity {
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
-    EditText name, address, phone, desc;
+    EditText name,  phone, desc;
     Button save;
     ImageView cam;
     CircleImageView prof;
+    private AutoCompleteTextView address;
+    private final String mAPIKey = "AIzaSyDFhO6SEcewKE7jQUjyE-XwqbhlODfObEA";
     ProgressBar progressBar;
     Uri img;
     String mypic;
@@ -86,6 +91,12 @@ public class EditChiefActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         name = findViewById(R.id.id_name);
         address = findViewById(R.id.id_address);
+
+        if (!Places.isInitialized()) {
+            // Initialize the SDK
+            Places.initialize(this, mAPIKey);
+        }
+        address.setAdapter(new PlacesAutoSuggestAdapter(this, android.R.layout.simple_list_item_1));
         phone = findViewById(R.id.phone);
         desc = findViewById(R.id.desc);
 //        orders = findViewById(R.id.num_orders);
