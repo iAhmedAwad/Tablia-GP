@@ -48,6 +48,7 @@ public class CustomerProfileFragment extends Fragment {
     private ImageView xEditProfile;
     private LinearLayout following_link;
     private ProgressBar progressBar;
+    public static CustomerSettings customer;
 
     public CustomerProfileFragment() {
         // Required empty public constructor
@@ -96,6 +97,7 @@ public class CustomerProfileFragment extends Fragment {
         model.getCustomerSettings().observe(getViewLifecycleOwner(), new Observer<CustomerSettings>() {
             @Override
             public void onChanged(CustomerSettings customerSettings) {
+                customer= customerSettings;
                 progressBar.setVisibility(View.GONE);
                 setProfileWidgets(customerSettings);
                 if (customerSettings != null) {

@@ -54,228 +54,229 @@ import iti.team.tablia.util.Permissions;
  * A simple {@link Fragment} subclass.
  */
 public class CustomerEditProfileFragment extends Fragment {
-  public static final String TAG = "EditProfileFragment";
-  private static final int CAMERA_REQUEST_CODE = 3;
-  Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
+    public static final String TAG = "EditProfileFragment";
+    private static final int CAMERA_REQUEST_CODE = 3;
+    Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
 
-  Uri img;
-  String mypic;
-  Bitmap bitmap;
-  //PlacesAPI
-  private final String mAPIKey = "AIzaSyDFhO6SEcewKE7jQUjyE-XwqbhlODfObEA";
-  //Firebase
-  private FirebaseAuth.AuthStateListener mAuthListener;
-  private FirebaseAuth mAuth;
-  private FirebaseDatabase mFirebaseDatabase;
-  private DatabaseReference mDatabaseReference;
-  private Database database;
-  //Widgets
-  private CircleImageView xProfileImage;
-  ImageView cam;
-  private AutoCompleteTextView xCusomerAddress;
-  private CustomerSettings mCustomerSettings;
-  private EditText xCustomerName, xCustomerPhone, xCustomerDescription;
-  private Button xSaveChanges;
-  private CustomerEditProfileViewModel model;
-  //vars
-
-
-  public CustomerEditProfileFragment() {
-    // Required empty public constructor
-  }
-
-  @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    model = new ViewModelProvider(getActivity()).get(CustomerEditProfileViewModel.class);
-  }
-
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_customer_edit_profile, container, false);
-    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Edit Profile");
+    Uri img;
+    String mypic;
+    Bitmap bitmap;
+    //PlacesAPI
+    private final String mAPIKey = "AIzaSyDFhO6SEcewKE7jQUjyE-XwqbhlODfObEA";
+    //Firebase
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+    private Database database;
+    //Widgets
+    private CircleImageView xProfileImage;
+    ImageView cam;
+    private AutoCompleteTextView xCusomerAddress;
+    private CustomerSettings mCustomerSettings;
+    private EditText xCustomerName, xCustomerPhone, xCustomerDescription;
+    private Button xSaveChanges;
+    private CustomerEditProfileViewModel model;
+    //vars
 
 
-    xProfileImage = view.findViewById(R.id.xprofile_image);
-    xCusomerAddress = view.findViewById(R.id.xCustomerAddress);
-    xCustomerName = view.findViewById(R.id.xCustomerName);
-    xCustomerPhone = view.findViewById(R.id.xCustomerPhone);
-    xCustomerDescription = view.findViewById(R.id.xCustomerDescription);
-    xSaveChanges = view.findViewById(R.id.xEditData);
-    cam = view.findViewById(R.id.id_edit_cam);
-    database = new Database(getActivity());
-    model.getCustomerSettings().observe(getViewLifecycleOwner(), new Observer<CustomerSettings>() {
-      @Override
-      public void onChanged(CustomerSettings customerSettings) {
-        setProfileWidgets(customerSettings);
-        mCustomerSettings = new CustomerSettings();
-        mCustomerSettings.setUser(customerSettings.getUser());
-        mCustomerSettings.setCustomerAccountSettings(customerSettings.getCustomerAccountSettings());
-      }
-    });
+    public CustomerEditProfileFragment() {
+        // Required empty public constructor
+    }
 
-    //setupFirebaseAuth();
-    initComponents();
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        model = new ViewModelProvider(getActivity()).get(CustomerEditProfileViewModel.class);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_customer_edit_profile, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Edit Profile");
+
+
+        xProfileImage = view.findViewById(R.id.xprofile_image);
+        xCusomerAddress = view.findViewById(R.id.xCustomerAddress);
+        xCustomerName = view.findViewById(R.id.xCustomerName);
+        xCustomerPhone = view.findViewById(R.id.xCustomerPhone);
+        xCustomerDescription = view.findViewById(R.id.xCustomerDescription);
+        xSaveChanges = view.findViewById(R.id.xEditData);
+        cam = view.findViewById(R.id.id_edit_cam);
+        database = new Database(getActivity());
+        model.getCustomerSettings().observe(getViewLifecycleOwner(), new Observer<CustomerSettings>() {
+            @Override
+            public void onChanged(CustomerSettings customerSettings) {
+//        setProfileWidgets(customerSettings);
+
+                mCustomerSettings = new CustomerSettings();
+                mCustomerSettings.setUser(customerSettings.getUser());
+                mCustomerSettings.setCustomerAccountSettings(customerSettings.getCustomerAccountSettings());
+            }
+        });
+        setProfileWidgets(CustomerProfileFragment.customer);
+
+        //setupFirebaseAuth();
+        initComponents();
 //    initProfileImage(xProfileImage);
-    return view;
-  }
+        return view;
+    }
 
 
-  /**
-   * sets thee fragment widgets with the data received from database
-   *
-   * @param customerSettings
-   */
-  private void setProfileWidgets(CustomerSettings customerSettings) {
+    /**
+     * sets thee fragment widgets with the data received from database
+     *
+     * @param customerSettings
+     */
+    private void setProfileWidgets(CustomerSettings customerSettings) {
 
-    Log.d(TAG, "Setting widgets with data retrieved from Firebase");
-    User user = customerSettings.getUser();
-    CustomerAccountSettings settings = customerSettings.getCustomerAccountSettings();
+        Log.d(TAG, "Setting widgets with data retrieved from Firebase");
+        User user = customerSettings.getUser();
+        CustomerAccountSettings settings = customerSettings.getCustomerAccountSettings();
 //    GlobalImageLoader.setImage(getActivity(), xProfileImage, settings.getProfilePhoto());
 
 
-    xCustomerName.setText(user.getFullName());
-    xCustomerPhone.setText(settings.getPhoneNumber());
-    xCusomerAddress.setText(settings.getAddress());
-    xCustomerDescription.setText(settings.getBio());
-    mypic = settings.getProfilePhoto();
-    xProfileImage.setImageBitmap(GlobalImageLoader.StringToBitMap(settings.getProfilePhoto()));
+        xCustomerName.setText(user.getFullName());
+        xCustomerPhone.setText(settings.getPhoneNumber());
+        xCusomerAddress.setText(settings.getAddress());
+        xCustomerDescription.setText(settings.getBio());
+        mypic = settings.getProfilePhoto();
+        xProfileImage.setImageBitmap(GlobalImageLoader.StringToBitMap(settings.getProfilePhoto()));
 
 
-
-  }
-
-  /**
-   * initializes the Address AutoCompleteTextView
-   * initializes the Save Changes button
-   */
-
-  private void initComponents() {
-    PlaceApi placeApi = new PlaceApi();
-
-    if (!Places.isInitialized()) {
-      // Initialize the SDK
-      Places.initialize(getActivity(), mAPIKey);
     }
-    // Create a new Places client instance
-    PlacesClient mPlacesClient = Places.createClient(getActivity());
-    xCusomerAddress.setAdapter(new PlacesAutoSuggestAdapter(getActivity(), android.R.layout.simple_list_item_1));
 
-    cam.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        SelectImage();
+    /**
+     * initializes the Address AutoCompleteTextView
+     * initializes the Save Changes button
+     */
 
-      }
-    });
+    private void initComponents() {
+        PlaceApi placeApi = new PlaceApi();
 
-    xSaveChanges.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        editCustomer(mCustomerSettings);
+        if (!Places.isInitialized()) {
+            // Initialize the SDK
+            Places.initialize(getActivity(), mAPIKey);
+        }
+        // Create a new Places client instance
+        PlacesClient mPlacesClient = Places.createClient(getActivity());
+        xCusomerAddress.setAdapter(new PlacesAutoSuggestAdapter(getActivity(), android.R.layout.simple_list_item_1));
+
+        cam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelectImage();
+
+            }
+        });
+
+        xSaveChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editCustomer(mCustomerSettings);
 
 //        if (bitmap != null) {
 //          model.uploadProfilePhoto(bitmap);
 //        }
-        navigateToProfileFragment();
+                navigateToProfileFragment();
 
-      }
-    });
+            }
+        });
 
-  }
-  public void SelectImage() {
+    }
 
-    final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
-    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-    builder.setTitle("Add Image");
-    builder.setItems(items, new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int which) {
+    public void SelectImage() {
 
-        if (items[which].equals("Camera")) {
+        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Add Image");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-          Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-          startActivityForResult(intentCamera, REQUEST_CAMERA);
+                if (items[which].equals("Camera")) {
 
-        } else if (items[which].equals("Gallery")) {
+                    Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intentCamera, REQUEST_CAMERA);
 
-          Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-          intentGallery.setType("image/*");
-          startActivityForResult(intentGallery.createChooser(intentGallery, "SelectFile"), SELECT_FILE);
+                } else if (items[which].equals("Gallery")) {
 
-        } else {
-          dialog.dismiss();
-        }
-      }
-    });
-    builder.show();
-  }
+                    Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intentGallery.setType("image/*");
+                    startActivityForResult(intentGallery.createChooser(intentGallery, "SelectFile"), SELECT_FILE);
 
-
-  private void initProfileImage(CircleImageView circleImageView) {
-    circleImageView.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        if (Permissions.checkPermission(getActivity(),
-            Permissions.CAMERA_PERMISSIONS)) {
-          Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-          startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
-        }
-      }
-    });
-    //database.uploadProfilePhoto(mImageUrl);
-  }
-
-  public void editCustomer(CustomerSettings customerSettings) {
-
-    String name = xCustomerName.getText().toString();
-    String phone = xCustomerPhone.getText().toString();
-    String address = xCusomerAddress.getText().toString();
-    String description = xCustomerDescription.getText().toString();
+                } else {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
 
 
-    customerSettings.getUser().setFullName(name);
-    customerSettings.getCustomerAccountSettings().setDisplayName(name);
-    customerSettings.getCustomerAccountSettings().setPhoneNumber(phone);
-    customerSettings.getCustomerAccountSettings().setAddress(address);
-    customerSettings.getCustomerAccountSettings().setBio(description);
-    customerSettings.getCustomerAccountSettings().setProfilePhoto(mypic);
+    private void initProfileImage(CircleImageView circleImageView) {
+        circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Permissions.checkPermission(getActivity(),
+                        Permissions.CAMERA_PERMISSIONS)) {
+                    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+                }
+            }
+        });
+        //database.uploadProfilePhoto(mImageUrl);
+    }
+
+    public void editCustomer(CustomerSettings customerSettings) {
+
+        String name = xCustomerName.getText().toString();
+        String phone = xCustomerPhone.getText().toString();
+        String address = xCusomerAddress.getText().toString();
+        String description = xCustomerDescription.getText().toString();
+
+
+        customerSettings.getUser().setFullName(name);
+        customerSettings.getCustomerAccountSettings().setDisplayName(name);
+        customerSettings.getCustomerAccountSettings().setPhoneNumber(phone);
+        customerSettings.getCustomerAccountSettings().setAddress(address);
+        customerSettings.getCustomerAccountSettings().setBio(description);
+        customerSettings.getCustomerAccountSettings().setProfilePhoto(mypic);
 //customerSettings.getCustomerAccountSettings().setProfilePhoto(mypic);
-    model.editCustomer(customerSettings);
-  }
+        model.editCustomer(customerSettings);
+    }
 
-  @Override
-  public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    if (resultCode ==Activity.RESULT_OK && data != null) {
-      if (requestCode == REQUEST_CAMERA) {
-        bitmap = (Bitmap) data.getExtras().get("data");
-        Log.i("nopic",GlobalImageLoader.BitMapToString(bitmap));
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            if (requestCode == REQUEST_CAMERA) {
+                bitmap = (Bitmap) data.getExtras().get("data");
+                Log.i("nopic", GlobalImageLoader.BitMapToString(bitmap));
 
-        xProfileImage.setImageBitmap(bitmap);
-        mypic = GlobalImageLoader.BitMapToString(bitmap);
+                xProfileImage.setImageBitmap(bitmap);
+                mypic = GlobalImageLoader.BitMapToString(bitmap);
 
-      } else if (requestCode == SELECT_FILE) {
+            } else if (requestCode == SELECT_FILE) {
 
-        img = data.getData();
-        try {
-          bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), img);
-          xProfileImage.setImageBitmap(bitmap);
-          mypic = GlobalImageLoader.BitMapToString(bitmap);
+                img = data.getData();
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), img);
+                    xProfileImage.setImageBitmap(bitmap);
+                    mypic = GlobalImageLoader.BitMapToString(bitmap);
 
 //        xProfileImage.setImageBitmap(bitmap);
-        Log.i("nopic", bitmap.toString());
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+                    Log.i("nopic", bitmap.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 
 //        Log.i("nopic", bitmap.toString());
 //        Log.i("nopic",GlobalImageLoader.BitMapToString(bitmap));
-      }
-    }
-
+            }
+        }
 
 
 //    if (requestCode == CAMERA_REQUEST_CODE) {
@@ -307,30 +308,30 @@ public class CustomerEditProfileFragment extends Fragment {
 //*/
 //    } else {
 //    }
-  }
-
-  private boolean isRootTask() {
-    if (getActivity().getTaskId() == 0) {
-      return true;
-    } else {
-      return false;
     }
-  }
 
-  public void navigateToProfileFragment() {
-    if(getActivity().getClass().equals(EditCustProfile.class)){
-      getActivity().finish();
-    }else {
-      getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-              new CustomerProfileFragment()).commit();
+    private boolean isRootTask() {
+        if (getActivity().getTaskId() == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
-  }
 
-  @Override
-  public void onDestroyView() {
-    super.onDestroyView();
-    model.getCustomerSettings().removeObservers(getViewLifecycleOwner());
-  }
+    public void navigateToProfileFragment() {
+        if (getActivity().getClass().equals(EditCustProfile.class)) {
+            getActivity().finish();
+        } else {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new CustomerProfileFragment()).commit();
+        }
+    }
+
+//  @Override
+//  public void onDestroyView() {
+//    super.onDestroyView();
+//    model.getCustomerSettings().removeObservers(getViewLifecycleOwner());
+//  }
 
   /*
        ----------------------------- Firebase setup ---------------------------------
