@@ -70,7 +70,7 @@ public class FilterActivity extends AppCompatActivity implements MultipleChoices
         intent.putExtra(FilteredDataActivity.INCOMING_MIN, minValue);
         intent.putExtra(FilteredDataActivity.INCOMING_MAX, maxValue);
 
-        Log.d("filterx", "Intent is out having min and max of"+ min +" & "+ max);
+        //Log.d("filterx", "Intent is out having min and max of"+ min +" & "+ max);
 
         startActivity(intent);
       }

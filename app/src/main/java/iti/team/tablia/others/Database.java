@@ -697,10 +697,10 @@ public class Database {
 
                 list.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Log.d("filterx", "first loop");
+                   // Log.d("filterx", "first loop");
 
                     for (DataSnapshot dsx : ds.getChildren()) {
-                        Log.d("filterx", "second loop");
+                      //  Log.d("filterx", "second loop");
                         MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
                         if (categoriesList.contains(menuPojo.getCategory())
                                 && menuPojo.getPriceItem() >= min
@@ -730,7 +730,7 @@ public class Database {
      * return all the menu items
      */
 
-    public MutableLiveData<ArrayList<MenuPojo>> getAllMenuItems() {
+    public MutableLiveData<ArrayList<MenuPojo>> getAllMenuItemsInRange(final double min, final double max) {
         final MutableLiveData<ArrayList<MenuPojo>> listMutableLiveData =
                 new MutableLiveData<ArrayList<MenuPojo>>();
 
@@ -748,7 +748,12 @@ public class Database {
                     for (DataSnapshot dsx : ds.getChildren()) {
                         MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
 
+                        if (menuPojo.getPriceItem() >= min
+                            && menuPojo.getPriceItem() <= max
+                        ){
+
                         list.add(menuPojo);
+                        }
 
                     }
                 }
@@ -870,7 +875,6 @@ public class Database {
      * @param chefId
      */
     public void followChef(String chefId) {
-        //TODO increment the following number of the customer by 1
 
         final DatabaseReference ref = FirebaseDatabase.getInstance()
                 .getReference(Constants.customerAccountSettingsNode)
@@ -959,7 +963,6 @@ public class Database {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         followingArrayList.clear();
                                         for (DataSnapshot dsx : dataSnapshot.getChildren()) {
-                                            //TODO make sure this is right huh!
 
                                             if (chefIDLis.contains(dsx.getKey())) {
                                                 Following following = new Following();
@@ -973,7 +976,6 @@ public class Database {
                                             }
                                         }
                                         followingMutableLiveData.setValue(followingArrayList);
-                                        //TODO check!
                                         ref.child(Constants.chefAccountSettingsNode).removeEventListener(this);
                                     }
 
@@ -1015,7 +1017,6 @@ public class Database {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 chefIDLis.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    //TODO make sure this works
                     chefIDLis.add(ds.getValue(String.class));
                 }
                 ref.child(Constants.chefAccountSettingsNode)
@@ -1024,7 +1025,6 @@ public class Database {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 followingArrayList.clear();
                                 for (DataSnapshot dsx : dataSnapshot.getChildren()) {
-                                    //TODO make sure this is right huh!
 
                                     if (chefIDLis.contains(dsx.getKey())) {
                                         Following following = new Following();
@@ -1038,7 +1038,6 @@ public class Database {
                                     }
                                 }
                                 followingMutableLiveData.setValue(followingArrayList);
-                                //TODO check!
                                 ref.child(Constants.chefAccountSettingsNode).removeEventListener(this);
                             }
 
@@ -1175,7 +1174,6 @@ public class Database {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         menuPojoArrayList.clear();
                                         for (DataSnapshot dsx : dataSnapshot.getChildren()) {
-                                            //TODO make sure this is right huh!
 
                                             if (chefIDLis.contains(dsx.getKey())) {
 
