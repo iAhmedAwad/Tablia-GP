@@ -20,7 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ChefHome.DisabledItemDetails"></activity>
-        <activity android:name=".ChefHome.TabBar.Profile.ChefFollowers.ChefFollowersList" />
         <activity android:name=".ChefHome.TabBar.Profile.Reviews.ChefReviewChefAcc" />
         <activity android:name=".CustomerAccount.ItemReview.ItemReview" />
         <activity android:name=".ChefHome.TabBar.Order.ChefOrderHistory" />

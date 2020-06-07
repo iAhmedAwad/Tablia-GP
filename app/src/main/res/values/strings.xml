@@ -72,7 +72,7 @@
     <string name="submit">submit</string>
 
     <!--  Chef Profiles by Yasmine -->
-    <string name="availability">Availability</string>
+    <string name="availability">Available</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="phone">Phone</string>

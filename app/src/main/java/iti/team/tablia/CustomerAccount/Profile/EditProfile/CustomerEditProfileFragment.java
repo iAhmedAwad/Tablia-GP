@@ -24,6 +24,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.libraries.places.api.Places;
@@ -83,13 +84,27 @@ public class CustomerEditProfileFragment extends Fragment {
     // Required empty public constructor
   }
 
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    model = new ViewModelProvider(getActivity()).get(CustomerEditProfileViewModel.class);
+  }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_customer_edit_profile, container, false);
     ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Edit Profile");
-    model = ViewModelProviders.of(this).get(CustomerEditProfileViewModel.class);
+
+
+    xProfileImage = view.findViewById(R.id.xprofile_image);
+    xCusomerAddress = view.findViewById(R.id.xCustomerAddress);
+    xCustomerName = view.findViewById(R.id.xCustomerName);
+    xCustomerPhone = view.findViewById(R.id.xCustomerPhone);
+    xCustomerDescription = view.findViewById(R.id.xCustomerDescription);
+    xSaveChanges = view.findViewById(R.id.xEditData);
+    cam = view.findViewById(R.id.id_edit_cam);
+    database = new Database(getActivity());
     model.getCustomerSettings().observe(getViewLifecycleOwner(), new Observer<CustomerSettings>() {
       @Override
       public void onChanged(CustomerSettings customerSettings) {
@@ -99,14 +114,7 @@ public class CustomerEditProfileFragment extends Fragment {
         mCustomerSettings.setCustomerAccountSettings(customerSettings.getCustomerAccountSettings());
       }
     });
-    xProfileImage = view.findViewById(R.id.xprofile_image);
-    xCusomerAddress = view.findViewById(R.id.xCustomerAddress);
-    xCustomerName = view.findViewById(R.id.xCustomerName);
-    xCustomerPhone = view.findViewById(R.id.xCustomerPhone);
-    xCustomerDescription = view.findViewById(R.id.xCustomerDescription);
-    xSaveChanges = view.findViewById(R.id.xEditData);
-    cam = view.findViewById(R.id.id_edit_cam);
-    database = new Database(getActivity());
+
     //setupFirebaseAuth();
     initComponents();
 //    initProfileImage(xProfileImage);
@@ -131,7 +139,10 @@ public class CustomerEditProfileFragment extends Fragment {
     xCustomerPhone.setText(settings.getPhoneNumber());
     xCusomerAddress.setText(settings.getAddress());
     xCustomerDescription.setText(settings.getBio());
+    mypic = settings.getProfilePhoto();
     xProfileImage.setImageBitmap(GlobalImageLoader.StringToBitMap(settings.getProfilePhoto()));
+
+
 
   }
 
@@ -250,17 +261,18 @@ public class CustomerEditProfileFragment extends Fragment {
         img = data.getData();
         try {
           bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), img);
+          xProfileImage.setImageBitmap(bitmap);
           mypic = GlobalImageLoader.BitMapToString(bitmap);
 
-        xProfileImage.setImageBitmap(bitmap);
+//        xProfileImage.setImageBitmap(bitmap);
         Log.i("nopic", bitmap.toString());
         } catch (IOException e) {
           e.printStackTrace();
         }
 
-        xProfileImage.setImageBitmap(bitmap);
-        Log.i("nopic", bitmap.toString());
-        Log.i("nopic",GlobalImageLoader.BitMapToString(bitmap));
+
+//        Log.i("nopic", bitmap.toString());
+//        Log.i("nopic",GlobalImageLoader.BitMapToString(bitmap));
       }
     }
 
@@ -314,8 +326,13 @@ public class CustomerEditProfileFragment extends Fragment {
     }
   }
 
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    model.getCustomerSettings().removeObservers(getViewLifecycleOwner());
+  }
 
-    /*
+  /*
        ----------------------------- Firebase setup ---------------------------------
     */
 
