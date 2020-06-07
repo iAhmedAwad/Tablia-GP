@@ -63,7 +63,7 @@ public class FilteredDataActivity extends AppCompatActivity {
     choices = intent.getStringExtra(INCOMING_CATEGORIES);
     min = intent.getDoubleExtra(INCOMING_MIN, 10.0);
     max = intent.getDoubleExtra(INCOMING_MAX, 1000.0);
-    Log.d("filterx", "Intent is INCOMING having min and max of"+ min +" & "+ max);
+    //Log.d("filterx", "Intent is INCOMING having min and max of"+ min +" & "+ max);
 
     if (choices != null) {
       String[] arr = choices.split(",");
