@@ -23,6 +23,10 @@
 
 
         <item
+            android:id="@+id/nav_mainDishes"
+            android:icon="@drawable/ic_grill"
+            android:title="Main Dishes" />
+        <item
             android:id="@+id/nav_fish"
             android:icon="@drawable/ic_fish"
             android:title="Seafood" />
@@ -31,6 +35,49 @@
             android:id="@+id/nav_grilled"
             android:icon="@drawable/ic_grill"
             android:title="Grilled" />
+
+        <item
+            android:id="@+id/nav_baking"
+            android:icon="@drawable/ic_grill"
+            android:title="Baking" />
+
+
+        <item
+            android:id="@+id/nav_sideDishes"
+            android:icon="@drawable/ic_grill"
+            android:title="Side Dishes" />
+
+
+        <item
+            android:id="@+id/nav_macaroni"
+            android:icon="@drawable/ic_grill"
+            android:title="Macaroni" />
+
+        <item
+            android:id="@+id/nav_mahashy"
+            android:icon="@drawable/ic_grill"
+            android:title="Mahashy" />
+
+        <item
+            android:id="@+id/nav_salad"
+            android:icon="@drawable/ic_grill"
+            android:title="Salad" />
+
+        <item
+            android:id="@+id/nav_soups"
+            android:icon="@drawable/ic_grill"
+            android:title="Soups" />
+        <item
+            android:id="@+id/nav_dessert"
+            android:icon="@drawable/ic_grill"
+            android:title="Dessert" />
+
+        <item
+            android:id="@+id/nav_juice"
+            android:icon="@drawable/ic_grill"
+            android:title="Juice" />
+
+
         <item
             android:id="@+id/chef_list"
             android:icon="@drawable/ic_top_chefs_24dp"

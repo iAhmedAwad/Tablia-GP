@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +40,7 @@ public class GrilledFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.grilled_fragment, container, false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Grilled");
-        mViewModel = ViewModelProviders.of(this).get(GrilledViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(GrilledViewModel.class);
         xRecyclerView = view.findViewById(R.id.xgrilledRecycle);
         progressBar = view.findViewById(R.id.progressBar);
         layoutManager = new LinearLayoutManager(getContext());

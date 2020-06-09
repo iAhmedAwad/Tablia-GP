@@ -2,7 +2,6 @@ package iti.team.tablia.CustomerAccount.Filter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,6 +75,7 @@ public class FilteredDataActivity extends AppCompatActivity {
 
   private void initViewModel() {
     mModel = new ViewModelProvider(this).get(FilteredDataActivityViewModel.class);
+
     mModel.getFilteredData(arrayList, min, max).observe(this, new Observer<ArrayList<MenuPojo>>() {
       @Override
       public void onChanged(ArrayList<MenuPojo> menuPojos) {
