@@ -1,31 +1,31 @@
 <resources>
-    <string name="app_name">Tablia</string>
+    <string name="app_name" translatable="false">Tablia</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
     <!-- Firebase -->
     <!--  Nodes  -->
-    <string name="usersNode">users</string>
-    <string name="customerAccountSettingsNode">customer_account_settings</string>
-    <string name="chefAccountSettingsNode">chef_account_settings</string>
-    <string name="ProfilePhotosNode">profilePhotos</string>
+    <string name="usersNode" translatable="false">users</string>
+    <string name="customerAccountSettingsNode" translatable="false">customer_account_settings</string>
+    <string name="chefAccountSettingsNode" translatable="false">chef_account_settings</string>
+    <string name="ProfilePhotosNode" translatable="false">profilePhotos</string>
     <!-- Fields-->
-    <string name="profilePhotoField">profilePhoto</string>
+    <string name="profilePhotoField" translatable="false">profilePhoto</string>
 
     <!--  user types: used to distinguish whether the user is a customer or a chef  -->
 
-    <string name="typeCustomer">customer</string>
-    <string name="typeChef">chef</string>
+    <string name="typeCustomer" translatable="false">customer</string>
+    <string name="typeChef" translatable="false">chef</string>
 
 
     <!-- the returned from camera intent   -->
-    <string name="selectedBitmap">selectedBitmap</string>
+    <string name="selectedBitmap" translatable="false">selectedBitmap</string>
 
     <!--  intent source and directions  -->
-    <string name="editProfileActivity">editProfileActivity</string>
-    <string name="intentSource">intentSource</string>
-    <string name="customerProfileActivity">customerProfileActivity</string>
+    <string name="editProfileActivity" translatable="false">editProfileActivity</string>
+    <string name="intentSource" translatable="false">intentSource</string>
+    <string name="customerProfileActivity" translatable="false">customerProfileActivity</string>
 
     <!--  Navigation drawer  -->
 
@@ -33,10 +33,10 @@
     <string name="NameItem">Item Name</string>
     <string name="Price">Price</string>
 
-    <string name="menuNode">menu</string>
+    <string name="menuNode" translatable="false">menu</string>
 
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
 
     <!--  Categories array  -->
 
@@ -83,7 +83,6 @@
     <string name="visit_menu">Visit Menu</string>
     <string name="follow">Follow</string>
     <string name="unfollow">Following</string>
-    <string name="message">Message</string>
 
     <!-- Customer Home Fragment Yasmine -->
     <string name="top_chefs">Top Chefs</string>
@@ -111,9 +110,7 @@
     <string name="what_do_you_think_about_our_product">What do you think about our product?</string>
     <string name="submit_review">Submit Review</string>
     <string name="title">Title</string>
-    <string name="name">Name</string>
     <string name="email">Email</string>
-    <string name="address">Address</string>
     <string name="phone_number">Phone Number</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
