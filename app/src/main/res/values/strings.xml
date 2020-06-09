@@ -69,7 +69,7 @@
     <string name="submit">Submit</string>
 
     <!--  Chef Profiles by Yasmine -->
-    <string name="availability">Available</string>
+    <string name="availability" translatable="false">Available</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="phone">Phone</string>
@@ -88,13 +88,13 @@
     <string name="top_chefs">Top Chefs</string>
     <string name="see_all_chefs">See All</string>
     <string name="recent_dishes">Recent Dishes</string>
-    <string name="custname">CustName</string>
-    <string name="itemname">ItemName</string>
+    <string name="custname" translatable="false">CustName</string>
+    <string name="itemname" translatable="false">ItemName</string>
     <string name="Category">Category</string>
     <string name="Description">Description</string>
     <string name="Ingredients">Ingredients</string>
     <string name="AddItem">Add Item</string>
-    <string name="item_quantaty">Item Quantaty:</string>
+    <string name="item_quantaty">Item Quantity:</string>
     <string name="_3_reviews">3 reviews</string>
     <string name="category">Category:</string>
     <string name="ingredients">Ingredients:</string>
@@ -151,7 +151,7 @@
     <string name="top_chef">Top Chef</string>
     <string name="dis_items">Disabled Items</string>
     <string name="edit_profile">Edit Profile</string>
-    <string name="add_item_images">Add Item Images</string>
+    <string name="add_item_images" translatable="false">Add Item Images</string>
     <string name="filter_by_category">Filter By Category</string>
     <string name="select_categories">Select Categories</string>
     <string name="filter_by_price">Filter By Price</string>
@@ -163,12 +163,12 @@
     <string name="welcome">Hello there,\nWelcome to Tablia</string>
     <string name="login">Login</string>
     <string name="new_user_sign_up">NEW USER? SIGN UP</string>
-    <string name="type_a_message">Type a message...</string>
+    <string name="type_a_message">Type a message…</string>
     <string name="customer_info">Customer Info</string>
-    <string name="a_chief_image">a chief image</string>
-    <string name="a_customer_image">a customer image</string>
+    <string name="a_chief_image" translatable="false">a chief image</string>
+    <string name="a_customer_image" translatable="false">a customer image</string>
     <string name="chef_menu">Chef Menu</string>
-    <string name="sub_total">Sub Total: </string>
+    <string name="sub_total">Subtotal: </string>
     <string name="seen">seen</string>
     <string name="qty">Qty:</string>
     <string name="remove">Remove</string>
@@ -176,7 +176,9 @@
     <string name="customer_name">Customer Name:</string>
     <string name="total">Total: </string>
     <string name="quantity2">Quantity: </string>
-    <string name="item_thumbnail">item thumbnail</string>
+    <string name="item_thumbnail" translatable="false">item thumbnail</string>
+    <string name="later">Later</string>
+    <string name="rate_chef">Rate Chef</string>
 
 
 </resources>

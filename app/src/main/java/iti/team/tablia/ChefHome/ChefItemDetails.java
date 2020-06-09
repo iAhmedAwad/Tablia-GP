@@ -155,11 +155,9 @@ public class ChefItemDetails extends AppCompatActivity {
                 Toast.makeText(this, "EDIT", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.disable:
-                detailsViewModel.disableMenuItem(chefId, itemId);
                 Toast.makeText(this, "disable", Toast.LENGTH_SHORT).show();
                 db.addMenuDisableItemToDatabase(menuPojo);
-
-
+                finish();
                 return true;
 
 

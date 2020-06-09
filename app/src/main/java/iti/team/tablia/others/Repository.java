@@ -941,7 +941,11 @@ public class Repository {
                 .child(chefId)
                 .child(itemId).removeValue();
     }
-
+    public void deleteDisabledItem(String chefId, String itemId) {
+        FirebaseDatabase.getInstance().getReference("Disable")
+                .child(chefId)
+                .child(itemId).removeValue();
+    }
     public void addDisabledToMenu(MenuPojo menuPojo) {
         String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("menu");

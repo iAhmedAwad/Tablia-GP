@@ -29,8 +29,8 @@ public class DisableMenuItemVM extends ViewModel {
         return repository.getDisItemDetails(chefId,itemId);
     }
 
-    public void deleteMenuItem(String chefId, String itemId) {
-        repository.deleteMenuItem(chefId,itemId);
+    public void deleteDisabledItem(String chefId, String itemId) {
+        repository.deleteDisabledItem(chefId,itemId);
     }
 
     public void addDisabledToMenu(MenuPojo menuPojo) {

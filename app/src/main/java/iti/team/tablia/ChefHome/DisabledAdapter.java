@@ -54,13 +54,11 @@ public class DisabledAdapter extends RecyclerView.Adapter<DisabledAdapter.ViewHo
             @Override
             public void onClick(View v) {
 
-                EditMenuItems.menuPojo = menuPojo;
-                ChefItemDetails.menuPojo=menuPojo;
+                DisabledItemDetails.menuPojo=menuPojo;
                 Intent intent = new Intent(context, DisabledItemDetails.class);
                 intent.putExtra("chefId", menuPojo.getChefID());
                 intent.putExtra("itemId", menuPojo.getItemID());
                 intent.putExtra("itemName", menuPojo.getItemName());
-//        intent.putExtra("pojoItem",menuPojo);
                 context.startActivity(intent);
             }
         });

@@ -27,9 +27,6 @@ public class ChefItemDetailsVM extends ViewModel {
         repository.deleteMenuItem( chefId,  itemId);
     }
 
-    public void disableMenuItem(String chefId, String itemId) {
-        repository.disableMenuItem(chefId,itemId);
-    }
 
     public MutableLiveData<List<Review>> getItemReviewsCountAndRating(String itemId) {
         return repository.getReviewsCountAndRating(itemId);
