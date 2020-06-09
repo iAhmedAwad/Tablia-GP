@@ -23,7 +23,7 @@
                 android:background="@color/colorPrimaryDark"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/menuStyle"
-                app:title="Chef Menu">
+                app:title="@string/chef_menu">
 
             </androidx.appcompat.widget.Toolbar>
 

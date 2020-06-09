@@ -18,7 +18,7 @@
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/menuStyle"
-            app:title="Edit Profile">
+            app:title="@string/edit_profile">
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -102,7 +102,6 @@
                 android:id="@+id/id_avaliable"
                 android:layout_width="188dp"
                 android:layout_height="16dp"
-                android:layout_centerHorizontal="true"
                 android:layout_margin="5dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="5dp"
@@ -152,6 +151,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/rect_purple"
                 android:padding="10dp"
+                android:textAllCaps="false"
                 android:layout_marginBottom="2dp"
                 android:textColor="@color/white"
                 android:text="@string/save_changes" />

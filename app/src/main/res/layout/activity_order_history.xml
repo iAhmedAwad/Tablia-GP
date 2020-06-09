@@ -19,7 +19,7 @@
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/menuStyle"
-            app:title="Order History">
+            app:title="@string/order_history">
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

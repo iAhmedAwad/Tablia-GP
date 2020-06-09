@@ -67,7 +67,7 @@ public class Repository {
 
     private FirebaseUser firebaseUser;
     private Set<String> usersList;
-//    private List<ChatUser> chatUserList;
+    //    private List<ChatUser> chatUserList;
     private List<OrderPojo> orderPojos;
     private List<Chat> chats;
     private String lastMsg;
@@ -103,7 +103,7 @@ public class Repository {
                     ChatList chatList = snapshot.getValue(ChatList.class);
                     list.add(chatList);
                 }
-                readChat(list,liveData, "cust");
+                readChat(list, liveData, "cust");
             }
 
             @Override
@@ -127,7 +127,7 @@ public class Repository {
                     ChatList chatList = snapshot.getValue(ChatList.class);
                     list.add(chatList);
                 }
-                readChat(list,liveData ,"chef");
+                readChat(list, liveData, "chef");
             }
 
             @Override
@@ -143,40 +143,40 @@ public class Repository {
      *
      * @param userChatList
      */
-    private void readChat(final List<ChatList> userChatList, final MutableLiveData<List<ChatUser>>liveData, String type) {
+    private void readChat(final List<ChatList> userChatList, final MutableLiveData<List<ChatUser>> liveData, String type) {
 
-       final List<ChatUser> chatUserList = new ArrayList<>();
-        if(type.equals("chef")){
-             reference=FirebaseDatabase.getInstance().getReference("customer_account_settings");
-             reference.addValueEventListener(new ValueEventListener() {
-                 @Override
-                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                     chatUserList.clear();
-                     for (ChatList chatList:userChatList){
-                         CustomerAccountSettings settings = dataSnapshot.child(chatList.getCustId())
-                                 .getValue(CustomerAccountSettings.class);
-                         ChatUser user = new ChatUser(chatList.getCustId(),settings.getDisplayName()
-                                 ,settings.getProfilePhoto(),settings.getStatus(),chatList.getLastMsgTime(),chatList.getLastMsg());
-                         chatUserList.add(user);
-                     }
-                     liveData.setValue(chatUserList);
-                 }
-
-                 @Override
-                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                 }
-             });
-        }else{
-            reference=FirebaseDatabase.getInstance().getReference("chef_account_settings");
+        final List<ChatUser> chatUserList = new ArrayList<>();
+        if (type.equals("chef")) {
+            reference = FirebaseDatabase.getInstance().getReference("customer_account_settings");
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (ChatList chatList:userChatList){
+                    chatUserList.clear();
+                    for (ChatList chatList : userChatList) {
+                        CustomerAccountSettings settings = dataSnapshot.child(chatList.getCustId())
+                                .getValue(CustomerAccountSettings.class);
+                        ChatUser user = new ChatUser(chatList.getCustId(), settings.getDisplayName()
+                                , settings.getProfilePhoto(), settings.getStatus(), chatList.getLastMsgTime(), chatList.getLastMsg());
+                        chatUserList.add(user);
+                    }
+                    liveData.setValue(chatUserList);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        } else {
+            reference = FirebaseDatabase.getInstance().getReference("chef_account_settings");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (ChatList chatList : userChatList) {
                         ChefAccountSettings settings = dataSnapshot.child(chatList.getChefId())
                                 .getValue(ChefAccountSettings.class);
-                        ChatUser user = new ChatUser(chatList.getChefId(),settings.getDisplayName()
-                                ,settings.getProfilePhoto(),settings.getStatus(),chatList.getLastMsgTime(),chatList.getLastMsg());
+                        ChatUser user = new ChatUser(chatList.getChefId(), settings.getDisplayName()
+                                , settings.getProfilePhoto(), settings.getStatus(), chatList.getLastMsgTime(), chatList.getLastMsg());
                         chatUserList.add(user);
                     }
                     liveData.setValue(chatUserList);
@@ -426,7 +426,7 @@ public class Repository {
                 ChefAccountSettings chefAccountSettings = dataSnapshot.getValue(ChefAccountSettings.class);
                 ChatUser chatUser = new ChatUser(userId, chefAccountSettings.getUserName(),
                         chefAccountSettings.getProfilePhoto(),
-                        chefAccountSettings.getStatus(),"none","none");
+                        chefAccountSettings.getStatus(), "none", "none");
                 user.setValue(chatUser);
             }
 
@@ -446,7 +446,7 @@ public class Repository {
                 CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
                 ChatUser chatUser = new ChatUser(userId, settings.getUserName(),
                         settings.getProfilePhoto(),
-                        settings.getStatus(),"none","none");
+                        settings.getStatus(), "none", "none");
                 user.setValue(chatUser);
             }
 
@@ -541,7 +541,7 @@ public class Repository {
                     ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
                     String chefId = snapshot.getKey();
                     ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto()
-                            , user.getStatus(),"none","none");
+                            , user.getStatus(), "none", "none");
                     chefList.add(chatUser);
 
                 }
@@ -579,7 +579,7 @@ public class Repository {
                         ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
                         String chefId = snapshot.getKey();
                         ChatUser chatUser = new ChatUser(chefId, user.getUserName()
-                                , user.getProfilePhoto(), user.getStatus(),"none","none");
+                                , user.getProfilePhoto(), user.getStatus(), "none", "none");
                         chefList.add(chatUser);
 
                     }
@@ -611,7 +611,9 @@ public class Repository {
                     for (DataSnapshot dataSnapshot1 : data.getChildren()) {
 
                         OrderPojo pojo = dataSnapshot1.getValue(OrderPojo.class);
-                        salesAmount += pojo.getSubTotal();
+                        if (pojo.isChefConfirm() && pojo.isCustConfirm()) {
+                            salesAmount += pojo.getSubTotal();
+                        }
                     }
 
                 }
@@ -643,6 +645,7 @@ public class Repository {
         });
         return liveData;
     }
+
     public MutableLiveData<MenuPojo> getDisItemDetails(String chefId, String itemId) {
         final MutableLiveData<MenuPojo> liveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("Disable").child(chefId).child(itemId);
@@ -660,6 +663,7 @@ public class Repository {
         });
         return liveData;
     }
+
     public MutableLiveData<ChefAccountSettings> getChefInfo(String chefId) {
         final MutableLiveData<ChefAccountSettings> liveData = new MutableLiveData<>();
         reference = FirebaseDatabase.getInstance().getReference("chef_account_settings").child(chefId);
@@ -938,6 +942,20 @@ public class Repository {
                 .child(itemId).removeValue();
     }
 
+    public void addDisabledToMenu(MenuPojo menuPojo) {
+        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("menu");
+
+        //add data to the "customers" node
+        reference.child(userid)
+                .child(menuPojo.getItemID())
+                .setValue(menuPojo);
+        FirebaseDatabase.getInstance().getReference("Disable")
+                .child(userid)
+                .child(menuPojo.getItemID()).removeValue();
+
+    }
+
     public void disableMenuItem(String chefId, String itemId) {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("disabled", true);
@@ -1088,23 +1106,23 @@ public class Repository {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         OrderPojo orderPojo = snapshot1.getValue(OrderPojo.class);
-                        try {
-                            Date date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+//                        try {
+                           /* Date date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
                                     .parse(orderPojo.getOrderTime());
                             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                             date = dateFormat.parse(dateFormat.format(date));
 
                             Date date1 = new Date();
                             DateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
-                            date1 = dateFormat1.parse(dateFormat1.format(date1));
+                            date1 = dateFormat1.parse(dateFormat1.format(date1));*/
 
 
-                            if (date1.equals(date)) {
-                                counter++;
-                            }
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                        if (!orderPojo.isChefConfirm() && !orderPojo.isCustConfirm()) {
+                            counter++;
                         }
+//                        } catch (ParseException e) {
+//                            e.printStackTrace();
+//                        }
 
                     }
                 }

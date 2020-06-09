@@ -29,12 +29,12 @@ tools:context=".ChefHome.ChefItemDetails">
 
             <TextView
                 android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginLeft="25dp"
                 android:layout_weight="3"
-                android:hint="Title"
+                android:hint="@string/title"
                 android:textColor="#fff"
                 android:textStyle="bold" />
 
@@ -142,7 +142,6 @@ tools:context=".ChefHome.ChefItemDetails">
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:hint="@string/_3_reviews"
                             android:textColor="@android:color/holo_blue_light" />
                     </LinearLayout>
                 </LinearLayout>

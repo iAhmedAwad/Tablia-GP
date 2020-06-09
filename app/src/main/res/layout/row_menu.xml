@@ -23,17 +23,6 @@
             android:padding="3dp"
             android:src="@drawable/placeholder" />
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/imgItem"-->
-        <!--            android:layout_width="164dp"-->
-        <!--            android:layout_height="144dp"-->
-        <!--            android:layout_marginStart="24dp"-->
-        <!--            android:layout_marginLeft="24dp"-->
-        <!--            android:layout_marginTop="24dp"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:srcCompat="@drawable/ic_tag_faces_black_24dp" />-->
-
         <TextView
             android:id="@+id/txtNameItem"
             android:layout_below="@id/imgItem"
@@ -41,9 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="5dp"
-            android:text="TextView"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textStyle="bold"
+             />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -60,9 +49,8 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="2dp"
-                android:text="TextView"
                 android:textColor="#000000"
-                android:textSize="18dp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtNameItem" />
             <TextView
@@ -72,7 +60,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="2dp"
-                android:text="TextView"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtPriceItem" />
         </LinearLayout>

@@ -34,7 +34,7 @@
                     android:layout_marginStart="25dp"
                     android:layout_marginLeft="25dp"
                     android:layout_weight="3"
-                    android:hint="Title"
+                    android:hint="@string/title"
                     android:textColor="#fff"
                     android:textStyle="bold" />
 
@@ -43,7 +43,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_shopping_cart" />
+                    app:srcCompat="@drawable/ic_shopping_cart"
+                    android:contentDescription="@string/cart" />
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

@@ -19,7 +19,7 @@
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/menuStyle"
-            app:title="Filter Result">
+            app:title="@string/filtered_result">
 
         </androidx.appcompat.widget.Toolbar>
 

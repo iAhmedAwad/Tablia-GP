@@ -29,7 +29,6 @@ public class Cart extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Cart");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

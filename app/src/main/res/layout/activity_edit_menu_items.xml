@@ -39,7 +39,8 @@
                 android:alpha="0.6"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/addphoto"/>
+                android:background="@drawable/addphoto"
+                android:contentDescription="@string/add_item_images" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycle"
@@ -179,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
-                android:text="Quantity"
+                android:text="@string/quantity"
                 android:textSize="18sp"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
@@ -202,6 +203,7 @@
                 android:textColor="@color/white"
                 android:background="@drawable/rect"
                 android:layout_margin="20dp"
+                android:textAllCaps="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/edit_item" />

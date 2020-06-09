@@ -39,7 +39,7 @@ public class DisabledItemDetails extends AppCompatActivity {
     private TextView category;
     private TextView ingredients;
     private TextView description;
-    private ChefItemDetailsVM detailsViewModel;
+    private DisableMenuItemVM detailsViewModel;
     private TextView qty;
     private String chefId;
     private String itemId;
@@ -74,8 +74,8 @@ public class DisabledItemDetails extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         itemName = findViewById(R.id.item_title);
         itemPrice = findViewById(R.id.price);
-        itemRating = findViewById(R.id.item_rating);
-        reviews = findViewById(R.id.item_reviews);
+//        itemRating = findViewById(R.id.item_rating);
+//        reviews = findViewById(R.id.item_reviews);
         category = findViewById(R.id.cat_name);
         ingredients = findViewById(R.id.ing);
         description = findViewById(R.id.desc);
@@ -86,30 +86,31 @@ public class DisabledItemDetails extends AppCompatActivity {
 
         //end
 
-        detailsViewModel = ViewModelProviders.of(this).get(ChefItemDetailsVM.class);
-        detailsViewModel.getItemReviewsCountAndRating(itemId).observe(this, new Observer<List<Review>>() {
-            @Override
-            public void onChanged(List<Review> reviewsList) {
-                double totalRating = 0;
-                for (Review review : reviewsList) {
-                    totalRating+=review.getRating();
-                }
-                itemRating.setRating((float) (totalRating/(float)reviewsList.size()));
-                reviews.setText(reviewsList.size() + " reviews");
-            }
-        });
-        reviews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(DisabledItemDetails.this, ItemReview.class);
-                i.putExtra("itemID",itemId);
-                startActivity(i);
-            }
-        });
+        detailsViewModel = ViewModelProviders.of(this).get(DisableMenuItemVM.class);
+//        detailsViewModel.getItemReviewsCountAndRating(itemId).observe(this, new Observer<List<Review>>() {
+//            @Override
+//            public void onChanged(List<Review> reviewsList) {
+//                double totalRating = 0;
+//                for (Review review : reviewsList) {
+//                    totalRating+=review.getRating();
+//                }
+//                itemRating.setRating((float) (totalRating/(float)reviewsList.size()));
+//                reviews.setText(reviewsList.size() + " reviews");
+//            }
+//        });
+//        reviews.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i=new Intent(DisabledItemDetails.this, ItemReview.class);
+//                i.putExtra("itemID",itemId);
+//                startActivity(i);
+//            }
+//        });
         detailsViewModel.getDisItemDetails(chefId, itemId).observe(this, new Observer<MenuPojo>() {
             @Override
             public void onChanged(MenuPojo menuPojo) {
                 if(menuPojo!=null) {
+
                     progressBar.setVisibility(View.GONE);
                     getSupportActionBar().setTitle(menuPojo.getItemName());
                     itemName.setText(menuPojo.getItemName());
@@ -146,9 +147,12 @@ public class DisabledItemDetails extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.id_delete:
+                detailsViewModel.deleteMenuItem(chefId, itemId);
                 Toast.makeText(this, "delete item", Toast.LENGTH_SHORT).show();
+                finish();
                 return true;
             case R.id.id_enable:
+                detailsViewModel.addDisabledToMenu(menuPojo);
                 Toast.makeText(this, "enable item", Toast.LENGTH_SHORT).show();
                 return true;
         }

@@ -19,7 +19,7 @@
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/menuStyle"
-            app:title="Edit Profile">
+            app:title="@string/edit_profile">
 
         </androidx.appcompat.widget.Toolbar>
 

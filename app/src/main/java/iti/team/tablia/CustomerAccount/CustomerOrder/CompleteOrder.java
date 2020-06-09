@@ -52,7 +52,6 @@ public class CompleteOrder extends AppCompatActivity {
         setContentView(R.layout.activity_complete_order);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Complete Order");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +127,7 @@ public class CompleteOrder extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (pickup.isChecked()) {
-                    shippingFee2.setText("EGP " + 0.0);
+                    shippingFee2.setText("EGP 0.0");
                     shippingFee2.setTextColor(Color.GREEN);
                     total.setText("EGP " + orderPojo.getSubTotal());
                     orderPojo.setTotal(orderPojo.getSubTotal());
@@ -159,6 +158,9 @@ public class CompleteOrder extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                progressBar.setVisibility(View.VISIBLE);
                 model.removeCartOrder(orderPojo, CompleteOrder.this);
             }
         });

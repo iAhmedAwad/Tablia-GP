@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginLeft="25dp"
-                android:text="username"
+                android:text="@string/username"
                 android:textColor="#fff"
                 android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
@@ -58,9 +58,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/txt_send"
             android:background="@android:color/transparent"
-            android:hint="Type a message..."
+            android:hint="@string/type_a_message"
             android:layout_toLeftOf="@id/btn_send"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/btn_send" />
 
         <ImageButton
             android:layout_width="40dp"

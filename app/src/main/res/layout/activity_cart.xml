@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/menuStyle">
+            app:popupTheme="@style/menuStyle"
+            app:title="@string/cart">
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

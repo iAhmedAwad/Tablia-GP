@@ -412,11 +412,12 @@ public class Database {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Disable");
 
         //add data to the "customers" node
-        String key = reference.push().getKey();
-        menuPojo.setItemID(key);
         reference.child(userid)
-                .child(key)
+                .child(menuPojo.getItemID())
                 .setValue(menuPojo);
+        FirebaseDatabase.getInstance().getReference("menu")
+                .child(userid)
+                .child(menuPojo.getItemID()).removeValue();
 
     }
 

@@ -19,7 +19,7 @@
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/menuStyle"
-            app:title="Reviews">
+            app:title="@string/reviews">
 
         </androidx.appcompat.widget.Toolbar>
 

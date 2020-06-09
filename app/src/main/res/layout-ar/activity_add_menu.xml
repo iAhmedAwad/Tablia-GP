@@ -20,7 +20,7 @@
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/menuStyle"
-            app:title="@string/add_menu_item"/>
+            app:title="Add Menu Item"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -180,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/quantity"
+                android:text="Quantity"
                 android:textSize="18sp"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
@@ -205,7 +205,6 @@
                 android:layout_margin="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:text="@string/AddItem"/>
 
         </LinearLayout>

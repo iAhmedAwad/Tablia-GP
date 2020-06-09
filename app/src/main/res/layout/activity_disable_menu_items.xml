@@ -27,7 +27,7 @@
                 android:background="@color/colorPrimaryDark"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:popupTheme="@style/menuStyle"
-                app:title="Disabled Items">
+                app:title="@string/dis_items">
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>

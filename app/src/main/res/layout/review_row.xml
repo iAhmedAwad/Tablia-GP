@@ -29,7 +29,7 @@
 
                 <TextView
                     android:id="@+id/id_txtCustomr_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="5dp"
@@ -49,7 +49,7 @@
                     android:isIndicator="true"
                     android:numStars="5"
                     android:progressTint="@color/colorPrimaryDark"
-                     />
+                    android:layout_marginEnd="5dp" />
             </LinearLayout>
             <TextView
                 android:id="@+id/id_txtItem_name"

@@ -61,10 +61,10 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/rect_purple"
                 android:textColor="@color/white"
-                android:text="Follow"
+                android:text="@string/follow"
                 android:textAllCaps="false"
-                android:textOff="Follow"
-                android:textOn="Following"
+                android:textOff="@string/follow"
+                android:textOn="@string/following"
                 app:layout_constraintBottom_toBottomOf="@+id/xFollowerRowImageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/xFollowerRowImageView" />
