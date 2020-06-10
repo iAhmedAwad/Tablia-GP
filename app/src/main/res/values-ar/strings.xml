@@ -129,5 +129,29 @@
     <string name="Price">السعر</string>
     <string name="later">فيما بعد</string>
     <string name="rate_chef">قيِّم الشيف</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="menu">القائمة</string>
+    <string name="delete">مسح</string>
+    <string name="disable">تعطيل</string>
+    <string name="edit">تعديل</string>
+    <string name="chat">الرسائل</string>
+    <string name="order">الطلبات</string>
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="main_dishes">أطباق رئيسية</string>
+    <string name="seafood">مأكولات بحرية</string>
+    <string name="grilled">مشويات</string>
+    <string name="baking">مخبوزات</string>
+    <string name="side_dishes">أطباق جانبية</string>
+    <string name="macaroni">مكرونات</string>
+    <string name="mahashy">محاشي</string>
+    <string name="salad">سلطات</string>
+    <string name="soups">شوربات</string>
+    <string name="dessert">حلويات</string>
+    <string name="juice">عصائر</string>
+    <string name="my_orders">طلباتي</string>
+    <string name="account">حساب</string>
+    <string name="signout">تسجيل خروج</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="enable">تفعيل</string>
 
 </resources>

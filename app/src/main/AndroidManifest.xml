@@ -19,39 +19,62 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChefHome.DisabledItemDetails"></activity>
-        <activity android:name=".ChefHome.TabBar.Profile.Reviews.ChefReviewChefAcc" />
-        <activity android:name=".CustomerAccount.ItemReview.ItemReview" />
-        <activity android:name=".ChefHome.TabBar.Order.ChefOrderHistory" />
-        <activity android:name=".CustomerAccount.MyOrders.OrderHistory" />
-        <activity android:name=".ChefHome.DisableMenuItems" />
-        <activity android:name=".CustomerAccount.MyOrders.CustOrderDetails.CustOrderDetails" />
-        <activity android:name=".CustomerAccount.CustomerOrder.EditCustProfile" />
-        <activity android:name=".ChefHome.EditMenuItems" />
-        <activity android:name=".ChefHome.ChefItemDetails" />
-        <activity android:name=".CustomerAccount.ChefMenus.ViewChefMenus" />
-        <activity android:name=".CustomerAccount.CustomerOrder.CompleteOrder" />
-        <activity android:name=".CustomerAccount.CustomerOrder.Cart" />
-        <activity android:name=".CustomerAccount.Items.ItemDetails" />
-        <activity android:name=".CustomerAccount.FollowingActivity.FollowingActivity" />
-        <activity
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.DisabledItemDetails"></activity>
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.TabBar.Profile.Reviews.ChefReviewChefAcc" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.ItemReview.ItemReview" />
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.TabBar.Order.ChefOrderHistory" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.MyOrders.OrderHistory" />
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.DisableMenuItems" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.MyOrders.CustOrderDetails.CustOrderDetails" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.CustomerOrder.EditCustProfile" />
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.EditMenuItems" />
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.ChefItemDetails" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.ChefMenus.ViewChefMenus" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.CustomerOrder.CompleteOrder" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.CustomerOrder.Cart" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.Items.ItemDetails" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.FollowingActivity.FollowingActivity" />
+        <activity android:screenOrientation="portrait"
             android:name=".CustomerAccount.Reviews.AddReviewsActivity"
             android:label="Write a review" />
-        <activity android:name=".Authentication.SplashScreen">
+        <activity android:screenOrientation="portrait"
+            android:name=".Authentication.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Authentication.ChefRegistration.ChefRegistrationActivity" />
-        <activity android:name=".CustomerAccount.CustomerChefListActivity" />
-        <activity android:name=".CustomerAccount.Filter.FilteredDataActivity" />
-        <activity android:name=".CustomerAccount.Filter.FilterActivity" />
-        <activity android:name=".Authentication.RegistrationOptionsActivity" />
-        <activity android:name=".ChefHome.TabBar.Order.OrderDeatils.OrderDeatils" />
-        <activity android:name=".others.MainActivity" />
-        <activity
+        <activity android:screenOrientation="portrait"
+            android:name=".Authentication.ChefRegistration.ChefRegistrationActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.CustomerChefListActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.Filter.FilteredDataActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".CustomerAccount.Filter.FilterActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".Authentication.RegistrationOptionsActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.TabBar.Order.OrderDeatils.OrderDeatils" />
+        <activity android:screenOrientation="portrait"
+            android:name=".others.MainActivity" />
+        <activity android:screenOrientation="portrait"
             android:name=".CustomerAccount.CustomerActivity.CustomerActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -62,7 +85,8 @@
             </intent-filter>
             -->
         </activity>
-        <activity android:name=".Authentication.LoginActivity">
+        <activity android:screenOrientation="portrait"
+            android:name=".Authentication.LoginActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -71,11 +95,16 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".Authentication.CustomerRegistration.CustomerRegistrationActivity" />
-        <activity android:name=".ChefHome.ChiefActivity" />
-        <activity android:name=".Customer.ChefProfile.ReviewsActivity" />
-        <activity android:name=".Customer.ChefProfile.ViewChiefProfileActivity" />
-        <activity android:name=".ChefHome.TabBar.Chat.Messages.MessageActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".Authentication.CustomerRegistration.CustomerRegistrationActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.ChiefActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".Customer.ChefProfile.ReviewsActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".Customer.ChefProfile.ViewChiefProfileActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.TabBar.Chat.Messages.MessageActivity" />
 
         <service
             android:name=".Services.MyFirebaseIdService"
@@ -85,9 +114,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ChefHome.TabBar.Profile.EditChiefActivity" />
-        <activity android:name=".ChefHome.TabBar.Menu.AddMenu.AddMenu" />
-        <activity android:name=".ChefHome.TabBar.Menu.MenuFragment" />
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.TabBar.Profile.EditChiefActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.TabBar.Menu.AddMenu.AddMenu" />
+        <activity android:screenOrientation="portrait"
+            android:name=".ChefHome.TabBar.Menu.MenuFragment" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -8,93 +8,93 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            android:title="Home" />
+            android:title="@string/home" />
 
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_profile"
-            android:title="Profile" />
+            android:title="@string/profile" />
 
 
         <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_chat"
-            android:title="Chat" />
+            android:title="@string/chat" />
 
 
         <item
             android:id="@+id/nav_mainDishes"
-            android:icon="@drawable/ic_grill"
-            android:title="Main Dishes" />
+            android:icon="@drawable/main_dish"
+            android:title="@string/main_dishes" />
         <item
             android:id="@+id/nav_fish"
             android:icon="@drawable/ic_fish"
-            android:title="Seafood" />
+            android:title="@string/seafood" />
 
         <item
             android:id="@+id/nav_grilled"
             android:icon="@drawable/ic_grill"
-            android:title="Grilled" />
+            android:title="@string/grilled" />
 
         <item
             android:id="@+id/nav_baking"
-            android:icon="@drawable/ic_grill"
-            android:title="Baking" />
+            android:icon="@drawable/baking"
+            android:title="@string/baking" />
 
 
         <item
             android:id="@+id/nav_sideDishes"
-            android:icon="@drawable/ic_grill"
-            android:title="Side Dishes" />
+            android:icon="@drawable/side_dish"
+            android:title="@string/side_dishes" />
 
 
         <item
             android:id="@+id/nav_macaroni"
-            android:icon="@drawable/ic_grill"
-            android:title="Macaroni" />
+            android:icon="@drawable/macaroni"
+            android:title="@string/macaroni" />
 
         <item
             android:id="@+id/nav_mahashy"
-            android:icon="@drawable/ic_grill"
-            android:title="Mahashy" />
+            android:icon="@drawable/mahshy"
+            android:title="@string/mahashy" />
 
         <item
             android:id="@+id/nav_salad"
-            android:icon="@drawable/ic_grill"
-            android:title="Salad" />
+            android:icon="@drawable/salad"
+            android:title="@string/salad" />
 
         <item
             android:id="@+id/nav_soups"
-            android:icon="@drawable/ic_grill"
-            android:title="Soups" />
+            android:icon="@drawable/soup"
+            android:title="@string/soups" />
         <item
             android:id="@+id/nav_dessert"
-            android:icon="@drawable/ic_grill"
-            android:title="Dessert" />
+            android:icon="@drawable/dessert"
+            android:title="@string/dessert" />
 
         <item
             android:id="@+id/nav_juice"
-            android:icon="@drawable/ic_grill"
-            android:title="Juice" />
+            android:icon="@drawable/juice"
+            android:title="@string/juice" />
 
 
         <item
             android:id="@+id/chef_list"
             android:icon="@drawable/ic_top_chefs_24dp"
-            android:title="Top Chefs" />
+            android:title="@string/top_chefs" />
         <item
             android:id="@+id/nav_orders"
             android:icon="@drawable/ic_assignment_black_24dp"
-            android:title="My Orders" />
+            android:title="@string/my_orders" />
 
     </group>
 
-    <item android:title="Account">
+    <item android:title="@string/account">
         <menu>
             <item
                 android:id="@+id/nav_signout"
                 android:icon="@drawable/ic_signout"
-                android:title="Signout" />
+                android:title="@string/signout" />
         </menu>
     </item>
 

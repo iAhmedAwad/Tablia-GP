@@ -35,7 +35,7 @@ public class MahashyFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                            @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_category, container, false);
-    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.JUICE);
+    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.MAHASHY);
     mViewModel = new ViewModelProvider(this).get(GeneralViewModel.class);
     xRecyclerView = view.findViewById(R.id.xCategoryRecycle);
     progressBar = view.findViewById(R.id.progressBar);

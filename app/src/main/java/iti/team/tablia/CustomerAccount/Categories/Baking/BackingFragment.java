@@ -18,13 +18,14 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
+import iti.team.tablia.CustomerAccount.Categories.General.GeneralViewModel;
 import iti.team.tablia.CustomerAccount.Categories.Grilled.GrilledAdapter;
 import iti.team.tablia.R;
 import iti.team.tablia.util.Constants;
 
 public class BackingFragment extends Fragment {
 
-  private BackingViewModel mViewModel;
+  private GeneralViewModel mViewModel;
   private RecyclerView xRecyclerView;
   private GrilledAdapter mAdapter;
   private RecyclerView.LayoutManager layoutManager;
@@ -38,12 +39,12 @@ public class BackingFragment extends Fragment {
                            Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_category, container, false);
     ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Backing");
-    mViewModel = new ViewModelProvider(this).get(BackingViewModel.class);
     xRecyclerView = view.findViewById(R.id.xCategoryRecycle);
     progressBar = view.findViewById(R.id.progressBar);
     layoutManager = new LinearLayoutManager(getContext());
     xRecyclerView.setHasFixedSize(true);
     xRecyclerView.setLayoutManager(layoutManager);
+    mViewModel = new ViewModelProvider(this).get(GeneralViewModel.class);
 
     return view;
   }
@@ -52,7 +53,7 @@ public class BackingFragment extends Fragment {
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    mViewModel.getBackingItems(Constants.BACKING)
+    mViewModel.getCategoryItems(Constants.BACKING)
         .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
           @Override
           public void onChanged(ArrayList<MenuPojo> menuPojos) {

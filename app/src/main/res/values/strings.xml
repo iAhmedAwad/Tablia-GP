@@ -179,6 +179,30 @@
     <string name="item_thumbnail" translatable="false">item thumbnail</string>
     <string name="later">Later</string>
     <string name="rate_chef">Rate Chef</string>
+    <string name="profile">profile</string>
+    <string name="menu">menu</string>
+    <string name="delete">Delete</string>
+    <string name="disable">Disable</string>
+    <string name="edit">Edit</string>
+    <string name="chat">Chat</string>
+    <string name="order">Order</string>
+    <string name="home">Home</string>
+    <string name="main_dishes">Main Dishes</string>
+    <string name="seafood">Seafood</string>
+    <string name="grilled">Grilled</string>
+    <string name="baking">Baking</string>
+    <string name="side_dishes">Side Dishes</string>
+    <string name="macaroni">Macaroni</string>
+    <string name="mahashy">Mahashy</string>
+    <string name="salad">Salad</string>
+    <string name="soups">Soups</string>
+    <string name="dessert">Dessert</string>
+    <string name="juice">Juice</string>
+    <string name="my_orders">My Orders</string>
+    <string name="account">Account</string>
+    <string name="signout">Signout</string>
+    <string name="logout">Logout</string>
+    <string name="enable">Enable</string>
 
 
 </resources>
