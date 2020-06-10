@@ -53,7 +53,7 @@ public class BackingFragment extends Fragment {
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    mViewModel.getCategoryItems(Constants.BACKING)
+    mViewModel.getCategoryItems(Constants.BACKING, Constants.BACKING_AR)
         .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
           @Override
           public void onChanged(ArrayList<MenuPojo> menuPojos) {

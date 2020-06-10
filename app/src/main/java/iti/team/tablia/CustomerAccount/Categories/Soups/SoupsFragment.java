@@ -51,7 +51,7 @@ import iti.team.tablia.util.Constants;
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
       super.onActivityCreated(savedInstanceState);
 
-      mViewModel.getCategoryItems(Constants.SOUPS)
+      mViewModel.getCategoryItems(Constants.SOUPS, Constants.SOUPS_AR)
           .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
             @Override
             public void onChanged(ArrayList<MenuPojo> menuPojos) {

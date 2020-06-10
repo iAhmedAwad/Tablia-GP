@@ -48,7 +48,7 @@ public class DessertFragment extends Fragment {
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    mViewModel.getCategoryItems(Constants.DESSERT)
+    mViewModel.getCategoryItems(Constants.DESSERT,Constants.DESSERT_AR)
         .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
           @Override
           public void onChanged(ArrayList<MenuPojo> menuPojos) {

@@ -51,7 +51,7 @@ public class MahashyFragment extends Fragment {
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    mViewModel.getCategoryItems(Constants.JUICE)
+    mViewModel.getCategoryItems(Constants.MAHASHY, Constants.MAHASHY_AR)
         .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
           @Override
           public void onChanged(ArrayList<MenuPojo> menuPojos) {

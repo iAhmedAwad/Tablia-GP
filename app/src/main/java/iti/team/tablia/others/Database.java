@@ -642,7 +642,7 @@ public class Database {
      * Categories .. this is gonna be a long journey!
      */
 
-    public MutableLiveData<ArrayList<MenuPojo>> getCategoryList(final String category) {
+    public MutableLiveData<ArrayList<MenuPojo>> getCategoryList(final String category, final String category_ar) {
         final MutableLiveData<ArrayList<MenuPojo>> listMutableLiveData =
                 new MutableLiveData<ArrayList<MenuPojo>>();
 
@@ -660,7 +660,8 @@ public class Database {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     for (DataSnapshot dsx : ds.getChildren()) {
                         MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
-                        if (menuPojo.getCategory().equals(category)) {
+                        if (menuPojo.getCategory().equals(category)
+                                ||menuPojo.getCategory().equals(category_ar)) {
                             list.add(menuPojo);
                         }
                     }

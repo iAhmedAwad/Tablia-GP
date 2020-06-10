@@ -16,8 +16,8 @@ public class GeneralViewModel  extends ViewModel {
     this.database = new Database();
   }
 
-  public MutableLiveData<ArrayList<MenuPojo>> getCategoryItems(String category) {
-    arrayListMutableLiveData = database.getCategoryList(category);
+  public MutableLiveData<ArrayList<MenuPojo>> getCategoryItems(String category, String category_ar) {
+    arrayListMutableLiveData = database.getCategoryList(category,category_ar);
     return arrayListMutableLiveData;
   }
 }

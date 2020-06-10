@@ -15,9 +15,9 @@ class BackingViewModel extends ViewModel {
   public BackingViewModel() {
     this.database = new Database();
   }
-
-  public MutableLiveData<ArrayList<MenuPojo>> getBackingItems(String category) {
-    arrayListMutableLiveData = database.getCategoryList(category);
-    return arrayListMutableLiveData;
-  }
+//
+//  public MutableLiveData<ArrayList<MenuPojo>> getBackingItems(String category) {
+//    arrayListMutableLiveData = database.getCategoryList(category, category_ar);
+//    return arrayListMutableLiveData;
+//  }
 }

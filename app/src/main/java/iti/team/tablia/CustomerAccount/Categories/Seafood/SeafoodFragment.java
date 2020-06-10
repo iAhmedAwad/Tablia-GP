@@ -48,7 +48,7 @@ public class SeafoodFragment extends Fragment {
     recyclerView.setLayoutManager(layoutManager);
 
     mViewModel = ViewModelProviders.of(this).get(SeafoodViewModel.class);
-    mViewModel.getFishItems(Constants.SEAFOOD).observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
+    mViewModel.getFishItems(Constants.SEAFOOD,Constants.SEAFOOD_AR).observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
       @Override
       public void onChanged(ArrayList<MenuPojo> menuPojos) {
         progressBar.setVisibility(View.GONE);

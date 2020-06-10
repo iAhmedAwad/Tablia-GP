@@ -55,7 +55,7 @@ public class GrilledFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mViewModel.getGrilledItems(Constants.GRILLED)
+        mViewModel.getGrilledItems(Constants.GRILLED,Constants.GRILLED_AR)
                 .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
                     @Override
                     public void onChanged(ArrayList<MenuPojo> menuPojos) {

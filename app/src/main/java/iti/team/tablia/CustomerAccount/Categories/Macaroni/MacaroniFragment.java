@@ -51,7 +51,7 @@ public   class MacaroniFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
       super.onActivityCreated(savedInstanceState);
 
-      mViewModel.getCategoryItems(Constants.MACARONI)
+      mViewModel.getCategoryItems(Constants.MACARONI, Constants.MACARONI_AR)
           .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
             @Override
             public void onChanged(ArrayList<MenuPojo> menuPojos) {
