@@ -99,7 +99,7 @@
                 android:layout_marginRight="30dp"
                 android:ems="10"
                 android:textColor="@color/DarkGrey"
-                android:inputType="textPersonName"
+                android:inputType="numberDecimal"
                 android:layout_marginStart="30dp" />
 
             <TextView
@@ -196,7 +196,7 @@
                 android:layout_marginRight="30dp"
                 android:textColor="@color/DarkGrey"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:layout_marginStart="30dp" />
             <Button
                 android:id="@+id/btnAddItem"

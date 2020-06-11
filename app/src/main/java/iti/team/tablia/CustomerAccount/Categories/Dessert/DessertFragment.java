@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.CustomerAccount.Categories.General.GeneralAdapter;
 import iti.team.tablia.CustomerAccount.Categories.General.GeneralViewModel;
@@ -32,7 +34,14 @@ public class DessertFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                            @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_category, container, false);
-    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.DESSERT);
+    String lang = Locale.getDefault().getLanguage();
+    if(lang.equals("ar")) {
+      ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.DESSERT_AR);
+
+    }else {
+      ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.DESSERT);
+
+    }
     mViewModel = new ViewModelProvider(this).get(GeneralViewModel.class);
     xRecyclerView = view.findViewById(R.id.xCategoryRecycle);
     progressBar = view.findViewById(R.id.progressBar);

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.CustomerAccount.ItemReview.ItemReview;
@@ -26,6 +27,7 @@ import iti.team.tablia.CustomerAccount.Items.ImageSliderAdapter;
 import iti.team.tablia.Models.Others.Review;
 import iti.team.tablia.R;
 import iti.team.tablia.others.Database;
+import iti.team.tablia.util.Constants;
 
 public class ChefItemDetails extends AppCompatActivity {
     private TextView toolbarTitle;
@@ -41,13 +43,31 @@ public class ChefItemDetails extends AppCompatActivity {
     private String chefId;
     private String itemId;
     private ProgressBar progressBar;
-    public static MenuPojo menuPojo ;
-    Database db ;
+    public static MenuPojo menuPojo;
+    Database db;
+    private String priceUnit;
+    private String reviewTxt;
+    private String item;
+    private String warning;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chef_item_details);
 
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            priceUnit = " ج.م";
+            reviewTxt=" تعليقات";
+            item=" وجبات";
+            warning="هذا المنتج قد نفذ";
+
+        } else {
+            item=" items";
+            priceUnit = " EGP";
+            reviewTxt=" reviews";
+            warning = "item is no longer exist";
+        }
         db = new Database(this);
 
         toolbarTitle = findViewById(R.id.toolbar_title);
@@ -67,7 +87,7 @@ public class ChefItemDetails extends AppCompatActivity {
                 finish();
             }
         });
-        progressBar=findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         itemName = findViewById(R.id.item_title);
         itemPrice = findViewById(R.id.price);
@@ -89,42 +109,37 @@ public class ChefItemDetails extends AppCompatActivity {
             public void onChanged(List<Review> reviewsList) {
                 double totalRating = 0;
                 for (Review review : reviewsList) {
-                    totalRating+=review.getRating();
+                    totalRating += review.getRating();
                 }
-                itemRating.setRating((float) (totalRating/(float)reviewsList.size()));
-                reviews.setText(reviewsList.size() + " reviews");
+                itemRating.setRating((float) (totalRating / (float) reviewsList.size()));
+                reviews.setText(reviewsList.size() + reviewTxt);
             }
         });
         reviews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(ChefItemDetails.this, ItemReview.class);
-                i.putExtra("itemID",itemId);
+                Intent i = new Intent(ChefItemDetails.this, ItemReview.class);
+                i.putExtra("itemID", itemId);
                 startActivity(i);
             }
         });
         detailsViewModel.getMenuItemDetails(chefId, itemId).observe(this, new Observer<MenuPojo>() {
             @Override
             public void onChanged(MenuPojo menuPojo) {
-                if(menuPojo!=null) {
+                if (menuPojo != null) {
                     progressBar.setVisibility(View.GONE);
                     getSupportActionBar().setTitle(menuPojo.getItemName());
                     itemName.setText(menuPojo.getItemName());
-                    itemPrice.setText(menuPojo.getPriceItem() + " EGP");
-                    qty.setText(menuPojo.getItemQuantity() + " Items");
-                    category.setText(menuPojo.getCategory());
-                    category.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(ChefItemDetails.this, "nav to category activity", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    itemPrice.setText(menuPojo.getPriceItem() + priceUnit);
+                    qty.setText(menuPojo.getItemQuantity() + item);
+                    String cat = getCategory(menuPojo.getCategory());
+                    category.setText(cat);
                     ingredients.setText(menuPojo.getIngredients());
                     description.setText(menuPojo.getDescription());
                     ImageSliderAdapter adapter = new ImageSliderAdapter(ChefItemDetails.this, menuPojo.getImgItem());
                     viewPager.setAdapter(adapter);
-                }else {
-                    Toast.makeText(ChefItemDetails.this, "item is no longer exist", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ChefItemDetails.this, warning, Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -163,5 +178,59 @@ public class ChefItemDetails extends AppCompatActivity {
 
         }
         return false;
+    }
+
+    private String getCategory(String category) {
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            if (category.equals(Constants.BACKING)) {
+                category = Constants.BACKING_AR;
+            } else if (category.equals(Constants.DESSERT)) {
+                category = Constants.DESSERT_AR;
+            } else if (category.equals(Constants.GRILLED)) {
+                category = Constants.GRILLED_AR;
+            } else if (category.equals(Constants.JUICE)) {
+                category = Constants.JUICE_AR;
+            } else if (category.equals(Constants.MACARONI)) {
+                category = Constants.MACARONI_AR;
+            } else if (category.equals(Constants.MAHASHY)) {
+                category = Constants.MAHASHY_AR;
+            } else if (category.equals(Constants.MAIN_DISHES)) {
+                category = Constants.MAIN_DISHES_AR;
+            } else if (category.equals(Constants.SALAD)) {
+                category = Constants.SALAD_AR;
+            } else if (category.equals(Constants.SEAFOOD)) {
+                category = Constants.SEAFOOD_AR;
+            } else if (category.equals(Constants.SIDE_DISHES)) {
+                category = Constants.SIDE_DISHES_AR;
+            } else if (category.equals(Constants.SOUPS)) {
+                category = Constants.SOUPS_AR;
+            }
+        } else {
+            if (category.equals(Constants.BACKING_AR)) {
+                category = Constants.BACKING;
+            } else if (category.equals(Constants.DESSERT_AR)) {
+                category = Constants.DESSERT;
+            } else if (category.equals(Constants.GRILLED_AR)) {
+                category = Constants.GRILLED;
+            } else if (category.equals(Constants.JUICE_AR)) {
+                category = Constants.JUICE;
+            } else if (category.equals(Constants.MACARONI_AR)) {
+                category = Constants.MACARONI;
+            } else if (category.equals(Constants.MAHASHY_AR)) {
+                category = Constants.MAHASHY;
+            } else if (category.equals(Constants.MAIN_DISHES_AR)) {
+                category = Constants.MAIN_DISHES;
+            } else if (category.equals(Constants.SALAD_AR)) {
+                category = Constants.SALAD;
+            } else if (category.equals(Constants.SEAFOOD_AR)) {
+                category = Constants.SEAFOOD;
+            } else if (category.equals(Constants.SIDE_DISHES_AR)) {
+                category = Constants.SIDE_DISHES;
+            } else if (category.equals(Constants.SOUPS_AR)) {
+                category = Constants.SOUPS;
+            }
+        }
+        return category;
     }
 }

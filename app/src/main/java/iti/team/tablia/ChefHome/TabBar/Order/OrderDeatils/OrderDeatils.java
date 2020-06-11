@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Chat.Messages.MessageActivity;
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
@@ -60,11 +61,33 @@ public class OrderDeatils extends AppCompatActivity {
     private ProgressBar progressBar;
     private CustomerAccountSettings cust;
     private ChefAccountSettings chef;
+    private String priceUnit;
+    private String itemLang;
+    private String status_del;
+    private String status_on_way;
+    private String status_not_del;
+    private String confirmDel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_deatils);
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            priceUnit = " ج.م";
+            itemLang = " أصناف";
+            status_del="تم توصيل الطلبية في";
+            status_not_del="لم يتم توصيل الطلبية بعد";
+            status_on_way="الطلبية في الطريق ليتم توصيلها";
+            confirmDel="تم تسليم الطلبية";
+        } else {
+            itemLang = " items";
+            priceUnit = " EGP";
+            status_del="Order was deliverd on";
+            status_not_del="Order not delivered yet";
+            status_on_way="Order on the way to be delivered";
+            confirmDel = "Delivery Confirmed";
+        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -126,10 +149,10 @@ public class OrderDeatils extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
 
                 orderTime.setText(orderPojo.getOrderTime());
-                itemNum.setText(orderPojo.getItems().size() + " items");
-                total.setText("EGP " + orderPojo.getTotal());
+                itemNum.setText(orderPojo.getItems().size() + itemLang);
+                total.setText(orderPojo.getTotal() + priceUnit);
                 if (orderPojo.isDeliveryType()) {
-                    deliveryType.setText("Door Delivery");
+                    deliveryType.setText(getString(R.string.door_delivery));
                     if (cust != null) {
                         delAddress.setText(cust.getAddress());
                     }
@@ -137,21 +160,21 @@ public class OrderDeatils extends AppCompatActivity {
                     if (chef != null) {
                         delAddress.setText(chef.getAddress());
                     }
-                    deliveryType.setText("Pickup");
+                    deliveryType.setText(getString(R.string.pickup_order));
                 }
-                shippingFee.setText(orderPojo.getDeliveryFee() + " EGP");
+                shippingFee.setText(orderPojo.getDeliveryFee() + priceUnit);
                 if (!orderPojo.isCustConfirm() && !orderPojo.isChefConfirm()) {
-                    delStatus.setText("Order not delivered yet");
+                    delStatus.setText(status_not_del);
                 } else if (orderPojo.isChefConfirm() && !orderPojo.isCustConfirm()) {
-                    delStatus.setText("Order on the way to be delivered");
+                    delStatus.setText(status_on_way);
                 } else if (orderPojo.isCustConfirm() && orderPojo.isChefConfirm()) {
-                    delStatus.setText("Order was deliverd on" + orderPojo.getDeliveryTime());
+                    delStatus.setText(status_del + orderPojo.getDeliveryTime());
                 }
                 if (orderPojo.isChefConfirm()) {
                     confirm.setEnabled(false);
                     confirm.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                     confirm.setBackground(null);
-                    confirm.setText("Delivery Confirmed");
+                    confirm.setText(confirmDel);
                     confirm.setTextColor(Color.GREEN);
                     editDelivery.setVisibility(View.INVISIBLE);
                     editShipping.setVisibility(View.INVISIBLE);
@@ -177,7 +200,7 @@ public class OrderDeatils extends AppCompatActivity {
             public void onClick(View v) {
                 if (!shippingFeeEditor.getText().toString().equals("")) {
                     double newShippingFee = Double.parseDouble(shippingFeeEditor.getText().toString());
-                    shippingFee.setText(newShippingFee + " EGP");
+                    shippingFee.setText(newShippingFee + priceUnit);
                     shippingFeeEditor.setVisibility(View.INVISIBLE);
                     shippingFee.setVisibility(View.VISIBLE);
                     doneShipping.setVisibility(View.INVISIBLE);
@@ -226,7 +249,7 @@ public class OrderDeatils extends AppCompatActivity {
                 confirm.setEnabled(false);
                 confirm.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                 confirm.setBackground(null);
-                confirm.setText("Delivery Confirmed");
+                confirm.setText(confirmDel);
                 confirm.setTextColor(Color.GREEN);
                 editDelivery.setVisibility(View.INVISIBLE);
                 editShipping.setVisibility(View.INVISIBLE);

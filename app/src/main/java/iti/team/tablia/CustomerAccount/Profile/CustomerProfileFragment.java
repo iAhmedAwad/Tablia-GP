@@ -59,7 +59,7 @@ public class CustomerProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_customer_profile, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Profile");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.profile));
 
         //database = new Database(getActivity());
         xOrders = view.findViewById(R.id.xOrders);

@@ -22,23 +22,19 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/menuStyle">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="4">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/toolbar_title"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_weight="3"
                     android:hint="@string/title"
                     android:textColor="#fff"
                     android:textStyle="bold" />
 
-            </LinearLayout>
+            </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -72,7 +68,7 @@
 
                     <TextView
                         android:id="@+id/item_title"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:textColor="@android:color/black"
@@ -97,7 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@id/qty"
                         app:layout_constraintTop_toBottomOf="@id/item_title" />
@@ -170,7 +166,7 @@
 
                     <TextView
                         android:id="@+id/ing"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="12dp"
                         android:textColor="@android:color/black"
@@ -204,9 +200,8 @@
 
                     <TextView
                         android:id="@+id/desc"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="12dp"
                         android:padding="12dp"
                         android:textColor="@android:color/black"
                         android:textSize="14sp"

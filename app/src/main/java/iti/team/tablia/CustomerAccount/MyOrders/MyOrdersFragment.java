@@ -45,7 +45,7 @@ public class MyOrdersFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_my_orders, container, false);
         fab = root.findViewById(R.id.fab_history);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Orders");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.orders));
         orderViewModel = ViewModelProviders.of(this).get(MyOrdersViewModel.class);
         progressBar=root.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);

@@ -172,6 +172,7 @@ public class Repository {
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    chatUserList.clear();
                     for (ChatList chatList : userChatList) {
                         ChefAccountSettings settings = dataSnapshot.child(chatList.getChefId())
                                 .getValue(ChefAccountSettings.class);
@@ -253,16 +254,35 @@ public class Repository {
         reference.updateChildren(hashMap);
     }
 
+    public MutableLiveData<ChefAccountSettings> getCurrentUser() {
+        final MutableLiveData<ChefAccountSettings> liveData = new MutableLiveData<>();
+        reference = FirebaseDatabase.getInstance().getReference("chef_account_settings").child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ChefAccountSettings settings = dataSnapshot.getValue(ChefAccountSettings.class);
+                liveData.setValue(settings);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return liveData;
+    }
+
     /**
      * update user current status if they are offline or online for chat
      *
      * @param status
      */
     public void custStatus(String status) {
-        reference = FirebaseDatabase.getInstance().getReference("customer_account_settings").child(firebaseUser.getUid());
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("status", status);
-        reference.updateChildren(hashMap);
+        FirebaseDatabase.getInstance().getReference("customer_account_settings").child(firebaseUser.getUid()).child("status").setValue(status);
+//        reference = FirebaseDatabase.getInstance().getReference("customer_account_settings").child(firebaseUser.getUid());
+//        HashMap<String, Object> hashMap = new HashMap<>();
+//        hashMap.put("status", status);
+//        reference.updateChildren(hashMap);
     }
 
     /**
@@ -941,11 +961,13 @@ public class Repository {
                 .child(chefId)
                 .child(itemId).removeValue();
     }
+
     public void deleteDisabledItem(String chefId, String itemId) {
         FirebaseDatabase.getInstance().getReference("Disable")
                 .child(chefId)
                 .child(itemId).removeValue();
     }
+
     public void addDisabledToMenu(MenuPojo menuPojo) {
         String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("menu");

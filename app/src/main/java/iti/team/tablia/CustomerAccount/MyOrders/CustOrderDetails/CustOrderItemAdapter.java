@@ -18,18 +18,27 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 import iti.team.tablia.CustomerAccount.Items.ItemDetails;
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.R;
 
 public class CustOrderItemAdapter extends RecyclerView.Adapter<CustOrderItemAdapter.ViewHolder> {
+    private String priceUnit;
     private List<CartPojo> cartPojos;
     Context context;
 
     public CustOrderItemAdapter(List<CartPojo> cartPojos, Context context) {
         this.cartPojos = cartPojos;
         this.context = context;
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            priceUnit = " ج.م";
+
+        } else {
+            priceUnit = " EGP";
+        }
     }
 
     @NonNull
@@ -49,7 +58,7 @@ public class CustOrderItemAdapter extends RecyclerView.Adapter<CustOrderItemAdap
         holder.itemImg.setImageBitmap(bitmap);
         holder.txtNameItem.setText(cartPojo.getItemName());
         holder.txtQuantity.setText(cartPojo.getQuantity() + "");
-        holder.txtSubTotal.setText((cartPojo.getItemPrice() * cartPojo.getQuantity()) + " EGP");
+        holder.txtSubTotal.setText((cartPojo.getItemPrice() * cartPojo.getQuantity()) + priceUnit);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

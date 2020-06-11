@@ -27,7 +27,7 @@ public class ViewChefMenus extends AppCompatActivity {
     ViewChefMenuAdaptor myAdapter;
     RecyclerView recycleMenu;
     ViewChefMenuViewModel myViewModel;
-    String chefId ;
+    String chefId;
     private ProgressBar progressBar;
 
     @Override
@@ -50,20 +50,20 @@ public class ViewChefMenus extends AppCompatActivity {
         recycleMenu = findViewById(R.id.recycleMenu);
         myViewModel = new ViewModelProvider(this).get(ViewChefMenuViewModel.class);
 
-      //  String chefId = get
+        //  String chefId = get
         final Intent intent = getIntent();
         chefId = intent.getStringExtra("userid");
 
-myViewModel.getList(chefId).observe(this, new Observer<List<MenuPojo>>() {
-    @Override
-    public void onChanged(List<MenuPojo> menuPojos) {
-        progressBar.setVisibility(View.GONE);
-        myAdapter = new ViewChefMenuAdaptor( menuPojos, ViewChefMenus.this);
-        recycleMenu.setAdapter(myAdapter);
-        myAdapter.notifyDataSetChanged();
+        myViewModel.getList(chefId).observe(this, new Observer<List<MenuPojo>>() {
+            @Override
+            public void onChanged(List<MenuPojo> menuPojos) {
+                progressBar.setVisibility(View.GONE);
+                myAdapter = new ViewChefMenuAdaptor(menuPojos, ViewChefMenus.this);
+                recycleMenu.setAdapter(myAdapter);
+                myAdapter.notifyDataSetChanged();
 
-    }
-});
+            }
+        });
         recycleMenu.setLayoutManager(gridLayoutManager);
     }
 }

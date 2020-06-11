@@ -27,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 import iti.team.tablia.Authentication.LoginActivity;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Chef.ChefSettings;
@@ -103,10 +105,19 @@ public class ChefRegistrationActivity extends AppCompatActivity {
           if (doStringsMatch(password, xConfirmPassword.getText().toString())) {
             registerNewEmail(email, password);
           } else {
-            Toast.makeText(mContext, "passwords do not match", Toast.LENGTH_SHORT).show();
+            if(Locale.getDefault().getLanguage().equals("ar")){
+              Toast.makeText(mContext, "لم تتطابق كلمة السر", Toast.LENGTH_SHORT).show();
+
+            }else{
+              Toast.makeText(mContext, "passwords do not match", Toast.LENGTH_SHORT).show();
+            }
           }
         } else {
-          Toast.makeText(mContext, "All fields must be filled", Toast.LENGTH_SHORT).show();
+          if (Locale.getDefault().getLanguage().equals("ar")){
+            Toast.makeText(mContext, "يجب ملء جميع الحقول", Toast.LENGTH_SHORT).show();
+          }else {
+            Toast.makeText(mContext, "All fields must be filled", Toast.LENGTH_SHORT).show();
+          }
         }
       }
     });
@@ -137,7 +148,11 @@ public class ChefRegistrationActivity extends AppCompatActivity {
     if (email.equals("") || fullName.equals("") || password.equals("")
         || address.equals("") || phoneNumber.equals("")
         || username.equals("") || confirmPassword.equals("")) {
-      Toast.makeText(mContext, "All fields must be filled out", Toast.LENGTH_SHORT).show();
+      if (Locale.getDefault().getLanguage().equals("ar")) {
+        Toast.makeText(mContext, "يجب ملء جميع الحقول", Toast.LENGTH_SHORT).show();
+      } else {
+        Toast.makeText(mContext, "All fields must be filled", Toast.LENGTH_SHORT).show();
+      }
       return false;
     }
     return true;
@@ -228,8 +243,11 @@ public class ChefRegistrationActivity extends AppCompatActivity {
               addNewChef();
             }
             if (!task.isSuccessful()) {
-              Toast.makeText(mContext, "Someone with that email already exists",
-                  Toast.LENGTH_SHORT).show();
+              if (Locale.getDefault().getLanguage().equals("ar")){
+                Toast.makeText(mContext, "هذا البريد الإلكتروني مسجل بالفعل", Toast.LENGTH_SHORT).show();
+              }else {
+                Toast.makeText(mContext, "Someone with that email already exists", Toast.LENGTH_SHORT).show();
+              }
               hideProgressBar();
 
             }
@@ -275,7 +293,11 @@ public class ChefRegistrationActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
               if (task.isSuccessful()) {
               } else {
-                Toast.makeText(mContext, "couldn't send email", Toast.LENGTH_SHORT).show();
+                if (Locale.getDefault().getLanguage().equals("ar")) {
+                  Toast.makeText(mContext, "لم يتم إرسال رسالة التأكيد", Toast.LENGTH_SHORT).show();
+                } else {
+                  Toast.makeText(mContext, "couldn't send email", Toast.LENGTH_SHORT).show();
+                }
                 hideProgressBar();
               }
             }

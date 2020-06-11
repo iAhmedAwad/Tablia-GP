@@ -62,7 +62,7 @@
     <string name="sold">Today\'s Orders</string>
     <string name="avg_sales">0</string>
     <string name="customer_rating">Your Rate</string>
-    <string name="sales">Your Sales:</string>
+    <string name="sales">Your Sales:&#160;</string>
     <string name="search">Search...</string>
     <string name="username">Username</string>
     <string name="avg_order">Number Of Orders You Delivered</string>
@@ -73,7 +73,7 @@
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="phone">Phone</string>
-    <string name="max_number_of_orders">Max Number of Orders :</string>
+    <string name="max_number_of_orders">Max Number of Orders:&#160;</string>
     <string name="save_changes">Save Changes</string>
     <string name="chef_name">Chef Name</string>
     <string name="address">Address</string>
@@ -94,16 +94,16 @@
     <string name="Description">Description</string>
     <string name="Ingredients">Ingredients</string>
     <string name="AddItem">Add Item</string>
-    <string name="item_quantaty">Item Quantity:</string>
+    <string name="item_quantaty">Item Quantity:&#160;</string>
     <string name="_3_reviews">3 reviews</string>
-    <string name="category">Category:</string>
-    <string name="ingredients">Ingredients:</string>
+    <string name="category">Category:&#160;</string>
+    <string name="ingredients">Ingredients:&#160;</string>
     <string name="edit_menu_item">Edit Menu Item</string>
     <string name="edit_item">Edit Item</string>
-    <string name="sold_by">Sold by:</string>
+    <string name="sold_by">Sold by:&#160;</string>
     <string name="write_review">Write Review</string>
-    <string name="order_time">Order Time:</string>
-    <string name="chef_name_cust_order">Chef Name:</string>
+    <string name="order_time">Order Time:&#160;</string>
+    <string name="chef_name_cust_order">Chef Name:&#160;</string>
     <string name="quantity">Quantity</string>
     <string name="add_a_review">Add a review</string>
     <string name="tab_on_star_to_rate">Tab on star to rate</string>
@@ -122,17 +122,17 @@
     <string name="door_delivery">Door Delivery</string>
     <string name="change_warrning">Chef can change delivery fees and delivery time based on your place</string>
     <string name="delivrey_time">Your order will be delivered:</string>
-    <string name="shipping_fee">Shipping fee:</string>
+    <string name="shipping_fee">Shipping fee:&#160;</string>
     <string name="pickup_order">Pickup Order</string>
     <string name="more_info">For more delivery information please contact chef</string>
     <string name="subtotal">Subtotal</string>
     <string name="shipping">Shipping</string>
     <string name="cancel_order">Cancel Order</string>
     <string name="confirm_order">Confirm Order</string>
-    <string name="order_num">ORDER NUM:</string>
+    <string name="order_num">ORDER NUM:&#160;</string>
     <string name="delivery_method">Delivery Method</string>
     <string name="delivery_address">Delivery Address</string>
-    <string name="shipping_fees">Shipping Fees:</string>
+    <string name="shipping_fees">Shipping Fees:&#160;</string>
     <string name="chef_info">Chef Info</string>
     <string name="message">Message</string>
     <string name="items_in_your_order">ITEMS IN YOUR ORDER</string>
@@ -168,14 +168,14 @@
     <string name="a_chief_image" translatable="false">a chief image</string>
     <string name="a_customer_image" translatable="false">a customer image</string>
     <string name="chef_menu">Chef Menu</string>
-    <string name="sub_total">Subtotal: </string>
+    <string name="sub_total">Subtotal:&#160;</string>
     <string name="seen">seen</string>
-    <string name="qty">Qty:</string>
+    <string name="qty">Qty:&#160;</string>
     <string name="remove">Remove</string>
     <string name="rate_your_chef">Rate your Chef</string>
-    <string name="customer_name">Customer Name:</string>
-    <string name="total">Total: </string>
-    <string name="quantity2">Quantity: </string>
+    <string name="customer_name">Customer Name:&#160;</string>
+    <string name="total">Total:&#160;</string>
+    <string name="quantity2">Quantity:&#160;</string>
     <string name="item_thumbnail" translatable="false">item thumbnail</string>
     <string name="later">Later</string>
     <string name="rate_chef">Rate Chef</string>

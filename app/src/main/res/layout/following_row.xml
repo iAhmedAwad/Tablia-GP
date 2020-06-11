@@ -41,7 +41,7 @@
 
             <TextView
                 android:id="@+id/xFollowerRowBio"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
@@ -49,7 +49,6 @@
                 android:lines="2"
                 android:maxLines="2"
                 android:textSize="13sp"
-                app:layout_constraintEnd_toStartOf="@+id/xFollowingRowButton"
                 app:layout_constraintStart_toEndOf="@+id/xFollowerRowImageView"
                 app:layout_constraintTop_toBottomOf="@+id/xFollowerRowFullName" />
 

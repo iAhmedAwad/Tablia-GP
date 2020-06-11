@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.CustomerAccount.Categories.General.GeneralAdapter;
@@ -35,7 +36,12 @@ import iti.team.tablia.util.Constants;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
       View view = inflater.inflate(R.layout.fragment_category, container, false);
-      ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.JUICE);
+        String lang = Locale.getDefault().getLanguage();
+        if(lang.equals("ar")) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.JUICE_AR);
+        }else {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.JUICE);
+        }
       mViewModel = new ViewModelProvider(this).get(GeneralViewModel.class);
       xRecyclerView = view.findViewById(R.id.xCategoryRecycle);
       progressBar = view.findViewById(R.id.progressBar);

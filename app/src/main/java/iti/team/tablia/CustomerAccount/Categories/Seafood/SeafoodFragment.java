@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.R;
@@ -38,7 +39,13 @@ public class SeafoodFragment extends Fragment {
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                            @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fish_fragment, container, false);
-    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Seafood");
+    String lang = Locale.getDefault().getLanguage();
+    if(lang.equals("ar")) {
+      ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.SEAFOOD_AR);
+    }else {
+      ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.SEAFOOD);
+
+    }
     recyclerView = view.findViewById(R.id.xFishRecycler);
     progressBar=view.findViewById(R.id.progressBar);
     progressBar.setVisibility(View.VISIBLE);

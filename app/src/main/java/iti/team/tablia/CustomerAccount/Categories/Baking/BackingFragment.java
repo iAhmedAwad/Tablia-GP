@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.CustomerAccount.Categories.General.GeneralViewModel;
@@ -38,7 +39,12 @@ public class BackingFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_category, container, false);
-    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Backing");
+    String lang = Locale.getDefault().getLanguage();
+    if(lang.equals("ar")) {
+      ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.BACKING_AR);
+    }else {
+      ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.BACKING);
+    }
     xRecyclerView = view.findViewById(R.id.xCategoryRecycle);
     progressBar = view.findViewById(R.id.progressBar);
     layoutManager = new LinearLayoutManager(getContext());

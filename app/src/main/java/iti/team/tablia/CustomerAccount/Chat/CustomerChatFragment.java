@@ -40,7 +40,7 @@ public class CustomerChatFragment extends Fragment {
          *
          */
         View view = inflater.inflate(R.layout.fragment_customer_chat, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Chat");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.chat));
         customerChatViewModel = ViewModelProviders.of(this).get(CustomerChatViewModel.class);
 
         /**render recyclerview and set its attribute

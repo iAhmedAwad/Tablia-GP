@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import iti.team.tablia.ChefHome.TabBar.Chat.Messages.MessageActivity;
@@ -43,11 +44,20 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
     FirebaseUser cust;
     ProgressBar progressBar;
     private LinearLayout rateChef;
+    private String viewRev;
+    private String viewMenus;
 
     protected void onCreate(Bundle savedInstanceState) {
         db = new Database();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_chief_profile);
+        if(Locale.getDefault().getLanguage().equals("ar")){
+            viewMenus="مشاهدة قائمة الشيف ";
+            viewRev="مشاهدة التعليقات على ";
+        }else {
+            viewMenus="View menu of ";
+            viewRev="View Reviews On ";
+        }
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         name = findViewById(R.id.id_name);
@@ -100,8 +110,8 @@ public class ViewChiefProfileActivity extends AppCompatActivity {
                 nb_followers.setText(String.valueOf(chiefPojo.getFollowers()));
                 rating.setRating(chiefPojo.getRating());
                 prfo_img.setImageBitmap(GlobalImageLoader.StringToBitMap(chiefPojo.getProfilePhoto()));
-                reviews.setText("View Reviews On " + chiefPojo.getDisplayName());
-                menus.setText("Vist " + chiefPojo.getDisplayName() + "'s " + "Menus");
+                reviews.setText(viewRev + chiefPojo.getDisplayName());
+                menus.setText(viewMenus+ chiefPojo.getDisplayName());
                 if (chiefPojo.isAvailable() == true) {
                     avaliablity.setImageResource(R.drawable.online);
                 } else {

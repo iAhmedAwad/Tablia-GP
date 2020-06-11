@@ -26,8 +26,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import iti.team.tablia.Authentication.LoginActivity;
 import iti.team.tablia.Models.Chat;
 import iti.team.tablia.Models.ChatUser;
 import iti.team.tablia.R;
@@ -85,7 +87,12 @@ public class MessageActivity extends AppCompatActivity {
         if (!msg.equals("")) {
           sendMessage(firebaseUser.getUid(), userId, msg);
         } else {
-          Toast.makeText(MessageActivity.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
+          if (Locale.getDefault().getLanguage().equals("ar")){
+            Toast.makeText(MessageActivity.this, "لا يمكن إرسال رسالة فارغة", Toast.LENGTH_SHORT).show();
+
+          }else {
+            Toast.makeText(MessageActivity.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
+          }
         }
         txt_send.setText("");
       }
@@ -142,10 +149,10 @@ public class MessageActivity extends AppCompatActivity {
   }
 
   private void status(String status) {
-    reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
-    HashMap<String, Object> hashMap = new HashMap<>();
-    hashMap.put("status", status);
-    reference.updateChildren(hashMap);
+//    reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
+//    HashMap<String, Object> hashMap = new HashMap<>();
+//    hashMap.put("status", status);
+//    reference.updateChildren(hashMap);
   }
 
   @Override

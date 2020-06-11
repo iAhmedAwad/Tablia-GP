@@ -38,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
@@ -72,6 +73,10 @@ public class EditChiefActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private Database database;
+    private String camera;
+    private String gal;
+    private String can;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,20 +152,30 @@ public class EditChiefActivity extends AppCompatActivity {
 
 
     private void SelectImage() {
-
-        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
+        if (Locale.getDefault().getLanguage().equals("ar")) {
+            camera = "كاميرا";
+            gal = "المعرض";
+            can = "إلغاء";
+            title ="إضافة صورة";
+        } else {
+            camera = "Camera";
+            gal = "Gallery";
+            can = "Cancel";
+            title = "Add Image";
+        }
+        final CharSequence[] items = {camera, gal, can};
         AlertDialog.Builder builder = new AlertDialog.Builder(EditChiefActivity.this);
-        builder.setTitle("Add Image");
+        builder.setTitle(title);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if (items[which].equals("Camera")) {
+                if (items[which].equals(camera)) {
 
                     Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intentCamera, REQUEST_CAMERA);
 
-                } else if (items[which].equals("Gallery")) {
+                } else if (items[which].equals(gal)) {
 
                     Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intentGallery.setType("image/*");

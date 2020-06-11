@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.Customer.ChefProfile.ViewChiefProfileActivity;
@@ -45,11 +46,19 @@ public class CompleteOrder extends AppCompatActivity {
     public static OrderPojo orderPojo;
     private TextView deliveryTime;
     public ProgressBar progressBar;
+    private String priceUnit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_order);
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            priceUnit = " ج.م";
+
+        } else {
+            priceUnit = " EGP";
+        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -102,21 +111,21 @@ public class CompleteOrder extends AppCompatActivity {
             }
         });
         deliveryTime.setText(orderPojo.getDeliveryTime());
-        subTotal.setText("EGP " + orderPojo.getSubTotal());
+        subTotal.setText(orderPojo.getSubTotal() + priceUnit);
 
-        shippingFee.setText(shipping + " EGP");
-        shippingFee2.setText("EGP " + shipping);
+        shippingFee.setText(shipping + priceUnit);
+        shippingFee2.setText(shipping + priceUnit);
         double totalD = orderPojo.getSubTotal() + shipping;
-        total.setText("EGP " + totalD);
+        total.setText(totalD + priceUnit);
         orderPojo.setTotal(totalD);
         doorDelivery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (doorDelivery.isChecked()) {
-                    shippingFee2.setText("EGP " + shipping);
+                    shippingFee2.setText(shipping + priceUnit);
                     shippingFee2.setTextColor(Color.parseColor("#71068F"));
                     double totalD = orderPojo.getSubTotal() + shipping;
-                    total.setText("EGP " + totalD);
+                    total.setText(totalD + priceUnit);
                     orderPojo.setTotal(totalD);
                     orderPojo.setDeliveryType(true);
                 }
@@ -127,9 +136,9 @@ public class CompleteOrder extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (pickup.isChecked()) {
-                    shippingFee2.setText("EGP 0.0");
+                    shippingFee2.setText(priceUnit + " 0.0");
                     shippingFee2.setTextColor(Color.GREEN);
-                    total.setText("EGP " + orderPojo.getSubTotal());
+                    total.setText(priceUnit + orderPojo.getSubTotal());
                     orderPojo.setTotal(orderPojo.getSubTotal());
                     orderPojo.setDeliveryType(false);
                 }
@@ -139,7 +148,7 @@ public class CompleteOrder extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                      WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 progressBar.setVisibility(View.VISIBLE);
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 Date date = new Date();
@@ -148,7 +157,12 @@ public class CompleteOrder extends AppCompatActivity {
                     @Override
                     public void onChanged(Boolean approved) {
                         if (!approved) {
-                            Toast.makeText(CompleteOrder.this, "Some of your orders or all of them are sold out please check your cart again", Toast.LENGTH_SHORT).show();
+                            if (Locale.getDefault().getLanguage().equals("ar")){
+                                Toast.makeText(CompleteOrder.this, "بعض طلباتك أو كلها قد نفذت برجاء التأكد من سلة التسوق مرة أخرى", Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                Toast.makeText(CompleteOrder.this, "Some of your orders or all of them are sold out please check your cart again", Toast.LENGTH_SHORT).show();
+                            }
                             finish();
                         }
                     }

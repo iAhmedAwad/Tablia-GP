@@ -54,7 +54,7 @@ public class CustomerHomeFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_customer_home, container, false);
-    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Home");
+    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.home));
     progressBar = view.findViewById(R.id.progressBar);
     progressBar.setVisibility(View.VISIBLE);
     progressBar2 = view.findViewById(R.id.progressBar1);

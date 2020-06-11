@@ -29,7 +29,7 @@ public class OrderPojo implements Serializable {
     this.items = items;
     ////////////////////
     deliveryFee = 0;
-    deliveryTime = "Not Specified Yet";
+    deliveryTime = "_";
     chefConfirm = false;
     custConfirm = false;
     total = 0.0;
@@ -37,7 +37,7 @@ public class OrderPojo implements Serializable {
 
   public OrderPojo() {
     deliveryFee = 0;
-    deliveryTime = "Not Specified Yet";
+    deliveryTime = "_";
     chefConfirm = false;
     custConfirm = false;
     total = 0.0;

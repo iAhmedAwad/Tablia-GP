@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.util.Locale;
+
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.R;
 
@@ -26,12 +28,20 @@ public class HomeFragment extends Fragment {
   private TextView avg_orders;
   private HomeViewModel homeViewModel;
   private ProgressBar progressBar;
+  private String priceUnit;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_home, container, false);
+    String lang = Locale.getDefault().getLanguage();
+    if (lang.equals("ar")) {
+      priceUnit = " ج.م";
+
+    } else {
+      priceUnit = " EGP";
+    }
     ratingBar = view.findViewById(R.id.chef_rate);
     rating = view.findViewById(R.id.rate);
     sales = view.findViewById(R.id.sales_amount);
@@ -55,7 +65,7 @@ public class HomeFragment extends Fragment {
       @Override
       public void onChanged(Double amount) {
         progressBar.setVisibility(View.GONE);
-        sales.setText(amount + " EGP");
+        sales.setText(amount + priceUnit);
       }
     });
     homeViewModel.getTodysOrders().observe(getViewLifecycleOwner(), new Observer<Integer>() {

@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Order.OrderPojo;
 import iti.team.tablia.Models.CartGroupPojo;
@@ -50,7 +51,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
   public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
     final CartGroupPojo order = orders.get(position);
     final String chefName = order.getCartPojos().get(0).getChefName();
-    holder.title.setText("Your Order from chef " + chefName);
+    if (Locale.getDefault().getLanguage().equals("ar")){
+      holder.title.setText("طلباتك من الشيف " + chefName);
+    }else {
+      holder.title.setText("Your Order from chef " + chefName);
+    }
     holder.itemRecyclerView.setHasFixedSize(true);
     holder.itemRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -58,7 +63,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     for (CartPojo pojo : order.getCartPojos()) {
       subTotal += (pojo.getQuantity() * pojo.getItemPrice());
     }
-    holder.subTotal.setText(subTotal + " EGP");
+    String lang = Locale.getDefault().getLanguage();
+    if(lang.equals("ar")){
+      holder.subTotal.setText(subTotal+" ج.م");
+
+    }else {
+      holder.subTotal.setText(subTotal+" EGP");
+    }
     ItemOrderAdapter itemOrderAdapter = new ItemOrderAdapter(order.getCartPojos(), context, holder.subTotal);
     holder.itemRecyclerView.setAdapter(itemOrderAdapter);
 

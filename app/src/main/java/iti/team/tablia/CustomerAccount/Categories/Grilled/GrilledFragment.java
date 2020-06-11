@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.R;
@@ -39,7 +40,14 @@ public class GrilledFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.grilled_fragment, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Grilled");
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.GRILLED_AR);
+
+        } else {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(Constants.GRILLED);
+
+        }
         mViewModel = new ViewModelProvider(this).get(GrilledViewModel.class);
         xRecyclerView = view.findViewById(R.id.xgrilledRecycle);
         progressBar = view.findViewById(R.id.progressBar);
@@ -55,11 +63,11 @@ public class GrilledFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mViewModel.getGrilledItems(Constants.GRILLED,Constants.GRILLED_AR)
+        mViewModel.getGrilledItems(Constants.GRILLED, Constants.GRILLED_AR)
                 .observe(getViewLifecycleOwner(), new Observer<ArrayList<MenuPojo>>() {
                     @Override
                     public void onChanged(ArrayList<MenuPojo> menuPojos) {
-                      progressBar.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
                         mAdapter = new GrilledAdapter(getContext(), menuPojos);
                         xRecyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();

@@ -33,7 +33,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.AddMenu;
 import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.AddMenuAdapter;
@@ -41,6 +43,7 @@ import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.MenuItemPojo;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.R;
 import iti.team.tablia.others.Database;
+import iti.team.tablia.util.Constants;
 
 public class EditMenuItems extends AppCompatActivity {
 
@@ -60,9 +63,11 @@ public class EditMenuItems extends AppCompatActivity {
     MenuItemPojo picItem;
     List<MenuItemPojo> list =  new ArrayList<>();
     String category;
-
     public static MenuPojo menuPojo ;
-
+    private String cam;
+    private String gal;
+    private String can;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,9 +129,10 @@ public class EditMenuItems extends AppCompatActivity {
 
 
         spinner = findViewById(R.id.spinner);
-
-        int x = CheckCategory(menuPojo.getCategory());
-
+        String cat = getCategory(menuPojo.getCategory());
+        String[]catList=getResources().getStringArray(R.array.Spinner_Item);
+        List<String> catClone=Arrays.asList(catList);
+        int x = catClone.indexOf(cat);
         spinner.setSelection(x);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -169,11 +175,14 @@ public class EditMenuItems extends AppCompatActivity {
                     db.updateMenuItemToDatabase(Item);
 
 
-//                    Log.i("MM", picture);
 
                     finish();
                 } else {
-                    Toast.makeText(EditMenuItems.this, "There Data Not Complete", Toast.LENGTH_LONG).show();
+                    if (Locale.getDefault().getLanguage().equals("ar")) {
+                        Toast.makeText(EditMenuItems.this, "أكمل البيانات من فضلك", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(EditMenuItems.this, "There Data Not Complete", Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }
@@ -183,20 +192,30 @@ public class EditMenuItems extends AppCompatActivity {
 
 
     private void SelectImage() {
-
-        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
+        if (Locale.getDefault().getLanguage().equals("ar")) {
+            cam = "كاميرا";
+            gal = "المعرض";
+            can = "إلغاء";
+            title ="إضافة صورة";
+        } else {
+            cam = "Camera";
+            gal = "Gallery";
+            can = "Cancel";
+            title = "Add Image";
+        }
+        final CharSequence[] items = {cam, gal, can};
         AlertDialog.Builder builder = new AlertDialog.Builder(EditMenuItems.this);
-        builder.setTitle("Add Image");
+        builder.setTitle(title);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if (items[which].equals("Camera")) {
+                if (items[which].equals(cam)) {
 
                     Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intentCamera, REQUEST_CAMERA);
 
-                } else if (items[which].equals("Gallery")) {
+                } else if (items[which].equals(gal)) {
 
                     Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intentGallery.setType("image/*");
@@ -218,21 +237,17 @@ public class EditMenuItems extends AppCompatActivity {
 
             if (requestCode == REQUEST_CAMERA) {
 
-//                Bundle bundle = data.getExtras();
                 bmp = (Bitmap) data.getExtras().get("data");
-//                imgAdd.setImageBitmap(bmp);
                 AddPic(bmp);
 
             } else if (requestCode == SELECT_FILE) {
 
-//                bmp = (Bitmap) data.getExtras().get("data");
                 selectedImageUri = data.getData();
                 try {
                     bmp = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-//                imgAdd.setImageBitmap(bmp);
                 AddPic(bmp);
             }
 
@@ -259,46 +274,59 @@ public class EditMenuItems extends AppCompatActivity {
 
     }
 
-    public int CheckCategory(String category){
-        int i  ;
-
-        switch (category){
-            case "Desert" :
-                i=0;
-                break;
-            case "Grilled" :
-                i=1;
-                break;
-            case "Juice":
-                i=2;
-                break;
-            case "Macaroni":
-                i=3;
-                break;
-            case "Mahashy":
-                i=4;
-                break;
-            case "Salad":
-                i=5;
-                break;
-            case "Seafood":
-                i=6;
-                break;
-            default:
-                i=0;
-                break;
+    private String getCategory(String category) {
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            if (category.equals(Constants.BACKING)) {
+                category = Constants.BACKING_AR;
+            } else if (category.equals(Constants.DESSERT)) {
+                category = Constants.DESSERT_AR;
+            } else if (category.equals(Constants.GRILLED)) {
+                category = Constants.GRILLED_AR;
+            } else if (category.equals(Constants.JUICE)) {
+                category = Constants.JUICE_AR;
+            } else if (category.equals(Constants.MACARONI)) {
+                category = Constants.MACARONI_AR;
+            } else if (category.equals(Constants.MAHASHY)) {
+                category = Constants.MAHASHY_AR;
+            } else if (category.equals(Constants.MAIN_DISHES)) {
+                category = Constants.MAIN_DISHES_AR;
+            } else if (category.equals(Constants.SALAD)) {
+                category = Constants.SALAD_AR;
+            } else if (category.equals(Constants.SEAFOOD)) {
+                category = Constants.SEAFOOD_AR;
+            } else if (category.equals(Constants.SIDE_DISHES)) {
+                category = Constants.SIDE_DISHES_AR;
+            } else if (category.equals(Constants.SOUPS)) {
+                category = Constants.SOUPS_AR;
+            }
+        } else {
+            if (category.equals(Constants.BACKING_AR)) {
+                category = Constants.BACKING;
+            } else if (category.equals(Constants.DESSERT_AR)) {
+                category = Constants.DESSERT;
+            } else if (category.equals(Constants.GRILLED_AR)) {
+                category = Constants.GRILLED;
+            } else if (category.equals(Constants.JUICE_AR)) {
+                category = Constants.JUICE;
+            } else if (category.equals(Constants.MACARONI_AR)) {
+                category = Constants.MACARONI;
+            } else if (category.equals(Constants.MAHASHY_AR)) {
+                category = Constants.MAHASHY;
+            } else if (category.equals(Constants.MAIN_DISHES_AR)) {
+                category = Constants.MAIN_DISHES;
+            } else if (category.equals(Constants.SALAD_AR)) {
+                category = Constants.SALAD;
+            } else if (category.equals(Constants.SEAFOOD_AR)) {
+                category = Constants.SEAFOOD;
+            } else if (category.equals(Constants.SIDE_DISHES_AR)) {
+                category = Constants.SIDE_DISHES;
+            } else if (category.equals(Constants.SOUPS_AR)) {
+                category = Constants.SOUPS;
+            }
         }
-
-        return i;
-
+        return category;
     }
+
 }
 
-
-//<item></item>
-//<item></item>
-//<item></item>
-//<item></item>
-//<item></item>
-//<item></item>
-//<item></item>
