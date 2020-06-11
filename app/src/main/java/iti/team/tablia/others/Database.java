@@ -249,70 +249,71 @@ public class Database {
             //ChefAccountSettingsNode
 
             if (ds.getKey().equals(mContext.getString(R.string.chefAccountSettingsNode))) {
-
-                try {
-                    chefAccountSettings.setUserName(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getUserName());
-
-                    chefAccountSettings.setAddress(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getAddress());
-
-                    chefAccountSettings.setBio(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getBio());
-
-                    chefAccountSettings.setDisplayName(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getDisplayName());
-
-
-                    chefAccountSettings.setOrders(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getOrders());
-                    chefAccountSettings.setProfilePhoto(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getProfilePhoto());
-
-                    chefAccountSettings.setFollowers(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getFollowers());
-
-                    //Edittedd
-                    chefAccountSettings.setFollowers(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getFollowers());
-
-                    chefAccountSettings.setStart_order_time(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getStart_order_time());
-                    chefAccountSettings.setEnd_order_time(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getEnd_order_time());
-
-                    chefAccountSettings.setAvailable(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .isAvailable());
-
-
-                } catch (NullPointerException e) {
-                }
+                chefAccountSettings = ds.child(userId)
+                        .getValue(ChefAccountSettings.class);
+//                try {
+//                    chefAccountSettings.setUserName(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getUserName());
+//
+//                    chefAccountSettings.setAddress(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getAddress());
+//
+//                    chefAccountSettings.setBio(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getBio());
+//
+//                    chefAccountSettings.setDisplayName(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getDisplayName());
+//
+//
+//                    chefAccountSettings.setOrders(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getOrders());
+//                    chefAccountSettings.setProfilePhoto(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getProfilePhoto());
+//
+//                    chefAccountSettings.setFollowers(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getFollowers());
+//
+//                    //Edittedd
+//                    chefAccountSettings.setFollowers(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getFollowers());
+//
+//                    chefAccountSettings.setStart_order_time(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getStart_order_time());
+//                    chefAccountSettings.setEnd_order_time(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getEnd_order_time());
+//
+//                    chefAccountSettings.setAvailable(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .isAvailable());
+//
+//
+//                } catch (NullPointerException e) {
+//                }
             }
 
             //Users Node
 
             if (ds.getKey().equals(mContext.getString(R.string.usersNode))) {
-
-                try {
-                    user.setUser_id(ds.child(userId).getValue(User.class).getUser_id());
-                    user.setEmail(ds.child(userId).getValue(User.class).getEmail());
-                    user.setFullName(ds.child(userId).getValue(User.class).getFullName());
-                    user.setUsername(ds.child(userId).getValue(User.class).getUsername());
-                    user.setType(ds.child(userId).getValue(User.class).getType());
-
-                } catch (NullPointerException e) {
-                }
+                user = ds.child(userId).getValue(User.class);
+//                try {
+//                    user.setUser_id(ds.child(userId).getValue(User.class).getUser_id());
+//                    user.setEmail(ds.child(userId).getValue(User.class).getEmail());
+//                    user.setFullName(ds.child(userId).getValue(User.class).getFullName());
+//                    user.setUsername(ds.child(userId).getValue(User.class).getUsername());
+//                    user.setType(ds.child(userId).getValue(User.class).getType());
+//
+//                } catch (NullPointerException e) {
+//                }
 
             }
         }
@@ -661,7 +662,7 @@ public class Database {
                     for (DataSnapshot dsx : ds.getChildren()) {
                         MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
                         if (menuPojo.getCategory().equals(category)
-                                ||menuPojo.getCategory().equals(category_ar)) {
+                                || menuPojo.getCategory().equals(category_ar)) {
                             list.add(menuPojo);
                         }
                     }
@@ -699,10 +700,10 @@ public class Database {
 
                 list.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                   // Log.d("filterx", "first loop");
+                    // Log.d("filterx", "first loop");
 
                     for (DataSnapshot dsx : ds.getChildren()) {
-                      //  Log.d("filterx", "second loop");
+                        //  Log.d("filterx", "second loop");
                         MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
                         if (categoriesList.contains(menuPojo.getCategory())
                                 && menuPojo.getPriceItem() >= min
@@ -751,10 +752,10 @@ public class Database {
                         MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
 
                         if (menuPojo.getPriceItem() >= min
-                            && menuPojo.getPriceItem() <= max
-                        ){
+                                && menuPojo.getPriceItem() <= max
+                        ) {
 
-                        list.add(menuPojo);
+                            list.add(menuPojo);
                         }
 
                     }
@@ -1324,8 +1325,9 @@ public class Database {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
-               list.setValue(settings.getDisplayName());
+                list.setValue(settings.getDisplayName());
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
