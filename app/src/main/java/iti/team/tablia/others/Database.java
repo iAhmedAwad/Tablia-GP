@@ -1171,7 +1171,7 @@ public class Database {
                             chefIDLis.add(ds.getKey());
                         }
                         ref.child(Constants.MenuNode)
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                .addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         menuPojoArrayList.clear();
