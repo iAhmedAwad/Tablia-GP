@@ -123,13 +123,13 @@ public class MessageActivity extends AppCompatActivity {
       }
     });
 
-    seenMessage(userId);
+//    seenMessage(userId);
 
   }
-
-  private void seenMessage(final String userId) {
-    messageViewModel.seenMessage(userId, isPaused);
-  }
+//
+//  private void seenMessage(final String userId) {
+//    messageViewModel.seenMessage(userId, isPaused);
+//  }
 
   private void sendMessage(final String sender, final String receiver, String message) {
     messageViewModel.sendMessage(sender, receiver, message);
@@ -150,10 +150,6 @@ public class MessageActivity extends AppCompatActivity {
 
   private void status(String status) {
     messageViewModel.setStatus(status);
-//    reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
-//    HashMap<String, Object> hashMap = new HashMap<>();
-//    hashMap.put("status", status);
-//    reference.updateChildren(hashMap);
   }
 
   @Override

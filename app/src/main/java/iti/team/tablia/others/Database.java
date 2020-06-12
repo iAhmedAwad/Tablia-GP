@@ -1164,7 +1164,7 @@ public class Database {
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
         ref.child(Constants.FOLLOWING_NODE).child(userId)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         chefIDLis.clear();
