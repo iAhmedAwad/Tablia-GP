@@ -62,7 +62,6 @@
                 android:maxLines="2"
                 android:text="TextView"
                 android:textSize="13sp"
-                app:layout_constraintEnd_toStartOf="@+id/xFollowingRowButton"
                 app:layout_constraintStart_toEndOf="@+id/xFollowerRowImageView"
                 app:layout_constraintTop_toBottomOf="@+id/xFollowerRowUsername" />
 

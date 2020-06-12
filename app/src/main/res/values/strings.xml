@@ -44,7 +44,7 @@
     <string-array name="Spinner_Item">
         <item>Dessert</item>
         <item>Grilled</item>
-        <item>Juice</item>
+        <item>Drinks</item>
         <item>Macaroni</item>
         <item>Mahashy</item>
         <item>Salad</item>
@@ -197,7 +197,7 @@
     <string name="salad">Salad</string>
     <string name="soups">Soups</string>
     <string name="dessert">Dessert</string>
-    <string name="juice">Juice</string>
+    <string name="juice">Drinks</string>
     <string name="my_orders">My Orders</string>
     <string name="account">Account</string>
     <string name="signout">Signout</string>

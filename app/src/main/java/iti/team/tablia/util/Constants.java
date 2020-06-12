@@ -18,7 +18,7 @@ public class Constants {
   public static final String GRILLED = "Grilled";
   public static final String BACKING = "Baking";
   public static final String DESSERT ="Dessert";
-  public static final String JUICE = "Juice";
+  public static final String JUICE = "Drinks";
   public static final String MACARONI = "Macaroni";
   public static final String MAIN_DISHES = "Main Dishes";
   public static final String SALAD = "Salad";
@@ -30,7 +30,7 @@ public class Constants {
   public static final String GRILLED_AR  = "مشويات";
   public static final String BACKING_AR  = "مخبوزات";
   public static final String DESSERT_AR  ="حلويات";
-  public static final String JUICE_AR  = "عصائر";
+  public static final String JUICE_AR  = "مشروبات";
   public static final String MACARONI_AR  = "مكرونات";
   public static final String MAIN_DISHES_AR  = "أطباق رئيسية";
   public static final String SALAD_AR  = "سلطات";
