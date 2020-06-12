@@ -52,4 +52,8 @@ public class MessageViewModel extends ViewModel {
   public void seenMessage(String userId, boolean isPaused) {
     repository.seenMessage(userId, isPaused);
   }
+
+    public void setStatus(String status) {
+    repository.setStatusFromMsg(status);
+    }
 }

@@ -1,9 +1,11 @@
 package iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -193,6 +195,9 @@ public class OrderDeatils extends AppCompatActivity {
                 editShipping.setVisibility(View.INVISIBLE);
                 double shipping = Double.parseDouble(shippingFee.getText().toString().split(" ")[0]);
                 shippingFeeEditor.setText(shipping + "");
+                shippingFeeEditor.requestFocus(String.valueOf(shipping).length());
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(shippingFeeEditor, InputMethodManager.SHOW_IMPLICIT);
             }
         });
         doneShipping.setOnClickListener(new View.OnClickListener() {
@@ -205,6 +210,8 @@ public class OrderDeatils extends AppCompatActivity {
                     shippingFee.setVisibility(View.VISIBLE);
                     doneShipping.setVisibility(View.INVISIBLE);
                     editShipping.setVisibility(View.VISIBLE);
+                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                     model.updateOrder(orderIDStr, chefID, custID, newShippingFee);
 
                 }
@@ -226,6 +233,9 @@ public class OrderDeatils extends AppCompatActivity {
                 doneDelivery.setVisibility(View.VISIBLE);
                 editDelivery.setVisibility(View.INVISIBLE);
                 delTimeEditor.setText(delTime.getText().toString());
+                delTimeEditor.requestFocus(delTime.getText().toString().length());
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(delTimeEditor, InputMethodManager.SHOW_IMPLICIT);
             }
         });
         doneDelivery.setOnClickListener(new View.OnClickListener() {
@@ -238,6 +248,8 @@ public class OrderDeatils extends AppCompatActivity {
                     delTime.setVisibility(View.VISIBLE);
                     doneDelivery.setVisibility(View.INVISIBLE);
                     editDelivery.setVisibility(View.VISIBLE);
+                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                     model.updateOrderDelTime(orderIDStr, chefID, custID, deliveryTime);
 
                 }

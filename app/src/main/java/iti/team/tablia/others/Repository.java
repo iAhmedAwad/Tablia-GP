@@ -58,6 +58,7 @@ import iti.team.tablia.others.Data;
 import iti.team.tablia.others.MyResponse;
 import iti.team.tablia.others.Sender;
 import iti.team.tablia.others.Token;
+import iti.team.tablia.util.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -1325,6 +1326,35 @@ public class Repository {
                 hashMap.put("rating", rate);
                 FirebaseDatabase.getInstance().getReference("chef_account_settings")
                         .child(chefId).updateChildren(hashMap);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void setStatusFromMsg(final String status) {
+        reference = FirebaseDatabase.getInstance().getReference("users")
+                .child(firebaseUser.getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if(user.getType().equals("chef")){
+                    reference = FirebaseDatabase.getInstance()
+                            .getReference(Constants.chefAccountSettingsNode).child(firebaseUser.getUid());
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("status", status);
+                    reference.updateChildren(hashMap);
+                }else{
+                    reference = FirebaseDatabase.getInstance()
+                            .getReference(Constants.customerAccountSettingsNode).child(firebaseUser.getUid());
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("status", status);
+                    reference.updateChildren(hashMap);
+                }
             }
 
             @Override

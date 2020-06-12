@@ -149,6 +149,7 @@ public class MessageActivity extends AppCompatActivity {
   }
 
   private void status(String status) {
+    messageViewModel.setStatus(status);
 //    reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
 //    HashMap<String, Object> hashMap = new HashMap<>();
 //    hashMap.put("status", status);
