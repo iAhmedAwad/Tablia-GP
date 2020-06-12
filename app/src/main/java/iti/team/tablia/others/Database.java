@@ -238,7 +238,7 @@ public class Database {
             ref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
-                    if (dataSnapshot != null) {
+                    if (dataSnapshot.getValue() != null) {
                         FirebaseDatabase.getInstance().getReference("Disable").child(userid)
                                 .setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
