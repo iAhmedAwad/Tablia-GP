@@ -177,9 +177,11 @@ public class Repository {
                     for (ChatList chatList : userChatList) {
                         ChefAccountSettings settings = dataSnapshot.child(chatList.getChefId())
                                 .getValue(ChefAccountSettings.class);
-                        ChatUser user = new ChatUser(chatList.getChefId(), settings.getDisplayName()
-                                , settings.getProfilePhoto(), settings.getStatus(), chatList.getLastMsgTime(), chatList.getLastMsg());
-                        chatUserList.add(user);
+                        if(settings.isAvailable()) {
+                            ChatUser user = new ChatUser(chatList.getChefId(), settings.getDisplayName()
+                                    , settings.getProfilePhoto(), settings.getStatus(), chatList.getLastMsgTime(), chatList.getLastMsg());
+                            chatUserList.add(user);
+                        }
                     }
                     liveData.setValue(chatUserList);
                 }
@@ -560,10 +562,12 @@ public class Repository {
                 chefList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
-                    String chefId = snapshot.getKey();
-                    ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto()
-                            , user.getStatus(), "none", "none");
-                    chefList.add(chatUser);
+                    if(user.isAvailable()) {
+                        String chefId = snapshot.getKey();
+                        ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto()
+                                , user.getStatus(), "none", "none");
+                        chefList.add(chatUser);
+                    }
 
                 }
                 chefListLiveData.setValue(chefList);
@@ -598,10 +602,12 @@ public class Repository {
                     chefList.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
-                        String chefId = snapshot.getKey();
-                        ChatUser chatUser = new ChatUser(chefId, user.getUserName()
-                                , user.getProfilePhoto(), user.getStatus(), "none", "none");
-                        chefList.add(chatUser);
+                        if(user.isAvailable()) {
+                            String chefId = snapshot.getKey();
+                            ChatUser chatUser = new ChatUser(chefId, user.getUserName()
+                                    , user.getProfilePhoto(), user.getStatus(), "none", "none");
+                            chefList.add(chatUser);
+                        }
 
                     }
                     chefSearchLiveData.setValue(chefList);

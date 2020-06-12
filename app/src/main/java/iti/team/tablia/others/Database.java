@@ -219,7 +219,7 @@ public class Database {
      */
     public void addChefToDatabase(ChefSettings chefSettings) {
 
-        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         //add data to the "users" node
@@ -233,6 +233,31 @@ public class Database {
         reference.child(mContext.getString(R.string.chefAccountSettingsNode))
                 .child(userid)
                 .setValue(chefSettings.getChefAccountSettings());
+        if (!chefSettings.getChefAccountSettings().isAvailable()) {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("menu").child(userid);
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                    if (dataSnapshot != null) {
+                        FirebaseDatabase.getInstance().getReference("Disable").child(userid)
+                                .setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    dataSnapshot.getRef().removeValue();
+                                }
+                            }
+
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
     /**
