@@ -56,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:hint="@string/full_name"
+                android:inputType="textPersonName"
                 android:textColor="@color/colorAccent" />
 
             <EditText
@@ -73,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/colorAccent" />
 
 
@@ -82,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:hint="@string/password"
+                android:inputType="textPassword"
                 android:textColor="@color/colorAccent" />
 
             <EditText
@@ -90,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:hint="@string/confirm_password"
+                android:inputType="textPassword"
                 android:textColor="@color/colorAccent" />
 
 
