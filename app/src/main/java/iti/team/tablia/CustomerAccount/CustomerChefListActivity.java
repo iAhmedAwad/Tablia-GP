@@ -117,7 +117,7 @@ public class CustomerChefListActivity extends AppCompatActivity {
           for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
             ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
             String chefId = snapshot.getKey();
-            ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto(), user.getStatus());
+            ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto(), user.getStatus(),"none","none");
             users.add(chatUser);
 
           }
@@ -145,9 +145,8 @@ public class CustomerChefListActivity extends AppCompatActivity {
         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
           ChefAccountSettings user = snapshot.getValue(ChefAccountSettings.class);
           String chefId = snapshot.getKey();
-          ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto(), user.getStatus());
+          ChatUser chatUser = new ChatUser(chefId, user.getUserName(), user.getProfilePhoto(), user.getStatus(),"none","none");
           users.add(chatUser);
-
         }
         userAdapter = new TopChefAdapter(CustomerChefListActivity.this, users);
         recyclerView.setAdapter(userAdapter);

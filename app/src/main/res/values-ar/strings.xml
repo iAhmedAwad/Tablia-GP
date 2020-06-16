@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Spinner_Item">
+        <item>حلويات</item>
+        <item>مشويات</item>
+        <item>مشروبات</item>
+        <item>مكرونات</item>
+        <item>محاشي</item>
+        <item>سلطات</item>
+        <item>مأكولات بحرية</item>
+        <item>أطباق رئيسية</item>
+        <item>مخبوزات</item>
+        <item>شوربات</item>
+        <item>أطباق جانبية</item>
+    </string-array>
+    <!--  Chef Profiles by Yasmine -->
+    <string name="name">الأسم</string>
+    <string name="description">الوصف</string>
+    <string name="phone">رقم الهاتف المحمول</string>
+    <string name="max_number_of_orders">أقصى عدد للطلبات:&#160;</string>
+    <string name="save_changes">حفظ التغييرات</string>
+    <string name="chef_name">أسم الشيف</string>
+    <string name="address">العنوان</string>
+    <string name="orders">الطلبات</string>
+    <string name="view_reviews">مشاهدة التعليقات</string>
+    <string name="number_of_orders">عدد الطلبات</string>
+    <string name="visit_menu">رؤية القائمة</string>
+    <string name="follow">متابعة</string>
+    <string name="unfollow">أتابع</string>
+    <string name="message">مراسلة</string>
+    <string name="top_chefs">الشيفات الأعلى تقييما</string>
+    <string name="see_all_chefs">للمزيد</string>
+    <string name="recent_dishes">الأطباق الجديدة</string>
+    <string name="tab_on_star_to_rate">أضغط على النجوم للتقييم</string>
+    <string name="what_do_you_think_about_our_product">ما رأيك في منتجنا؟</string>
+    <string name="submit_review">إضافة تعليق</string>
+    <string name="title">عنوان</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="phone_number">رقم الهاتف المحمول</string>
+    <string name="password">كلمة السر</string>
+    <string name="confirm_password">تأكيد كلمة السر</string>
+    <string name="sign_up">التسجيل</string>
+    <string name="address_details">تفاصيل العنوان</string>
+    <string name="change">تغيير</string>
+    <string name="address_warrning">هذا العنوان الذي سيتم التوصيل إليه تأكد من صحته</string>
+    <string name="select_a_delivery_method">إختر طريقة توصيل</string>
+    <string name="door_delivery">تسليم إلى باب منزلك</string>
+    <string name="change_warrning">قد يغير الشيف رسوم وميعاد التوصيل بناءا على مكانك </string>
+    <string name="delivrey_time">سيتم توصيل الطلب في ميعاد:&#160;</string>
+    <string name="shipping_fee">رسوم التوصيل:&#160;</string>
+    <string name="pickup_order">إستلام الطلب بنفسي</string>
+    <string name="more_info">لمزيد من المعلومات حول التوصيل برجاء التواصل مع الشيف</string>
+    <string name="subtotal">السعرالأساسي</string>
+    <string name="shipping">التوصيل</string>
+    <string name="cancel_order">إلغاء الطلب</string>
+    <string name="confirm_order">تأكيد الطلب</string>
+    <string name="order_num">رقم الطلب:&#160;</string>
+    <string name="delivery_method">طريقة التوصيل</string>
+    <string name="delivery_address">عنوان التوصيل</string>
+    <string name="shipping_fees">رسوم التوصيل:&#160;</string>
+    <string name="chef_info">معلومات الشيف</string>
+    <string name="items_in_your_order">الوجبات التي طلبتها</string>
+    <string name="delivery_time">ميعاد التوصيل</string>
+    <string name="status">الحالة</string>
+    <string name="confirm_delivery">تأكيد التوصيل</string>
+    <string name="full_name">الأسم بالكامل</string>
+    <string name="username">إسم المستخدم</string>
+    <string name="cust_reg">إنشاء حساب عميل</string>
+    <string name="add_menu_item">إضافة وجبة جديدة</string>
+    <string name="cart">سلة التسوق</string>
+    <string name="order_history">الطلبات السابقة</string>
+    <string name="chef_reg">إنشاء حساب شيف</string>
+    <string name="reviews">التعليقات</string>
+    <string name="complete_order">تكملة الطلب</string>
+    <string name="order_status">حالة الطلب</string>
+    <string name="top_chef">الشيفات الأعلى تقييما</string>
+    <string name="dis_items">الوجبات الغير مفعلة</string>
+    <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="filter_by_category">تصنيف حسب النوع</string>
+    <string name="select_categories">إختر نوع أو أكثر</string>
+    <string name="filter_by_price">تصنيف حسب السعر</string>
+    <string name="apply">تأكيد</string>
+    <string name="filter">تصنيف</string>
+    <string name="filtered_result">نتائج التصنيف</string>
+    <string name="following">أتابع</string>
+    <string name="sign_in_to_continue">سجل الدخول للمتابعة</string>
+    <string name="welcome">مرحبا بكم في طبلية</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="new_user_sign_up">مستخدم جديد؟ سجل</string>
+    <string name="type_a_message">أكتب رسالة…</string>
+    <string name="customer_info">معلومات العميل</string>
+    <string name="chef_menu">قائمة الشيف</string>
+    <string name="sub_total">السعر الأساسي:&#160;</string>
+    <string name="seen">تمت المشاهدة</string>
+    <string name="qty">الكمية:&#160;</string>
+    <string name="remove">إزالة</string>
+    <string name="rate_your_chef">قيِّم الشيف</string>
+    <string name="customer_name">أسم العميل:&#160;</string>
+    <string name="total">إجمالي:&#160;</string>
+    <string name="quantity2">الكمية:&#160;</string>
+    <string name="Category">تصنيف</string>
+    <string name="Description">الوصف</string>
+    <string name="Ingredients">المكونات</string>
+    <string name="AddItem">إضافة وجبة</string>
+    <string name="item_quantaty">عدد الوجبات المتوفرة:&#160;</string>
+    <string name="_3_reviews">تعليقات</string>
+    <string name="category">النوع:&#160;</string>
+    <string name="ingredients">المكونات</string>
+    <string name="edit_menu_item">تعديل الوجبة</string>
+    <string name="edit_item">تعديل الوجبة</string>
+    <string name="sold_by">البائع:&#160;</string>
+    <string name="write_review">أكتب تعليق</string>
+    <string name="order_time">ميعاد التوصيل:&#160;</string>
+    <string name="chef_name_cust_order">أسم الشيف:&#160;</string>
+    <string name="quantity">الكمية</string>
+    <string name="add_a_review">إضافة تعليق</string>
+    <string name="Order">أطلب</string>
+    <string name="most_sold_item_for_today">تم بيعه</string>
+    <string name="item">الطلبات</string>
+    <string name="followers">المتابعون</string>
+    <string name="sold">الطلبات الجديدة</string>
+    <string name="avg_sales">0</string>
+    <string name="customer_rating">تقييمك</string>
+    <string name="sales">المبيعات:&#160;</string>
+    <string name="search">بحث…</string>
+    <string name="avg_order"> إجمالي عدد الطلبات</string>
+    <string name="submit">تقييم</string>
+    <string name="NameItem">أسم الوجبة</string>
+    <string name="Price">السعر</string>
+    <string name="later">فيما بعد</string>
+    <string name="rate_chef">قيِّم الشيف</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="menu">القائمة</string>
+    <string name="delete">مسح</string>
+    <string name="disable">تعطيل</string>
+    <string name="edit">تعديل</string>
+    <string name="chat">الرسائل</string>
+    <string name="order">الطلبات</string>
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="main_dishes">أطباق رئيسية</string>
+    <string name="seafood">مأكولات بحرية</string>
+    <string name="grilled">مشويات</string>
+    <string name="baking">مخبوزات</string>
+    <string name="side_dishes">أطباق جانبية</string>
+    <string name="macaroni">مكرونات</string>
+    <string name="mahashy">محاشي</string>
+    <string name="salad">سلطات</string>
+    <string name="soups">شوربات</string>
+    <string name="dessert">حلويات</string>
+    <string name="juice">مشروبات</string>
+    <string name="my_orders">طلباتي</string>
+    <string name="account">حساب</string>
+    <string name="signout">تسجيل خروج</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="enable">تفعيل</string>
+
+</resources>

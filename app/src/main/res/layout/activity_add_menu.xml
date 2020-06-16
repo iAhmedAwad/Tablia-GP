@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".ChefHome.TabBar.Menu.AddMenu.AddMenu">
 
@@ -18,26 +19,8 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/menuStyle">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="4">
-
-                <TextView
-                    android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_weight="3"
-                    android:text="Add Menu Item"
-                    android:textColor="#fff"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
+            app:popupTheme="@style/menuStyle"
+            app:title="@string/add_menu_item"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -52,18 +35,22 @@
 
             <ImageView
                 android:id="@+id/imgAdd"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:alpha="0.6"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/addphoto" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"/>
 
             <TextView
                 android:id="@+id/txtAddItem"
@@ -72,19 +59,23 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/NameItem"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_marginStart="30dp" />
 
             <EditText
                 android:id="@+id/editNameItem"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:ems="10"
+                android:textColor="@color/DarkGrey"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:layout_marginStart="30dp"
+                android:layout_marginRight="30dp" />
 
             <TextView
                 android:id="@+id/txtPriceItem"
@@ -93,19 +84,23 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/Price"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginStart="30dp" />
 
             <EditText
                 android:id="@+id/editPriceItem"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="40" />
+                android:textColor="@color/DarkGrey"
+                android:inputType="numberDecimal"
+                android:layout_marginStart="30dp" />
 
             <TextView
                 android:id="@+id/textView22"
@@ -113,18 +108,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
+                android:textColor="@color/colorAccent"
                 android:text="@string/Category"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginStart="30dp"/>
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="263dp"
+                android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
-                android:entries="@array/Spinner_Item" />
+                android:layout_marginEnd="30dp"
+                android:entries="@array/Spinner_Item"
+                android:layout_marginStart="30dp"
+                android:layout_marginRight="30dp" />
 
             <TextView
                 android:id="@+id/textView27"
@@ -132,20 +131,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
-                android:text="@string/Description"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:text="@string/description"
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_marginStart="30dp"  />
 
             <EditText
                 android:id="@+id/editDescrption"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:textColor="@color/DarkGrey"
+                android:layout_marginRight="30dp"
+                android:layout_marginEnd="30dp"
+                android:inputType="textMultiLine"
+                android:layout_marginStart="30dp" />
 
             <TextView
                 android:id="@+id/textView28"
@@ -154,27 +157,56 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/Ingredients"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_marginStart="30dp" />
 
             <EditText
                 android:id="@+id/editIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:textColor="@color/DarkGrey"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:layout_marginStart="30dp" />
+            <TextView
+                android:id="@+id/txtQty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:text="@string/quantity"
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_marginStart="30dp" />
 
+            <EditText
+                android:id="@+id/editItemqty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:textColor="@color/DarkGrey"
+                android:ems="10"
+                android:inputType="number"
+                android:layout_marginStart="30dp" />
             <Button
                 android:id="@+id/btnAddItem"
-                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:background="@drawable/rect"
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/AddItem" />
+                android:textAllCaps="false"
+                android:text="@string/AddItem"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

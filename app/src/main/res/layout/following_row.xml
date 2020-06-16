@@ -36,35 +36,21 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="2dp"
-                android:text="Name.."
                 app:layout_constraintStart_toEndOf="@+id/xFollowerRowImageView"
                 app:layout_constraintTop_toTopOf="@+id/xFollowerRowImageView" />
 
             <TextView
-                android:id="@+id/xFollowerRowUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="2dp"
-                android:text="Username"
-                app:layout_constraintStart_toEndOf="@+id/xFollowerRowImageView"
-                app:layout_constraintTop_toBottomOf="@+id/xFollowerRowFullName" />
-
-            <TextView
                 android:id="@+id/xFollowerRowBio"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="2dp"
                 android:lines="2"
                 android:maxLines="2"
-                android:text="TextView"
                 android:textSize="13sp"
-                app:layout_constraintEnd_toStartOf="@+id/xFollowingRowButton"
                 app:layout_constraintStart_toEndOf="@+id/xFollowerRowImageView"
-                app:layout_constraintTop_toBottomOf="@+id/xFollowerRowUsername" />
+                app:layout_constraintTop_toBottomOf="@+id/xFollowerRowFullName" />
 
             <ToggleButton
                 android:id="@+id/xFollowingRowButton"
@@ -72,10 +58,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:text="Follow"
+                android:background="@drawable/rect_purple"
+                android:textColor="@color/white"
+                android:text="@string/follow"
                 android:textAllCaps="false"
-                android:textOff="Follow"
-                android:textOn="Following"
+                android:textOff="@string/follow"
+                android:textOn="@string/following"
                 app:layout_constraintBottom_toBottomOf="@+id/xFollowerRowImageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/xFollowerRowImageView" />

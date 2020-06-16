@@ -219,7 +219,7 @@ public class Database {
      */
     public void addChefToDatabase(ChefSettings chefSettings) {
 
-        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
         //add data to the "users" node
@@ -233,6 +233,31 @@ public class Database {
         reference.child(mContext.getString(R.string.chefAccountSettingsNode))
                 .child(userid)
                 .setValue(chefSettings.getChefAccountSettings());
+        if (!chefSettings.getChefAccountSettings().isAvailable()) {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("menu").child(userid);
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() != null) {
+                        FirebaseDatabase.getInstance().getReference("Disable").child(userid)
+                                .setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    dataSnapshot.getRef().removeValue();
+                                }
+                            }
+
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
     /**
@@ -249,70 +274,71 @@ public class Database {
             //ChefAccountSettingsNode
 
             if (ds.getKey().equals(mContext.getString(R.string.chefAccountSettingsNode))) {
-
-                try {
-                    chefAccountSettings.setUserName(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getUserName());
-
-                    chefAccountSettings.setAddress(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getAddress());
-
-                    chefAccountSettings.setBio(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getBio());
-
-                    chefAccountSettings.setDisplayName(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getDisplayName());
-
-
-                    chefAccountSettings.setOrders(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getOrders());
-                    chefAccountSettings.setProfilePhoto(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getProfilePhoto());
-
-                    chefAccountSettings.setFollowers(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getFollowers());
-
-                    //Edittedd
-                    chefAccountSettings.setFollowers(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getFollowers());
-
-                    chefAccountSettings.setStart_order_time(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getStart_order_time());
-                    chefAccountSettings.setEnd_order_time(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .getEnd_order_time());
-
-                    chefAccountSettings.setAvailable(ds.child(userId)
-                            .getValue(ChefAccountSettings.class)
-                            .isAvailable());
-
-
-                } catch (NullPointerException e) {
-                }
+                chefAccountSettings = ds.child(userId)
+                        .getValue(ChefAccountSettings.class);
+//                try {
+//                    chefAccountSettings.setUserName(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getUserName());
+//
+//                    chefAccountSettings.setAddress(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getAddress());
+//
+//                    chefAccountSettings.setBio(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getBio());
+//
+//                    chefAccountSettings.setDisplayName(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getDisplayName());
+//
+//
+//                    chefAccountSettings.setOrders(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getOrders());
+//                    chefAccountSettings.setProfilePhoto(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getProfilePhoto());
+//
+//                    chefAccountSettings.setFollowers(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getFollowers());
+//
+//                    //Edittedd
+//                    chefAccountSettings.setFollowers(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getFollowers());
+//
+//                    chefAccountSettings.setStart_order_time(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getStart_order_time());
+//                    chefAccountSettings.setEnd_order_time(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .getEnd_order_time());
+//
+//                    chefAccountSettings.setAvailable(ds.child(userId)
+//                            .getValue(ChefAccountSettings.class)
+//                            .isAvailable());
+//
+//
+//                } catch (NullPointerException e) {
+//                }
             }
 
             //Users Node
 
             if (ds.getKey().equals(mContext.getString(R.string.usersNode))) {
-
-                try {
-                    user.setUser_id(ds.child(userId).getValue(User.class).getUser_id());
-                    user.setEmail(ds.child(userId).getValue(User.class).getEmail());
-                    user.setFullName(ds.child(userId).getValue(User.class).getFullName());
-                    user.setUsername(ds.child(userId).getValue(User.class).getUsername());
-                    user.setType(ds.child(userId).getValue(User.class).getType());
-
-                } catch (NullPointerException e) {
-                }
+                user = ds.child(userId).getValue(User.class);
+//                try {
+//                    user.setUser_id(ds.child(userId).getValue(User.class).getUser_id());
+//                    user.setEmail(ds.child(userId).getValue(User.class).getEmail());
+//                    user.setFullName(ds.child(userId).getValue(User.class).getFullName());
+//                    user.setUsername(ds.child(userId).getValue(User.class).getUsername());
+//                    user.setType(ds.child(userId).getValue(User.class).getType());
+//
+//                } catch (NullPointerException e) {
+//                }
 
             }
         }
@@ -412,11 +438,12 @@ public class Database {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Disable");
 
         //add data to the "customers" node
-        String key = reference.push().getKey();
-        menuPojo.setItemID(key);
         reference.child(userid)
-                .child(key)
+                .child(menuPojo.getItemID())
                 .setValue(menuPojo);
+        FirebaseDatabase.getInstance().getReference("menu")
+                .child(userid)
+                .child(menuPojo.getItemID()).removeValue();
 
     }
 
@@ -641,7 +668,7 @@ public class Database {
      * Categories .. this is gonna be a long journey!
      */
 
-    public MutableLiveData<ArrayList<MenuPojo>> getCategoryList(final String category) {
+    public MutableLiveData<ArrayList<MenuPojo>> getCategoryList(final String category, final String category_ar) {
         final MutableLiveData<ArrayList<MenuPojo>> listMutableLiveData =
                 new MutableLiveData<ArrayList<MenuPojo>>();
 
@@ -659,7 +686,8 @@ public class Database {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     for (DataSnapshot dsx : ds.getChildren()) {
                         MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
-                        if (menuPojo.getCategory().equals(category)) {
+                        if (menuPojo.getCategory().equals(category)
+                                || menuPojo.getCategory().equals(category_ar)) {
                             list.add(menuPojo);
                         }
                     }
@@ -697,10 +725,10 @@ public class Database {
 
                 list.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Log.d("filterx", "first loop");
+                    // Log.d("filterx", "first loop");
 
                     for (DataSnapshot dsx : ds.getChildren()) {
-                        Log.d("filterx", "second loop");
+                        //  Log.d("filterx", "second loop");
                         MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
                         if (categoriesList.contains(menuPojo.getCategory())
                                 && menuPojo.getPriceItem() >= min
@@ -730,7 +758,7 @@ public class Database {
      * return all the menu items
      */
 
-    public MutableLiveData<ArrayList<MenuPojo>> getAllMenuItems() {
+    public MutableLiveData<ArrayList<MenuPojo>> getAllMenuItemsInRange(final double min, final double max) {
         final MutableLiveData<ArrayList<MenuPojo>> listMutableLiveData =
                 new MutableLiveData<ArrayList<MenuPojo>>();
 
@@ -748,7 +776,12 @@ public class Database {
                     for (DataSnapshot dsx : ds.getChildren()) {
                         MenuPojo menuPojo = dsx.getValue(MenuPojo.class);
 
-                        list.add(menuPojo);
+                        if (menuPojo.getPriceItem() >= min
+                                && menuPojo.getPriceItem() <= max
+                        ) {
+
+                            list.add(menuPojo);
+                        }
 
                     }
                 }
@@ -870,7 +903,6 @@ public class Database {
      * @param chefId
      */
     public void followChef(String chefId) {
-        //TODO increment the following number of the customer by 1
 
         final DatabaseReference ref = FirebaseDatabase.getInstance()
                 .getReference(Constants.customerAccountSettingsNode)
@@ -959,7 +991,6 @@ public class Database {
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         followingArrayList.clear();
                                         for (DataSnapshot dsx : dataSnapshot.getChildren()) {
-                                            //TODO make sure this is right huh!
 
                                             if (chefIDLis.contains(dsx.getKey())) {
                                                 Following following = new Following();
@@ -973,7 +1004,6 @@ public class Database {
                                             }
                                         }
                                         followingMutableLiveData.setValue(followingArrayList);
-                                        //TODO check!
                                         ref.child(Constants.chefAccountSettingsNode).removeEventListener(this);
                                     }
 
@@ -1015,7 +1045,6 @@ public class Database {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 chefIDLis.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    //TODO make sure this works
                     chefIDLis.add(ds.getValue(String.class));
                 }
                 ref.child(Constants.chefAccountSettingsNode)
@@ -1024,7 +1053,6 @@ public class Database {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 followingArrayList.clear();
                                 for (DataSnapshot dsx : dataSnapshot.getChildren()) {
-                                    //TODO make sure this is right huh!
 
                                     if (chefIDLis.contains(dsx.getKey())) {
                                         Following following = new Following();
@@ -1038,7 +1066,6 @@ public class Database {
                                     }
                                 }
                                 followingMutableLiveData.setValue(followingArrayList);
-                                //TODO check!
                                 ref.child(Constants.chefAccountSettingsNode).removeEventListener(this);
                             }
 
@@ -1162,7 +1189,7 @@ public class Database {
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
         ref.child(Constants.FOLLOWING_NODE).child(userId)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         chefIDLis.clear();
@@ -1170,12 +1197,11 @@ public class Database {
                             chefIDLis.add(ds.getKey());
                         }
                         ref.child(Constants.MenuNode)
-                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                .addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         menuPojoArrayList.clear();
                                         for (DataSnapshot dsx : dataSnapshot.getChildren()) {
-                                            //TODO make sure this is right huh!
 
                                             if (chefIDLis.contains(dsx.getKey())) {
 
@@ -1324,8 +1350,9 @@ public class Database {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 CustomerAccountSettings settings = dataSnapshot.getValue(CustomerAccountSettings.class);
-               list.setValue(settings.getDisplayName());
+                list.setValue(settings.getDisplayName());
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }

@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -31,104 +33,119 @@ import iti.team.tablia.util.GlobalImageLoader;
  */
 public class CustomerProfileFragment extends Fragment {
 
-  //Other members
-  private static final String TAG = "CustomerProfileActivity";
-  //Firebase
+    //Other members
+    private static final String TAG = "CustomerProfileActivity";
+    //Firebase
 //    private FirebaseAuth.AuthStateListener mAuthListener;
 //    private FirebaseAuth mAuth;
 //    private FirebaseDatabase mFirebaseDatabase;
 //    private DatabaseReference mDatabaseReference;
 //    private Database database;
-  //Widgets
-  private TextView xOrders, xFollowing, xCustomerName,
-      xCustomerPhone, xCustomerAddress, xCustomerDescription;
-  private CircleImageView xProfileImage;
-  private ImageView xEditProfile;
+    //Widgets
+    private TextView xOrders, xFollowing, xCustomerName,
+            xCustomerPhone, xCustomerAddress, xCustomerDescription;
+    private CircleImageView xProfileImage;
+    private ImageView xEditProfile;
+    private LinearLayout following_link;
+    private ProgressBar progressBar;
+    public static CustomerSettings customer;
 
-  public CustomerProfileFragment() {
-    // Required empty public constructor
-  }
+    public CustomerProfileFragment() {
+        // Required empty public constructor
+    }
 
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_customer_profile, container, false);
-    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Profile");
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_customer_profile, container, false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.profile));
 
-    //database = new Database(getActivity());
-    xOrders = view.findViewById(R.id.xOrders);
-    xFollowing = view.findViewById(R.id.xFollowing);
-    xCustomerName = view.findViewById(R.id.xCustomerName);
-    xCustomerPhone = view.findViewById(R.id.xCustomerPhone);
-    xCustomerAddress = view.findViewById(R.id.xCustomerAddress);
-    xCustomerDescription = view.findViewById(R.id.xCustomerDescription);
-    xProfileImage = view.findViewById(R.id.xprofile_image);
-    xEditProfile = view.findViewById(R.id.xEditProfile);
-    //TM.log("Hello from" + TAG);
-    initButton();
-    //setupFirebaseAuth();
+        //database = new Database(getActivity());
+        xOrders = view.findViewById(R.id.xOrders);
+        xFollowing = view.findViewById(R.id.xFollowing);
+        xCustomerName = view.findViewById(R.id.xCustomerName);
+        xCustomerPhone = view.findViewById(R.id.xCustomerPhone);
+        xCustomerAddress = view.findViewById(R.id.xCustomerAddress);
+        xCustomerDescription = view.findViewById(R.id.xCustomerDescription);
+        xProfileImage = view.findViewById(R.id.xprofile_image);
+        xEditProfile = view.findViewById(R.id.xEditProfile);
+        following_link = view.findViewById(R.id.following_link);
+        following_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FollowingActivity.class);
+                startActivity(intent);
+            }
+        });
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        //TM.log("Hello from" + TAG);
+        initButton();
+        //setupFirebaseAuth();
 
-    return view;
-  }
+        return view;
+    }
 
-  @Override
-  public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-    CustomerProfileViewModel model =
-        ViewModelProviders.of(this).get(CustomerProfileViewModel.class);
+        CustomerProfileViewModel model =
+                ViewModelProviders.of(this).get(CustomerProfileViewModel.class);
 
-    model.getCustomerSettings().observe(getViewLifecycleOwner(), new Observer<CustomerSettings>() {
-      @Override
-      public void onChanged(CustomerSettings customerSettings) {
-        setProfileWidgets(customerSettings);
-        if (customerSettings != null) {
+        model.getCustomerSettings().observe(getViewLifecycleOwner(), new Observer<CustomerSettings>() {
+            @Override
+            public void onChanged(CustomerSettings customerSettings) {
+                customer= customerSettings;
+                progressBar.setVisibility(View.GONE);
+                setProfileWidgets(customerSettings);
+                if (customerSettings != null) {
 //           Log.d("HelloV", customerSettings.toString());
-        }
-        Log.d("pic", customerSettings.getCustomerAccountSettings().getProfilePhoto().toString());
-      }
-    });
-  }
+                }
+                Log.d("pic", customerSettings.getCustomerAccountSettings().getProfilePhoto().toString());
+            }
+        });
+    }
 
-  private void initButton() {
-    xFollowing.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), FollowingActivity.class);
-        startActivity(intent);
-      }
-    });
+    private void initButton() {
+        xFollowing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FollowingActivity.class);
+                startActivity(intent);
+            }
+        });
 
-    xEditProfile.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        navigateToEditProfileFragment();
-      }
-    });
+        xEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigateToEditProfileFragment();
+            }
+        });
 
-  }
+    }
 
-  private void setProfileWidgets(CustomerSettings customerSettings) {
-    Log.d(TAG, "Setting widgets with data retrieved from Firebase");
-    User user = customerSettings.getUser();
-    CustomerAccountSettings settings = customerSettings.getCustomerAccountSettings();
+    private void setProfileWidgets(CustomerSettings customerSettings) {
+        Log.d(TAG, "Setting widgets with data retrieved from Firebase");
+        User user = customerSettings.getUser();
+        CustomerAccountSettings settings = customerSettings.getCustomerAccountSettings();
 //    GlobalImageLoader.setImage(getContext(), xProfileImage, settings.getProfilePhoto());
-    xProfileImage.setImageBitmap(GlobalImageLoader.StringToBitMap(settings.getProfilePhoto()));
-    xCustomerName.setText(user.getFullName());
-    xOrders.setText(String.valueOf(settings.getOrders()));
-    xFollowing.setText(String.valueOf(settings.getFollowing()));
-    xCustomerPhone.setText(settings.getPhoneNumber());
-    xCustomerAddress.setText(settings.getAddress());
-    xCustomerDescription.setText(settings.getBio());
+        xProfileImage.setImageBitmap(GlobalImageLoader.StringToBitMap(settings.getProfilePhoto()));
+        xCustomerName.setText(user.getFullName());
+        xOrders.setText(String.valueOf(settings.getOrders()));
+        xFollowing.setText(String.valueOf(settings.getFollowing()));
+        xCustomerPhone.setText(settings.getPhoneNumber());
+        xCustomerAddress.setText(settings.getAddress());
+        xCustomerDescription.setText(settings.getBio());
 
-  }
+    }
 
-  private void navigateToEditProfileFragment() {
-    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-        new CustomerEditProfileFragment()).addToBackStack("Edit Fragment").commit();
-    //
-  }
+    private void navigateToEditProfileFragment() {
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new CustomerEditProfileFragment()).addToBackStack("Edit Fragment").commit();
+        //
+    }
 
 
     /*

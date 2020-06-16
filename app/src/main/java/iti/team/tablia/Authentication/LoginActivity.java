@@ -28,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 import iti.team.tablia.ChefHome.ChiefActivity;
 import iti.team.tablia.CustomerAccount.CustomerActivity.CustomerActivity;
 import iti.team.tablia.Models.User;
@@ -81,9 +83,14 @@ public class LoginActivity extends AppCompatActivity {
       String type = sharedPref.getString(Constants.userType, "customer");
       String fullName = sharedPref.getString(Constants.fullName, "Customer");
       user.setType(type);
+      if (Locale.getDefault().getLanguage().equals("ar")){
+        Toast.makeText(LoginActivity.this, "مرحبا, " +
+                fullName, Toast.LENGTH_SHORT).show();
+      }else {
+        Toast.makeText(LoginActivity.this, "Welcome, " +
+                fullName, Toast.LENGTH_SHORT).show();
+      }
 
-      Toast.makeText(LoginActivity.this, "Welcome, " +
-          fullName, Toast.LENGTH_SHORT).show();
       navigateToChosenActivity(user);
 
     } else {
@@ -113,7 +120,12 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                   if (!task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Failed to authenticate", Toast.LENGTH_SHORT).show();
+                    if (Locale.getDefault().getLanguage().equals("ar")){
+                      Toast.makeText(LoginActivity.this, "فشل تسجيل الدخول", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                      Toast.makeText(LoginActivity.this, "Failed to authenticate", Toast.LENGTH_SHORT).show();
+                    }
                     mProgressBar.setVisibility(View.GONE);
                   } else {
                     try {
@@ -123,7 +135,12 @@ public class LoginActivity extends AppCompatActivity {
                         //Triaaaaaaaaaaaaaaal
                         setupFirebaseAuth();
                       } else {
-                        Toast.makeText(LoginActivity.this, "Email is not yet verified \n Check your inbox", Toast.LENGTH_SHORT).show();
+                        if (Locale.getDefault().getLanguage().equals("ar")){
+                          Toast.makeText(LoginActivity.this, "لم يتم تأكيد حسابك \n برجاء مراجعة البريد الوارد", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                          Toast.makeText(LoginActivity.this, "Email is not yet verified \n Check your inbox", Toast.LENGTH_SHORT).show();
+                        }
                         hideProgressBar();
                         mAuth.signOut();
                       }
@@ -134,7 +151,12 @@ public class LoginActivity extends AppCompatActivity {
               });
 
         } else {
-          Toast.makeText(LoginActivity.this, "You didn't fill in all the fields.", Toast.LENGTH_SHORT).show();
+          if (Locale.getDefault().getLanguage().equals("ar")){
+            Toast.makeText(LoginActivity.this, "برجاء ملء جميع الحقول", Toast.LENGTH_SHORT).show();
+
+          }else {
+            Toast.makeText(LoginActivity.this, "You didn't fill in all the fields.", Toast.LENGTH_SHORT).show();
+          }
         }
       }
     });
@@ -231,7 +253,13 @@ public class LoginActivity extends AppCompatActivity {
                 //retrieve user information from database
 
                 User user = database.retrieveUserFromDatabase(dataSnapshot);
-
+                if (Locale.getDefault().getLanguage().equals("ar")){
+                  Toast.makeText(LoginActivity.this, "مرحبا, " +
+                          user.getFullName(), Toast.LENGTH_SHORT).show();
+                }else {
+                  Toast.makeText(LoginActivity.this, "Welcome, " +
+                          user.getFullName(), Toast.LENGTH_SHORT).show();
+                }
                 Toast.makeText(LoginActivity.this, "Welcome, " +
                     user.getFullName(), Toast.LENGTH_SHORT).show();
 
@@ -264,7 +292,12 @@ public class LoginActivity extends AppCompatActivity {
                          */
 
           } else {
-            Toast.makeText(LoginActivity.this, "Email is not Verified\nCheck your Inbox", Toast.LENGTH_SHORT).show();
+            if (Locale.getDefault().getLanguage().equals("ar")){
+              Toast.makeText(LoginActivity.this, "لم يتم تأكيد حسابك \n برجاء مراجعة البريد الوارد", Toast.LENGTH_SHORT).show();
+
+            }else {
+              Toast.makeText(LoginActivity.this, "Email is not yet verified \n Check your inbox", Toast.LENGTH_SHORT).show();
+            }
             FirebaseAuth.getInstance().signOut();
             hideProgressBar();
           }

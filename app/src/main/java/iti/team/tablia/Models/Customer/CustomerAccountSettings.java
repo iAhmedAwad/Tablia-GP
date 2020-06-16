@@ -21,7 +21,7 @@ public class CustomerAccountSettings {
         "&_nc_ht=scontent-hbe1-1.xx&_nc_tp=6&oh=2c60b072ef5edb4fc64b5d0fea2c11e4&oe=5EE1935F";
     userName = "JohnDoe";
     address = "Please, edit profile so you can enter your address";
-    phoneNumber = "0123 456 789";
+    phoneNumber = "0123456789";
     orders = 0;
     following = 0;
     status = "offline";

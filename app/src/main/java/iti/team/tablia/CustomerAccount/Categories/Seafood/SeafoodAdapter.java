@@ -12,10 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.CustomerAccount.Items.ItemDetails;
 import iti.team.tablia.R;
+import iti.team.tablia.util.Constants;
 import iti.team.tablia.util.GlobalImageLoader;
 
 public class SeafoodAdapter extends RecyclerView.Adapter<SeafoodAdapter.ViewHolder> {
@@ -38,8 +40,16 @@ public class SeafoodAdapter extends RecyclerView.Adapter<SeafoodAdapter.ViewHold
     final MenuPojo menuPojo = menuPojos.get(position);
 
     holder.xCatItemName.setText(menuPojos.get(position).getItemName());
-    holder.xCatItemCategory.setText(menuPojos.get(position).getCategory());
-    holder.xCatItemPrice.setText(String.valueOf(menuPojos.get(position).getPriceItem())+"EGP");
+    String cat = getCategory(menuPojos.get(position).getCategory());
+    holder.xCatItemCategory.setText(cat);
+    String lang = Locale.getDefault().getLanguage();
+    if(lang.equals("ar")){
+      holder.xCatItemPrice.setText(String.valueOf(menuPojos.get(position).getPriceItem())+" ج.م");
+
+    }else {
+      holder.xCatItemPrice.setText(String.valueOf(menuPojos.get(position).getPriceItem())+" EGP");
+    }
+    holder.cat_imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
     holder.cat_imageView.setImageBitmap(
         GlobalImageLoader.StringToBitMap(
             menuPojos.get(position).getImgItem().get(0).getImgaeItem()));
@@ -74,4 +84,58 @@ public class SeafoodAdapter extends RecyclerView.Adapter<SeafoodAdapter.ViewHold
       cat_imageView = itemView.findViewById(R.id.cat_imageView);
     }
   }
+  private String getCategory(String category) {
+    String lang = Locale.getDefault().getLanguage();
+    if (lang.equals("ar")) {
+      if (category.equals(Constants.BACKING)) {
+        category = Constants.BACKING_AR;
+      } else if (category.equals(Constants.DESSERT)) {
+        category = Constants.DESSERT_AR;
+      } else if (category.equals(Constants.GRILLED)) {
+        category = Constants.GRILLED_AR;
+      } else if (category.equals(Constants.JUICE)) {
+        category = Constants.JUICE_AR;
+      } else if (category.equals(Constants.MACARONI)) {
+        category = Constants.MACARONI_AR;
+      } else if (category.equals(Constants.MAHASHY)) {
+        category = Constants.MAHASHY_AR;
+      } else if (category.equals(Constants.MAIN_DISHES)) {
+        category = Constants.MAIN_DISHES_AR;
+      } else if (category.equals(Constants.SALAD)) {
+        category = Constants.SALAD_AR;
+      } else if (category.equals(Constants.SEAFOOD)) {
+        category = Constants.SEAFOOD_AR;
+      } else if (category.equals(Constants.SIDE_DISHES)) {
+        category = Constants.SIDE_DISHES_AR;
+      } else if (category.equals(Constants.SOUPS)) {
+        category = Constants.SOUPS_AR;
+      }
+    } else {
+      if (category.equals(Constants.BACKING_AR)) {
+        category = Constants.BACKING;
+      } else if (category.equals(Constants.DESSERT_AR)) {
+        category = Constants.DESSERT;
+      } else if (category.equals(Constants.GRILLED_AR)) {
+        category = Constants.GRILLED;
+      } else if (category.equals(Constants.JUICE_AR)) {
+        category = Constants.JUICE;
+      } else if (category.equals(Constants.MACARONI_AR)) {
+        category = Constants.MACARONI;
+      } else if (category.equals(Constants.MAHASHY_AR)) {
+        category = Constants.MAHASHY;
+      } else if (category.equals(Constants.MAIN_DISHES_AR)) {
+        category = Constants.MAIN_DISHES;
+      } else if (category.equals(Constants.SALAD_AR)) {
+        category = Constants.SALAD;
+      } else if (category.equals(Constants.SEAFOOD_AR)) {
+        category = Constants.SEAFOOD;
+      } else if (category.equals(Constants.SIDE_DISHES_AR)) {
+        category = Constants.SIDE_DISHES;
+      } else if (category.equals(Constants.SOUPS_AR)) {
+        category = Constants.SOUPS;
+      }
+    }
+    return category;
+  }
+
 }

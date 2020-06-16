@@ -19,7 +19,7 @@
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/menuStyle"
-            app:title="Order Status">
+            app:title="@string/order_status">
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -42,9 +42,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="ORDER NUM:"
+                android:text="@string/order_num"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -55,8 +56,8 @@
                 android:layout_below="@id/txtOrderID"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:text="-MTT5JGCRFC66"
                 android:textColor="@color/colorAccent"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -68,7 +69,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_margin="10dp"
-                android:text="04:30 06/01/2020"
                 android:textSize="12sp" />
 
             <androidx.cardview.widget.CardView
@@ -101,14 +101,12 @@
                                 android:id="@+id/item_num"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="1 item"
                                 android:textColor="@color/colorAccent" />
 
                             <TextView
                                 android:id="@+id/total_amount"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="EGP 190" />
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
 
                         <View
@@ -128,14 +126,13 @@
                                 android:id="@+id/txtshipping_method"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Delivery Method"
+                                android:text="@string/delivery_method"
                                 android:textColor="@color/colorAccent" />
 
                             <TextView
                                 android:id="@+id/shipping_method"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Door delivery" />
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -151,9 +148,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/lineSep2"
+                        android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Delivery Address"
+                        android:text="@string/delivery_address"
                         android:textColor="@color/colorAccent"
                         android:textSize="16sp" />
 
@@ -166,8 +164,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:text="14,dewidar st., damanhour" />
+                        android:layout_marginRight="10dp" />
 
 
                     <TextView
@@ -177,9 +174,10 @@
                         android:layout_below="@id/del_address"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
+                        android:layout_marginStart="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Shipping Fees: " />
+                        android:text="@string/shipping_fees" />
 
                     <TextView
                         android:id="@+id/shipping_fee"
@@ -189,7 +187,6 @@
                         android:layout_marginTop="10dp"
                         android:layout_toEndOf="@id/txtshipping_fee"
                         android:layout_toRightOf="@id/txtshipping_fee"
-                        android:text="40 EGP"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
 
@@ -199,6 +196,7 @@
                         android:layout_height="40dp"
                         android:layout_below="@id/del_address"
                         android:layout_marginTop="-1dp"
+                        android:inputType="numberDecimal"
                         android:layout_toEndOf="@id/txtshipping_fee"
                         android:layout_toRightOf="@id/txtshipping_fee"
                         android:textColor="@color/colorAccent"
@@ -214,7 +212,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="20dp"
-                        app:srcCompat="@drawable/ic_edit_black_24dp" />
+                        app:srcCompat="@drawable/ic_edit_black_24dp"
+                        android:layout_marginEnd="20dp" />
 
                     <ImageView
                         android:id="@+id/done_shipping_fee"
@@ -227,7 +226,8 @@
                         android:layout_marginRight="20dp"
                         android:background="@drawable/rect_purple"
                         android:visibility="invisible"
-                        app:srcCompat="@drawable/ic_check_black_24dp" />
+                        app:srcCompat="@drawable/ic_check_black_24dp"
+                        android:layout_marginEnd="20dp" />
 
                     <TextView
                         android:id="@+id/txtCustInfo"
@@ -238,8 +238,9 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Customer Info "
-                        android:textColor="@color/colorAccent" />
+                        android:text="@string/customer_info"
+                        android:textColor="@color/colorAccent"
+                        android:layout_marginStart="10dp" />
 
                     <TextView
                         android:id="@+id/cust_name"
@@ -249,7 +250,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="10dp"
-                        android:text="Customer Name" />
+                        android:layout_marginStart="10dp" />
 
                     <TextView
                         android:id="@+id/cust_phone"
@@ -259,7 +260,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="10dp"
-                        android:text="+201025387616" />
+                        android:layout_marginStart="10dp" />
 
                     <LinearLayout
                         android:id="@+id/message"
@@ -270,7 +271,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/rect_purple"
-                        android:padding="2dp">
+                        android:padding="2dp"
+                        android:layout_marginEnd="20dp">
 
                         <ImageView
                             android:layout_width="15dp"
@@ -282,7 +284,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="Message"
+                            android:text="@string/message"
                             android:textColor="@color/white" />
 
 
@@ -299,7 +301,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/order_details_cont"
                 android:layout_margin="10dp"
-                android:text="ITEMS IN YOUR ORDER"
+                android:text="@string/items_in_your_order"
                 android:textColor="@color/colorAccent"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -341,8 +343,9 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Delivery Time"
-                        android:textColor="@color/colorAccent" />
+                        android:text="@string/delivery_time"
+                        android:textColor="@color/colorAccent"
+                        android:layout_marginStart="10dp" />
 
                     <ImageView
                         android:id="@+id/edit_del_time"
@@ -353,7 +356,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="20dp"
-                        app:srcCompat="@drawable/ic_edit_black_24dp" />
+                        app:srcCompat="@drawable/ic_edit_black_24dp"
+                        android:layout_marginEnd="20dp" />
 
                     <ImageView
                         android:id="@+id/done_del_time"
@@ -366,17 +370,17 @@
                         android:layout_marginRight="20dp"
                         android:background="@drawable/rect_purple"
                         android:visibility="invisible"
-                        app:srcCompat="@drawable/ic_check_black_24dp" />
+                        app:srcCompat="@drawable/ic_check_black_24dp"
+                        android:layout_marginEnd="20dp" />
 
                     <TextView
                         android:id="@+id/delivery_time"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtdel_time"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
-                        android:layout_margin="10dp"
-                        android:text="after 2 hours" />
+                        android:layout_margin="10dp"/>
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/delivery_timeEditor"
@@ -387,7 +391,8 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="10dp"
                         android:textSize="14sp"
-                        android:visibility="invisible" />
+                        android:visibility="invisible"
+                        android:layout_marginStart="10dp" />
 
                     <TextView
                         android:id="@+id/txtdel_status"
@@ -396,16 +401,17 @@
                         android:layout_below="@id/delivery_time"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:text="Status"
-                        android:textColor="@color/colorAccent" />
+                        android:text="@string/status"
+                        android:textColor="@color/colorAccent"
+                        android:layout_marginStart="10dp" />
 
                     <TextView
                         android:id="@+id/delivery_status"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtdel_status"
                         android:layout_marginLeft="10dp"
-                        android:text="Your Item has been delivered" />
+                        android:layout_marginStart="10dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -421,7 +427,8 @@
                             android:layout_margin="20dp"
                             android:background="@drawable/rect"
                             android:padding="10dp"
-                            android:text="Confirm Delivery"
+                            android:textAllCaps="false"
+                            android:text="@string/confirm_delivery"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -434,10 +441,11 @@
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
+
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:id="@+id/progressBar"/>
+        android:layout_centerVertical="true" />
 </RelativeLayout>

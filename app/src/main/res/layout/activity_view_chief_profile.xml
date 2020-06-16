@@ -46,7 +46,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="0dp"
-                android:background="@drawable/online" />
+                android:background="@drawable/online"
+                android:layout_alignEnd="@id/id_profile_pic" />
 
         </RelativeLayout>
 
@@ -63,43 +64,18 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-
-        <TextView
-            android:id="@+id/id_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/id_name"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="sans-serif"
-            android:text="@string/address"
-            android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
-            android:textSize="13sp" />
-
         <RatingBar
             android:id="@+id/id_rating"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/id_address"
+            android:layout_below="@+id/id_name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:isIndicator="true"
             android:numStars="5"
             android:progressTint="@color/colorAccent"
             android:stepSize="0.1" />
-
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/id_chat"-->
-        <!--            android:layout_width="40dp"-->
-        <!--            android:layout_height="40dp"-->
-        <!--            android:layout_alignParentRight="true"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:layout_marginRight="15dp"-->
-        <!--            android:adjustViewBounds="true"-->
-        <!--            android:scaleType="centerInside"-->
-        <!--            app:srcCompat="@drawable/ic_message_black_24dp" />-->
 
     </RelativeLayout>
 
@@ -141,9 +117,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="@string/followers"
-                    android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -175,8 +150,8 @@
                     android:fontFamily="sans-serif-light"
                     android:padding="5dp"
                     android:text="@string/follow"
+                    android:textAllCaps="false"
                     android:layout_margin="2dp"
-                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textOff="@string/follow"
                     android:textOn="@string/unfollow"
@@ -227,7 +202,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:textColor="@color/colorAccent"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/id_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="@string/address"
+                android:textAllCaps="false"
+                android:textColor="#000"
+                android:textSize="13sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/grey" />
+
+        </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -285,34 +287,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/number_of_orders"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/id_nb_orders"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@color/grey" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -349,9 +324,31 @@
                     android:text="@string/visit_menu"
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey" />
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/rateChef"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rate_chef"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
         </LinearLayout>
 
         <ProgressBar

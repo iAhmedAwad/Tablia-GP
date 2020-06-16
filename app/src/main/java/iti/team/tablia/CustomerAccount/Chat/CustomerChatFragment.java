@@ -40,7 +40,7 @@ public class CustomerChatFragment extends Fragment {
          *
          */
         View view = inflater.inflate(R.layout.fragment_customer_chat, container, false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Chat");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.chat));
         customerChatViewModel = ViewModelProviders.of(this).get(CustomerChatViewModel.class);
 
         /**render recyclerview and set its attribute
@@ -54,14 +54,15 @@ public class CustomerChatFragment extends Fragment {
         /**observe viewmodel to get chat list
          *
          */
-        customerChatViewModel.getChatList().observe(getActivity(), new Observer<List<ChatUser>>() {
+        customerChatViewModel.getCustChatList().observe(getViewLifecycleOwner(), new Observer<List<ChatUser>>() {
             @Override
-            public void onChanged(List<ChatUser> users) {
-              progressBar.setVisibility(View.GONE);
-                userAdapter = new UserAdapter(getContext(), users, true);
+            public void onChanged(List<ChatUser> chatUsers) {
+                progressBar.setVisibility(View.GONE);
+                userAdapter = new UserAdapter(getContext(), chatUsers, true);
                 recyclerView.setAdapter(userAdapter);
             }
         });
+
 
         /**
          *update token for push notification

@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
+        app:cardCornerRadius="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -18,57 +19,48 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border">
 
-            <LinearLayout
-                android:id="@+id/lin"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/id_txtCustomr_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="5dp"
-                android:orientation="horizontal"
-                android:weightSum="4">
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="15dp"
+                android:text="@string/custname"
+                android:layout_marginHorizontal="15dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/id_txtCustomr_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:text="@string/custname"
-                    android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:textColor="@color/colorAccent" />
+            <RatingBar
+                android:id="@+id/id_ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressTint="@color/colorPrimaryDark" />
 
-
-                <TextView
-                    android:id="@+id/id_txtItem_name"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/colorAccent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="@string/itemname" />
-
-                <RatingBar
-                    android:id="@+id/id_ratingBar"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
-                    android:isIndicator="true"
-                    android:numStars="5"
-                    android:progressTint="@color/colorPrimaryDark"
-                     />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/id_txtItem_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_txtCustomr_name"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/itemname"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/id_txtReview"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/lin"
+                android:layout_below="@id/id_txtItem_name"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"

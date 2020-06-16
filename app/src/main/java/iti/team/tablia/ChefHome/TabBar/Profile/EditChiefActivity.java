@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,9 +23,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.libraries.places.api.Places;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
@@ -42,14 +46,17 @@ import iti.team.tablia.Models.Chef.ChefSettings;
 import iti.team.tablia.Models.User;
 import iti.team.tablia.R;
 import iti.team.tablia.others.Database;
+import iti.team.tablia.others.PlacesAutoSuggestAdapter;
 
 
 public class EditChiefActivity extends AppCompatActivity {
     Integer REQUEST_CAMERA = 1, SELECT_FILE = 0;
-    EditText name, address, orders, phone, desc;
+    EditText name,  phone, desc;
     Button save;
     ImageView cam;
     CircleImageView prof;
+    private AutoCompleteTextView address;
+    private final String mAPIKey = "AIzaSyDFhO6SEcewKE7jQUjyE-XwqbhlODfObEA";
     ProgressBar progressBar;
     Uri img;
     String mypic;
@@ -66,18 +73,38 @@ public class EditChiefActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private Database database;
+    private String camera;
+    private String gal;
+    private String can;
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_chief);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         name = findViewById(R.id.id_name);
         address = findViewById(R.id.id_address);
+
+        if (!Places.isInitialized()) {
+            // Initialize the SDK
+            Places.initialize(this, mAPIKey);
+        }
+        address.setAdapter(new PlacesAutoSuggestAdapter(this, android.R.layout.simple_list_item_1));
         phone = findViewById(R.id.phone);
         desc = findViewById(R.id.desc);
-        orders = findViewById(R.id.num_orders);
+//        orders = findViewById(R.id.num_orders);
         save = findViewById(R.id.id_save_changes);
         cam = findViewById(R.id.id_edit_cam);
         prof = findViewById(R.id.id_profile_pic);
@@ -112,7 +139,7 @@ public class EditChiefActivity extends AppCompatActivity {
                 settings.setDisplayName(name.getText().toString());
                 settings.setBio(desc.getText().toString());
                 settings.setPhoneNumber(phone.getText().toString());
-                settings.setOrders(Integer.parseInt(orders.getText().toString()));
+//                settings.setOrders(Integer.parseInt(orders.getText().toString()));
                 settings.setAvailable(swicth.isChecked());
                 settings.setProfilePhoto(mypic);
 
@@ -125,20 +152,30 @@ public class EditChiefActivity extends AppCompatActivity {
 
 
     private void SelectImage() {
-
-        final CharSequence[] items = {"Camera", "Gallery", "Cancel"};
+        if (Locale.getDefault().getLanguage().equals("ar")) {
+            camera = "كاميرا";
+            gal = "المعرض";
+            can = "إلغاء";
+            title ="إضافة صورة";
+        } else {
+            camera = "Camera";
+            gal = "Gallery";
+            can = "Cancel";
+            title = "Add Image";
+        }
+        final CharSequence[] items = {camera, gal, can};
         AlertDialog.Builder builder = new AlertDialog.Builder(EditChiefActivity.this);
-        builder.setTitle("Add Image");
+        builder.setTitle(title);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if (items[which].equals("Camera")) {
+                if (items[which].equals(camera)) {
 
                     Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(intentCamera, REQUEST_CAMERA);
 
-                } else if (items[which].equals("Gallery")) {
+                } else if (items[which].equals(gal)) {
 
                     Intent intentGallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intentGallery.setType("image/*");
@@ -230,7 +267,7 @@ public class EditChiefActivity extends AppCompatActivity {
         address.setText(chefSettings.getChefAccountSettings().getAddress());
         desc.setText(String.valueOf(chefSettings.getChefAccountSettings().getBio()));
         phone.setText(String.valueOf(chefSettings.getChefAccountSettings().getPhoneNumber()));
-        orders.setText(String.valueOf(chefSettings.getChefAccountSettings().getOrders()));
+//        orders.setText(String.valueOf(chefSettings.getChefAccountSettings().getOrders()));
         swicth.setChecked(chefSettings.getChefAccountSettings().isAvailable());
         mypic = chefSettings.getChefAccountSettings().getProfilePhoto();
         Bitmap bitmapload = StringToBitMap(chefSettings.getChefAccountSettings().getProfilePhoto());

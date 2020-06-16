@@ -11,15 +11,16 @@ import android.widget.RatingBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import iti.team.tablia.CustomerAccount.MyOrders.CustOrderDetails.CustOrderDetails;
 import iti.team.tablia.R;
 
 public class RatingDialog extends AppCompatDialogFragment {
     private RatingBar ratingBar;
-    private Button submit;
+    private Button submit,later;
     private String chefId,custId;
-
+    private DialogViewModel model;
     public RatingDialog(String chefId,String custId) {
         this.chefId = chefId;
         this.custId = custId;
@@ -34,13 +35,23 @@ public class RatingDialog extends AppCompatDialogFragment {
         builder.setView(view);
         ratingBar = view.findViewById(R.id.chef_rate);
         submit = view.findViewById(R.id.submitRate);
+        later = view.findViewById(R.id.submitLater);
+        model = ViewModelProviders.of(this).get(DialogViewModel.class);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CustOrderDetails)getActivity()).model.saveCustRating(chefId,custId,ratingBar.getRating());
+                model.saveCustRating(chefId,custId,ratingBar.getRating());
                 RatingDialog.this.dismiss();
             }
         });
+        later.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+        this.setCancelable(false);
         return  builder.create();
     }
 }

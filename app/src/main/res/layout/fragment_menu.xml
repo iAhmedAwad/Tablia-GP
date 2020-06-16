@@ -30,31 +30,36 @@
             android:id="@+id/fab_disabled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="20dp"
-            app:srcCompat="@drawable/ic_history_black_24dp"
-            app:backgroundTint="@color/colorPrimaryDark"
             android:layout_above="@id/fab"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginEnd="20dp"
-            android:layout_alignParentRight="true" />
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:srcCompat="@drawable/ic_history_black_24dp" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="20dp"
-            android:contentDescription="@string/submit"
-            app:srcCompat="@drawable/ic_add_black_24dp"
-            app:backgroundTint="@color/colorAccent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="20dp" />
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/submit"
+            app:backgroundTint="@color/colorAccent"
+            app:srcCompat="@drawable/ic_add_black_24dp" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
 
     </RelativeLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

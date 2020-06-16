@@ -25,14 +25,22 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import iti.team.tablia.Authentication.LoginActivity;
+import iti.team.tablia.CustomerAccount.Categories.Baking.BackingFragment;
+import iti.team.tablia.CustomerAccount.Categories.Dessert.DessertFragment;
 import iti.team.tablia.CustomerAccount.Categories.Grilled.GrilledFragment;
+import iti.team.tablia.CustomerAccount.Categories.Juice.JuiceFragment;
+import iti.team.tablia.CustomerAccount.Categories.Macaroni.MacaroniFragment;
+import iti.team.tablia.CustomerAccount.Categories.Mahashy.MahashyFragment;
+import iti.team.tablia.CustomerAccount.Categories.MainDishes.MainDishesFragment;
+import iti.team.tablia.CustomerAccount.Categories.Salad.SaladFragment;
 import iti.team.tablia.CustomerAccount.Categories.Seafood.SeafoodFragment;
+import iti.team.tablia.CustomerAccount.Categories.SideDishes.SideDishesFragment;
+import iti.team.tablia.CustomerAccount.Categories.Soups.SoupsFragment;
 import iti.team.tablia.CustomerAccount.Chat.CustomerChatFragment;
 import iti.team.tablia.CustomerAccount.CustomerChefListActivity;
 import iti.team.tablia.CustomerAccount.CustomerOrder.Cart;
 import iti.team.tablia.CustomerAccount.Filter.FilterActivity;
 import iti.team.tablia.CustomerAccount.Home.home.CustomerHomeFragment;
-import iti.team.tablia.CustomerAccount.Items.ItemDetails;
 import iti.team.tablia.CustomerAccount.MyOrders.MyOrdersFragment;
 import iti.team.tablia.CustomerAccount.Profile.CustomerProfileFragment;
 import iti.team.tablia.Models.Customer.CustomerSettings;
@@ -141,6 +149,61 @@ public class CustomerActivity extends AppCompatActivity implements FragmentManag
             mManager.beginTransaction().replace(R.id.fragment_container,
                 new GrilledFragment()).commit();
             break;
+
+          case R.id.nav_mainDishes:
+
+            mManager.beginTransaction().replace(R.id.fragment_container,
+                new MainDishesFragment()).commit();
+            break;
+
+          case R.id.nav_baking:
+
+            mManager.beginTransaction().replace(R.id.fragment_container,
+                new BackingFragment()).commit();
+            break;
+
+          case R.id.nav_sideDishes:
+
+            mManager.beginTransaction().replace(R.id.fragment_container,
+                new SideDishesFragment()).commit();
+            break;
+
+          case R.id.nav_macaroni:
+
+            mManager.beginTransaction().replace(R.id.fragment_container,
+                new MacaroniFragment()).commit();
+            break;
+
+          case R.id.nav_mahashy:
+
+            mManager.beginTransaction().replace(R.id.fragment_container,
+                new MahashyFragment()).commit();
+            break;
+
+          case R.id.nav_salad:
+
+            mManager.beginTransaction().replace(R.id.fragment_container,
+                new SaladFragment()).commit();
+            break;
+
+          case R.id.nav_soups:
+
+            mManager.beginTransaction().replace(R.id.fragment_container,
+                new SoupsFragment()).commit();
+            break;
+
+          case R.id.nav_dessert:
+
+            mManager.beginTransaction().replace(R.id.fragment_container,
+                new DessertFragment()).commit();
+            break;
+
+          case R.id.nav_juice:
+
+            mManager.beginTransaction().replace(R.id.fragment_container,
+                new JuiceFragment()).commit();
+            break;
+
           case R.id.nav_signout:
             FirebaseAuth.getInstance().signOut();
             SharedPreferences sharedPref = getSharedPreferences(Constants.isLogged, MODE_PRIVATE);

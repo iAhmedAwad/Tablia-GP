@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/menuStyle">
+            app:popupTheme="@style/menuStyle"
+            app:title="@string/complete_order">
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -42,7 +43,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_margin="10dp"
-                android:text="ADDRESS DETAILS"
+                android:text="@string/address_details"
                 android:textSize="16sp" />
 
             <TextView
@@ -52,7 +53,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_margin="10dp"
-                android:text="CHANGE"
+                android:text="@string/change"
                 android:textColor="#64039F"
                 android:textStyle="bold" />
 
@@ -73,10 +74,10 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="10dp"
-                        android:text="Huda Anwar"
                         android:textColor="@android:color/black"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp" />
 
                     <TextView
                         android:id="@+id/cust_address"
@@ -86,8 +87,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:text="14,dewidar st., damanhour" />
+                        android:layout_marginLeft="10dp" />
 
                     <TextView
                         android:id="@+id/cust_phone"
@@ -97,7 +97,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="10dp"
-                        android:text="+201025387616" />
+                        android:layout_marginStart="10dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
                         android:layout_marginLeft="10dp"
                         android:textStyle="bold"
                         android:layout_marginRight="10dp"
-                        android:text="This is the address that will be delivered to make sure it's accurate" />
+                        android:text="@string/address_warrning" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/address_cont"
                 android:layout_margin="10dp"
-                android:text="SELECT A DELIVERY METHOD" />
+                android:text="@string/select_a_delivery_method" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/del_cont"
@@ -146,46 +146,47 @@
                             android:id="@+id/door"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Door Delivery" />
+                            android:text="@string/door_delivery" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="30dp"
-                            android:text="Chef can change delivery fees and delivery time based on your place" />
+                            android:text="@string/change_warrning"
+                            android:layout_marginStart="30dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="30dp">
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginStart="30dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Your order will be delivered: " />
+                                android:text="@string/delivrey_time" />
 
                             <TextView
                                 android:id="@+id/delivery_time"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tomorrow" />
+                                android:layout_height="wrap_content"/>
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="30dp">
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginStart="30dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Shipping fee: " />
+                                android:text="@string/shipping_fee" />
 
                             <TextView
                                 android:id="@+id/shipping_fee"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="40 EGP"
                                 android:textColor="@color/colorAccent"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -194,7 +195,7 @@
                             android:id="@+id/pickup"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pickup Station" />
+                            android:text="@string/pickup_order" />
 
                     </RadioGroup>
 
@@ -204,7 +205,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/del_type"
                         android:layout_marginLeft="30dp"
-                        android:text="For more delivery information please contact chef" />
+                        android:text="@string/more_info"
+                        android:layout_marginStart="30dp" />
 
                     <TextView
                         android:id="@+id/chef_name"
@@ -215,9 +217,9 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="30dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Huda"
                         android:textColor="#64039F"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginStart="30dp" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -239,7 +241,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_margin="5dp"
-                        android:text="Subtotal"
+                        android:text="@string/subtotal"
                         android:textColor="@android:color/black" />
 
                     <TextView
@@ -249,7 +251,6 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_margin="5dp"
-                        android:text="EGP 45.0"
                         android:textColor="@android:color/black" />
 
                     <TextView
@@ -259,7 +260,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_margin="5dp"
-                        android:text="Shipping"
+                        android:text="@string/shipping"
                         android:textColor="@android:color/black" />
 
                     <TextView
@@ -270,7 +271,6 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_margin="5dp"
-                        android:text="EGP 40.0"
                         android:textColor="@color/colorAccent" />
 
                     <View
@@ -288,7 +288,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_margin="5dp"
-                        android:text="Total"
+                        android:text="@string/total"
                         android:textColor="@android:color/black" />
 
                     <TextView
@@ -299,7 +299,6 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_margin="5dp"
-                        android:text="EGP 85.0"
                         android:textColor="@color/colorAccent" />
 
                     <LinearLayout
@@ -318,7 +317,8 @@
                             android:layout_weight="1"
                             android:background="@drawable/rect_red"
                             android:padding="10dp"
-                            android:text="Cancel Order"
+                            android:text="@string/cancel_order"
+                            android:textAllCaps="false"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
 
@@ -330,7 +330,8 @@
                             android:layout_weight="1"
                             android:background="@drawable/rect"
                             android:padding="10dp"
-                            android:text="Confirm Order"
+                            android:textAllCaps="false"
+                            android:text="@string/confirm_order"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
                     </LinearLayout>

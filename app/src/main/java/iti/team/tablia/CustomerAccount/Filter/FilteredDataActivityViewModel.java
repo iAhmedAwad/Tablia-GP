@@ -21,7 +21,7 @@ public class FilteredDataActivityViewModel extends ViewModel {
     if (categoryList != null) {
       listMutableLiveData = database.getFilteredItems(categoryList, min, max);
     } else {
-      listMutableLiveData = database.getAllMenuItems();
+      listMutableLiveData = database.getAllMenuItemsInRange(min, max);
     }
 
     return listMutableLiveData;

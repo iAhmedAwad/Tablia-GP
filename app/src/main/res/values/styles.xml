@@ -20,4 +20,11 @@
     </style>
 
     <style name="customRatingBar" parent="android:style/Widget.Material.RatingBar.Small"></style>
+
+    <style name="AppTheme.FullScreen">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

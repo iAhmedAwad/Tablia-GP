@@ -11,9 +11,10 @@ import iti.team.tablia.others.Database;
 public class ViewChefMenuViewModel extends ViewModel {
 
     Database db = new Database();
+
     public MutableLiveData<List<MenuPojo>> getList(String chefId) {
 
-       return db.getMenuItems(chefId);
+        return db.getMenuItems(chefId);
 
     }
 

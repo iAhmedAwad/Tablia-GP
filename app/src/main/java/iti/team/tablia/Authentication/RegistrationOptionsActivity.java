@@ -28,16 +28,16 @@ public class RegistrationOptionsActivity extends AppCompatActivity implements Vi
 
   private void navigateToCustomerRegistrationActivity() {
     Intent intent = new Intent(RegistrationOptionsActivity.this, CustomerRegistrationActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
     startActivity(intent);
-    finish();
+    //finish();
   }
 
   private void navigateToChefRegistrationActivity() {
     Intent intent = new Intent(RegistrationOptionsActivity.this, ChefRegistrationActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
     startActivity(intent);
-    finish();
+    //finish();
   }
 
   @Override

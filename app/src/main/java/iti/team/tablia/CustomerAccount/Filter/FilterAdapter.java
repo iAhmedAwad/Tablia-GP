@@ -12,67 +12,134 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
 import iti.team.tablia.CustomerAccount.Items.ItemDetails;
 import iti.team.tablia.R;
+import iti.team.tablia.util.Constants;
 import iti.team.tablia.util.GlobalImageLoader;
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder> {
-  private ArrayList<MenuPojo> mList;
-  private Context mContext;
+    private String priceUnit;
+    private ArrayList<MenuPojo> mList;
+    private Context mContext;
 
-  public FilterAdapter(Context context, ArrayList<MenuPojo> filteredDataList) {
-    this.mContext = context;
-    this.mList = filteredDataList;
-  }
+    public FilterAdapter(Context context, ArrayList<MenuPojo> filteredDataList) {
+        this.mContext = context;
+        this.mList = filteredDataList;
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            priceUnit = " ج.م";
 
-  @NonNull
-  @Override
-  public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    return new ViewHolder(LayoutInflater.from(mContext)
-        .inflate(R.layout.cat_row, parent, false));
-  }
-
-  @Override
-  public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-    final MenuPojo menuPojo = mList.get(position);
-
-    holder.xCatItemName.setText(menuPojo.getItemName());
-    holder.xCatItemCategory.setText(menuPojo.getCategory());
-    holder.xCatItemPrice.setText(String.valueOf(menuPojo.getPriceItem())+"EGP");
-    holder.cat_imageView.setImageBitmap(
-        GlobalImageLoader.StringToBitMap(
-            menuPojo.getImgItem().get(0).getImgaeItem()));
-
-    holder.itemView.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Intent intent = new Intent(mContext, ItemDetails.class);
-        intent.putExtra("chefId", menuPojo.getChefID());
-        intent.putExtra("itemId", menuPojo.getItemID());
-        intent.putExtra("itemName", menuPojo.getItemName());
-        mContext.startActivity(intent);
-      }
-    });
-  }
-
-  @Override
-  public int getItemCount() {
-    return mList.size();
-  }
-
-  public class ViewHolder extends RecyclerView.ViewHolder {
-    private TextView xCatItemName, xCatItemPrice, xCatItemCategory;
-    private ImageView cat_imageView;
-
-    public ViewHolder(@NonNull View itemView) {
-      super(itemView);
-      xCatItemName = itemView.findViewById(R.id.xCatItemName);
-      xCatItemCategory = itemView.findViewById(R.id.xCatItemCategory);
-      xCatItemPrice = itemView.findViewById(R.id.xCatItemPrice);
-      cat_imageView = itemView.findViewById(R.id.cat_imageView);
+        } else {
+            priceUnit = " EGP";
+        }
     }
-  }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(mContext)
+                .inflate(R.layout.cat_row, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        final MenuPojo menuPojo = mList.get(position);
+
+        holder.xCatItemName.setText(menuPojo.getItemName());
+        String cat = getCategory(menuPojo.getCategory());
+        holder.xCatItemCategory.setText(cat);
+        holder.xCatItemPrice.setText(String.valueOf(menuPojo.getPriceItem()+ priceUnit));
+        holder.cat_imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        holder.cat_imageView.setImageBitmap(
+                GlobalImageLoader.StringToBitMap(
+                        menuPojo.getImgItem().get(0).getImgaeItem()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ItemDetails.class);
+                intent.putExtra("chefId", menuPojo.getChefID());
+                intent.putExtra("itemId", menuPojo.getItemID());
+                intent.putExtra("itemName", menuPojo.getItemName());
+                mContext.startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return mList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView xCatItemName, xCatItemPrice, xCatItemCategory;
+        private ImageView cat_imageView;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            xCatItemName = itemView.findViewById(R.id.xCatItemName);
+            xCatItemCategory = itemView.findViewById(R.id.xCatItemCategory);
+            xCatItemPrice = itemView.findViewById(R.id.xCatItemPrice);
+            cat_imageView = itemView.findViewById(R.id.cat_imageView);
+        }
+    }
+
+    private String getCategory(String category) {
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            if (category.equals(Constants.BACKING)) {
+                category = Constants.BACKING_AR;
+            } else if (category.equals(Constants.DESSERT)) {
+                category = Constants.DESSERT_AR;
+            } else if (category.equals(Constants.GRILLED)) {
+                category = Constants.GRILLED_AR;
+            } else if (category.equals(Constants.JUICE)) {
+                category = Constants.JUICE_AR;
+            } else if (category.equals(Constants.MACARONI)) {
+                category = Constants.MACARONI_AR;
+            } else if (category.equals(Constants.MAHASHY)) {
+                category = Constants.MAHASHY_AR;
+            } else if (category.equals(Constants.MAIN_DISHES)) {
+                category = Constants.MAIN_DISHES_AR;
+            } else if (category.equals(Constants.SALAD)) {
+                category = Constants.SALAD_AR;
+            } else if (category.equals(Constants.SEAFOOD)) {
+                category = Constants.SEAFOOD_AR;
+            } else if (category.equals(Constants.SIDE_DISHES)) {
+                category = Constants.SIDE_DISHES_AR;
+            } else if (category.equals(Constants.SOUPS)) {
+                category = Constants.SOUPS_AR;
+            }
+        } else {
+            if (category.equals(Constants.BACKING_AR)) {
+                category = Constants.BACKING;
+            } else if (category.equals(Constants.DESSERT_AR)) {
+                category = Constants.DESSERT;
+            } else if (category.equals(Constants.GRILLED_AR)) {
+                category = Constants.GRILLED;
+            } else if (category.equals(Constants.JUICE_AR)) {
+                category = Constants.JUICE;
+            } else if (category.equals(Constants.MACARONI_AR)) {
+                category = Constants.MACARONI;
+            } else if (category.equals(Constants.MAHASHY_AR)) {
+                category = Constants.MAHASHY;
+            } else if (category.equals(Constants.MAIN_DISHES_AR)) {
+                category = Constants.MAIN_DISHES;
+            } else if (category.equals(Constants.SALAD_AR)) {
+                category = Constants.SALAD;
+            } else if (category.equals(Constants.SEAFOOD_AR)) {
+                category = Constants.SEAFOOD;
+            } else if (category.equals(Constants.SIDE_DISHES_AR)) {
+                category = Constants.SIDE_DISHES;
+            } else if (category.equals(Constants.SOUPS_AR)) {
+                category = Constants.SOUPS;
+            }
+        }
+        return category;
+    }
+
 }

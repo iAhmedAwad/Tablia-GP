@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
+import java.util.Locale;
 
 import iti.team.tablia.Models.Chat;
 import iti.team.tablia.R;
@@ -37,6 +38,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     this.context = context;
     this.chats = chats;
     this.imageurl = imageurl;
+
   }
 
   @NonNull
@@ -65,9 +67,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
     if (position == chats.size() - 1) {
       if (chat.isSeen()) {
-        holder.seen.setText("Seen");
+        if(Locale.getDefault().getLanguage().equals("ar")){
+          holder.seen.setText("تمت المشاهدة");
+        }else{
+          holder.seen.setText("Seen");
+        }
       } else {
-        holder.seen.setText("Delivered");
+        if(Locale.getDefault().getLanguage().equals("ar")){
+          holder.seen.setText("تم التوصيل");
+        }else {
+          holder.seen.setText("Delivered");
+        }
       }
     } else {
       holder.seen.setVisibility(View.GONE);

@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Order.OrderDeatils.OrderDeatils;
 import iti.team.tablia.Models.Customer.CustomerAccountSettings;
@@ -20,6 +21,7 @@ import iti.team.tablia.R;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
+    private String priceUnit;
     private List<OrderPojo> orderPojos;
     private Context context;
     private OrderViewModel orderViewModel;
@@ -28,6 +30,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         this.orderPojos = orderPojos;
         this.context = context;
         this.orderViewModel = orderViewModel;
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            priceUnit = " ج.م";
+
+        } else {
+            priceUnit = " EGP";
+        }
     }
 
     @NonNull
@@ -46,19 +55,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         final OrderPojo orderPojo = orderPojos.get(position);
         holder.txtOrderTime.setText(orderPojo.getOrderTime());
         orderViewModel.getCustInfo(orderPojo.getCustomerID()).observe((LifecycleOwner) context, new Observer<CustomerAccountSettings>() {
-          @Override
-          public void onChanged(CustomerAccountSettings customerAccountSettings) {
-            holder.txtCustomerID.setText(customerAccountSettings.getDisplayName());
-          }
+            @Override
+            public void onChanged(CustomerAccountSettings customerAccountSettings) {
+                holder.txtCustomerID.setText(customerAccountSettings.getDisplayName());
+            }
         });
-        holder.txtPrice.setText(String.valueOf(orderPojos.get(position).getTotal()));
+        holder.txtPrice.setText(String.valueOf(orderPojos.get(position).getTotal() + priceUnit));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToOrderDeatils = new Intent(context, OrderDeatils.class);
-                goToOrderDeatils.putExtra("orderID",orderPojo.getOrderID());
-                goToOrderDeatils.putExtra("chefID",orderPojo.getChefID());
-                goToOrderDeatils.putExtra("custID",orderPojo.getCustomerID());
+                goToOrderDeatils.putExtra("orderID", orderPojo.getOrderID());
+                goToOrderDeatils.putExtra("chefID", orderPojo.getChefID());
+                goToOrderDeatils.putExtra("custID", orderPojo.getCustomerID());
                 context.startActivity(goToOrderDeatils);
 
             }

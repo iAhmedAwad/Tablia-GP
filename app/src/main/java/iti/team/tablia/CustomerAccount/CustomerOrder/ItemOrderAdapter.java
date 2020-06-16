@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.R;
@@ -30,12 +31,20 @@ public class ItemOrderAdapter extends RecyclerView.Adapter<ItemOrderAdapter.View
     private Cart cartActivity;
     private int _qty = 0;
     private double price;
+    private String priceUnit;
 
     public ItemOrderAdapter(List<CartPojo> items, Context context, TextView subTotal) {
         this.items = items;
         this.context = context;
         this.subTotal = subTotal;
         cartActivity = (Cart) context;
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            priceUnit = " ج.م";
+
+        } else {
+            priceUnit = " EGP";
+        }
     }
 
     @NonNull
@@ -51,7 +60,7 @@ public class ItemOrderAdapter extends RecyclerView.Adapter<ItemOrderAdapter.View
         Bitmap bitmap = stringToBitMap(item.getImg());
         holder.itemImg.setImageBitmap(bitmap);
         holder.itemName.setText(item.getItemName());
-        holder.price.setText(item.getItemPrice() + " EGP");
+        holder.price.setText(item.getItemPrice() + priceUnit);
         holder.qty.setText(item.getQuantity() + "");
         holder.minusQty.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +72,7 @@ public class ItemOrderAdapter extends RecyclerView.Adapter<ItemOrderAdapter.View
                     String[] itemPrice = subTotal.getText().toString().split(" ");
                     price = Double.parseDouble(itemPrice[0]);
                     price -= item.getItemPrice();
-                    subTotal.setText(price + " EGP");
+                    subTotal.setText(price + priceUnit);
                 }
                 item.setQuantity(_qty);
                 holder.qty.setText(_qty + "");
@@ -80,7 +89,7 @@ public class ItemOrderAdapter extends RecyclerView.Adapter<ItemOrderAdapter.View
                 String[] itemPrice = subTotal.getText().toString().split(" ");
                 price = Double.parseDouble(itemPrice[0]);
                 price += item.getItemPrice();
-                subTotal.setText(price + " EGP");
+                subTotal.setText(price + priceUnit);
                 item.setQuantity(_qty);
 
                 cartActivity.cartViewModel.updateCart(item).observe(cartActivity, new Observer<Boolean>() {
@@ -90,9 +99,13 @@ public class ItemOrderAdapter extends RecyclerView.Adapter<ItemOrderAdapter.View
                             _qty--;
                             holder.qty.setText(_qty + "");
                             price -= item.getItemPrice();
-                            subTotal.setText(price + " EGP");
+                            subTotal.setText(price + priceUnit);
                             item.setQuantity(_qty);
-                            Toast.makeText(context, "no more items available", Toast.LENGTH_SHORT).show();
+                            if(Locale.getDefault().getLanguage().equals("ar")){
+                                Toast.makeText(context, "لا يوجد المزيد من هذا المنتج", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(context, "no more items available", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
@@ -106,7 +119,7 @@ public class ItemOrderAdapter extends RecyclerView.Adapter<ItemOrderAdapter.View
                 String[] itemPrice = subTotal.getText().toString().split(" ");
                 double price = Double.parseDouble(itemPrice[0]);
                 price -= itemTotal;
-                subTotal.setText(price + " EGP");
+                subTotal.setText(price + priceUnit);
                 items.remove(item);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, items.size());

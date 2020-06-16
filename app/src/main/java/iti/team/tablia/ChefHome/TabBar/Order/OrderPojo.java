@@ -28,16 +28,16 @@ public class OrderPojo implements Serializable {
     this.subTotal = subTotal;
     this.items = items;
     ////////////////////
-    deliveryFee = 10.0;
-    deliveryTime = "2 hours";
+    deliveryFee = 0;
+    deliveryTime = "_";
     chefConfirm = false;
     custConfirm = false;
     total = 0.0;
   }
 
   public OrderPojo() {
-    deliveryFee = 10.0;
-    deliveryTime = "2 hours";
+    deliveryFee = 0;
+    deliveryTime = "_";
     chefConfirm = false;
     custConfirm = false;
     total = 0.0;

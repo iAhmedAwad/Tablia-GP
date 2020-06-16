@@ -21,6 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Locale;
 
 import iti.team.tablia.ChefHome.TabBar.Menu.AddMenu.MenuItemPojo;
 import iti.team.tablia.ChefHome.TabBar.Menu.PojoMenu.MenuPojo;
@@ -32,6 +33,7 @@ import iti.team.tablia.Models.CartPojo;
 import iti.team.tablia.Models.Chef.ChefAccountSettings;
 import iti.team.tablia.Models.Others.Review;
 import iti.team.tablia.R;
+import iti.team.tablia.util.Constants;
 
 public class ItemDetails extends AppCompatActivity {
     private ImageView cart;
@@ -52,11 +54,30 @@ public class ItemDetails extends AppCompatActivity {
     private String chefId;
     private String itemId;
     private ProgressBar progressBar;
+    private String priceUnit;
+    private String reviewTxt;
+    private String more;
+    private String warning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
+        String lang = Locale.getDefault().getLanguage();
+
+        if (lang.equals("ar")) {
+            priceUnit = " ج.م";
+            reviewTxt=" تعليقات";
+            warning="هذا المنتج قد نفذ";
+            more="لا يوجد المزيد";
+
+        } else {
+            priceUnit = " EGP";
+            reviewTxt=" reviews";
+            warning = "item is no longer exist";
+            more="no more items available";
+        }
+
         toolbarTitle = findViewById(R.id.toolbar_title);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -100,7 +121,7 @@ public class ItemDetails extends AppCompatActivity {
                     totalRating+=review.getRating();
                 }
                 itemRating.setRating((float) (totalRating/(float)reviewsList.size()));
-                reviews.setText(reviewsList.size() + " reviews");
+                reviews.setText(reviewsList.size() + reviewTxt);
             }
         });
 
@@ -145,7 +166,7 @@ public class ItemDetails extends AppCompatActivity {
                                         if (!aBoolean) {
                                             fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFC107")));
                                             fab.setImageResource(R.drawable.ic_add_cart);
-                                            Toast.makeText(ItemDetails.this, "no more items available", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ItemDetails.this, more, Toast.LENGTH_SHORT).show();
                                         } else {
                                             Toast.makeText(ItemDetails.this, "item added to cart", Toast.LENGTH_SHORT).show();
                                         }
@@ -185,15 +206,16 @@ public class ItemDetails extends AppCompatActivity {
                     getSupportActionBar().setTitle(menuPojo.getItemName());
                     itemName.setText(menuPojo.getItemName());
                     price = menuPojo.getPriceItem();
-                    itemPrice.setText(menuPojo.getPriceItem() + " EGP");
-                    category.setText(menuPojo.getCategory());
+                    itemPrice.setText(menuPojo.getPriceItem() + priceUnit);
+                    String cat = getCategory(menuPojo.getCategory());
+                    category.setText(cat);
                     ingredients.setText(menuPojo.getIngredients());
                     description.setText(menuPojo.getDescription());
                     imgList = menuPojo.getImgItem();
                     ImageSliderAdapter adapter = new ImageSliderAdapter(ItemDetails.this, menuPojo.getImgItem());
                     viewPager.setAdapter(adapter);
                 } else {
-                    Toast.makeText(ItemDetails.this, "item is no longer exist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ItemDetails.this, warning, Toast.LENGTH_SHORT).show();
                     finish();
                 }
 
@@ -221,4 +243,58 @@ public class ItemDetails extends AppCompatActivity {
         });
 
     }
+    private String getCategory(String category) {
+        String lang = Locale.getDefault().getLanguage();
+        if (lang.equals("ar")) {
+            if (category.equals(Constants.BACKING)) {
+                category = Constants.BACKING_AR;
+            } else if (category.equals(Constants.DESSERT)) {
+                category = Constants.DESSERT_AR;
+            } else if (category.equals(Constants.GRILLED)) {
+                category = Constants.GRILLED_AR;
+            } else if (category.equals(Constants.JUICE)) {
+                category = Constants.JUICE_AR;
+            } else if (category.equals(Constants.MACARONI)) {
+                category = Constants.MACARONI_AR;
+            } else if (category.equals(Constants.MAHASHY)) {
+                category = Constants.MAHASHY_AR;
+            } else if (category.equals(Constants.MAIN_DISHES)) {
+                category = Constants.MAIN_DISHES_AR;
+            } else if (category.equals(Constants.SALAD)) {
+                category = Constants.SALAD_AR;
+            } else if (category.equals(Constants.SEAFOOD)) {
+                category = Constants.SEAFOOD_AR;
+            } else if (category.equals(Constants.SIDE_DISHES)) {
+                category = Constants.SIDE_DISHES_AR;
+            } else if (category.equals(Constants.SOUPS)) {
+                category = Constants.SOUPS_AR;
+            }
+        } else {
+            if (category.equals(Constants.BACKING_AR)) {
+                category = Constants.BACKING;
+            } else if (category.equals(Constants.DESSERT_AR)) {
+                category = Constants.DESSERT;
+            } else if (category.equals(Constants.GRILLED_AR)) {
+                category = Constants.GRILLED;
+            } else if (category.equals(Constants.JUICE_AR)) {
+                category = Constants.JUICE;
+            } else if (category.equals(Constants.MACARONI_AR)) {
+                category = Constants.MACARONI;
+            } else if (category.equals(Constants.MAHASHY_AR)) {
+                category = Constants.MAHASHY;
+            } else if (category.equals(Constants.MAIN_DISHES_AR)) {
+                category = Constants.MAIN_DISHES;
+            } else if (category.equals(Constants.SALAD_AR)) {
+                category = Constants.SALAD;
+            } else if (category.equals(Constants.SEAFOOD_AR)) {
+                category = Constants.SEAFOOD;
+            } else if (category.equals(Constants.SIDE_DISHES_AR)) {
+                category = Constants.SIDE_DISHES;
+            } else if (category.equals(Constants.SOUPS_AR)) {
+                category = Constants.SOUPS;
+            }
+        }
+        return category;
+    }
+
 }

@@ -18,9 +18,9 @@ public class SeafoodViewModel extends ViewModel {
 
   }
 
-  public MutableLiveData<ArrayList<MenuPojo>> getFishItems(String category) {
+  public MutableLiveData<ArrayList<MenuPojo>> getFishItems(String category, String category_ar) {
 
-    mutableLiveData = database.getCategoryList(category);
+    mutableLiveData = database.getCategoryList(category, category_ar);
 
     return mutableLiveData;
   }

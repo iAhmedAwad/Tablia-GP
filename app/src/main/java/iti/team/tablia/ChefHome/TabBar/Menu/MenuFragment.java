@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -26,62 +27,62 @@ import iti.team.tablia.R;
 
 public class MenuFragment extends Fragment {
 
-  private MenuViewModel menuViewModel;
+    private MenuViewModel menuViewModel;
 
-  MenuAdapter myAdapter;
-  RecyclerView recycleMenu;
-  FloatingActionButton fab;
-  FloatingActionButton fabDis;
-  Bitmap bitmap = null;
+    MenuAdapter myAdapter;
+    RecyclerView recycleMenu;
+    FloatingActionButton fab;
+    FloatingActionButton fabDis;
+    Bitmap bitmap = null;
+    private ProgressBar progressBar;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
+        menuViewModel = ViewModelProviders.of(this).get(MenuViewModel.class);
 
-    menuViewModel = ViewModelProviders.of(this).get(MenuViewModel.class);
-
-    View root = inflater.inflate(R.layout.fragment_menu, container, false);
-
-
-    fab = root.findViewById(R.id.fab);
-    fabDis = root.findViewById(R.id.fab_disabled);
-    recycleMenu = root.findViewById(R.id.recycleMenu);
-    recycleMenu.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        View root = inflater.inflate(R.layout.fragment_menu, container, false);
 
 
-    menuViewModel.getList();
+        fab = root.findViewById(R.id.fab);
+        fabDis = root.findViewById(R.id.fab_disabled);
+        recycleMenu = root.findViewById(R.id.recycleMenu);
+        progressBar = root.findViewById(R.id.progressBar);
+        recycleMenu.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
 
-
-    menuViewModel.deatilsMutableLiveData.observe(getViewLifecycleOwner(), new Observer<List<MenuPojo>>() {
-      @Override
-      public void onChanged(List<MenuPojo> menuPojos) {
-
-        myAdapter = new MenuAdapter(menuPojos, getContext());
-        recycleMenu.setAdapter(myAdapter);
-
-      }
-    });
+        menuViewModel.getList();
 
 
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Intent goToAddMenue = new Intent(getContext(), AddMenu.class);
-        startActivity(goToAddMenue);
-      }
-    });
-    fabDis.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Toast.makeText(getContext(), "Disabled items", Toast.LENGTH_SHORT).show();
+        menuViewModel.deatilsMutableLiveData.observe(getViewLifecycleOwner(), new Observer<List<MenuPojo>>() {
+            @Override
+            public void onChanged(List<MenuPojo> menuPojos) {
+                progressBar.setVisibility(View.GONE);
+                myAdapter = new MenuAdapter(menuPojos, getContext());
+                recycleMenu.setAdapter(myAdapter);
 
-        Intent goToDisable = new Intent(getActivity(), DisableMenuItems.class);
-        startActivity(goToDisable);
-      }
-    });
+            }
+        });
 
-    return root;
-  }
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToAddMenue = new Intent(getContext(), AddMenu.class);
+                startActivity(goToAddMenue);
+            }
+        });
+        fabDis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Disabled items", Toast.LENGTH_SHORT).show();
+
+                Intent goToDisable = new Intent(getActivity(), DisableMenuItems.class);
+                startActivity(goToDisable);
+            }
+        });
+
+        return root;
+    }
 }

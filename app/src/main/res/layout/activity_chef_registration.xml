@@ -5,40 +5,30 @@
     android:layout_height="match_parent">
 
 
-    <RelativeLayout
-        android:id="@+id/rellay1"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/grad"
-        android:paddingBottom="5dp">
+        android:layout_alignParentTop="true">
 
-        <RelativeLayout
-            android:id="@+id/imgUser"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="40dp"
-            android:layout_marginTop="10dp">
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/menuStyle"
+            app:title="@string/chef_reg">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Create a New Chef Account"
-                android:layout_marginTop="30dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="21sp" />
+        </androidx.appcompat.widget.Toolbar>
 
-
-        </RelativeLayout>
-
-
-    </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/linlay1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rellay1"
+        android:layout_below="@id/bar_layout"
         android:orientation="horizontal">
 
     </LinearLayout>
@@ -54,6 +44,7 @@
 
 
         <LinearLayout
+            android:id="@+id/lin1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -64,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="Name" />
+                android:hint="@string/name" />
 
 
             <EditText
@@ -72,21 +63,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="Username" />
+                android:hint="@string/username" />
 
             <EditText
                 android:id="@+id/xChefEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="Email" />
+                android:inputType="textEmailAddress"
+                android:hint="@string/email" />
 
             <AutoCompleteTextView
                 android:id="@+id/xChefAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="Address" />
+                android:hint="@string/address" />
 
 
             <EditText
@@ -94,14 +86,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="Phone Number" />
+                android:inputType="number|phone"
+                android:hint="@string/phone_number" />
 
             <EditText
                 android:id="@+id/xChefPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="Password" />
+                android:inputType="textPassword"
+                android:hint="@string/password" />
 
 
             <EditText
@@ -109,183 +103,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="Confirm Password" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
-
-            <Button
-                android:id="@+id/xChefBtnRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/rect_purple"
-                android:padding="5dp"
-                android:layout_marginBottom="2dp"
-                android:textColor="@color/white"
-                android:text="Sign Up" />
+                android:inputType="textPassword"
+                android:hint="@string/confirm_password" />
 
 
         </LinearLayout>
+        <Button
+            android:id="@+id/xChefBtnRegister"
+            android:background="@drawable/rect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@id/lin1"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:textAllCaps="false"
+            android:text="@string/sign_up"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
-
-    <!--    <Button-->
-    <!--        android:id="@+id/xChefBtnRegister"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="16dp"-->
-    <!--        android:layout_marginLeft="16dp"-->
-    <!--        android:layout_marginTop="24dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        android:layout_marginRight="16dp"-->
-    <!--        android:background="@drawable/white_onclick_grey"-->
-    <!--        android:padding="14dp"-->
-    <!--        android:text="Register"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
-    <!--        app:layout_constraintHorizontal_bias="1.0"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/xChefPhone" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/xChefUsername"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:hint="Username"-->
-    <!--        android:inputType="text"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
-    <!--        app:layout_constraintHorizontal_bias="1.0"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/xChefName" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/textView4"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="24dp"-->
-    <!--        android:gravity="center_horizontal"-->
-    <!--        android:text="Create a New Chef Account"-->
-    <!--        android:textColor="@color/Black"-->
-    <!--        android:textSize="20sp"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/guideline6" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/xChefPassword"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:hint="Password"-->
-    <!--        android:inputType="textPassword"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/xChefEmail" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/xChefConfirmPassword"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:hint="Confirm Password"-->
-    <!--        android:inputType="textPassword"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
-    <!--        app:layout_constraintHorizontal_bias="1.0"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/xChefPassword" />-->
-
-    <!--    <ProgressBar-->
-    <!--        android:id="@+id/progressBar"-->
-    <!--        android:layout_width="50dp"-->
-    <!--        android:layout_height="50dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--        app:layout_constraintRight_toRightOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--    <androidx.constraintlayout.widget.Guideline-->
-    <!--        android:id="@+id/guideline6"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        app:layout_constraintGuide_begin="23dp" />-->
-
-    <!--    <androidx.constraintlayout.widget.Guideline-->
-    <!--        android:id="@+id/guideline7"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        app:layout_constraintGuide_end="16dp" />-->
-
-    <!--    <androidx.constraintlayout.widget.Guideline-->
-    <!--        android:id="@+id/guideline8"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="vertical"-->
-    <!--        app:layout_constraintGuide_begin="16dp" />-->
-
-    <!--    <androidx.constraintlayout.widget.Guideline-->
-    <!--        android:id="@+id/guideline9"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="vertical"-->
-    <!--        app:layout_constraintGuide_end="16dp" />-->
-
-    <!--    <AutoCompleteTextView-->
-    <!--        android:id="@+id/xChefAddress"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:hint="Address.."-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
-    <!--        app:layout_constraintHorizontal_bias="1.0"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/xChefConfirmPassword" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/xChefPhone"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Phone Number"-->
-    <!--        android:inputType="phone"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
-    <!--        app:layout_constraintHorizontal_bias="1.0"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/xChefAddress" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/xChefName"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="24dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Name"-->
-    <!--        android:inputType="textPersonName"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/textView4" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/xChefEmail"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="16dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="Email"-->
-    <!--        android:inputType="textEmailAddress"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/guideline8"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/xChefUsername" />-->
-
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp" />
 </RelativeLayout>
 
 

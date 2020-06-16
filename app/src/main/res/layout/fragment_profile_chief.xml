@@ -46,7 +46,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="0dp"
-                android:background="@drawable/online" />
+                android:background="@drawable/online"
+                android:layout_alignEnd="@id/id_profile_pic" />
 
 
         </RelativeLayout>
@@ -65,27 +66,16 @@
             android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/id_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/id_name"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="sans-serif"
-            android:text="@string/address"
-            android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
-            android:textSize="13sp" />
-
         <RatingBar
             android:id="@+id/id_rating"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/id_address"
+            android:layout_below="@+id/id_name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:isIndicator="true"
+            android:layout_marginBottom="10dp"
             android:progressTint="@color/colorAccent"
             android:numStars="5"
             android:stepSize="0.1" />
@@ -98,10 +88,11 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
-
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_edit_black_24dp" />
+            app:srcCompat="@drawable/ic_edit_black_24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp" />
 
     </RelativeLayout>
 
@@ -142,9 +133,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="@string/followers"
-                    android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -181,9 +171,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="@string/orders"
-                    android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
-                    android:textSize="15sp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -208,7 +197,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:textColor="@color/colorAccent"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/id_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="@string/address"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="13sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/grey" />
+
+        </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -268,7 +283,6 @@
                     android:background="@color/grey" />
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

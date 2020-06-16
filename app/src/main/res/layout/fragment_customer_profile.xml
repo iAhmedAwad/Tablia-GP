@@ -13,6 +13,7 @@
         android:id="@+id/rellay1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:background="@drawable/grad"
         android:paddingBottom="20dp">
 
@@ -50,35 +51,12 @@
             android:layout_below="@id/imgUser"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5sp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif-light"
             android:text="Customer Name "
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/xCustomerAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/xCustomerName"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="sans-serif"
-            android:text="Address , Adress"
-            android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/xCustomerDescription"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/xCustomerAddress"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:text="Descption "
-            android:textColor="@color/colorAccent"
-            android:textSize="13sp" />
 
 
         <ImageView
@@ -90,7 +68,9 @@
             android:layout_marginRight="15dp"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/ic_edit_black_24dp" />
+            app:srcCompat="@drawable/ic_edit_black_24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp" />
 
     </RelativeLayout>
 
@@ -112,6 +92,7 @@
             android:paddingBottom="4dp">
 
             <LinearLayout
+                android:id="@+id/following_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -130,8 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="following"
-                    android:textAllCaps="true"
+                    android:text="@string/following"
                     android:textColor="@color/colorAccent"
                     android:textSize="15sp" />
 
@@ -169,8 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text=" Orders"
-                    android:textAllCaps="true"
+                    android:text="@string/orders"
                     android:textColor="@color/colorAccent"
                     android:textSize="15sp" />
 
@@ -191,8 +170,6 @@
         android:layout_marginRight="30dp">
 
         <LinearLayout
-
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -206,7 +183,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Phone "
+                    android:text="@string/phone"
                     android:textColor="@color/colorAccent"
                     android:textSize="13sp" />
 
@@ -214,10 +191,9 @@
                     android:id="@+id/xCustomerPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                 android:hint="Phone Number"
-                    android:textColor="@color/colorAccent"
+                    android:hint="Phone Number"
+                    android:textColor="#000"
                     android:textSize="13sp" />
-
 
 
                 <View
@@ -228,8 +204,65 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/xCustomerAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:hint="Address"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="13sp" />
 
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/description"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/xCustomerDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:hint="Descption "
+                    android:textColor="#000"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -424,7 +457,12 @@
     <!--        app:layout_constraintEnd_toStartOf="@+id/guideline4"-->
     <!--        app:layout_constraintStart_toStartOf="@+id/guideline3"-->
     <!--        app:layout_constraintTop_toBottomOf="@+id/xCustomerName" />-->
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>
 
